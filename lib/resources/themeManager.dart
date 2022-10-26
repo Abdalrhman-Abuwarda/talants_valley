@@ -19,7 +19,7 @@ class ThemeManager {
             elevation: 0,
             iconTheme: IconThemeData(
               size: 25,
-              color: Color(0xFF151617),
+              color: ColorManager.primaryFontColor,
             ),
             centerTitle: true,
             // titleSpacing: 30,
@@ -35,7 +35,9 @@ class ThemeManager {
         headline2: TextStyle(fontSize: 20.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.w600, color: ColorManager.primaryFontColor),
         // headline6: TextStyle(fontSize: 20.0,fontFamily: 'Segoe UI', fontWeight: FontWeight.w600),
         subtitle1: TextStyle(fontSize: 16.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
+        subtitle2: TextStyle(fontSize: 20.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
         bodyText2: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor ),
+        bodyText1: TextStyle(fontSize: 11.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

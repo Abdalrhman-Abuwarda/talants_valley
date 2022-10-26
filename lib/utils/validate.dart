@@ -8,7 +8,7 @@ class Validate {
     }
     // Check if the entered email has the right format
     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-      return 'Please enter a valid email address';
+      return '🚩Please enter a valid email address';
     }
     // Return null if the entered email is valid
     return null;
@@ -18,20 +18,27 @@ class Validate {
     if (value == null || value.trim().isEmpty) {
       return 'This field is required';
     }
-    if (value.trim().length < 5) {
-      return 'Password must be at least 8 characters in length';
+    if (value.trim().length < 10) {
+      return '❗Password must be at least 8 characters in length';
     }
     // Return null if the entered password is valid
     return null;
   }
 
+  static String? validateRePassword(value, String password){
+    if(value != password){
+      return 'password does not match';
+    }
+  }
+
   static String? validateUserName(value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter full your name';
+      return 'Please enter your name';
     }
-    if (value.trim().length < 8) {
+    if (value.trim().length < 3) {
       return 'Please entar valid name';
     }
+
     // Return null if the entered password is valid
     return null;
   }
@@ -40,9 +47,21 @@ class Validate {
     if (value == null || value.trim().isEmpty) {
       return 'This field is required';
     }
-    if (value.trim().length < 4) {
+    if (value.trim().length < 6) {
       return 'Code must be at least 4 characters in length';
     }
+    // Return null if the entered password is valid
+    return null;
+  }
+
+  static String? validatePhoneNumber(value) {
+    if (value == null || value.trim().isEmpty) {
+      return '📱Please enter Phone Number';
+    }
+    if (value.trim().length < 11) {
+      return 'Please entar valid Phone Number';
+    }
+
     // Return null if the entered password is valid
     return null;
   }

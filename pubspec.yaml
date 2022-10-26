@@ -39,6 +39,10 @@ dependencies:
   flutter_screenutil: ^5.5.4
   provider: ^6.0.4
   pinput: ^2.2.16
+  intl_phone_number_input:
+  dio: ^4.0.6
+  shared_preferences: ^2.0.15
+  country_phone_code_picker: ^0.0.41
 
 dev_dependencies:
   flutter_test:

@@ -14,7 +14,10 @@ class CustomOptPage extends StatelessWidget {
     required this.caption,
     required this.buttomText,
     required this.fotterText,
-    required this.futterButtomText
+    required this.futterButtomText,
+    required this.onPressedButtom,
+    required this.onPressedTextButtom,
+    required this.valedate,
   });
 
   final TextEditingController optController;
@@ -23,6 +26,9 @@ class CustomOptPage extends StatelessWidget {
   final String fotterText;
   final String buttomText;
   final String futterButtomText;
+  final void Function()? onPressedButtom;
+ final dynamic Function() onPressedTextButtom;
+ final String? Function(String?)? valedate;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +46,7 @@ class CustomOptPage extends StatelessWidget {
               style: Theme.of(context).textTheme.subtitle1),
           addVerticalSpace(AppSize.s30),
           Pinput(
-            validator: (value) {
-              Validate.validateCode(value);
-            },
+            validator: valedate,
             controller: optController,
             obscureText: false,
             length: 6,
@@ -71,9 +75,9 @@ class CustomOptPage extends StatelessWidget {
           ),
 
           addVerticalSpace(AppSize.s90.h),
-          ElevatedButton(onPressed: () {}, child: Text(buttomText,)),
+          ElevatedButton(onPressed: onPressedButtom, child: Text(buttomText,)),
           addVerticalSpace(AppPadding.p44),
-          FooterAuth(text: fotterText, textButtom: futterButtomText, onPressed: () {},)
+          FooterAuth(text: fotterText, textButtom: futterButtomText, onPressed: onPressedTextButtom,)
         ],
       ),
     );

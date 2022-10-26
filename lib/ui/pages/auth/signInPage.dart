@@ -8,12 +8,18 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import '../../../resources/assetsManager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
+import '../../../utils/helper.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customWidgets/authWigdgets/authFooterPage.dart';
 import '../../shared/customWidgets/authWigdgets/authHeaderPage.dart';
 import '../../shared/customWidgets/mainTextFormField.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
   var formKye = GlobalKey<FormState>();
 
   final bool isPassword = true;
@@ -28,8 +34,7 @@ class SignInPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsetsDirectional.only(
-              start: AppPadding.p44.w, end: AppPadding.p32.w),
+          padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
           child: Form(
             key: formKye,
             child: Column(
@@ -46,9 +51,7 @@ class SignInPage extends StatelessWidget {
                   hintText: 'email@gmail.com',
                   inbutType: TextInputType.emailAddress,
                   controller: _emailController,
-                  validator: (value) {
-                    Validate.validatePassword(value);
-                  },
+                  validator: (value) => Validate.validateEmail(value),
                 ),
                 addVerticalSpace(24.h),
                 Text(
@@ -62,9 +65,7 @@ class SignInPage extends StatelessWidget {
                         isPassword: auth.isPassword,
                         inbutType: TextInputType.visiblePassword,
                         controller: _passwordController,
-                        validator: (value){
-                          Validate.validateEmail(value);
-                        },
+                        validator: (value) => Validate.validatePassword(value),
                         suffixPressed: (){auth.suffixPressed();},
                         suffixIcon:
                         auth.isPassword ? Icons.visibility : Icons.visibility_off,
@@ -76,7 +77,7 @@ class SignInPage extends StatelessWidget {
                     addHorizantelSpace(160.w),
                     TextButton(
                       onPressed: () {
-                        ServiceNavigations.serviceNavi.pushNamedWidget(RouteGenerator.forgetPassword);
+                        ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
                       },
                       child:  Text(
                         "Forget Password?",
@@ -86,9 +87,23 @@ class SignInPage extends StatelessWidget {
                   ],
                 ),
                 addVerticalSpace(60.h),
-                ElevatedButton(onPressed: (){}, child: const Text('Sign In')),
+                Consumer<AuthProvider>(
+                  builder: (context, auth, child) =>
+                      ElevatedButton(
+                          onPressed: (){
+                            if (formKye.currentState!.validate()){
+                              Helpers.showSnackBar(message: "login successfully");
+                              auth.LoginUser(_emailController.text, _passwordController.text);
+                              // Helpers.showSnackBar(message: "login successfully");
+                              // ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.homePage);
+                            }
+                          },
+                          child: const Text('Sign In')),
+                ),
                 addVerticalSpace(38.h),
-                FooterAuth(text: "Don't have an account?", textButtom: 'Sign Up', onPressed: () {},)
+                FooterAuth(text: "Don't have an account?", textButtom: 'Sign Up', onPressed: () {
+                  ServiceNavigations.serviceNavi.pushNamedWidget(RouteGenerator.signUpPage);
+                },)
               ],
             ),
           ),
