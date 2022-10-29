@@ -41,8 +41,8 @@ class PhoneNumberTextField extends StatelessWidget {
       // ),
     PositionedDirectional(
             start: AppSize.s80.w,
-            top: 8.h,
-            bottom: 8.h,
+            top: AppSize.s8.h,
+            bottom: AppSize.s8.h,
             child: Container(
               height: AppSize.s40.h,
               width: 1,

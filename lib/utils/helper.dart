@@ -4,8 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Helpers {
   static final GlobalKey<ScaffoldMessengerState> scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  static showSnackBar({required String message}) {
+
+ static showSnackBar({required String message}) {
+    print("ssss");
     scaffoldKey.currentState?.showSnackBar(SnackBar(
       content: Text(message),
       duration: const Duration(seconds: 3),
@@ -15,6 +18,7 @@ class Helpers {
       shape: const StadiumBorder(),
       behavior: SnackBarBehavior.floating,
     ));
+    print("After Snak");
   }
 }
 

@@ -14,6 +14,7 @@ import '../../shared/customWidgets/authWigdgets/authFooterPage.dart';
 import '../../shared/customWidgets/authWigdgets/authHeaderPage.dart';
 import '../../shared/customWidgets/mainTextFormField.dart';
 
+
 class SignInPage extends StatefulWidget {
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -92,7 +93,7 @@ class _SignInPageState extends State<SignInPage> {
                       ElevatedButton(
                           onPressed: (){
                             if (formKye.currentState!.validate()){
-                              Helpers.showSnackBar(message: "login successfully");
+                              // Helpers.showSnackBar(message: "login successfully");
                               auth.LoginUser(_emailController.text, _passwordController.text);
                               // Helpers.showSnackBar(message: "login successfully");
                               // ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.homePage);

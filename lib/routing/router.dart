@@ -9,6 +9,12 @@ class RouteGenerator {
   static const String successResetPage = '/successResetPage';
   static const String mainVerificationPage = '/mainVerificationPage';
   static const String settingPage = '/settingPage';
+  static const String verificationEmailPage = '/verificationEmailPage';
+  static const String verificationMobilePage = '/verificationMobilePage';
+  static const String verificationIDPage = '/verificationIDPage';
+  static const String verificationAdressPage = '/verificationAdressPage';
+  static const String successVerificationEmail = '/successVerificationEmail';
+  static const String successVerificationMobile = '/successVerificationMobile';
 
   RouteGenerator._();
 

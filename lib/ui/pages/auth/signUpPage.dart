@@ -37,6 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
@@ -69,7 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ],
                         ),
                       ),
-                      addHorizantelSpace(24.w),
+                      addHorizantelSpace(AppSize.s25.w),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               'Last Name',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            addVerticalSpace(5.h),
+                            addVerticalSpace(AppSize.s4.h),
                             MainTextformField(
                                 hintText: 'Enter last name',
                                 inbutType: TextInputType.name,
@@ -95,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     'Email',
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  addVerticalSpace(5.h),
+                  addVerticalSpace(AppSize.s5.h),
                   MainTextformField(
                       hintText: 'email@gmail.com',
                       inbutType: TextInputType.emailAddress,
@@ -106,7 +107,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     'Password',
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  addVerticalSpace(5.h),
+                  addVerticalSpace(AppSize.s5.h),
                   Consumer<AuthProvider>(
                       builder: (context, auth, child) => MainTextformField(
                             hintText: 'Enter your password',
@@ -137,7 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     'Country',
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  addVerticalSpace(5.h),
+                  addVerticalSpace(AppSize.s5.h),
                   MainTextformField(
                       hintText: '',
                       inbutType: TextInputType.text,

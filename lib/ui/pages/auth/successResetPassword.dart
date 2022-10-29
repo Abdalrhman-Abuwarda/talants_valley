@@ -27,6 +27,7 @@ class SuccessResetPassword extends StatelessWidget {
         ),
       ),
       body: CustomSuccessPage(
+        withTitel: true,
         titel: 'Password Reset',
         caption:
             "Your Password has been Successfully Reset Click below to Login",

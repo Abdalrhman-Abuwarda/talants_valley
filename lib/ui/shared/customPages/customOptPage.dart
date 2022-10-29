@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
+import 'package:talants_valley/resources/assetsManager.dart';
 
 import '../../../resources/colorsManager.dart';
 import '../../../resources/valuesManager.dart';
@@ -10,7 +11,7 @@ import '../customWidgets/authWigdgets/authFooterPage.dart';
 class CustomOptPage extends StatelessWidget {
   const CustomOptPage({
     required  this.optController,
-    required this.title,
+    this.title,
     required this.caption,
     required this.buttomText,
     required this.fotterText,
@@ -18,10 +19,12 @@ class CustomOptPage extends StatelessWidget {
     required this.onPressedButtom,
     required this.onPressedTextButtom,
     required this.valedate,
+    this.withImage = false,
+    this.pathImage,
   });
 
   final TextEditingController optController;
-  final String title;
+  final String? title;
   final String caption;
   final String fotterText;
   final String buttomText;
@@ -29,6 +32,8 @@ class CustomOptPage extends StatelessWidget {
   final void Function()? onPressedButtom;
  final dynamic Function() onPressedTextButtom;
  final String? Function(String?)? valedate;
+ final bool withImage ;
+ final String? pathImage;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +43,10 @@ class CustomOptPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           addVerticalSpace(AppSize.s30.h),
-          Center(
-              child: Text(title,
+          withImage == true ?
+          Image.asset(pathImage ?? "", height: 68.h, width: 68.w,)
+         : Center(
+              child: Text(title ?? "",
                   style: Theme.of(context).textTheme.headline2)),
           addVerticalSpace(AppSize.s18.h),
           Text(caption,

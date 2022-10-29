@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talants_valley/resources/valuesManager.dart';
 
 import 'colorsManager.dart';
 
@@ -14,21 +15,21 @@ class ThemeManager {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
           buttonColor: ColorManager.blueColor,
         ),
-        appBarTheme: const AppBarTheme(
-          toolbarHeight: 100,
+        appBarTheme:  AppBarTheme(
+          toolbarHeight: AppSize.s100.h,
             elevation: 0,
-            iconTheme: IconThemeData(
-              size: 25,
+            iconTheme: const IconThemeData(
+              size: AppSize.s25,
               color: ColorManager.primaryFontColor,
             ),
             centerTitle: true,
             // titleSpacing: 30,
-            actionsIconTheme: IconThemeData(
-              size: 20,
+            actionsIconTheme: const IconThemeData(
+              size: AppSize.s25,
               color: Color(0xFF151617),
             ),
             backgroundColor: null,
-            titleTextStyle: TextStyle(fontSize: 43, color: Colors.white)
+            titleTextStyle: const TextStyle(fontSize: 43, color: Colors.white)
         ),
       textTheme:   TextTheme(
         headline1: TextStyle(fontSize: 30.sp, fontFamily: 'Segoe UI',fontWeight: FontWeight.w600, color: ColorManager.primaryFontColor),
@@ -37,10 +38,13 @@ class ThemeManager {
         subtitle1: TextStyle(fontSize: 16.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
         subtitle2: TextStyle(fontSize: 20.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
         bodyText2: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor ),
-        bodyText1: TextStyle(fontSize: 11.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor ),
+        bodyText1: TextStyle(fontSize: 10.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+          backgroundColor: ColorManager.blueColor,
+          disabledBackgroundColor: ColorManager.blueColor.withOpacity(0.4),
+          disabledForegroundColor: ColorManager.whiteColor,
           textStyle: TextStyle(fontSize: 20.sp, fontFamily: 'Segoe UI', fontWeight: FontWeight.w600, color: ColorManager.whiteColor),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(7.r),
@@ -51,22 +55,22 @@ class ThemeManager {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: ColorManager.whiteColor,
-        contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
+        contentPadding: EdgeInsets.symmetric(vertical: AppPadding.p15.h, horizontal: AppPadding.p20.w),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7.r),
             borderSide: const BorderSide(
               color: ColorManager.mainBorderColor,
             )
         ),
-        errorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(
+        errorBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10.r)),
+          borderSide: const BorderSide(
             color: ColorManager.redColor,
           ),
         ),
-        focusedBorder:  const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10.r)),
+          borderSide: const BorderSide(
             color: ColorManager.foucasBorderColor,
             width: 2,
           ),

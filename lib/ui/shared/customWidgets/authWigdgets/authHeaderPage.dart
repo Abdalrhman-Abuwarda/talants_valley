@@ -15,8 +15,8 @@ class HeadarAuth extends StatelessWidget {
       child: Column(
           children: [
             Image.asset(ImageAssets.mainImage,
-              height: 28.h,
-              width: 85.w,),
+              height: AppSize.s28.h,
+              width: AppSize.s80.w,),
             addVerticalSpace(heightSpace),
             Text('Sigin In', style: Theme.of(context).textTheme.headline1),
           ]

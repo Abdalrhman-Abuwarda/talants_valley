@@ -20,6 +20,7 @@ class CheckEmailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Image.asset(
           ImageAssets.mainImage,
@@ -47,7 +48,7 @@ class CheckEmailPage extends StatelessWidget {
                   futterButtomText: 'Resend',
                   onPressedButtom: (){
                     if(formKye.currentState!.validate()){
-                      auth.checkEmailPassword(verificationCode: _optController.text);
+                      auth.checkEmailPassword( verificationCode: _optController.text);
                       // ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.createNewPassword);
                     }
                   },

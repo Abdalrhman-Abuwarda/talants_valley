@@ -43,6 +43,7 @@ dependencies:
   dio: ^4.0.6
   shared_preferences: ^2.0.15
   country_phone_code_picker: ^0.0.41
+  dropdown_button2: ^1.8.9
 
 dev_dependencies:
   flutter_test:

@@ -19,7 +19,7 @@ Future<dynamic> LoginUser(String email, String password) async{
   final dataResponse = await AuthRepository().loginUserRepository(email: email, password: password);
   SharedPrefController().saveData(data: dataResponse);
   print(dataResponse.user.email);
-  Helpers.showSnackBar(message: "login successfully");
+  // Helpers.showSnackBar(message: "login successfully");
   ServiceNavigations.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
   notifyListeners();

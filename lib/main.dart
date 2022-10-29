@@ -11,9 +11,12 @@ import 'package:talants_valley/ui/pages/auth/signInPage.dart';
 import 'package:talants_valley/ui/pages/auth/signUpPage.dart';
 import 'package:talants_valley/ui/pages/auth/successResetPassword.dart';
 import 'package:talants_valley/ui/pages/verification/mainVerificationPage.dart';
+import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/sharedController.dart';
 import 'core/provider/authProvider.dart';
+import 'core/provider/formProvider.dart';
+import 'core/provider/verificationProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,11 +34,14 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider(), child: MyApp()),
+        ChangeNotifierProvider(create: (_) => FormProvider(), child: MyApp()),
+        ChangeNotifierProvider(create: (_) => VerificationProvider(), child: MyApp()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),
         builder: (context, child) =>
             MaterialApp(
+              scaffoldMessengerKey: Helpers.scaffoldKey,
               debugShowCheckedModeBanner: false,
               title: 'Talants Valley',
               theme: ThemeManager.lightTheme,

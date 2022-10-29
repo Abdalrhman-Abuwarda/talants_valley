@@ -26,7 +26,9 @@ class VerificationListTile extends StatelessWidget {
         title: Text(title),
         subtitle: Row(children: [
           Text(suptitle, style: Theme.of(context).textTheme.bodyText1,),
-          Text(hintSupTitel ?? "", style: Theme.of(context).textTheme.bodyText1,),
+          Text(hintSupTitel ?? "", style: Theme.of(context).textTheme.bodyText1!.copyWith(
+            color: ColorManager.redColor,
+          ),),
         ]),
         trailing: Container(
           height: AppSize.s30.h,

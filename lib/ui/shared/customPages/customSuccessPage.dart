@@ -5,11 +5,12 @@ import '../../../resources/assetsManager.dart';
 import '../../../resources/valuesManager.dart';
 
 class CustomSuccessPage extends StatelessWidget {
-  CustomSuccessPage({required this.titel, required this.caption, required this.textButtom, required this.onPressed}) ;
+  CustomSuccessPage({ this.titel, required this.caption, required this.textButtom, required this.onPressed, this.withTitel = false}) ;
 
-  final String titel;
+  final String? titel;
   final String caption;
   final String textButtom;
+  final bool withTitel;
   void Function()? onPressed;
 
   @override
@@ -25,7 +26,8 @@ class CustomSuccessPage extends StatelessWidget {
               height: AppSize.s55.h, width: AppSize.s55.w,),
           ),
           addVerticalSpace(AppSize.s20.h),
-          Text(titel, style: Theme.of(context).textTheme.headline2,),
+          if(withTitel == true)
+          Text(titel ?? "", style: Theme.of(context).textTheme.headline2,),
           addVerticalSpace(AppSize.s28.h),
           Text(caption, textAlign: TextAlign.center,style: Theme.of(context).textTheme.subtitle1,),
           addVerticalSpace(AppSize.s66.h),

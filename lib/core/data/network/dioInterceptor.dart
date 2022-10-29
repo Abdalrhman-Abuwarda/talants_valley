@@ -49,18 +49,20 @@ class DioInterceptor extends Interceptor {
         }
         break;
       case DioErrorType.response:
-        {
+
           print('This is response err $err');
           print(err.response!.data);
           if(err.response!.statusCode == 400){
             print("Helllllo Pro this is 400");
             Helpers.showSnackBar(message: err.response!.data["message"]);
+            print("after Pro this is 400");
+
           }
           else if(err.response!.statusCode == 422) {
             Helpers.showSnackBar(message: err.response!.data["message"]);
           }
           print(err.response!.statusCode);
-        }
+
         break;
       case DioErrorType.other:
         {
@@ -69,7 +71,7 @@ class DioInterceptor extends Interceptor {
         }
         break;
     }
-    super.onError(err, handler);
+    // super.onError(err, handler);
   }
 }
 
