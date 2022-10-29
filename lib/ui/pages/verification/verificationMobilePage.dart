@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/ui/shared/customPages/customOptPage.dart';
 
 import '../../../core/data/local/sharedController.dart';
@@ -35,23 +37,25 @@ class VerificationMobilePage extends StatelessWidget {
       ),
       body: Form(
         key: formKye,
-        child: CustomOptPage(
-          withImage: true,
-          pathImage: ImageAssets.mobileSuccessImage,
-          optController: _optMobileController,
-          caption:
-              'We have sent you a verification code to your mobile number ${SharedPrefController().getData().user.mobile}',
-          buttomText: 'Verify',
-          fotterText: "Didn't get the code? ",
-          futterButtomText: 'Resend',
-          onPressedButtom: () {
-            if (formKye.currentState!.validate()) {
-              ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(
-                  RouteGenerator.successVerificationMobile);
-            }
-          },
-          onPressedTextButtom: () {},
-          valedate: (value) => Validate.validateCode(value),
+        child: Consumer<VerificationProvider>(
+          builder: (context, verification, child) =>
+              CustomOptPage(
+                withImage: true,
+                pathImage: ImageAssets.mobileSuccessImage,
+                optController: _optMobileController,
+                caption:
+                'We have sent you a verification code to your mobile number ${SharedPrefController().getData().user.mobile}',
+                buttomText: 'Verify',
+                fotterText: "Didn't get the code? ",
+                futterButtomText: 'Resend',
+                onPressedButtom: () {
+                  if (formKye.currentState!.validate()) {
+                    verification.verificationMobile(code: _optMobileController.text);
+                  }
+                },
+                onPressedTextButtom: () {},
+                valedate: (value) => Validate.validateCode(value),
+              ),
         ),
       ),
     );

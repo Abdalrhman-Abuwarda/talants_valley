@@ -4,13 +4,13 @@ import '../../../utils/helper.dart';
 import '../local/sharedController.dart';
 
 class DioInterceptor extends Interceptor {
-  final _prefsLocator = SharedPrefController();
+
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     if(options.headers.containsKey("Authorization")){
-    options.headers['Authorization'] = _prefsLocator.getData().accessToken  ;}
-    super.onRequest(options, handler);
+    options.headers['Authorization'] = "Bearer ${SharedPrefController().getData().accessToken}";}
+    // super.onRequest(options, handler);
   }
 
   @override
@@ -57,6 +57,9 @@ class DioInterceptor extends Interceptor {
             Helpers.showSnackBar(message: err.response!.data["message"]);
             print("after Pro this is 400");
 
+          }
+          else if(err.response!.statusCode == 401){
+            Helpers.showSnackBar(message: err.response!.data["message"]);
           }
           else if(err.response!.statusCode == 422) {
             Helpers.showSnackBar(message: err.response!.data["message"]);

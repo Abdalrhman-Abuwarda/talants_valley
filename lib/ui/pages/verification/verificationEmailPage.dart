@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
+import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/ui/shared/customPages/customOptPage.dart';
 
 import '../../../resources/assetsManager.dart';
@@ -42,22 +44,24 @@ class _VerificationEmailPageState extends State<VerificationEmailPage> {
       ),
       body: Form(
         key: formKye,
-        child: CustomOptPage(
-          optController: _optController,
-          caption: "We have sent you a verification code to your email ${SharedPrefController().getData().user.email}",
-          withImage: true,
-          pathImage: ImageAssets.emailImage,
-          onPressedButtom: () {
-            if (formKye.currentState!.validate()) {
-              ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(
-                  RouteGenerator.successVerificationMobile);
-            }
-          },
-          buttomText: 'Verify',
-          fotterText: "Didn't get the code?",
-          futterButtomText: 'Resend',
-          onPressedTextButtom: () {},
-          valedate: (value) => Validate.validateCode(value),
+        child: Consumer<VerificationProvider>(
+          builder: (context, verification, child) =>
+              CustomOptPage(
+                optController: _optController,
+                caption: "We have sent you a verification code to your email ${SharedPrefController().getData().user.email}",
+                withImage: true,
+                pathImage: ImageAssets.emailImage,
+                onPressedButtom: () {
+                  if (formKye.currentState!.validate()) {
+                    verification.verificationEmail(code: _optController.text);
+                  }
+                },
+                buttomText: 'Verify',
+                fotterText: "Didn't get the code?",
+                futterButtomText: 'Resend',
+                onPressedTextButtom: () {},
+                valedate: (value) => Validate.validateCode(value),
+              ),
         ),
       ),
     );

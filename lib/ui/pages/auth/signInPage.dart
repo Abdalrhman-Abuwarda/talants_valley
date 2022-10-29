@@ -93,10 +93,7 @@ class _SignInPageState extends State<SignInPage> {
                       ElevatedButton(
                           onPressed: (){
                             if (formKye.currentState!.validate()){
-                              // Helpers.showSnackBar(message: "login successfully");
                               auth.LoginUser(_emailController.text, _passwordController.text);
-                              // Helpers.showSnackBar(message: "login successfully");
-                              // ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.homePage);
                             }
                           },
                           child: const Text('Sign In')),

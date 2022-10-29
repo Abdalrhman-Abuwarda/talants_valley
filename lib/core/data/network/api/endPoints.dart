@@ -9,4 +9,9 @@ class Endpoints {
   static const String userForgetPassword = 'user/password/forgot';
   static const String userVerifyPassword = 'user/password/verify-code';
   static const String crateNewPassword = 'user/password/recover';
+  static const String sendCodeEmail = 'user/send-code-email';
+  static const String sendCodeMobile = 'user/send-code-mobile';
+  static const String verificationEmail = 'user/verify/email';
+  static const String verificationMobile = 'user/verify/mobile';
+
 }
