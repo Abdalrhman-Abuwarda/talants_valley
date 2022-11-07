@@ -1,15 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/data/network/api/endPoints.dart';
 import 'package:talants_valley/core/data/network/dioClient.dart';
 
 import '../../model/responseDataModel.dart';
+import '../../model/userModel.dart';
 
 class AuthRepository {
   Dio dio = Dio();
 
   
   //----------------------------------------loginUserRepository-------------------------------
-  Future<DataModel> loginUserRepository(
+
+  Future<UserModel> loginUserRepository(
       {required String email, required String password}) async {
     final response = await DioClient(dio).post(Endpoints.userLogin, data: {
       "email": email,
@@ -17,8 +20,9 @@ class AuthRepository {
     });
     print(response.statusCode);
     print(response.data);
-    final data = DataModel.fromJson(response.data["data"]);
-    return data;
+    SharedPrefController().saveAccessToken(tocken: response.data["data"]["accessToken"]);
+    final user = UserModel.fromJson(response.data["data"]["user"]);
+    return user;
   }
 
   

@@ -11,6 +11,7 @@ import 'package:talants_valley/ui/pages/auth/signInPage.dart';
 import 'package:talants_valley/ui/pages/auth/signUpPage.dart';
 import 'package:talants_valley/ui/pages/auth/successResetPassword.dart';
 import 'package:talants_valley/ui/pages/verification/mainVerificationPage.dart';
+import 'package:talants_valley/ui/splashPage.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/sharedController.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Talants Valley',
               theme: ThemeManager.lightTheme,
-              home: SignInPage() ,
+              home: SplashPage() ,
               navigatorKey: ServiceNavigations.serviceNavi.navKey,
               onGenerateRoute: RoutsGnerate.generateRoute,
             ),

@@ -44,7 +44,7 @@ class VerificationMobilePage extends StatelessWidget {
                 pathImage: ImageAssets.mobileSuccessImage,
                 optController: _optMobileController,
                 caption:
-                'We have sent you a verification code to your mobile number ${SharedPrefController().getData().user.mobile}',
+                'We have sent you a verification code to your mobile number ${SharedPrefController().getUser().mobile.replaceRange(0, 9, "**********")}',
                 buttomText: 'Verify',
                 fotterText: "Didn't get the code? ",
                 futterButtomText: 'Resend',

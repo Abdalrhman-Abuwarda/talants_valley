@@ -9,20 +9,25 @@ import '../../utils/helper.dart';
 
 class AuthProvider with ChangeNotifier{
 bool isPassword = true;
+
+String? postCode;
+void savePsotCode(String code){}
+
 void suffixPressed(){
   isPassword = !isPassword;
   notifyListeners();
 }
 
 //-----------------------------LoginUser----------------------------------------
+
 Future<dynamic> LoginUser(String email, String password) async{
   final dataResponse = await AuthRepository().loginUserRepository(email: email, password: password);
-  SharedPrefController().saveData(data: dataResponse);
-  print(dataResponse.user.email);
-  // Helpers.showSnackBar(message: "login successfully");
+  SharedPrefController().saveData(user: dataResponse);
+  print(dataResponse.email);
+  Helpers.showSnackBar(message: "login successfully");
   ServiceNavigations.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
-  notifyListeners();
+  // notifyListeners();
 }
 
 
@@ -35,11 +40,9 @@ Future<dynamic> SignupUser(
       required String email,
       required String password}) async{
   final dataResponse = await AuthRepository().signupUserRepository(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
-  SharedPrefController().saveData(data: dataResponse);
-  print(dataResponse.user.email);
   Helpers.showSnackBar(message: "Signup successfully");
   ServiceNavigations.serviceNavi
-      .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
+      .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
   notifyListeners();
 }
 
@@ -75,4 +78,13 @@ Future<dynamic> createNewPassword({required String password}) async{
       .pushNamedWidget(RouteGenerator.successResetPage);
   notifyListeners();
 }
+
+//------------------------------------------------------------------------------
+
+Future<dynamic> logout() async {
+  SharedPrefController().logout();
+  ServiceNavigations.serviceNavi
+      .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
+}
+
 }

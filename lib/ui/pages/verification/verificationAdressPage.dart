@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/formProvider.dart';
+import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/resources/assetsManager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
@@ -10,8 +11,8 @@ import '../../../resources/colorsManager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
-import '../../shared/customWidgets/costumElevatedbutton.dart';
-import '../../shared/customWidgets/cusomDropdownWidget.dart';
+import '../../shared/customWidgets/customElevatedbutton.dart';
+import '../../shared/customWidgets/customDropdownWidget.dart';
 import '../../shared/customWidgets/mainTextFormField.dart';
 
 class VerificationAdressPage extends StatefulWidget {
@@ -23,7 +24,8 @@ class VerificationAdressPage extends StatefulWidget {
 
 class _VerificationAdressPageState extends State<VerificationAdressPage> {
   var formKye = GlobalKey<FormState>();
-  List<String> items = DrppdownModel().addressDocumentType;
+  final List<String> items = DrppdownModel().addressDocumentType;
+  final List<String> country = DrppdownModel().countriesName;
   String? selectedValue = null;
   final TextEditingController _adress_1_Controller = TextEditingController();
   final TextEditingController _adress_2_Controller = TextEditingController();
@@ -48,11 +50,11 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppPadding.p44.w),
-        child: Form(
-          key: formKye,
-          child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppPadding.p44.w),
+          child: Form(
+            key: formKye,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -75,20 +77,18 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                     style: Theme.of(context).textTheme.subtitle1),
                 addVerticalSpace(AppSize.s5.h),
                 Consumer<FormProvider>(
-                  builder: (context, form, child) =>
-                      CustomDropdownWidget(
-                        items: items,
-                        hintText: 'Choose your document type',
-                        validator: (value) {},
-                        onChange: (Object? value) {
-                          form.onChangeAddress(value);
-                        },
-                        selectedValue: form.selectedValueAddress,
-                    ),
+                  builder: (context, form, child) => CustomDropdownWidget(
+                    items: items,
+                    hintText: 'Choose your document type',
+                    validator: (value) {},
+                    onChange: (Object? value) {
+                      form.onChangeAddressType(value);
+                    },
+                    selectedValue: form.selectedVerificationAddressType,
+                  ),
                 ),
                 addVerticalSpace(AppSize.s16.h),
-                Text('Adress 1',
-                    style: Theme.of(context).textTheme.subtitle1),
+                Text('Adress 1', style: Theme.of(context).textTheme.subtitle1),
                 addVerticalSpace(AppSize.s5.h),
                 MainTextformField(
                     hintText: "Neighborhood, building..",
@@ -96,8 +96,7 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                     controller: _adress_1_Controller,
                     validator: (value) => Validate.validateCode(value)),
                 addVerticalSpace(AppSize.s16.h),
-                Text('Adress 2',
-                    style: Theme.of(context).textTheme.subtitle1),
+                Text('Adress 2', style: Theme.of(context).textTheme.subtitle1),
                 addVerticalSpace(AppSize.s5.h),
                 MainTextformField(
                     hintText: "Street",
@@ -112,7 +111,7 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'First Name',
+                            'City',
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
                           addVerticalSpace(AppSize.s4.h),
@@ -131,26 +130,54 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Last Name',
+                            'Country',
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
                           addVerticalSpace(AppSize.s4.h),
-                          MainTextformField(
+                          Consumer<FormProvider>(
+                            builder: (context, form, child) =>
+                                CustomDropdownWidget(
+                              items: country,
                               hintText: '',
-                              inbutType: TextInputType.name,
-                              controller: _CountryController,
-                              validator: (value) =>
-                                  Validate.validateUserName(value))
+                              validator: (value) {},
+                              onChange: (Object? value) {
+                                form.onChangeCountryAddress(value);
+                              },
+                              selectedValue: form.selectedCountryAddress,
+                            ),
+                          ),
                         ],
                       ),
                     )
                   ],
                 ),
                 addVerticalSpace(AppSize.s22.h),
-                CostumElevatedButton(),
-                Text("Your document shouldn't be three months old", style: Theme.of(context).textTheme.bodyText2,),
+                Consumer<VerificationProvider>(
+                    builder: (context, verification, child) =>
+                        CostumElevatedButton(
+                          onPressed: () {
+                            verification.picKImageAddress();
+                          },
+                        )),
+                Text(
+                  "Your document shouldn't be three months old",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
                 addVerticalSpace(AppSize.s30.h),
-                ElevatedButton(onPressed: (){}, child: Text("Continue"))
+            Consumer2<VerificationProvider, FormProvider>(
+                builder: (context, verification, form, child) =>
+                    ElevatedButton(onPressed: () {
+                      verification.verificationAdress(
+                          address1: _adress_1_Controller.text,
+                          address2: _adress_2_Controller.text,
+                          city: _cityController.text,
+                          addressDocumentType:
+                          form.selectedVerificationAddressType!,
+                          country: form.selectedCountryAddress!);
+                    },
+                        child: Text("Continue")
+                    ),
+                )
               ],
             ),
           ),

@@ -15,14 +15,41 @@ class Validate {
   }
 // اعمل extention
   static String? validatePassword(value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'This field is required';
+    RegExp hasUpper = RegExp(r'[A-Z]');
+    RegExp hasLower = RegExp(r'[a-z]');
+    RegExp hasDigit = RegExp(r'\d');
+    RegExp hasPunct = RegExp(r'[!@#\$&*~-]');
+    // 2
+    if (!RegExp(r'.{10,}').hasMatch(value)) {
+      return 'Passwords must have at least 10 characters';
     }
-    if (value.trim().length < 10) {
-      return '❗Password must be at least 8 characters in length';
+    // 3
+    if (!hasUpper.hasMatch(value)) {
+      return 'Passwords must have at least one uppercase character';
     }
-    // Return null if the entered password is valid
+    // 4
+    if (!hasLower.hasMatch(value)) {
+      return 'Passwords must have at least one lowercase character';
+    }
+    // 5
+    if (!hasDigit.hasMatch(value)) {
+      return 'Passwords must have at least one number';
+    }
+    // 6
+    if (!hasPunct.hasMatch(value)) {
+      return 'Passwords need at least one special character like !@#\$&*~-';
+    }
+    // 7
     return null;
+    // if (value == null || value.trim().isEmpty) {
+    //   return 'This field is required';
+    // }
+    // if (value.trim().length < 10) {
+    //   return '❗Password must be at least 8 characters in length';
+    // }
+    // // Return null if the entered password is valid
+    // // return "✅ Nice work. This is an excellent password";
+    // return null;
   }
 
   static String? validateRePassword(value, String password){

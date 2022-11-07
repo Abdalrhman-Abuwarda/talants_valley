@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
+import 'package:talants_valley/core/provider/authProvider.dart';
 import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/resources/colorsManager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
@@ -10,13 +11,28 @@ import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../shared/customWidgets/verificationWidgets/verificationListTile.dart';
 
-class MainVerificationPage extends StatelessWidget {
+class MainVerificationPage extends StatefulWidget {
   MainVerificationPage({Key? key}) : super(key: key);
+
+  @override
+  State<MainVerificationPage> createState() => _MainVerificationPageState();
+}
+
+
+class _MainVerificationPageState extends State<MainVerificationPage> {
   var formKye = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  final String verifiedID = SharedPrefController().getUser().verifiedId.status;
+  final String verifiedAddress = SharedPrefController().getUser().verifiedAddress.status;
+  final bool verifiedEmail = SharedPrefController().getUser().verifiedEmail;
+  final bool verifiedMobile = SharedPrefController().getUser().verifiedMobile;
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
+      key: _key ,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
@@ -24,8 +40,24 @@ class MainVerificationPage extends StatelessWidget {
           style: Theme.of(context).textTheme.headline2,
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {_key.currentState!.openDrawer();},
           icon: const Icon(Icons.menu),
+        ),
+      ),
+      drawer: Drawer(
+        child: Consumer<AuthProvider>(
+          builder: (context, auth, child) =>
+              ListView(
+                children: [
+                  ListTile(
+                      onTap: (){
+                        auth.logout();
+                      },
+                      title: Text("Logout"),
+                      trailing: Icon(Icons.logout)
+                  )
+                ],
+              ),
         ),
       ),
       body: Padding(
@@ -37,7 +69,7 @@ class MainVerificationPage extends StatelessWidget {
                 children: [
                   addVerticalSpace(AppSize.s28.h),
                   Text(
-                    'Hello, ${SharedPrefController().getData().user.firstName}',
+                    'Hello, ${SharedPrefController().getUser().firstName}',
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   addVerticalSpace(AppSize.s30.h),
@@ -48,33 +80,36 @@ class MainVerificationPage extends StatelessWidget {
                   addVerticalSpace(AppSize.s40.h),
                   // ignore: unrelated_type_equality_checks
                   VerificationListTile(
+                    textButton: "Verify",
                     title: 'Email Address',
-                    suptitle: SharedPrefController().getData().user.email,
+                    supTitel: SharedPrefController().getUser().email,
                     hintSupTitel:
-                    SharedPrefController().getData().user.verifiedEmail == true
+                    verifiedEmail == true
                         ? "(verified)"
                         : "(not verifieda)",
-                    hintColor: SharedPrefController().getData().user.verifiedEmail == true ? ColorManager.greenColor : ColorManager.redColor,
+                    hintColor: verifiedEmail == true ? ColorManager.greenColor : ColorManager.redColor,
                     onPressed: () {
                       verification.sendCodeEmail();
                     },
-                    isSuccess: SharedPrefController().getData().user.verifiedEmail == true ? true : false,
+                    isSuccess: verifiedEmail == true ? true : false,
                   ),
                   addVerticalSpace(AppSize.s12.h),
                   VerificationListTile(
+                    textButton: "Verify",
                     title: 'Phone Number',
-                    suptitle: SharedPrefController().getData().user.mobile,
-                    hintSupTitel:
-                    // ignore: unrelated_type_equality_checks
-                    SharedPrefController().getData().user.verifiedMobile == true
+                supTitel: SharedPrefController()
+                    .getUser()
+                    .mobile
+                    .replaceRange(4, 10, "******"),
+                hintSupTitel:
+                verifiedMobile == true
                         ? "(verified)"
-                        : "(not verifieda)",
-                    hintColor: SharedPrefController().getData().user.verifiedMobile == true ? ColorManager.greenColor : ColorManager.redColor,
+                        : "(not verified)",
+                    hintColor: verifiedMobile == true ? ColorManager.greenColor : ColorManager.redColor,
                     onPressed: () {
-                      ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(
-                          RouteGenerator.verificationMobilePage);
+                      verification.sendCodeMobile();
                     },
-                    isSuccess: SharedPrefController().getData().user.verifiedMobile == true ? true : false,
+                    isSuccess: verifiedMobile == true ? true : false,
                   ),
                   addVerticalSpace(AppSize.s12.h),
                   Text(
@@ -83,25 +118,24 @@ class MainVerificationPage extends StatelessWidget {
                   ),
                   addVerticalSpace(AppSize.s12.h),
                   VerificationListTile(
+                    isSuccess: verifiedID == "approved" ? true : false,
                     title: 'ID Verification',
-                    suptitle: 'Identity card - Driver license - Passport',
-                    onPressed: () {
-                      ServiceNavigations.serviceNavi
-                          .pushNamedAndRemoveUtils(RouteGenerator.verificationIDPage);
-                    },
+                    supTitel: 'Identity card - Driver license - Passport',
+                    onPressed: verifiedID == "not_uploaded" ? verification.idVerifiedPressedFunction : verifiedID == "pending" ? null : verification.idVerifiedPressedFunction,
+                    textButton: verifiedID == "not_uploaded" ? "Verify" : verifiedID == "pending" ? "Pending" : "Try Again",
                   ),
                   addVerticalSpace(AppSize.s12.h),
                   VerificationListTile(
+                    isSuccess: verifiedAddress == "approved" ? true : false,
                     title: 'Address Verification',
-                    suptitle: 'Phone, Electricity, Water Bill - Bank statement',
-                    onPressed: () {
-                      ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(
-                          RouteGenerator.verificationAdressPage);
-                    },
+                    supTitel: 'Phone, Electricity, Water Bill - Bank statement',
+                    onPressed: verifiedAddress == "not_uploaded" ? verification.addressVerifiedPressedFunction : verifiedAddress == "pending" ? null : verification.addressVerifiedPressedFunction,
+                    textButton: verifiedAddress == "not_uploaded" ? "Verify" : verifiedAddress == "pending" ? "Pending" : "Try Again",
                   ),
                   addVerticalSpace(AppSize.s66.h),
                   ElevatedButton(
-                    onPressed: verification.buttonVerificationFunction(formKye),
+                    onPressed:
+                    verifiedMobile && verifiedEmail == true ? verification.mainOnPressedFunction : null,
                       child: Text('Continue'))
                 ],
               ),

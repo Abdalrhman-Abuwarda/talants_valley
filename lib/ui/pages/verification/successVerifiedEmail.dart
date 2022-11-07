@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/ui/shared/customPages/customSuccessPage.dart';
 
 import '../../../resources/assetsManager.dart';
@@ -23,12 +25,20 @@ class SuccessVerifiedEmailPage extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
             ServiceNavigations.serviceNavi
-              .pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);},
+                .pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
+          },
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: CustomSuccessPage(caption: 'You Verified Your Email Successfully', textButtom: 'Continue', onPressed: (){ServiceNavigations.serviceNavi
-          .pushNamedWidget(RouteGenerator.mainVerificationPage);},),
+      body: Consumer<VerificationProvider>(
+        builder: (context, verification, child) => CustomSuccessPage(
+          caption: 'You Verified Your Email Successfully',
+          textButtom: 'Continue',
+          onPressed: () {
+            verification.getUser();
+          },
+        ),
+      ),
     );
   }
 }

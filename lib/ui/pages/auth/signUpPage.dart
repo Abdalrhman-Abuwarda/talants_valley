@@ -7,12 +7,15 @@ import 'package:talants_valley/ui/shared/customWidgets/mainTextFormField.dart';
 import 'package:talants_valley/utils/validate.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
+import '../../../core/model/dropdownModel.dart';
 import '../../../core/provider/authProvider.dart';
+import '../../../core/provider/formProvider.dart';
 import '../../../resources/colorsManager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../shared/customWidgets/authWigdgets/authFooterPage.dart';
 import '../../shared/customWidgets/authWigdgets/phoneNumberTextField.dart';
+import '../../shared/customWidgets/customDropdownWidget.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key? key}) : super(key: key);
@@ -22,6 +25,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final List<String> country = DrppdownModel().countriesName;
+
   final TextEditingController _firstNameController = TextEditingController();
 
   final TextEditingController _lastNameController = TextEditingController();
@@ -120,8 +125,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               auth.suffixPressed();
                             },
                             suffixIcon: auth.isPassword
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           )),
                   addVerticalSpace(AppSize.s16.h),
                   Text(
@@ -131,7 +136,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   addVerticalSpace(5.h),
                   PhoneNumberTextField(
                     phoneNumberController: _phoneNumberController,
-                    validate: (value) => Validate.validatePhoneNumber(value),
                   ),
                   addVerticalSpace(AppSize.s16.h),
                   Text(
@@ -139,26 +143,29 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   addVerticalSpace(AppSize.s5.h),
-                  MainTextformField(
-                      hintText: '',
-                      inbutType: TextInputType.text,
-                      controller: _countryController,
-                      validator: (value) => Validate.validateUserName(value)),
-                  addVerticalSpace(AppSize.s55.h),
-                  Consumer<AuthProvider>(
-                    builder: (context, auth, child) => ElevatedButton(
+                  Consumer<FormProvider>(
+                    builder: (context, form, child) =>
+                        CustomDropdownWidget(
+                          items: country,
+                          hintText: '',
+                          validator: (value) {},
+                          onChange: (Object? value) {
+                            form.onChangeCountrySignUp(value);
+                          },
+                          selectedValue: form.selectedCountrySignUp,
+                        ),
+                  ),
+                  Consumer2<AuthProvider, FormProvider>(
+                    builder: (context, auth, form,child) => ElevatedButton(
                         onPressed: () {
                           if (formKye.currentState!.validate()) {
                             auth.SignupUser(
                                 firstName: _firstNameController.text,
                                 lastName: _lastNameController.text,
                                 email: _emailController.text,
-                                country: _countryController.text,
-                                mobile: _phoneNumberController.text,
+                                country: form.selectedCountrySignUp!,
+                                mobile: "${auth.postCode}${_phoneNumberController.text}",
                                 password: _passwordController.text);
-                            // ServiceNavigations.serviceNavi
-                            //     .pushNamedAndRemoveUtils(
-                            //         RouteGenerator.homePage);
                           }
                         },
                         child: const Text('Sign Up')),

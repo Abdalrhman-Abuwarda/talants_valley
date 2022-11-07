@@ -3,14 +3,14 @@ import 'package:talants_valley/core/model/userModel.dart';
 class DataModel {
  final String accessToken;
  final String refreshToken;
- final User user;
+ final UserModel user;
 
   DataModel._({required this.accessToken,required this.refreshToken,required this.user});
 
   factory DataModel.fromJson(Map<String, dynamic> json) => DataModel._(
     accessToken: json["accessToken"],
     refreshToken: json["refreshToken"],
-    user: User.fromJson(json['user']),
+    user: UserModel.fromJson(json['user']),
   );
 
   Map<String, dynamic> toJson() {
@@ -25,7 +25,7 @@ class DataModel {
 //---------------------------------VerifiedAddressModel-----------------------------------
 
 class VerifiedAddress {
- final DisapproveReason disapproveReason;
+ final DisapproveReason? disapproveReason;
  final String status;
   final String? addressDocumentType;
   final String? addressFile;
@@ -34,7 +34,7 @@ class VerifiedAddress {
   VerifiedAddress._({required this.disapproveReason,required this.status, this.addressDocumentType, this.addressFile, this.otherDocumentType});
 
   factory VerifiedAddress.fromJson(Map<String, dynamic> json) => VerifiedAddress._(
-    disapproveReason: DisapproveReason.fromJson(json['disapproveReason']),
+    disapproveReason:json['disapproveReason'] == null ? null : DisapproveReason.fromJson(json['disapproveReason']),
     // disapproveReason = new DisapproveReason.fromJson(json['disapproveReason']) ;
       status: json["status"],
     addressDocumentType: json["addressDocumentType"],
@@ -44,7 +44,7 @@ class VerifiedAddress {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['disapproveReason'] = disapproveReason.toJson();
+    data['disapproveReason'] = disapproveReason!.toJson();
     data['status'] = status;
     return data;
   }
@@ -58,9 +58,13 @@ class DisapproveReason {
 final Map<String, dynamic>? disapproveReason;
 
 
-factory DisapproveReason.fromJson(Map<String, dynamic> json) => DisapproveReason._(disapproveReason: json["disapproveReason"]);
+factory DisapproveReason.fromJson(Map<String, dynamic> json) =>
+    DisapproveReason._(
+        disapproveReason: json["disapproveReason"] == null ? null : json["disapproveReason"],
+    );
 Map<String, dynamic> toJson() {
   final Map<String, dynamic> data = <String, dynamic>{};
+  data["disapproveReason"] = disapproveReason;
   return data;
 }
 }
@@ -92,7 +96,7 @@ class Address {
 //-------------------------verifiedId--------------------------
 
 class VerifiedId {
- final DisapproveReason disapproveReason;
+ final DisapproveReason? disapproveReason;
  final String status;
  final String? idDocumentType;
  final String? idNumber;
@@ -101,7 +105,7 @@ class VerifiedId {
   VerifiedId._({required this.disapproveReason,required this.status, this.idDocumentType, this.idNumber, this.idFile});
 
   factory VerifiedId.fromJson(Map<String, dynamic> json) => VerifiedId._(
-    disapproveReason : DisapproveReason.fromJson(json['disapproveReason']),
+    disapproveReason :json['disapproveReason'] == null ? null: DisapproveReason.fromJson(json['disapproveReason']),
     status : json['status'],
     idDocumentType : json['idDocumentType'],
     idNumber: json['idNumber'],
@@ -110,7 +114,7 @@ class VerifiedId {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['disapproveReason'] = disapproveReason.toJson();
+    data['disapproveReason'] = disapproveReason == null ? null :disapproveReason!.toJson();
     data['status'] = status;
     data['idDocumentType'] = idDocumentType;
     data['idNumber'] = idNumber;

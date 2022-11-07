@@ -92,8 +92,11 @@ class _SignInPageState extends State<SignInPage> {
                   builder: (context, auth, child) =>
                       ElevatedButton(
                           onPressed: (){
+                            print("before the if");
                             if (formKye.currentState!.validate()){
+                              print("after the if");
                               auth.LoginUser(_emailController.text, _passwordController.text);
+                              print("Fuckkkkkk");
                             }
                           },
                           child: const Text('Sign In')),

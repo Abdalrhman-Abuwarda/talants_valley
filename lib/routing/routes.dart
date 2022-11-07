@@ -30,7 +30,7 @@ class RoutsGnerate{
       case RouteGenerator.signUpPage:
         return MaterialPageRoute(builder: (_) => SignUpPage());
       case RouteGenerator.homePage:
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        return MaterialPageRoute(builder: (_) =>  HomePage());
       case RouteGenerator.forgetPassword:
         return MaterialPageRoute(builder: (_) => ForgetPasswordPage());
       case RouteGenerator.createNewPassword:

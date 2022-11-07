@@ -5,9 +5,10 @@ import '../../../resources/colorsManager.dart';
 import '../../../resources/valuesManager.dart';
 
 class CostumElevatedButton extends StatelessWidget {
-  const CostumElevatedButton({
-    Key? key,
-  }) : super(key: key);
+  CostumElevatedButton({
+    required this.onPressed
+  });
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class CostumElevatedButton extends StatelessWidget {
             elevation: const MaterialStatePropertyAll(0),
             side: const MaterialStatePropertyAll(
                 BorderSide(color: ColorManager.mainBorderColor))),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -1,17 +1,41 @@
 import 'package:flutter/cupertino.dart';
 
 class FormProvider with ChangeNotifier{
-  String? selectedValueId = null;
-  String? selectedValueAddress = null;
+  String? selectedVerificationIdType;
+  String? selectedVerificationAddressType;
+  String? selectedCountryAddress;
+  String? selectedCountrySignUp;
   // void onChange(String value){
   //   selectedValue = value;
   // }
   //
-   void onChangeId(Object? value){
-    selectedValueId = value as String;
+   void onChangeIdType(Object? value){
+    selectedVerificationIdType = value as String;
+    notifyListeners();
 }
 
-   void onChangeAddress(Object? value){
-    selectedValueAddress = value as String;
+   void onChangeAddressType(Object? value){
+    selectedVerificationAddressType = value as String;
+    notifyListeners();
 }
+
+//    void onChangeAddressType(Object? value){
+//     selectedVerificationAddressType = value as String;
+//     notifyListeners();
+// }
+
+  void onChangeCountryAddress(Object? value){
+    selectedCountryAddress = value as String;
+    notifyListeners();
+  }
+
+
+  void onChangeCountrySignUp(Object? value){
+    selectedCountrySignUp = value as String;
+    notifyListeners();
+  }
+
+
+
+
 }

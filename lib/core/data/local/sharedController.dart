@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../model/responseDataModel.dart';
+import '../../model/userModel.dart';
 
 // enum PrefKeys {id, full_name, email, gender, token, refresh_token ,isLoggedIn}
 class SharedPrefController {
@@ -19,22 +20,50 @@ class SharedPrefController {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
+
   bool isLoggedIn() {
     return _sharedPreferences.getBool("isLoggedIn") ?? false;
   }
 
   Future<bool> saveData(
-      {required DataModel data}) async {
-    String dataJson = jsonEncode(data.toJson());
+      {required UserModel user}) async {
+    String userJson = jsonEncode(user.toJson());
     await _sharedPreferences.setBool("isLoggedIn", true);
-    return await _sharedPreferences.setString("data", dataJson);
+    return await _sharedPreferences.setString("user", userJson);
+  }
+  
+  Future<bool> saveAccessToken({required String tocken}) async {
+    return await _sharedPreferences.setString("accessToken", tocken);
   }
 
-  DataModel getData() {
-    final data = jsonDecode(_sharedPreferences.getString("data")!);
+  // Future<bool> saveUser({required UserModel user}) async{
+  //   String userJson = jsonEncode(user.toJson());
+  //   return await _sharedPreferences.setString("user", userJson);
+  // }
 
-    return DataModel.fromJson(data) ;
+  // UserModel getUser() {
+  //   final user = jsonDecode(_sharedPreferences.getString("user")!);
+  //   return UserModel.fromJson(user);
+  // }
+
+  UserModel getUser() {
+    final user = jsonDecode(_sharedPreferences.getString("user")!);
+    return UserModel.fromJson(user) ;
   }
+  
+  bool get verifiedMobile => _sharedPreferences.getBool("verifiedMobile") ?? false;
+  bool get verifiedEmail => _sharedPreferences.getBool("verifiedEmail") ?? false;
+  String get accessToken => _sharedPreferences.getString("accessToken") ?? '';
+
+  // String get verifiedMobile => _sharedPreferences.getString(getData().user.verifiedEmail.toString()) ?? '';
+  // String get verifiedEmail => _sharedPreferences.getString(getData().user.verifiedMobile.toString()) ?? '';
+  // Future<bool> updateVerifiedEmail() async{
+  //   return await _sharedPreferences.setBool("verifiedEmail", true);
+  // }
+
+  // Future<bool> updateVerifiedMobile() async{
+  //   return await _sharedPreferences.setBool("verifiedMobile", true);
+  // }
 
   Future<bool> saveId({required String id}) async {
     return await _sharedPreferences.setString("id", id);
@@ -56,9 +85,4 @@ class SharedPrefController {
     return _sharedPreferences.clear();
   }
 
-  // String get email{
-  //   return _sharedPreferences.getString("email")??'';
-  // }
-  // String get token => _sharedPreferences.getString(PrefKeys.token.name) ?? '';
-  // String get token => _sharedPreferences.getString(getUser().token) ?? '';
 }

@@ -8,14 +8,15 @@ import '../../../../resources/valuesManager.dart';
 
 class VerificationListTile extends StatelessWidget {
   VerificationListTile(
-      {required this.title, required this.suptitle, required this.onPressed, this.hintSupTitel, this.isSuccess = false, this.hintColor});
+      {required this.title, required this.supTitel, required this.onPressed, this.hintSupTitel, this.isSuccess = false, this.hintColor, required this.textButton});
 
   final String title;
-  final String suptitle;
+  final String supTitel;
   void Function()? onPressed;
   final String? hintSupTitel;
   final bool isSuccess;
    final Color? hintColor;
+   final String textButton;
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +30,37 @@ class VerificationListTile extends StatelessWidget {
         style: ListTileStyle.list,
         title: Text(title),
         subtitle: Row(children: [
-          Text(suptitle, style: Theme.of(context).textTheme.bodyText1,),
+          Text(supTitel, style: Theme.of(context).textTheme.bodyText1,),
           Text(hintSupTitel ?? "", style: Theme.of(context).textTheme.bodyText1!.copyWith(
             color: hintColor,
           ),),
         ]),
         trailing:
             isSuccess != true ?
-        Container(
-          height: AppSize.s30.h,
-          width: AppSize.s90.w,
-          child: ElevatedButton(onPressed: onPressed, child: Text('Verify'),),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: AppSize.s30.h,
+              width: AppSize.s90.w,
+              child: ElevatedButton(onPressed: onPressed, child: Text(textButton, style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                color: ColorManager.whiteColor,
+                fontSize: 13.sp
+              ),),),
+            ),
+            addVerticalSpace(AppSize.s8.h),
+          ],
         )
         :
-                Image.asset(ImageAssets.successImage,
-                height: AppSize.s35.h,
-                width: AppSize.s35.w,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(ImageAssets.successImage,
+                    height: AppSize.s35.h,
+                    width: AppSize.s35.w,
+                    ),
+                    addVerticalSpace(AppSize.s8.h),
+                  ],
                 )
       ),
     );

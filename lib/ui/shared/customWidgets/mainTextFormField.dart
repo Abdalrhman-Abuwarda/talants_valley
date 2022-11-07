@@ -22,11 +22,15 @@ final TextInputType inbutType;
   final String? Function(String?)? validator;
   final IconData? suffixIcon;
   final Function()? suffixPressed;
+   var formKye = GlobalKey<FormState>();
 
 
-  @override
+
+   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      // onChanged: ,
       validator: validator,
       controller: controller,
       obscureText: isPassword ,

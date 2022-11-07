@@ -12,6 +12,7 @@ class DioClient {
       ..options.connectTimeout = 15000
       ..options.receiveTimeout = 15000
       ..options.responseType = ResponseType.json
+      ..options.contentType = Headers.formUrlEncodedContentType
       // ..interceptors.addAll(iterable)
       ..interceptors.add(DioInterceptor());
   }

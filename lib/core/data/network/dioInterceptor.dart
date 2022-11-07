@@ -8,9 +8,9 @@ class DioInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if(options.headers.containsKey("Authorization")){
-    options.headers['Authorization'] = "Bearer ${SharedPrefController().getData().accessToken}";}
-    // super.onRequest(options, handler);
+    // if(options.headers.containsKey("Authorization")){
+    options.headers['Authorization'] = "Bearer ${SharedPrefController().accessToken}";
+    super.onRequest(options, handler);
   }
 
   @override
@@ -53,10 +53,11 @@ class DioInterceptor extends Interceptor {
           print('This is response err $err');
           print(err.response!.data);
           if(err.response!.statusCode == 400){
-            print("Helllllo Pro this is 400");
             Helpers.showSnackBar(message: err.response!.data["message"]);
             print("after Pro this is 400");
-
+          }
+          else if(err.response!.statusCode == 404){
+            Helpers.showSnackBar(message: err.response!.data["message"]);
           }
           else if(err.response!.statusCode == 401){
             Helpers.showSnackBar(message: err.response!.data["message"]);
@@ -68,13 +69,11 @@ class DioInterceptor extends Interceptor {
 
         break;
       case DioErrorType.other:
-        {
           print('This is other Type error $err');
           print(err.response!.statusCode);
-        }
         break;
     }
-    // super.onError(err, handler);
+    super.onError(err, handler);
   }
 }
 

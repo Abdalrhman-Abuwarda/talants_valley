@@ -13,5 +13,8 @@ class Endpoints {
   static const String sendCodeMobile = 'user/send-code-mobile';
   static const String verificationEmail = 'user/verify/email';
   static const String verificationMobile = 'user/verify/mobile';
+  static const String getUserData = 'settings/profile';
+  static const String verificationID = 'user/verify/id';
+  static const String verificationAddress = 'user/verify/address';
 
 }
