@@ -22,10 +22,8 @@ class MainVerificationPage extends StatefulWidget {
 class _MainVerificationPageState extends State<MainVerificationPage> {
   var formKye = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-  final String verifiedID = SharedPrefController().getUser().verifiedId.status;
-  final String verifiedAddress = SharedPrefController().getUser().verifiedAddress.status;
-  final bool verifiedEmail = SharedPrefController().getUser().verifiedEmail;
-  final bool verifiedMobile = SharedPrefController().getUser().verifiedMobile;
+  final dataUser = SharedPrefController().getUser();
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +67,7 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                 children: [
                   addVerticalSpace(AppSize.s28.h),
                   Text(
-                    'Hello, ${SharedPrefController().getUser().firstName}',
+                    'Hello, ${dataUser.firstName}',
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   addVerticalSpace(AppSize.s30.h),
@@ -82,34 +80,32 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                   VerificationListTile(
                     textButton: "Verify",
                     title: 'Email Address',
-                    supTitel: SharedPrefController().getUser().email,
+                    supTitel: dataUser.email,
                     hintSupTitel:
-                    verifiedEmail == true
+                    dataUser.verifiedEmail == true
                         ? "(verified)"
-                        : "(not verifieda)",
-                    hintColor: verifiedEmail == true ? ColorManager.greenColor : ColorManager.redColor,
+                        : "(not verified)",
+                    hintColor: dataUser.verifiedEmail == true ? ColorManager.greenColor : ColorManager.redColor,
                     onPressed: () {
                       verification.sendCodeEmail();
                     },
-                    isSuccess: verifiedEmail == true ? true : false,
+                    isSuccess: dataUser.verifiedEmail == true ? true : false,
                   ),
                   addVerticalSpace(AppSize.s12.h),
                   VerificationListTile(
                     textButton: "Verify",
                     title: 'Phone Number',
-                supTitel: SharedPrefController()
-                    .getUser()
-                    .mobile
+                supTitel: dataUser.mobile
                     .replaceRange(4, 10, "******"),
                 hintSupTitel:
-                verifiedMobile == true
+                dataUser.verifiedMobile == true
                         ? "(verified)"
                         : "(not verified)",
-                    hintColor: verifiedMobile == true ? ColorManager.greenColor : ColorManager.redColor,
+                    hintColor: dataUser.verifiedMobile == true ? ColorManager.greenColor : ColorManager.redColor,
                     onPressed: () {
                       verification.sendCodeMobile();
                     },
-                    isSuccess: verifiedMobile == true ? true : false,
+                    isSuccess: dataUser.verifiedMobile == true ? true : false,
                   ),
                   addVerticalSpace(AppSize.s12.h),
                   Text(
@@ -118,24 +114,24 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                   ),
                   addVerticalSpace(AppSize.s12.h),
                   VerificationListTile(
-                    isSuccess: verifiedID == "approved" ? true : false,
+                    isSuccess: dataUser.verifiedId.status == "approved" ? true : false,
                     title: 'ID Verification',
                     supTitel: 'Identity card - Driver license - Passport',
-                    onPressed: verifiedID == "not_uploaded" ? verification.idVerifiedPressedFunction : verifiedID == "pending" ? null : verification.idVerifiedPressedFunction,
-                    textButton: verifiedID == "not_uploaded" ? "Verify" : verifiedID == "pending" ? "Pending" : "Try Again",
+                    onPressed: dataUser.verifiedId.status == "not_uploaded" ? verification.idVerifiedPressedFunction : dataUser.verifiedId.status == "pending" ? null : verification.idVerifiedPressedFunction,
+                    textButton: dataUser.verifiedId.status == "not_uploaded" ? "Verify" : dataUser.verifiedId.status == "pending" ? "Pending" : "Try Again",
                   ),
                   addVerticalSpace(AppSize.s12.h),
                   VerificationListTile(
-                    isSuccess: verifiedAddress == "approved" ? true : false,
+                    isSuccess: dataUser.verifiedAddress.status == "approved" ? true : false,
                     title: 'Address Verification',
                     supTitel: 'Phone, Electricity, Water Bill - Bank statement',
-                    onPressed: verifiedAddress == "not_uploaded" ? verification.addressVerifiedPressedFunction : verifiedAddress == "pending" ? null : verification.addressVerifiedPressedFunction,
-                    textButton: verifiedAddress == "not_uploaded" ? "Verify" : verifiedAddress == "pending" ? "Pending" : "Try Again",
+                    onPressed: dataUser.verifiedAddress.status == "not_uploaded" ? verification.addressVerifiedPressedFunction : dataUser.verifiedAddress.status == "pending" ? null : verification.addressVerifiedPressedFunction,
+                    textButton: dataUser.verifiedAddress.status == "not_uploaded" ? "Verify" : dataUser.verifiedAddress.status == "pending" ? "Pending" : "Try Again",
                   ),
                   addVerticalSpace(AppSize.s66.h),
                   ElevatedButton(
                     onPressed:
-                    verifiedMobile && verifiedEmail == true ? verification.mainOnPressedFunction : null,
+                    dataUser.verifiedMobile && dataUser.verifiedEmail == true ? verification.mainOnPressedFunction : null,
                       child: Text('Continue'))
                 ],
               ),

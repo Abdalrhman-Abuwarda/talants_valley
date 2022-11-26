@@ -59,7 +59,13 @@ class ThemeManager {
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7.r),
             borderSide: const BorderSide(
-              color: ColorManager.mainBorderColor,
+              color: ColorManager.mainBorderColor
+            )
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7.r),
+            borderSide: const BorderSide(
+                color: ColorManager.mainBorderColor
             )
         ),
         errorBorder:  OutlineInputBorder(

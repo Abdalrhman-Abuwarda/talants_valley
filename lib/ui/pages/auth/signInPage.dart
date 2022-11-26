@@ -75,7 +75,8 @@ class _SignInPageState extends State<SignInPage> {
 
                 Row(
                   children: [
-                    addHorizantelSpace(160.w),
+                    Expanded(child: SizedBox()),
+                    // addHorizantelSpace(160.w),
                     TextButton(
                       onPressed: () {
                         ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);

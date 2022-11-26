@@ -20,4 +20,3 @@ class FooterAuth extends StatelessWidget {
   }
 }
 
-// Navigator.of(context).pushNamed(RouteGenerator.loginPage);

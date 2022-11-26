@@ -80,11 +80,12 @@ class CustomOptPage extends StatelessWidget {
                 )
             ),
           ),
-
-          addVerticalSpace(AppSize.s90.h),
+          addVerticalSpace(AppSize.s66.h),
+          FooterAuth(text: fotterText, textButtom: futterButtomText, onPressed: onPressedTextButtom,),
+          addVerticalSpace(AppSize.s60.h),
           ElevatedButton(onPressed: onPressedButtom, child: Text(buttomText,)),
           addVerticalSpace(AppPadding.p44),
-          FooterAuth(text: fotterText, textButtom: futterButtomText, onPressed: onPressedTextButtom,)
+
         ],
       ),
     );

@@ -27,6 +27,10 @@ class PhoneNumberTextField extends StatelessWidget {
         child: IntlPhoneField(
           initialCountryCode: "PS",
           controller: phoneNumberController,
+          dropdownIconPosition: IconPosition.trailing,
+          disableLengthCheck: true,
+          flagsButtonMargin: EdgeInsets.only(left: AppPadding.p16.w),
+          dropdownIcon: Icon(Icons.arrow_drop_down),
           decoration:  InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(7.r)),
@@ -34,12 +38,12 @@ class PhoneNumberTextField extends StatelessWidget {
             ),
           ),
           onChanged: (phone) {
-            print("This is phone ${phone.countryCode}");
-            print("This is with Complite ${phone.completeNumber}");
+            // print("This is phone ${phone.countryCode}");
+            // print("This is with Complite ${phone.completeNumber}");
             auth.postCode = phone.countryCode.toString();
           },
           onCountryChanged: (country) {
-            print('Country changed to: ' + country.name);
+            // print('Country changed to: ' + country.name);
           },
         ),
       ),

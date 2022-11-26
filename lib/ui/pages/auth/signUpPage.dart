@@ -44,11 +44,11 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
-          child: Form(
-            key: formKye,
-            child: SingleChildScrollView(
+        child: Form(
+          key: formKye,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -65,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               'First Name',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            addVerticalSpace(AppSize.s4.h),
+                            addVerticalSpace(AppSize.s5.h),
                             MainTextformField(
                                 hintText: 'Enter first name',
                                 inbutType: TextInputType.name,
@@ -84,7 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               'Last Name',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            addVerticalSpace(AppSize.s4.h),
+                            addVerticalSpace(AppSize.s5.h),
                             MainTextformField(
                                 hintText: 'Enter last name',
                                 inbutType: TextInputType.name,
@@ -96,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       )
                     ],
                   ),
-                  addVerticalSpace(AppSize.s16.h),
+                  addVerticalSpace(AppSize.s15.h),
                   Text(
                     'Email',
                     style: Theme.of(context).textTheme.subtitle1,
@@ -137,7 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   PhoneNumberTextField(
                     phoneNumberController: _phoneNumberController,
                   ),
-                  addVerticalSpace(AppSize.s16.h),
+                  addVerticalSpace(AppSize.s5.h),
                   Text(
                     'Country',
                     style: Theme.of(context).textTheme.subtitle1,
@@ -155,6 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           selectedValue: form.selectedCountrySignUp,
                         ),
                   ),
+                  addVerticalSpace(AppSize.s66.h),
                   Consumer2<AuthProvider, FormProvider>(
                     builder: (context, auth, form,child) => ElevatedButton(
                         onPressed: () {

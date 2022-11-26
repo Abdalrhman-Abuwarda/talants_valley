@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  final dataUser = SharedPrefController().getUser();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class HomePage extends StatelessWidget {
         title: Text("Home",
           style: Theme.of(context).textTheme.headline2,),
         leading: IconButton(
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           onPressed: (){
             _key.currentState!.openDrawer();
           },
@@ -38,8 +39,8 @@ class HomePage extends StatelessWidget {
                      onTap: (){
                        auth.logout();
                      },
-                     title: Text("Logout"),
-                     trailing: Icon(Icons.logout)
+                     title: const Text("Logout"),
+                     trailing: const Icon(Icons.logout)
                  )
                ],
              ),
@@ -56,7 +57,8 @@ class HomePage extends StatelessWidget {
             ),
             addVerticalSpace(AppSize.s14.h),
             Visibility(
-              visible: SharedPrefController().getUser().verifiedAddress != true || SharedPrefController().getUser().verifiedId != true ? true : false,
+              visible:
+              dataUser.verifiedAddress.status != "approved" || dataUser.verifiedId.status != "approved" ? true : false,
               child: Container(
                 height: AppSize.s45.h,
                 decoration: BoxDecoration(
@@ -66,7 +68,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('${SharedPrefController().getUser().verifiedAddress != true && SharedPrefController().getUser().verifiedId != true ? 2 : 1} task left to complete'),
+                    Text('${dataUser.verifiedAddress.status != "approved" && dataUser.verifiedId.status != "approved" ? 2 : 1} task left to complete'),
                     SizedBox(
                       height: AppSize.s30.h,
                       width:
@@ -76,7 +78,7 @@ class HomePage extends StatelessWidget {
                           ServiceNavigations.serviceNavi
                               .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
                         },
-                        child: Text("Verify"),
+                        child: const Text("Verify"),
                       ),
                     ),
                   ]
