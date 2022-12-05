@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:io';
 
 class Validate {
   // Validate._();
@@ -90,6 +91,13 @@ class Validate {
     }
 
     // Return null if the entered password is valid
+    return null;
+  }
+
+  static dynamic validateFile(File? value){
+    if(value == null){
+      return "Upload a File";
+    }
     return null;
   }
 }

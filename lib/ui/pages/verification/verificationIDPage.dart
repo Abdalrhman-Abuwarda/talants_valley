@@ -15,6 +15,7 @@ import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customWidgets/customElevatedbutton.dart';
+import '../../shared/customWidgets/verificationWidgets/customButtonWhenUploudFile.dart';
 
 class VerificationIDPage extends StatefulWidget {
   VerificationIDPage({Key? key}) : super(key: key);
@@ -51,30 +52,30 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p44.w),
-        child: Form(
-          key: formKye,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              addVerticalSpace(AppSize.s25.h),
-              Center(
-                  child: Image.asset(
-                ImageAssets.IdVerificationImage,
-                height: AppSize.s66.h,
-                width: AppSize.s66.w,
-              )),
-              addVerticalSpace(AppSize.s20.h),
-              Text(
-                "Upload Document that Proof your Identity\nSuch as: Identity Card, Passport, Driver License",
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-              addVerticalSpace(AppSize.s28.h),
-              Text('Document Type',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: ColorManager.primaryFontColor.withOpacity(0.7))),
-              addVerticalSpace(AppSize.s5.h),
-              Consumer<FormProvider>(
-                builder: (context, form, child) => CustomDropdownWidget(
+        child: Consumer2<VerificationProvider, FormProvider>(
+          builder: (context, verification, form, child) => Form(
+            key: formKye,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                addVerticalSpace(AppSize.s25.h),
+                Center(
+                    child: Image.asset(
+                  ImageAssets.IdVerificationImage,
+                  height: AppSize.s66.h,
+                  width: AppSize.s66.w,
+                )),
+                addVerticalSpace(AppSize.s20.h),
+                Text(
+                  "Upload Document that Proof your Identity\nSuch as: Identity Card, Passport, Driver License",
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                addVerticalSpace(AppSize.s28.h),
+                Text('Document Type',
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: ColorManager.primaryFontColor.withOpacity(0.7))),
+                addVerticalSpace(AppSize.s5.h),
+                CustomDropdownWidget(
                   items: items,
                   hintText: 'Choose your document type',
                   validator: (value) {},
@@ -83,33 +84,48 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
                   },
                   selectedValue: form.selectedVerificationIdType,
                 ),
-              ),
-              addVerticalSpace(AppSize.s16.h),
-              Text('ID Number',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: ColorManager.primaryFontColor.withOpacity(0.7))),
-              addVerticalSpace(AppSize.s5.h),
-              MainTextformField(
-                  hintText: "Enter your ID number",
-                  inbutType: TextInputType.text,
-                  controller: _idController,
-                  validator: (value) => Validate.validateCode(value)),
-              addVerticalSpace(AppSize.s30.h),
-              Consumer<VerificationProvider>(
-                builder: (context, verification, child) => CostumElevatedButton(
+                addVerticalSpace(AppSize.s16.h),
+                Text('ID Number',
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: ColorManager.primaryFontColor.withOpacity(0.7))),
+                addVerticalSpace(AppSize.s5.h),
+                MainTextformField(
+                    hintText: "Enter your ID number",
+                    inbutType: TextInputType.text,
+                    controller: _idController,
+                    validator: (value) => Validate.validateCode(value)),
+                addVerticalSpace(AppSize.s30.h),
+                verification.mainIDFile != null ?
+                CustomButtonWhenUploudFile(acceptedFile: verification.acceptedIdFile, mainText: verification.idFile!.name, sizeFile: verification.idFileSize!, onPressed: () { verification.deleteIfFile(); },)
+                :
+                CostumElevatedButton(
                   onPressed: () {
-                    verification.picKImageID();
+                    verification.pickFileID();
                   },
+                  validator: (value) => Validate.validateFile(value),
                 ),
-              ),
-              addVerticalSpace(AppSize.s70.h),
-              Consumer2<VerificationProvider, FormProvider>(
-                  builder: (context, verification, form ,child) =>
-                      ElevatedButton(onPressed: () {
-                        verification.verificationID(idNumber: _idController.text, idDocumentType: form.selectedVerificationIdType!);
-                      },
-                          child: Text('Continue')))
-            ],
+                Row(
+                  children: [
+                    Text(verification.idFileSize > 2 ? "❗ Your file is too big." : "" , style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      color: ColorManager.redColor
+                    ),),
+                    addHorizantelSpace(verification.idFileSize > 2 ? AppSize.s28.w : 0),
+                    Text("2 MP maximum" , style: Theme.of(context).textTheme.bodyText1,),
+                  ],
+                ),
+                addVerticalSpace(AppSize.s60.h),
+                ElevatedButton(
+                    onPressed: (verification.acceptedAddressFile == true  && _idController.text.isNotEmpty) ? () {
+                      if (formKye.currentState!.validate()) {
+                        verification.verificationID(
+                            idNumber: _idController.text,
+                            idDocumentType: form.selectedVerificationIdType!);
+                      }
+                    } :
+                       null ,
+                    child: Text('Continue'))
+              ],
+            ),
           ),
         ),
       ),

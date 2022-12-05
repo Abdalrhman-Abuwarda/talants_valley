@@ -30,6 +30,13 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -93,11 +100,11 @@ class _SignInPageState extends State<SignInPage> {
                   builder: (context, auth, child) =>
                       ElevatedButton(
                           onPressed: (){
-                            print("before the if");
+                            // print("before the if");
                             if (formKye.currentState!.validate()){
-                              print("after the if");
+                              // print("after the if");
                               auth.LoginUser(_emailController.text, _passwordController.text);
-                              print("Fuckkkkkk");
+                              // print("Fuckkkkkk");
                             }
                           },
                           child: const Text('Sign In')),

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
+import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
+import '../../../core/data/local/sharedController.dart';
 import '../../../resources/assetsManager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
@@ -18,6 +20,13 @@ class ForgetPasswordPage extends StatefulWidget {
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   final TextEditingController _emailController = TextEditingController();
   var formKye = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +74,13 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     controller: _emailController,
                     validator: (value) => Validate.validateEmail(value)),
                 addVerticalSpace(AppSize.s55.h),
-                Consumer<AuthProvider>(
-                  builder: (context, auth, child) => ElevatedButton(
+                Consumer2<AuthProvider, VerificationProvider>(
+                  builder: (context, auth, verification, child) => ElevatedButton(
                       onPressed: () {
                         if (formKye.currentState!.validate()) {
+                          SharedPrefController().saveForgetEmail(email: _emailController.text);
                           auth.forgetPassword(email: _emailController.text);
+                          // verification.startTimer();
                         }
                       },
                       child: const Text('Send code')),

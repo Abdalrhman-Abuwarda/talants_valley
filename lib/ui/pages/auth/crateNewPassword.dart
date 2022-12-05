@@ -10,13 +10,27 @@ import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
 
-class CreateNewPasswordPage extends StatelessWidget {
+class CreateNewPasswordPage extends StatefulWidget {
   CreateNewPasswordPage({Key? key}) : super(key: key);
 
+  @override
+  State<CreateNewPasswordPage> createState() => _CreateNewPasswordPageState();
+}
+
+class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
   final TextEditingController _newPasswordController = TextEditingController();
+
   final TextEditingController _reEnterPasswordController = TextEditingController();
+
   var formKye = GlobalKey<FormState>();
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _newPasswordController.dispose();
+    _reEnterPasswordController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

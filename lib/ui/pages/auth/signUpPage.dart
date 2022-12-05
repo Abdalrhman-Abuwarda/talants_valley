@@ -36,9 +36,19 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _countryController = TextEditingController();
+  // final TextEditingController _countryController = TextEditingController();
   var formKye = GlobalKey<FormState>();
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _phoneNumberController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

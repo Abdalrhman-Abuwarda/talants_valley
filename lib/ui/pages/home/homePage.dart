@@ -52,13 +52,13 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello, ${SharedPrefController().getUser().firstName}',
+              'Hello, ${SharedPrefController().getUser()!.firstName}',
               style: Theme.of(context).textTheme.subtitle2,
             ),
             addVerticalSpace(AppSize.s14.h),
             Visibility(
               visible:
-              dataUser.verifiedAddress.status != "approved" || dataUser.verifiedId.status != "approved" ? true : false,
+              dataUser!.verifiedAddress.status != "approved" || dataUser!.verifiedId.status != "approved" ? true : false,
               child: Container(
                 height: AppSize.s45.h,
                 decoration: BoxDecoration(
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('${dataUser.verifiedAddress.status != "approved" && dataUser.verifiedId.status != "approved" ? 2 : 1} task left to complete'),
+                    Text('${dataUser!.verifiedAddress.status != "approved" && dataUser!.verifiedId.status != "approved" ? 2 : 1} task left to complete'),
                     SizedBox(
                       height: AppSize.s30.h,
                       width:

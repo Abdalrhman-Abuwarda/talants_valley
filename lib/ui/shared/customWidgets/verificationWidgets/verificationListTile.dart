@@ -8,7 +8,7 @@ import '../../../../resources/valuesManager.dart';
 
 class VerificationListTile extends StatelessWidget {
   VerificationListTile(
-      {required this.title, required this.supTitel, required this.onPressed, this.hintSupTitel, this.isSuccess = false, this.hintColor, required this.textButton});
+      {super.key, required this.title, required this.supTitel, required this.onPressed, this.hintSupTitel, this.isSuccess = false, this.hintColor, required this.textButton, this.rejectedHint});
 
   final String title;
   final String supTitel;
@@ -17,6 +17,7 @@ class VerificationListTile extends StatelessWidget {
   final bool isSuccess;
    final Color? hintColor;
    final String textButton;
+   final String? rejectedHint;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,9 @@ class VerificationListTile extends StatelessWidget {
       ),
       child: ListTile(
         style: ListTileStyle.list,
-        title: Text(title),
+        title: Row(children: [Text(title), addHorizantelSpace(AppSize.s25.h), Text(rejectedHint ?? "", style: Theme.of(context).textTheme.bodyText2!.copyWith(
+          color: ColorManager.redColor
+        ),)]),
         subtitle: Row(children: [
           Text(supTitel, style: Theme.of(context).textTheme.bodyText1,),
           Text(hintSupTitel ?? "", style: Theme.of(context).textTheme.bodyText1!.copyWith(

@@ -77,6 +77,7 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                   ),
                   addVerticalSpace(AppSize.s40.h),
                   // ignore: unrelated_type_equality_checks
+                  //verification Email ListTile
                   VerificationListTile(
                     textButton: "Verify",
                     title: 'Email Address',
@@ -92,6 +93,8 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                     isSuccess: dataUser.verifiedEmail == true ? true : false,
                   ),
                   addVerticalSpace(AppSize.s12.h),
+
+                  //Verification phone number ListTile
                   VerificationListTile(
                     textButton: "Verify",
                     title: 'Phone Number',
@@ -113,18 +116,24 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                   addVerticalSpace(AppSize.s12.h),
+
+                  //verification ID ListTile
                   VerificationListTile(
                     isSuccess: dataUser.verifiedId.status == "approved" ? true : false,
                     title: 'ID Verification',
                     supTitel: 'Identity card - Driver license - Passport',
+                    rejectedHint: dataUser.verifiedId.status == "rejected" ? "Rejected" : "",
                     onPressed: dataUser.verifiedId.status == "not_uploaded" ? verification.idVerifiedPressedFunction : dataUser.verifiedId.status == "pending" ? null : verification.idVerifiedPressedFunction,
                     textButton: dataUser.verifiedId.status == "not_uploaded" ? "Verify" : dataUser.verifiedId.status == "pending" ? "Pending" : "Try Again",
                   ),
                   addVerticalSpace(AppSize.s12.h),
+
+                  //verification address listTile
                   VerificationListTile(
                     isSuccess: dataUser.verifiedAddress.status == "approved" ? true : false,
                     title: 'Address Verification',
                     supTitel: 'Phone, Electricity, Water Bill - Bank statement',
+                    rejectedHint: dataUser.verifiedAddress.status == "rejected" ? "Rejected" : "",
                     onPressed: dataUser.verifiedAddress.status == "not_uploaded" ? verification.addressVerifiedPressedFunction : dataUser.verifiedAddress.status == "pending" ? null : verification.addressVerifiedPressedFunction,
                     textButton: dataUser.verifiedAddress.status == "not_uploaded" ? "Verify" : dataUser.verifiedAddress.status == "pending" ? "Pending" : "Try Again",
                   ),

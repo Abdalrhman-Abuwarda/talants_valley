@@ -12,7 +12,7 @@ class AuthRepository {
   
   //----------------------------------------loginUserRepository-------------------------------
 
-  Future<UserModel> loginUserRepository(
+  Future loginUserRepository(
       {required String email, required String password}) async {
     final response = await DioClient(dio).post(Endpoints.userLogin, data: {
       "email": email,
@@ -21,6 +21,7 @@ class AuthRepository {
     print(response.statusCode);
     print(response.data);
     SharedPrefController().saveAccessToken(tocken: response.data["data"]["accessToken"]);
+    SharedPrefController().saveRefreshToken(tocken: response.data["data"]["refreshToken"]);
     final user = UserModel.fromJson(response.data["data"]["user"]);
     return user;
   }

@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/core/provider/authProvider.dart';
+import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/resources/assetsManager.dart';
 
 import '../../../resources/colorsManager.dart';
@@ -8,7 +13,7 @@ import '../../../resources/valuesManager.dart';
 import '../../../utils/validate.dart';
 import '../customWidgets/authWigdgets/authFooterPage.dart';
 
-class CustomOptPage extends StatelessWidget {
+class CustomOptPage extends StatefulWidget {
   const CustomOptPage({
     required  this.optController,
     this.title,
@@ -30,10 +35,45 @@ class CustomOptPage extends StatelessWidget {
   final String buttomText;
   final String futterButtomText;
   final void Function()? onPressedButtom;
- final dynamic Function() onPressedTextButtom;
+ final  Function() onPressedTextButtom;
  final String? Function(String?)? valedate;
  final bool withImage ;
  final String? pathImage;
+
+
+  @override
+  State<CustomOptPage> createState() => _CustomOptPageState();
+}
+class _CustomOptPageState extends State<CustomOptPage> {
+
+  // static const maxSeconds = 120;
+  // int seconds = maxSeconds;
+  // Timer? timer;
+  //
+  // void startTimer() {
+  //   timer = Timer.periodic(Duration(seconds: 1), (_) {
+  //     if(seconds > 0) {
+  //       setState(() => seconds--);
+  //     }else{
+  //       timer?.cancel();
+  //     }
+  //   });
+  // }
+@override
+  void initState() {
+  Provider.of<AuthProvider>(context,listen: false).startTimer();
+  super.initState();
+
+  // TODO: implement initState
+  }
+
+  // @override
+  // void dispose() {
+  //   Provider.of<AuthProvider>(context, listen: false).timer!.cancel();
+  //   // TODO: implement dispose
+  //   super.dispose();
+  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,18 +83,18 @@ class CustomOptPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           addVerticalSpace(AppSize.s30.h),
-          withImage == true ?
-          Image.asset(pathImage ?? "", height: 68.h, width: 68.w,)
+          widget.withImage == true ?
+          Image.asset(widget.pathImage ?? "", height: 68.h, width: 68.w,)
          : Center(
-              child: Text(title ?? "",
+              child: Text(widget.title ?? "",
                   style: Theme.of(context).textTheme.headline2)),
           addVerticalSpace(AppSize.s18.h),
-          Text(caption,
+          Text(widget.caption,
               style: Theme.of(context).textTheme.subtitle1),
           addVerticalSpace(AppSize.s30),
           Pinput(
-            validator: valedate,
-            controller: optController,
+            validator: widget.valedate,
+            controller: widget.optController,
             obscureText: false,
             length: 6,
             separatorPositions: [3],
@@ -81,11 +121,26 @@ class CustomOptPage extends StatelessWidget {
             ),
           ),
           addVerticalSpace(AppSize.s66.h),
-          FooterAuth(text: fotterText, textButtom: futterButtomText, onPressed: onPressedTextButtom,),
-          addVerticalSpace(AppSize.s60.h),
-          ElevatedButton(onPressed: onPressedButtom, child: Text(buttomText,)),
-          addVerticalSpace(AppPadding.p44),
+          Consumer<AuthProvider>(
+              builder: (context, auth, child) =>
+              Text("${auth.minutes.toString().padLeft(2, '0')} : ${auth.seconds.toString().padLeft(2, '0')}")
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(widget.fotterText),
+              Consumer<AuthProvider>(
+                builder: (context, auth, child) => TextButton(
+                    onPressed: auth.seconds != 0 ? null : widget.onPressedTextButtom
+                     ,
+                    child: Text(widget.futterButtomText)),
+              )
+            ],
+          ),
 
+          addVerticalSpace(AppSize.s60.h),
+          ElevatedButton(onPressed: widget.onPressedButtom, child: Text(widget.buttomText,)),
+          addVerticalSpace(AppPadding.p44),
         ],
       ),
     );

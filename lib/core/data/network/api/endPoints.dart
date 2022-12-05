@@ -2,7 +2,7 @@ class Endpoints {
   Endpoints._();
 
   // base url
-  static const String baseUrl = "https://talents-valley.herokuapp.com/api/";
+  static const String baseUrl = "https://talents-valley-backend.herokuapp.com/api/";
 
   static const String userLogin = 'user/login';
   static const String userSignup = 'user/signup';

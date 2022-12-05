@@ -10,7 +10,7 @@ class DioClient {
     dio
       ..options.baseUrl = Endpoints.baseUrl
       ..options.connectTimeout = 15000
-      ..options.receiveTimeout = 15000
+      ..options.receiveTimeout = 30000
       ..options.responseType = ResponseType.json
       ..options.contentType = Headers.formUrlEncodedContentType
       // ..interceptors.addAll(iterable)

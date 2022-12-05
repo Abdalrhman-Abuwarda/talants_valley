@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -9,7 +10,7 @@ class SharedPrefController {
   // final String user = "USER";
   SharedPrefController._();
 
-  static final SharedPrefController _instance=SharedPrefController._();
+  static final SharedPrefController _instance = SharedPrefController._();
   late SharedPreferences _sharedPreferences;
 
   factory SharedPrefController() {
@@ -20,20 +21,26 @@ class SharedPrefController {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-
   bool isLoggedIn() {
     return _sharedPreferences.getBool("isLoggedIn") ?? false;
   }
 
-  Future<bool> saveData(
-      {required UserModel user}) async {
+  Future<bool> saveData({required UserModel user}) async {
+    debugPrint(user.toString());
+
     String userJson = jsonEncode(user.toJson());
+    // debugPrint("This is Save data $userJson");
+    // debugPrint("This is in SharedPreferance");
     await _sharedPreferences.setBool("isLoggedIn", true);
     return await _sharedPreferences.setString("user", userJson);
   }
-  
+
   Future<bool> saveAccessToken({required String tocken}) async {
     return await _sharedPreferences.setString("accessToken", tocken);
+  }
+
+  Future<bool> saveRefreshToken({required String tocken}) async {
+    return await _sharedPreferences.setString("refToken", tocken);
   }
 
   // Future<bool> saveUser({required UserModel user}) async{
@@ -47,12 +54,26 @@ class SharedPrefController {
   // }
 
   UserModel getUser() {
-    final user = jsonDecode(_sharedPreferences.getString("user")!);
-    return UserModel.fromJson(user) ;
+    // debugPrint("_sharedPreferences.getString(user");
+    // debugPrint("This is the user data in sharedpref ${_sharedPreferences.getString("user")}");
+    final dynamic user = jsonDecode(_sharedPreferences.getString("user")!);
+    return UserModel.fromJson(user);
   }
-  
-  bool get verifiedMobile => _sharedPreferences.getBool("verifiedMobile") ?? false;
-  bool get verifiedEmail => _sharedPreferences.getBool("verifiedEmail") ?? false;
+
+  // UserModel? getUser() {
+  //   final dynamic user = jsonDecode(_sharedPreferences.getString("user")!);
+  //   if (user == null) {
+  //     return null;
+  //   }
+  //   return UserModel.fromJson(user);
+  // }
+
+  bool get verifiedMobile =>
+      _sharedPreferences.getBool("verifiedMobile") ?? false;
+
+  bool get verifiedEmail =>
+      _sharedPreferences.getBool("verifiedEmail") ?? false;
+
   String get accessToken => _sharedPreferences.getString("accessToken") ?? '';
 
   // String get verifiedMobile => _sharedPreferences.getString(getData().user.verifiedEmail.toString()) ?? '';
@@ -65,6 +86,14 @@ class SharedPrefController {
   //   return await _sharedPreferences.setBool("verifiedMobile", true);
   // }
 
+  Future<bool> saveForgetEmail({required String email}) async {
+    return await _sharedPreferences.setString("forgetEmail", email);
+  }
+
+  getForgetEmail() {
+    return _sharedPreferences.getString("forgetEmail");
+  }
+
   Future<bool> saveId({required String id}) async {
     return await _sharedPreferences.setString("id", id);
   }
@@ -73,16 +102,15 @@ class SharedPrefController {
     return await _sharedPreferences.setString("recoverToken", recoverToken);
   }
 
-  getRecoverToken(){
+  getRecoverToken() {
     return _sharedPreferences.getString("recoverToken");
   }
 
-  getId(){
+  getId() {
     return _sharedPreferences.getString("id");
   }
 
-  Future<bool> logout()  {
+  Future<bool> logout() {
     return _sharedPreferences.clear();
   }
-
 }

@@ -17,24 +17,29 @@ class _SplashPageState extends State<SplashPage> {
   @override
 
   final bool isLoggedIn = SharedPrefController().isLoggedIn();
-  final verifiedEmail = SharedPrefController().verifiedEmail;
-  final verifiedMobil = SharedPrefController().verifiedMobile;
 
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.delayed(const Duration(seconds: 3), (){
-      if(isLoggedIn && verifiedEmail && verifiedMobil){
+      if(SharedPrefController().accessToken == ""){
+        print("Tis is null ");
+        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
+      }
+      else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail && SharedPrefController().getUser().verifiedMobile){
         ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.homePage);
       }
-      else if(isLoggedIn && verifiedEmail != true && verifiedMobil != true){
+      else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail != true && SharedPrefController().getUser().verifiedMobile != true){
         ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainVerificationPage);
       }
+      // else if(SharedPrefController().getUser() == null){
+      //   print("Tis is null ");
+      //   ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
+      // }
       else{
         ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
       }
-      // SharedPrefController().isLoggedIn() && SharedPrefController().getData().user.verifiedMobile && SharedPrefController().getData().user.verifiedEmail ? ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainVerificationPage)
-      //     : ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.settingPage);
+
     });
   }
   Widget build(BuildContext context) {

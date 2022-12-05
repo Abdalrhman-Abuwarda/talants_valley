@@ -48,7 +48,7 @@ class _VerificationEmailPageState extends State<VerificationEmailPage> {
           builder: (context, verification, child) =>
               CustomOptPage(
                 optController: _optController,
-                caption: "We have sent you a verification code to your email ${SharedPrefController().getUser().email.replaceRange(0, 3, "****")}",
+                caption: "We have sent you a verification code to your email ${SharedPrefController().getUser()!.email.replaceRange(0, 3, "****")}",
                 withImage: true,
                 pathImage: ImageAssets.emailImage,
                 onPressedButtom: () {
@@ -59,7 +59,7 @@ class _VerificationEmailPageState extends State<VerificationEmailPage> {
                 buttomText: 'Verify',
                 fotterText: "Didn't get the code?",
                 futterButtomText: 'Resend',
-                onPressedTextButtom: () {},
+                onPressedTextButtom: () => verification.resendCodeEmail(),
                 valedate: (value) => Validate.validateCode(value),
               ),
         ),
