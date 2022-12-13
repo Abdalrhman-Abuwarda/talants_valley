@@ -69,7 +69,7 @@ Future<dynamic> LoginUser(String email, String password) async{
 
 
 //--------------------------SignupUser------------------------------------------
-Future<dynamic> SignupUser(
+Future<dynamic> signupUser(
     { required String firstName,
       required String lastName,
       required String mobile,

@@ -170,7 +170,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     builder: (context, auth, form,child) => ElevatedButton(
                         onPressed: () {
                           if (formKye.currentState!.validate()) {
-                            auth.SignupUser(
+                            auth.signupUser(
                                 firstName: _firstNameController.text,
                                 lastName: _lastNameController.text,
                                 email: _emailController.text,

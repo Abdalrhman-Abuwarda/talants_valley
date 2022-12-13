@@ -26,8 +26,11 @@ class _SplashPageState extends State<SplashPage> {
         print("Tis is null ");
         ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
       }
-      else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail && SharedPrefController().getUser().verifiedMobile){
+      else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail && SharedPrefController().getUser().verifiedMobile && SharedPrefController().getUser().role == 0){
         ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.homePage);
+      }
+      else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail && SharedPrefController().getUser().verifiedMobile && SharedPrefController().getUser().role == 1){
+        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.homeTeamDashboard);
       }
       else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail != true && SharedPrefController().getUser().verifiedMobile != true){
         ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainVerificationPage);

@@ -22,7 +22,7 @@ class VerificationListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSize.s66.h,
+      // height: AppSize.s66.h,
       decoration: BoxDecoration(
           color: ColorManager.whiteColor,
           borderRadius: BorderRadius.circular(7.r)

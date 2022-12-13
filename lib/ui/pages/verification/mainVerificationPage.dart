@@ -35,7 +35,6 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Verification',
-          style: Theme.of(context).textTheme.headline2,
         ),
         leading: IconButton(
           onPressed: () {_key.currentState!.openDrawer();},
@@ -58,92 +57,94 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
               ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
-        child: Consumer<VerificationProvider>(
-          builder: (context, verification, child) =>
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  addVerticalSpace(AppSize.s28.h),
-                  Text(
-                    'Hello, ${dataUser.firstName}',
-                    style: Theme.of(context).textTheme.subtitle2,
-                  ),
-                  addVerticalSpace(AppSize.s30.h),
-                  Text(
-                    'To use our services, We need to verify your account',
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  addVerticalSpace(AppSize.s40.h),
-                  // ignore: unrelated_type_equality_checks
-                  //verification Email ListTile
-                  VerificationListTile(
-                    textButton: "Verify",
-                    title: 'Email Address',
-                    supTitel: dataUser.email,
-                    hintSupTitel:
-                    dataUser.verifiedEmail == true
-                        ? "(verified)"
-                        : "(not verified)",
-                    hintColor: dataUser.verifiedEmail == true ? ColorManager.greenColor : ColorManager.redColor,
-                    onPressed: () {
-                      verification.sendCodeEmail();
-                    },
-                    isSuccess: dataUser.verifiedEmail == true ? true : false,
-                  ),
-                  addVerticalSpace(AppSize.s12.h),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+          child: Consumer<VerificationProvider>(
+            builder: (context, verification, child) =>
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    addVerticalSpace(AppSize.s28.h),
+                    Text(
+                      'Hello, ${dataUser.firstName}',
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
+                    addVerticalSpace(AppSize.s30.h),
+                    Text(
+                      'To use our services, We need to verify your account',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    addVerticalSpace(AppSize.s40.h),
+                    // ignore: unrelated_type_equality_checks
+                    //verification Email ListTile
+                    VerificationListTile(
+                      textButton: "Verify",
+                      title: 'Email Address',
+                      supTitel: dataUser.email,
+                      hintSupTitel:
+                      dataUser.verifiedEmail == true
+                          ? "(verified)"
+                          : "(not verified)",
+                      hintColor: dataUser.verifiedEmail == true ? ColorManager.greenColor : ColorManager.redColor,
+                      onPressed: () {
+                        verification.sendCodeEmail();
+                      },
+                      isSuccess: dataUser.verifiedEmail == true ? true : false,
+                    ),
+                    addVerticalSpace(AppSize.s12.h),
 
-                  //Verification phone number ListTile
-                  VerificationListTile(
-                    textButton: "Verify",
-                    title: 'Phone Number',
-                supTitel: dataUser.mobile
-                    .replaceRange(4, 10, "******"),
-                hintSupTitel:
-                dataUser.verifiedMobile == true
-                        ? "(verified)"
-                        : "(not verified)",
-                    hintColor: dataUser.verifiedMobile == true ? ColorManager.greenColor : ColorManager.redColor,
-                    onPressed: () {
-                      verification.sendCodeMobile();
-                    },
-                    isSuccess: dataUser.verifiedMobile == true ? true : false,
-                  ),
-                  addVerticalSpace(AppSize.s12.h),
-                  Text(
-                    'You can complete the 2 following tasks later',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                  addVerticalSpace(AppSize.s12.h),
+                    //Verification phone number ListTile
+                    VerificationListTile(
+                      textButton: "Verify",
+                      title: 'Phone Number',
+                  supTitel: dataUser.mobile!
+                      .replaceRange(4, 10, "******"),
+                  hintSupTitel:
+                  dataUser.verifiedMobile == true
+                          ? "(verified)"
+                          : "(not verified)",
+                      hintColor: dataUser.verifiedMobile == true ? ColorManager.greenColor : ColorManager.redColor,
+                      onPressed: () {
+                        verification.sendCodeMobile();
+                      },
+                      isSuccess: dataUser.verifiedMobile == true ? true : false,
+                    ),
+                    addVerticalSpace(AppSize.s12.h),
+                    Text(
+                      'You can complete the 2 following tasks later',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    addVerticalSpace(AppSize.s12.h),
 
-                  //verification ID ListTile
-                  VerificationListTile(
-                    isSuccess: dataUser.verifiedId.status == "approved" ? true : false,
-                    title: 'ID Verification',
-                    supTitel: 'Identity card - Driver license - Passport',
-                    rejectedHint: dataUser.verifiedId.status == "rejected" ? "Rejected" : "",
-                    onPressed: dataUser.verifiedId.status == "not_uploaded" ? verification.idVerifiedPressedFunction : dataUser.verifiedId.status == "pending" ? null : verification.idVerifiedPressedFunction,
-                    textButton: dataUser.verifiedId.status == "not_uploaded" ? "Verify" : dataUser.verifiedId.status == "pending" ? "Pending" : "Try Again",
-                  ),
-                  addVerticalSpace(AppSize.s12.h),
+                    //verification ID ListTile
+                    VerificationListTile(
+                      isSuccess: dataUser.verifiedId.status == "approved" ? true : false,
+                      title: 'ID Verification',
+                      supTitel: 'Identity card - Driver license - Passport',
+                      rejectedHint: dataUser.verifiedId.status == "rejected" ? "Rejected" : "",
+                      onPressed: dataUser.verifiedId.status == "not_uploaded" ? verification.idVerifiedPressedFunction : dataUser.verifiedId.status == "pending" ? null : verification.idVerifiedPressedFunction,
+                      textButton: dataUser.verifiedId.status == "not_uploaded" ? "Verify" : dataUser.verifiedId.status == "pending" ? "Pending" : "Try Again",
+                    ),
+                    addVerticalSpace(AppSize.s12.h),
 
-                  //verification address listTile
-                  VerificationListTile(
-                    isSuccess: dataUser.verifiedAddress.status == "approved" ? true : false,
-                    title: 'Address Verification',
-                    supTitel: 'Phone, Electricity, Water Bill - Bank statement',
-                    rejectedHint: dataUser.verifiedAddress.status == "rejected" ? "Rejected" : "",
-                    onPressed: dataUser.verifiedAddress.status == "not_uploaded" ? verification.addressVerifiedPressedFunction : dataUser.verifiedAddress.status == "pending" ? null : verification.addressVerifiedPressedFunction,
-                    textButton: dataUser.verifiedAddress.status == "not_uploaded" ? "Verify" : dataUser.verifiedAddress.status == "pending" ? "Pending" : "Try Again",
-                  ),
-                  addVerticalSpace(AppSize.s66.h),
-                  ElevatedButton(
-                    onPressed:
-                    dataUser.verifiedMobile && dataUser.verifiedEmail == true ? verification.mainOnPressedFunction : null,
-                      child: Text('Continue'))
-                ],
-              ),
+                    //verification address listTile
+                    VerificationListTile(
+                      isSuccess: dataUser.verifiedAddress.status == "approved" ? true : false,
+                      title: 'Address Verification',
+                      supTitel: 'Phone, Electricity, Water Bill - Bank statement',
+                      rejectedHint: dataUser.verifiedAddress.status == "rejected" ? "Rejected" : "",
+                      onPressed: dataUser.verifiedAddress.status == "not_uploaded" ? verification.addressVerifiedPressedFunction : dataUser.verifiedAddress.status == "pending" ? null : verification.addressVerifiedPressedFunction,
+                      textButton: dataUser.verifiedAddress.status == "not_uploaded" ? "Verify" : dataUser.verifiedAddress.status == "pending" ? "Pending" : "Try Again",
+                    ),
+                    addVerticalSpace(AppSize.s66.h),
+                    ElevatedButton(
+                      onPressed:
+                      dataUser.verifiedMobile && dataUser.verifiedEmail == true ? verification.mainOnPressedFunction : null,
+                        child: Text('Continue'))
+                  ],
+                ),
+          ),
         ),
       ),
     );

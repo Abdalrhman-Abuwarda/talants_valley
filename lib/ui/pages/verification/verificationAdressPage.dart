@@ -36,12 +36,11 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
           'Verification',
-          style: Theme.of(context).textTheme.headline2,
         ),
         leading: IconButton(
           onPressed: () {
@@ -152,7 +151,7 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                   ),
                   addVerticalSpace(AppSize.s22.h),
                   verification.mainAddressFile != null?
-                  CustomButtonWhenUploudFile(acceptedFile: verification.acceptedAddressFile!, mainText: verification.addressFile!.name, sizeFile: verification.addressFileSize!, onPressed: () { verification.deleteAddressFile(); },)
+                  CustomButtonWhenUploudFile(acceptedFile: verification.acceptedAddressFile, mainText: verification.addressFile!.name, sizeFile: verification.addressFileSize!, onPressed: () { verification.deleteAddressFile(); },)
                   :
                   CostumElevatedButton(
                     onPressed: () {

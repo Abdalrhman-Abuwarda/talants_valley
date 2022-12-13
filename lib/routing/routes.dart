@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
 import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
 import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
+import 'package:talants_valley/ui/teamPages/homeTeamDashboard/HomeTeamPage.dart';
 
 import '../ui/pages/auth/checkEmailPage.dart';
 import '../ui/pages/auth/crateNewPassword.dart';
@@ -16,6 +17,8 @@ import '../ui/pages/verification/successVerifiedMopile.dart';
 import '../ui/pages/verification/verificationAdressPage.dart';
 import '../ui/pages/verification/verificationIDPage.dart';
 import '../ui/pages/verification/verificationMobilePage.dart';
+import '../ui/teamPages/homeTeamDashboard/userManagementPages/mainUserManagementPage.dart';
+import '../ui/teamPages/homeTeamDashboard/userManagementPages/userDetailsPage.dart';
 
 
 class RoutsGnerate{
@@ -53,6 +56,12 @@ class RoutsGnerate{
         return MaterialPageRoute(builder: (_) => VerificationIDPage());
       case RouteGenerator.verificationAdressPage:
         return MaterialPageRoute(builder: (_) => VerificationAdressPage());
+      case RouteGenerator.getUserDetails:
+        return MaterialPageRoute(builder: (_) => UserDetailsPage());
+      case RouteGenerator.homeTeamDashboard:
+        return MaterialPageRoute(builder: (_) => HomeTeamPage());
+      case RouteGenerator.mainUserManagementPage:
+        return MaterialPageRoute(builder: (_) => MainUserManagementPage());
         default:
         throw const FormatException("Route not found");
     }

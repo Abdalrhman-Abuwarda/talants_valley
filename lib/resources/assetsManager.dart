@@ -1,13 +1,17 @@
 const String Image_Paht = "assets/images";
-
 class ImageAssets {
   // static const String splashLogo = "$Image_Paht/splash.png";
   static const String mainImage = "$Image_Paht/mainimage.png";
   static const String successImage = "$Image_Paht/success.png";
   static const String emailImage = "$Image_Paht/email.png";
   static const String mobileSuccessImage = "$Image_Paht/mobile_success.png";
-  static const String IdVerificationImage = "$Image_Paht/id_verification.png";
+  static const String idVerificationImage = "$Image_Paht/id_verification.png";
   static const String addressVerificationImage = "$Image_Paht/adress_verification.png";
+  static const String homeBottomBarImage = "$Image_Paht/bottomNavigationBar/home.png";
+  static const String cashBottomBarImage = "$Image_Paht/bottomNavigationBar/cash.png";
+  static const String invoiceBottomBarImage = "$Image_Paht/bottomNavigationBar/invoice.png";
+  static const String analyticsBottomBarImage = "$Image_Paht/bottomNavigationBar/google-analytics.png";
+  static const String userBottomBarImage = "$Image_Paht/bottomNavigationBar/user.png";
 }
 
 const String Icon_Path='assets/icons';

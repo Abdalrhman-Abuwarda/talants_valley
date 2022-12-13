@@ -5,16 +5,20 @@ class UserModel {
   final String firstName;
   final String lastName;
   final String email;
-  final String mobile;
+  final String? mobile;
   final int balance;
   bool verifiedEmail;
   bool verifiedMobile;
   final VerifiedAddress verifiedAddress;
   final VerifiedId verifiedId;
   final int role;
-  final Address address;
+  final Address? address;
   final bool isBlocked;
-
+  final String? createdAt;
+  final int? profit;
+  final int? revenue;
+  final String? lastLogin;
+  final String? updateAt;
   UserModel._(
       {required this.id,
       required this.firstName,
@@ -28,23 +32,36 @@ class UserModel {
       required this.verifiedId,
       required this.role,
       required this.address,
-      required this.isBlocked});
+      required this.isBlocked,
+      required this.createdAt,
+        required this.profit,
+        required this.revenue,
+        required this.lastLogin,
+        required this.updateAt
+      });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel._(
-        id: json['_id'],
-        firstName: json['firstName'],
-        lastName: json['lastName'],
-        email: json['email'],
-        mobile: json['mobile'],
-        balance: json['balance'],
-        verifiedEmail: json['verifiedEmail'],
-        verifiedMobile: json['verifiedMobile'],
-        verifiedAddress: VerifiedAddress.fromJson(json['verifiedAddress']),
-        verifiedId: VerifiedId.fromJson(json['verifiedId']),
-        role: json['role'],
-        address: Address.fromJson(json['address']),
-        isBlocked: json['isBlocked'],
-      );
+      id: json['_id'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      email: json['email'],
+      mobile: json['mobile'],
+      balance: json['balance'],
+      verifiedEmail: json['verifiedEmail'],
+      verifiedMobile: json['verifiedMobile'],
+      verifiedAddress: VerifiedAddress.fromJson(json['verifiedAddress']),
+      verifiedId: VerifiedId.fromJson(json['verifiedId']),
+      role: json['role'],
+      address: json['address'] == null ? null : Address.fromJson(json['address']),
+      // address: Address.fromJson(json['address']),
+      isBlocked: json['isBlocked'],
+      createdAt: json["createdAt"],
+      profit: json['profit'],
+    revenue: json['revenue'],
+    lastLogin: json['lastLogin'],
+    updateAt: json['updateAt'],
+  );
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -59,8 +76,13 @@ class UserModel {
     data['verifiedAddress'] = verifiedAddress.toJson();
     data['verifiedId'] = verifiedId.toJson();
     data['role'] = role;
-    data['address'] = address.toJson();
+    data['address'] = address?.toJson();
     data['isBlocked'] = isBlocked;
+    data['createdAt'] = createdAt;
+    data['profit'] = profit;
+    data['revenue'] = revenue;
+    data['lastLogin'] =lastLogin;
+    data['updateAt'] = updateAt;
     return data;
   }
 }

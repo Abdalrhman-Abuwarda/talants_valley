@@ -58,8 +58,8 @@ Future<dynamic> sendCodeEmail() async{
     // Helpers.showSnackBar(message: "The process done successfully");
     final context =ServiceNavigations.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
-    Provider.of<AuthProvider>(context!, listen: false).minutes = 1;
-    Provider.of<AuthProvider>(context!, listen: false).startTimer();
+    Provider.of<AuthProvider>(context, listen: false).minutes = 1;
+    Provider.of<AuthProvider>(context, listen: false).startTimer();
     Helpers.showSnackBar(message: "The process done successfully");
 
     notifyListeners();
@@ -96,8 +96,8 @@ Future<dynamic> sendCodeMobile() async{
     // Helpers.showSnackBar(message: "The process done successfully");
     final context =ServiceNavigations.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
-    Provider.of<AuthProvider>(context!, listen: false).minutes = 1;
-    Provider.of<AuthProvider>(context!, listen: false).startTimer();
+    Provider.of<AuthProvider>(context, listen: false).minutes = 1;
+    Provider.of<AuthProvider>(context, listen: false).startTimer();
     Helpers.showSnackBar(message: "The process done successfully");
 
     notifyListeners();
@@ -128,7 +128,7 @@ Future<dynamic> sendCodeMobile() async{
 
 //------------------------mainVerificationPageOnPressedFunctions----------------
   Function()? mainOnPressedFunction() =>
-      ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.homePage);
+      ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.homeTeamDashboard);
 
   Function()? idVerifiedPressedFunction() =>
       ServiceNavigations.serviceNavi
@@ -220,7 +220,7 @@ void deleteIfFile(){
 
   void checkAcceptedFileId(){
     for(String x in acceptedFileExtensionType){
-      if(idFile!.extension == x && idFileSize! < 2){
+      if(idFile!.extension == x && idFileSize< 2){
         acceptedIdFile = true;
         break;
       }

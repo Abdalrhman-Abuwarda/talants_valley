@@ -38,9 +38,8 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           'Verification',
-          style: Theme.of(context).textTheme.headline2,
         ),
         leading: IconButton(
           onPressed: () {
@@ -61,7 +60,7 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
                 addVerticalSpace(AppSize.s25.h),
                 Center(
                     child: Image.asset(
-                  ImageAssets.IdVerificationImage,
+                  ImageAssets.idVerificationImage,
                   height: AppSize.s66.h,
                   width: AppSize.s66.w,
                 )),
@@ -96,7 +95,7 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
                     validator: (value) => Validate.validateCode(value)),
                 addVerticalSpace(AppSize.s30.h),
                 verification.mainIDFile != null ?
-                CustomButtonWhenUploudFile(acceptedFile: verification.acceptedIdFile, mainText: verification.idFile!.name, sizeFile: verification.idFileSize!, onPressed: () { verification.deleteIfFile(); },)
+                CustomButtonWhenUploudFile(acceptedFile: verification.acceptedIdFile, mainText: verification.idFile!.name, sizeFile: verification.idFileSize, onPressed: () { verification.deleteIfFile(); },)
                 :
                 CostumElevatedButton(
                   onPressed: () {
@@ -115,7 +114,7 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
                 ),
                 addVerticalSpace(AppSize.s60.h),
                 ElevatedButton(
-                    onPressed: (verification.acceptedAddressFile == true  && _idController.text.isNotEmpty) ? () {
+                    onPressed: (verification.acceptedIdFile == true  && _idController.text.isNotEmpty) ? () {
                       if (formKye.currentState!.validate()) {
                         verification.verificationID(
                             idNumber: _idController.text,
@@ -123,7 +122,7 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
                       }
                     } :
                        null ,
-                    child: Text('Continue'))
+                    child: const Text('Continue'))
               ],
             ),
           ),

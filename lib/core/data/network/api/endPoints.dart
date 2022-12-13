@@ -16,5 +16,7 @@ class Endpoints {
   static const String getUserData = 'settings/profile';
   static const String verificationID = 'user/verify/id';
   static const String verificationAddress = 'user/verify/address';
+  static const String getUsers = '/team/user/list?limit=20';
+  static const String getUserDetails = '/team/user/details/';
 
 }

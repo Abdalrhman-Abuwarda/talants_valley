@@ -98,6 +98,7 @@ class Address {
 
   Address._({required this.country, this.city, this.address1, this.address2});
 
+
   factory Address.fromJson(Map<String, dynamic> json) => Address._(
         country: json["country"],
         city: json["city"],
@@ -105,7 +106,7 @@ class Address {
         address2: json["address2"],
       );
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic>? toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['country'] = country;
     data["city"] = city;

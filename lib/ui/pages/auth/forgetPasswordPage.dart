@@ -48,45 +48,47 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             icon: Icon(Icons.arrow_back_ios),
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
-          child: Form(
-            key: formKye,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                addVerticalSpace(AppSize.s30.h),
-                Center(
-                    child: Text('Forget Password',
-                        style: Theme.of(context).textTheme.headline2)),
-                addVerticalSpace(AppSize.s18.h),
-                Text("We'll send a code to your email to reset password",
-                    style: Theme.of(context).textTheme.subtitle1),
-                addVerticalSpace(AppSize.s30),
-                Text(
-                  'Email',
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                addVerticalSpace(5.h),
-                MainTextformField(
-                    hintText: 'email@gmail.com',
-                    inbutType: TextInputType.emailAddress,
-                    controller: _emailController,
-                    validator: (value) => Validate.validateEmail(value)),
-                addVerticalSpace(AppSize.s55.h),
-                Consumer2<AuthProvider, VerificationProvider>(
-                  builder: (context, auth, verification, child) => ElevatedButton(
-                      onPressed: () {
-                        if (formKye.currentState!.validate()) {
-                          SharedPrefController().saveForgetEmail(email: _emailController.text);
-                          auth.forgetPassword(email: _emailController.text);
-                          // verification.startTimer();
-                        }
-                      },
-                      child: const Text('Send code')),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
+            child: Form(
+              key: formKye,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  addVerticalSpace(AppSize.s30.h),
+                  Center(
+                      child: Text('Forget Password',
+                          style: Theme.of(context).textTheme.headline2)),
+                  addVerticalSpace(AppSize.s18.h),
+                  Text("We'll send a code to your email to reset password",
+                      style: Theme.of(context).textTheme.subtitle1),
+                  addVerticalSpace(AppSize.s30),
+                  Text(
+                    'Email',
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  addVerticalSpace(5.h),
+                  MainTextformField(
+                      hintText: 'email@gmail.com',
+                      inbutType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      validator: (value) => Validate.validateEmail(value)),
+                  addVerticalSpace(AppSize.s55.h),
+                  Consumer2<AuthProvider, VerificationProvider>(
+                    builder: (context, auth, verification, child) => ElevatedButton(
+                        onPressed: () {
+                          if (formKye.currentState!.validate()) {
+                            SharedPrefController().saveForgetEmail(email: _emailController.text);
+                            auth.forgetPassword(email: _emailController.text);
+                            // verification.startTimer();
+                          }
+                        },
+                        child: const Text('Send code')),
 
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ));

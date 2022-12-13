@@ -41,79 +41,81 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
-          child: Form(
-            key: formKye,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                addVerticalSpace(AppSize.s30.h),
-                const HeadarAuth(heightSpace: 100,),
-                addVerticalSpace(55.h),
-                Text(
-                  'Email',
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                MainTextformField(
-                  hintText: 'email@gmail.com',
-                  inbutType: TextInputType.emailAddress,
-                  controller: _emailController,
-                  validator: (value) => Validate.validateEmail(value),
-                ),
-                addVerticalSpace(24.h),
-                Text(
-                  'Password',
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                Consumer<AuthProvider>(
-                  builder: (context, auth, child)=>
-                      MainTextformField(
-                        hintText: 'Enter your password',
-                        isPassword: auth.isPassword,
-                        inbutType: TextInputType.visiblePassword,
-                        controller: _passwordController,
-                        validator: (value) => Validate.validatePassword(value),
-                        suffixPressed: (){auth.suffixPressed();},
-                        suffixIcon:
-                        auth.isPassword ? Icons.visibility : Icons.visibility_off,
-                      )
-                ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
+            child: Form(
+              key: formKye,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  addVerticalSpace(AppSize.s30.h),
+                  const HeadarAuth(heightSpace: 100,),
+                  addVerticalSpace(55.h),
+                  Text(
+                    'Email',
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  MainTextformField(
+                    hintText: 'email@gmail.com',
+                    inbutType: TextInputType.emailAddress,
+                    controller: _emailController,
+                    validator: (value) => Validate.validateEmail(value),
+                  ),
+                  addVerticalSpace(24.h),
+                  Text(
+                    'Password',
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  Consumer<AuthProvider>(
+                    builder: (context, auth, child)=>
+                        MainTextformField(
+                          hintText: 'Enter your password',
+                          isPassword: auth.isPassword,
+                          inbutType: TextInputType.visiblePassword,
+                          controller: _passwordController,
+                          validator: (value) => Validate.validatePassword(value),
+                          suffixPressed: (){auth.suffixPressed();},
+                          suffixIcon:
+                          auth.isPassword ? Icons.visibility : Icons.visibility_off,
+                        )
+                  ),
 
-                Row(
-                  children: [
-                    Expanded(child: SizedBox()),
-                    // addHorizantelSpace(160.w),
-                    TextButton(
-                      onPressed: () {
-                        ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
-                      },
-                      child:  Text(
-                        "Forget Password?",
-                        style: Theme.of(context).textTheme.subtitle1,
+                  Row(
+                    children: [
+                      Expanded(child: SizedBox()),
+                      // addHorizantelSpace(160.w),
+                      TextButton(
+                        onPressed: () {
+                          ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
+                        },
+                        child:  Text(
+                          "Forget Password?",
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                addVerticalSpace(60.h),
-                Consumer<AuthProvider>(
-                  builder: (context, auth, child) =>
-                      ElevatedButton(
-                          onPressed: (){
-                            // print("before the if");
-                            if (formKye.currentState!.validate()){
-                              // print("after the if");
-                              auth.LoginUser(_emailController.text, _passwordController.text);
-                              // print("Fuckkkkkk");
-                            }
-                          },
-                          child: const Text('Sign In')),
-                ),
-                addVerticalSpace(38.h),
-                FooterAuth(text: "Don't have an account?", textButtom: 'Sign Up', onPressed: () {
-                  ServiceNavigations.serviceNavi.pushNamedWidget(RouteGenerator.signUpPage);
-                },)
-              ],
+                    ],
+                  ),
+                  addVerticalSpace(60.h),
+                  Consumer<AuthProvider>(
+                    builder: (context, auth, child) =>
+                        ElevatedButton(
+                            onPressed: (){
+                              // print("before the if");
+                              if (formKye.currentState!.validate()){
+                                // print("after the if");
+                                auth.LoginUser(_emailController.text, _passwordController.text);
+                                // print("Fuckkkkkk");
+                              }
+                            },
+                            child: const Text('Sign In')),
+                  ),
+                  addVerticalSpace(38.h),
+                  FooterAuth(text: "Don't have an account?", textButtom: 'Sign Up', onPressed: () {
+                    ServiceNavigations.serviceNavi.pushNamedWidget(RouteGenerator.signUpPage);
+                  },)
+                ],
+              ),
             ),
           ),
         ),

@@ -13,15 +13,15 @@ import '../../provider/authProvider.dart';
 
 class VerificationRepository{
   Dio dio = Dio();
-  var provider = Provider.of<VerificationProvider>(
-      ServiceNavigations.serviceNavi.navKey.currentContext!,
-      listen: false);
+  // var provider = Provider.of<VerificationProvider>(
+  //     ServiceNavigations.serviceNavi.navKey.currentContext!,
+  //     listen: false);
 
   //---------------------sendCodeEmailRepositoryepository-----------------------
 
 Future<dynamic> sendCodeEmailRepository() async{
   final response= await DioClient(dio).post(Endpoints.sendCodeEmail);
-  print(response.data);
+  debugPrint(response.data);
   return response.data;
 }
 
@@ -32,7 +32,7 @@ Future<dynamic> verificationEmailRepository(String code) async {
     "verificationCode": code,
   });
 
-  print(response.data);
+  debugPrint(response.data);
   return response.data;
 }
 
@@ -40,7 +40,7 @@ Future<dynamic> verificationEmailRepository(String code) async {
 
 Future<dynamic> sendCodeMobileRepository() async{
   final response = await DioClient(dio).post(Endpoints.sendCodeMobile);
-  print(response.data);
+  debugPrint(response.data);
   return response.data;
 }
 
@@ -50,7 +50,7 @@ Future<dynamic> verificationMobileRepository(String code) async {
   final response = await DioClient(dio).post(Endpoints.verificationMobile, data: {
     "verificationCode": code,
   });
-  print(response.data);
+  debugPrint(response.data);
   return response.data;
 }
 
@@ -59,7 +59,7 @@ Future<dynamic> verificationMobileRepository(String code) async {
 
 Future<UserModel> getUserRepository() async{
   final response = await DioClient(dio).get(Endpoints.getUserData);
-  print(response.data["data"]);
+  debugPrint(response.data["data"]);
   final user = UserModel.fromJson(response.data["data"]);
   return user;
 }
@@ -74,10 +74,10 @@ Future<dynamic> verificationIDRepository(File file, String idNumber,String idDoc
         "idDocumentType": idDocumentType,
       }
   );
-  
+
   final response = await DioClient(dio).post(Endpoints.verificationID, data: formData);
     // debugPrint(response.data);
-    print("This is the response of verification ID ${response.data}");
+  debugPrint("This is the response of verification ID ${response.data}");
     return response.data;
 }
 
@@ -99,7 +99,7 @@ Future<dynamic> verificationAddressRepository(File file, String address1,String 
 
   final response = await DioClient(dio).post(Endpoints.verificationAddress, data: formData);
     // debugPrint(response.data);
-    print("This is the response of verification ID ${response.data}");
+  debugPrint("This is the response of verification ID ${response.data}");
     return response.data;
 }
 

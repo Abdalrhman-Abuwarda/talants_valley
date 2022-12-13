@@ -15,6 +15,9 @@ class RouteGenerator {
   static const String verificationAdressPage = '/verificationAdressPage';
   static const String successVerificationEmail = '/successVerificationEmail';
   static const String successVerificationMobile = '/successVerificationMobile';
+  static const String getUserDetails = '/getUserDetails';
+  static const String homeTeamDashboard = '/homeTeamDashboard';
+  static const String mainUserManagementPage = '/mainUserManagement';
 
   RouteGenerator._();
 
