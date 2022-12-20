@@ -8,6 +8,7 @@ import '../../../../core/data/local/sharedController.dart';
 import '../../../../core/model/userModel.dart';
 import '../../../../resources/valuesManager.dart';
 import '../../../shared/customWidgets/TeamUserMangement/userListTile.dart';
+import '../../../shared/customWidgets/TeamUserMangement/userOptionBottomSheet.dart';
 import '../../../shared/customWidgets/searchBar.dart';
 
 class MainUserManagementPage extends StatefulWidget {
@@ -57,10 +58,9 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
                           scrollDirection: Axis.vertical,
                           itemCount: userMangement.listUsers.length,
                           itemBuilder: (context, index) => ListTileUser(
+                            isBlocked: userMangement.listUsers[index].isBlocked,
                                 fullName:
-                                    userMangement.listUsers[index].firstName +
-                                        " " +
-                                        userMangement.listUsers[index].lastName,
+                                    "${userMangement.listUsers[index].firstName} ${userMangement.listUsers[index].lastName}",
                                 email: userMangement.listUsers[index].email,
                                 balance: userMangement.listUsers[index].balance
                                     .toString(),
@@ -68,12 +68,36 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
                                     .listUsers[index].firstName[0]
                                     .toUpperCase(),
                                 onTap: () {
-                                  userMangement.getUserDetails(userMangement.listUsers[index].id);
+                                  userMangement.getUserDetails(
+                                      userMangement.listUsers[index].id);
                                 },
+                                onPressedIcon: () => showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(23.r),
+                                          topRight: Radius.circular(23.r)),
+                                    ),
+                                    context: context,
+                                    builder: (context) => UserOptionBottomSheet(
+                                      isBlocked: userMangement
+                                          .listUsers[index].isBlocked,
+                                          blockFunction: () {
+                                            userMangement.blockUser(
+                                                userMangement
+                                                    .listUsers[index].id);
+                                            Navigator.pop(context);
+                                          },
+                                          deleteFunction: () {
+                                            userMangement.deleteUser(
+                                                userMangement
+                                                    .listUsers[index].id);
+                                            Navigator.pop(context);
+                                          },
+                                        )),
                               )),
                 ),
               ),
-              // ListTileUser(fullName: "${dataUser.firstName} ${dataUser.lastName}", email: dataUser.email, balance: "\$ ${dataUser.balance.toString()}", leadingLatter: dataUser.firstName[0].toUpperCase(),)
             ],
           ),
         ),

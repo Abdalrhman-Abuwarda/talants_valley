@@ -11,9 +11,9 @@ class UserModel {
   bool verifiedMobile;
   final VerifiedAddress verifiedAddress;
   final VerifiedId verifiedId;
-  final int role;
+  late final int role;
   final Address? address;
-  final bool isBlocked;
+  late bool isBlocked;
   final String? createdAt;
   final int? profit;
   final int? revenue;

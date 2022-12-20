@@ -6,6 +6,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
+import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.dart';
 
 import '../../../../resources/colorsManager.dart';
 import '../../../../resources/valuesManager.dart';
@@ -21,8 +22,8 @@ class PhoneNumberTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
-      builder: (context, auth, child) => SizedBox(
+    return Consumer2<AuthProvider, UserManagementProvider>(
+      builder: (context, auth, userManagement, child) => SizedBox(
         height: AppSize.s70.h,
         child: IntlPhoneField(
           initialCountryCode: "PS",
@@ -41,6 +42,7 @@ class PhoneNumberTextField extends StatelessWidget {
             // print("This is phone ${phone.countryCode}");
             // print("This is with Complite ${phone.completeNumber}");
             auth.postCode = phone.countryCode.toString();
+            userManagement.postCode = phone.countryCode.toString();
           },
           onCountryChanged: (country) {
             // print('Country changed to: ' + country.name);

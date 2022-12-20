@@ -13,7 +13,9 @@ class PersonalInformationCard extends StatelessWidget {
     required this.address,
     required this.role,
     required this.password,
-});
+    required this.onTapEdit,
+    required this.onTapRole
+  });
 
   final String fullName;
   final String email;
@@ -21,8 +23,9 @@ class PersonalInformationCard extends StatelessWidget {
   final String id;
   final String address;
   final String role;
-  final String  password;
-
+  final String password;
+  final void Function()? onTapEdit;
+  final void Function()? onTapRole;
 
   @override
   Widget build(BuildContext context) {
@@ -31,23 +34,30 @@ class PersonalInformationCard extends StatelessWidget {
     TextStyle? valueCardStyle = Theme.of(context).textTheme.headline5;
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: AppPadding.p18.h, horizontal: AppPadding.p17.w),
+      padding: EdgeInsets.symmetric(
+          vertical: AppPadding.p18.h, horizontal: AppPadding.p17.w),
       decoration: BoxDecoration(
           color: ColorManager.whiteColor,
           borderRadius: BorderRadius.circular(AppSize.s7.r),
-          border: Border.all(
-              color: ColorManager.mainBorderColor
-          )
-      ),
+          border: Border.all(color: ColorManager.mainBorderColor)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: Text("Personal Information" ,style: titleCardStyle,)),
+              Expanded(
+                  child: Text(
+                "Personal Information",
+                style: titleCardStyle,
+              )),
               // Spacer(),
-              InkWell(onTap: (){}, child: Text("Edit", style: TextStyle(color: ColorManager.blueColor),))
+              InkWell(
+                  onTap: onTapEdit,
+                  child: const Text(
+                    "Edit",
+                    style: TextStyle(color: ColorManager.blueColor),
+                  ))
             ],
           ),
           addVerticalSpace(AppSize.s18.h),
@@ -59,17 +69,35 @@ class PersonalInformationCard extends StatelessWidget {
                 children: [
                   Text("Full Name", style: propertyCardStyle),
                   addVerticalSpace(AppSize.s10.h),
-                  Text("Email", style: propertyCardStyle,),
+                  Text(
+                    "Email",
+                    style: propertyCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text("Phone", style: propertyCardStyle,),
+                  Text(
+                    "Phone",
+                    style: propertyCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text("ID", style: propertyCardStyle,),
+                  Text(
+                    "ID",
+                    style: propertyCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text("Address", style: propertyCardStyle,),
+                  Text(
+                    "Address",
+                    style: propertyCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text("Role", style: propertyCardStyle,),
+                  Text(
+                    "Role",
+                    style: propertyCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text("Password", style: propertyCardStyle,),
+                  Text(
+                    "Password",
+                    style: propertyCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
                 ],
               ),
@@ -77,23 +105,47 @@ class PersonalInformationCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(fullName, style: valueCardStyle,),
+                  Text(
+                    fullName,
+                    style: valueCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text(email, style: valueCardStyle,),
+                  Text(
+                    email,
+                    style: valueCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text(phone, style: valueCardStyle,),
+                  Text(
+                    phone,
+                    style: valueCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text(id, style: valueCardStyle,),
+                  Text(
+                    id,
+                    style: valueCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text(address, style: valueCardStyle,),
+                  Text(
+                    address,
+                    style: valueCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text(role == 0 ? "User" : "Team", style: valueCardStyle,),
+                  InkWell(
+                    onTap: onTapRole,
+                    child: Text(
+                      role == 0 ? "User" : "Team",
+                      style: valueCardStyle,
+                    ),
+                  ),
                   addVerticalSpace(AppSize.s10.h),
-                  Text("Send Recovery Email", style: valueCardStyle,),
+                  Text(
+                    "Send Recovery Email",
+                    style: valueCardStyle,
+                  ),
                   addVerticalSpace(AppSize.s10.h),
                 ],
               ),
-              Spacer()
+              const Spacer()
             ],
           )
         ],

@@ -17,6 +17,7 @@ import '../ui/pages/verification/successVerifiedMopile.dart';
 import '../ui/pages/verification/verificationAdressPage.dart';
 import '../ui/pages/verification/verificationIDPage.dart';
 import '../ui/pages/verification/verificationMobilePage.dart';
+import '../ui/teamPages/homeTeamDashboard/userManagementPages/editUserInformationPage.dart';
 import '../ui/teamPages/homeTeamDashboard/userManagementPages/mainUserManagementPage.dart';
 import '../ui/teamPages/homeTeamDashboard/userManagementPages/userDetailsPage.dart';
 
@@ -54,7 +55,7 @@ class RoutsGnerate{
         return MaterialPageRoute(builder: (_) => VerificationMobilePage());
       case RouteGenerator.verificationIDPage:
         return MaterialPageRoute(builder: (_) => VerificationIDPage());
-      case RouteGenerator.verificationAdressPage:
+      case RouteGenerator.verificationAddressPage:
         return MaterialPageRoute(builder: (_) => VerificationAdressPage());
       case RouteGenerator.getUserDetails:
         return MaterialPageRoute(builder: (_) => UserDetailsPage());
@@ -62,6 +63,8 @@ class RoutsGnerate{
         return MaterialPageRoute(builder: (_) => HomeTeamPage());
       case RouteGenerator.mainUserManagementPage:
         return MaterialPageRoute(builder: (_) => MainUserManagementPage());
+      case RouteGenerator.editUserInformationPage:
+        return MaterialPageRoute(builder: (_) => EditUserInformation());
         default:
         throw const FormatException("Route not found");
     }

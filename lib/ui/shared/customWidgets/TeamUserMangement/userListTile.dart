@@ -9,7 +9,9 @@ class ListTileUser extends StatelessWidget {
     required this.email,
     required this.balance,
     required this.leadingLatter,
-    required this.onTap
+    required this.onTap,
+    required this.onPressedIcon,
+    required this.isBlocked,
   });
 
   final String balance;
@@ -17,6 +19,8 @@ class ListTileUser extends StatelessWidget {
   final String email;
   final String leadingLatter;
   final void Function()? onTap;
+  final void Function()? onPressedIcon;
+  final bool isBlocked;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class ListTileUser extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                backgroundColor: ColorManager.grayColor,
+                backgroundColor: isBlocked == false ? ColorManager.grayColor : ColorManager.mainBorderColor,
                 radius: AppSize.s20.r,
                 child: Text(leadingLatter, style: const TextStyle(color: ColorManager.whiteColor),),
               ),
@@ -48,20 +52,25 @@ class ListTileUser extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(fullName, style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold),),
-                  Text(email, style: Theme.of(context).textTheme.bodyText1,),
+                  Text(fullName, style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold,
+                      color: isBlocked == false ? ColorManager.secondaryFontColor : ColorManager.mainBorderColor),),
+                  Text(email, style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: isBlocked == false ? ColorManager.secondaryFontColor : ColorManager.mainBorderColor
+                  ),),
                 ],
               ),
               const Spacer(),
               Column(
                 children: [
-                  Text(r"$"+balance, style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold)),
-                  Text("Not Verified", style: Theme.of(context).textTheme.bodyText1,),
+                  Text(r"$"+balance, style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold,
+                  color:  isBlocked == false ? ColorManager.secondaryFontColor : ColorManager.mainBorderColor)),
+                  Text("Not Verified", style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color:  isBlocked == false ? ColorManager.secondaryFontColor : ColorManager.mainBorderColor
+                  ), ),
                 ],
               ),
-              // Spacer(),
-              // addHorizantelSpace(AppSize.s20.w),
-              IconButton(onPressed: (){}, icon: const Icon(Icons.more_vert, size: AppSize.s20,))
+
+              IconButton(onPressed: onPressedIcon, icon: const Icon(Icons.more_vert, size: AppSize.s20,))
             ],
           ),
         ),

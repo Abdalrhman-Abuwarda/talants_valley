@@ -136,7 +136,7 @@ Future<dynamic> sendCodeMobile() async{
 
   Function()? addressVerifiedPressedFunction() =>
       ServiceNavigations.serviceNavi
-          .pushNamedAndRemoveUtils(RouteGenerator.verificationAdressPage);
+          .pushNamedAndRemoveUtils(RouteGenerator.verificationAddressPage);
 
 
 //-----------------------------pickFileID---------------------------------------

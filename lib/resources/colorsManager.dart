@@ -5,6 +5,8 @@ static const Color primaryFontColor = Color(0xFF151617);
 static const Color redColor = Color(0xFFEE404C);
 static const Color secondaryFontColor = Color(0xFF262626);
 static const Color thirdFontColor = Color(0xFF8C8C8C);
+static const Color labelFontColor = Color(0xFF6C6969);
+// #E2E2E2
 static const Color whiteColor = Color(0xFFFFFFFF);
 static const Color blackColor = Color(0xFF000000);
 static const Color blueColor = Color(0xFF4375FF);

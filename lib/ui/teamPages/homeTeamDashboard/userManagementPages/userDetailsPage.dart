@@ -39,19 +39,34 @@ class UserDetailsPage extends StatelessWidget {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                     PersonalInformationCard(fullName: "${userManagement.userDetails.firstName} ${userManagement.userDetails.firstName}",
-                      email: userManagement.userDetails.email,
-                      phone: "${userManagement.userDetails.mobile}",
-                      id: userManagement.userDetails.id,
-                      address: userManagement.userDetails.address!.country,
-                      role: userManagement.userDetails.role.toString(), password: 'Send Recovery Email'
+                     PersonalInformationCard(fullName: "${userManagement.userDetails!.firstName} ${userManagement.userDetails!.firstName}",
+                      email: userManagement.userDetails!.email,
+                      phone: "${userManagement.userDetails!.mobile}",
+                      id: userManagement.userDetails!.id,
+                      address: userManagement.userDetails!.address!.country,
+                      role: userManagement.userDetails!.role.toString(), password: 'Send Recovery Email'
                       ,
+                       onTapEdit: (){ServiceNavigations.serviceNavi
+                           .pushNamedAndRemoveUtils(RouteGenerator.editUserInformationPage);},
+                       onTapRole: (){
+                         AlertDialog(
+                             title: const Text("Example"),
+                             content: const Text("Do you like this book?"),
+                             actions: [
+                               TextButton(onPressed: (){}, child: Text("Team")),
+                               TextButton(onPressed: (){}, child: Text("Block")),
+                             ],
+                             shape: RoundedRectangleBorder(
+                               borderRadius: BorderRadius.circular(30),
+                             )
+                         );
+                       },
                     ),
                     addVerticalSpace(AppSize.s10.h),
-                    UpdatesCard(created: userManagement.userDetails.createdAt!.substring(0, 10),
-                      lastLogin: userManagement.userDetails.lastLogin!.substring(0, 10),),
+                    UpdatesCard(created: userManagement.userDetails!.createdAt!.substring(0, 10),
+                      lastLogin: userManagement.userDetails!.lastLogin!.substring(0, 10),),
                     addVerticalSpace(AppSize.s10.h),
-                    FinancialInformatioCard(balance: userManagement.userDetails.balance.toString(), profit: userManagement.userDetails.profit.toString(), revenue: userManagement.userDetails.revenue.toString(),),
+                    FinancialInformatioCard(balance: userManagement.userDetails!.balance.toString(), profit: userManagement.userDetails!.profit.toString(), revenue: userManagement.userDetails!.revenue.toString(),),
                   ],
                 ),
               ),    
