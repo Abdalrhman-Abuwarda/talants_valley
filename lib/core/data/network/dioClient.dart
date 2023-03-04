@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:talants_valley/core/data/network/dioInterceptor.dart';
 
-import 'api/endPoints.dart';
+import 'api/end_points.dart';
 
 class DioClient {
 // dio instance

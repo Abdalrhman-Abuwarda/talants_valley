@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
-import 'package:talants_valley/core/data/network/api/endPoints.dart';
+import 'package:talants_valley/core/data/network/api/end_points.dart';
 import 'package:talants_valley/core/data/network/dioClient.dart';
 
 import '../../model/responseDataModel.dart';
@@ -18,8 +19,8 @@ class AuthRepository {
       "email": email,
       "password": password,
     });
-    print(response.statusCode);
-    print(response.data);
+    debugPrint(response.statusCode.toString());
+    debugPrint(response.data);
     SharedPrefController().saveAccessToken(tocken: response.data["data"]["accessToken"]);
     SharedPrefController().saveRefreshToken(tocken: response.data["data"]["refreshToken"]);
     final user = UserModel.fromJson(response.data["data"]["user"]);
@@ -43,10 +44,10 @@ class AuthRepository {
       "password": password,
       "country": country,
     });
-    print(response.statusCode);
-    print(response.data);
+    debugPrint(response.statusCode.toString());
+    debugPrint(response.data);
     final data = DataModel.fromJson(response.data["data"]);
-    print("This is user id ${data.user.id}");
+    debugPrint("This is user id ${data.user.id}");
     return data;
   }
   
@@ -56,9 +57,9 @@ Future<dynamic> forgetPasswordRepository({required String email}) async{
     final response = await DioClient(dio).post(Endpoints.userForgetPassword, data: {
       "email": email,
     });
-    print(response.data);
+    debugPrint(response.data);
     final userId = response.data["data"]["_id"];
-    print("This is user id $userId");
+    debugPrint("This is user id $userId");
     return userId;
 }
 
@@ -69,9 +70,9 @@ Future<dynamic> checkEmailRrpository({required String id, required String verifi
     "_id": id,
     "verificationCode": verificationCode,
   });
-  print(response.data);
+  debugPrint(response.data);
   final recoverToken = response.data["data"]["recoverToken"];
-  print(recoverToken);
+  debugPrint(recoverToken);
   return recoverToken;
 }
 
@@ -82,7 +83,7 @@ Future<dynamic> createNewPasswordRepository({required String password, required 
       "password": password,
       "recoverToken": recoverToken,
     });
-    print(response.data);
+    debugPrint(response.data);
     return response.data;
 }
 }

@@ -5,7 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/repository/verificationRepository.dart';
+import 'package:talants_valley/core/data/repository/verification_repository.dart';
 import 'package:talants_valley/core/model/userModel.dart';
 
 import '../../routing/navigations.dart';

@@ -16,7 +16,7 @@ import 'package:talants_valley/ui/pages/auth/successResetPassword.dart';
 import 'package:talants_valley/ui/pages/verification/mainVerificationPage.dart';
 import 'package:talants_valley/ui/pages/verification/verificationIDPage.dart';
 import 'package:talants_valley/ui/splashPage.dart';
-import 'package:talants_valley/ui/teamPages/homeTeamDashboard/HomeTeamPage.dart';
+import 'package:talants_valley/ui/teamPages/homeTeamDashboard/homeTeamPage.dart';
 import 'package:talants_valley/ui/teamPages/homeTeamDashboard/userManagementPages/userDetailsPage.dart';
 import 'package:talants_valley/utils/helper.dart';
 

@@ -2,20 +2,14 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/network/api/endPoints.dart';
+import 'package:talants_valley/core/data/network/api/end_points.dart';
 import 'package:talants_valley/core/data/network/dioClient.dart';
 import 'package:talants_valley/core/model/userModel.dart';
-import 'package:talants_valley/core/provider/verificationProvider.dart';
 
-import '../../../routing/navigations.dart';
-import '../../provider/authProvider.dart';
 
 class VerificationRepository{
   Dio dio = Dio();
-  // var provider = Provider.of<VerificationProvider>(
-  //     ServiceNavigations.serviceNavi.navKey.currentContext!,
-  //     listen: false);
+
 
   //---------------------sendCodeEmailRepositoryepository-----------------------
 

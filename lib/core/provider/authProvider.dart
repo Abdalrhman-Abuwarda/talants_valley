@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
-import 'package:talants_valley/core/data/repository/authRepository.dart';
+import 'package:talants_valley/core/data/repository/auth_repository.dart';
 import 'package:talants_valley/core/model/responseDataModel.dart';
 import 'package:talants_valley/core/provider/verificationProvider.dart';
 

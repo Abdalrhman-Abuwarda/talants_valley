@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
 import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
 import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
-import 'package:talants_valley/ui/teamPages/homeTeamDashboard/HomeTeamPage.dart';
+import 'package:talants_valley/ui/teamPages/homeTeamDashboard/homeTeamPage.dart';
 
 import '../ui/pages/auth/checkEmailPage.dart';
 import '../ui/pages/auth/crateNewPassword.dart';

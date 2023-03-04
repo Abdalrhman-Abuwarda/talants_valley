@@ -1,11 +1,10 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/core/data/network/dioClient.dart';
 import 'package:talants_valley/core/model/userModel.dart';
 
-import '../../network/api/endPoints.dart';
+import '../../network/api/end_points.dart';
 
 class UserManagementRepository {
   Dio dio = Dio();

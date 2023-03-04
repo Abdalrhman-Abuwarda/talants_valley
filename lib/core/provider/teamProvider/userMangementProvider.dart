@@ -1,6 +1,6 @@
 import 'package:country_phone_code_picker/constants/country_codes.dart';
 import 'package:flutter/material.dart';
-import 'package:talants_valley/core/data/repository/team/userMangementRepoaitory.dart';
+import 'package:talants_valley/core/data/repository/team/user_mangement_repoaitory.dart';
 import 'package:talants_valley/core/model/userModel.dart';
 
 import '../../../routing/navigations.dart';
