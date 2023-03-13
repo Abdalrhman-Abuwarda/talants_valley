@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
-import '../../../resources/assetsManager.dart';
+import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../shared/customPages/customSuccessPage.dart';

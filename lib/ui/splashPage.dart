@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:talants_valley/resources/assetsManager.dart';
+import 'package:talants_valley/resources/assets_manager.dart';
 
 import '../core/data/local/sharedController.dart';
 import '../routing/navigations.dart';
@@ -23,14 +23,14 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), (){
       if(SharedPrefController().accessToken == ""){
-        print("Tis is null ");
+        debugPrint("Tis is null ");
         ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
       }
       else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail && SharedPrefController().getUser().verifiedMobile && SharedPrefController().getUser().role == 0){
-        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.homePage);
+        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainFreelancerPage);
       }
       else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail && SharedPrefController().getUser().verifiedMobile && SharedPrefController().getUser().role == 1){
-        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.homeTeamDashboard);
+        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainTeamPage);
       }
       else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail != true && SharedPrefController().getUser().verifiedMobile != true){
         ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainVerificationPage);

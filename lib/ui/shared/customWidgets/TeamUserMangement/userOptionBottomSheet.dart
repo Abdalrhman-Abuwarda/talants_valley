@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../resources/valuesManager.dart';
 
 class UserOptionBottomSheet extends StatelessWidget {
-  UserOptionBottomSheet({
+  const UserOptionBottomSheet({super.key,
     required this.blockFunction,
     required this.deleteFunction,
     required this.isBlocked

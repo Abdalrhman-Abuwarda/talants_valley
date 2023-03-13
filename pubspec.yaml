@@ -47,6 +47,7 @@ dependencies:
   intl_phone_field: ^3.1.0
   image_picker: ^0.8.6
   file_picker: ^5.2.3
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,8 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/images/bottomNavigationBar/
+    - assets/icons/
+    - assets/icons/freelancer_bottom_bar_icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

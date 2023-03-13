@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/formProvider.dart';
 import 'package:talants_valley/core/provider/verificationProvider.dart';
-import 'package:talants_valley/resources/assetsManager.dart';
+import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
 import '../../../core/model/dropdownModel.dart';
-import '../../../resources/colorsManager.dart';
+import '../../../resources/colors_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
 import '../routing/navigations.dart';
-import 'colorsManager.dart';
+import 'colors_manager.dart';
 
 class ThemeManager {
   // final currentContext = ServiceNavigations.serviceNavi.navKey.currentContext!;
@@ -36,14 +36,17 @@ class ThemeManager {
       textTheme:   TextTheme(
         headline1: TextStyle(fontSize: 30.sp, fontFamily: 'Segoe UI',fontWeight: FontWeight.w600, color: ColorManager.primaryFontColor),
         headline2: TextStyle(fontSize: 20.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.w600, color: ColorManager.primaryFontColor),
-        headline6: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.thirdFontColor),
+        headline3: TextStyle(fontSize: 15.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.w600, color: ColorManager.primaryFontColor),
         headline4: TextStyle(fontSize: 16.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.w600, color: ColorManager.thirdFontColor),
+        headline5: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.blackColor ),
+        headline6: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.thirdFontColor),
         subtitle1: TextStyle(fontSize: 16.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
         subtitle2: TextStyle(fontSize: 20.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
         bodyText2: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor ),
-        headline5: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.blackColor ),
+
         bodyText1: TextStyle(fontSize: 10.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor ),
-        labelMedium: TextStyle(fontSize: 14.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.labelFontColor )
+        labelMedium: TextStyle(fontSize: 14.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.labelFontColor ),
+        // labelLarge: TextStyle(fontSize: 15.sp, fontFamily: 'Segoe UI', fontWeight: FontWeight.w600, color: ColorManager.labelFontColor)
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
-import 'package:talants_valley/resources/assetsManager.dart';
+import 'package:talants_valley/resources/assets_manager.dart';
 
-import '../../../../resources/colorsManager.dart';
+import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
 
 class VerificationListTile extends StatelessWidget {

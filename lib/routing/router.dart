@@ -2,7 +2,7 @@ class RouteGenerator {
   static const String splashPage = '/';
   static const String signInPage = '/signInPage';
   static const String signUpPage = '/signUpPage';
-  static const String homePage = '/homePage';
+  static const String mainFreelancerPage = '/homePage';
   static const String forgetPassword = '/forgetPassword';
   static const String createNewPassword = '/createNewPassword';
   static const String checkEmailPage = '/checkEmailPage';
@@ -16,7 +16,7 @@ class RouteGenerator {
   static const String successVerificationEmail = '/successVerificationEmail';
   static const String successVerificationMobile = '/successVerificationMobile';
   static const String getUserDetails = '/getUserDetails';
-  static const String homeTeamDashboard = '/homeTeamDashboard';
+  static const String mainTeamPage = '/homeTeamDashboard';
   static const String mainUserManagementPage = '/mainUserManagement';
   static const String editUserInformationPage = '/editUserInformation';
 

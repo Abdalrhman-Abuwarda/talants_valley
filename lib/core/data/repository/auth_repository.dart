@@ -20,7 +20,7 @@ class AuthRepository {
       "password": password,
     });
     debugPrint(response.statusCode.toString());
-    debugPrint(response.data);
+    // debugPrint(response.data);
     SharedPrefController().saveAccessToken(tocken: response.data["data"]["accessToken"]);
     SharedPrefController().saveRefreshToken(tocken: response.data["data"]["refreshToken"]);
     final user = UserModel.fromJson(response.data["data"]["user"]);

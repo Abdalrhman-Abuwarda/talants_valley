@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
 import 'package:talants_valley/core/provider/verificationProvider.dart';
-import 'package:talants_valley/resources/colorsManager.dart';
+import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
 import '../../../routing/navigations.dart';
@@ -12,7 +12,7 @@ import '../../../routing/router.dart';
 import '../../shared/customWidgets/verificationWidgets/verificationListTile.dart';
 
 class MainVerificationPage extends StatefulWidget {
-  MainVerificationPage({Key? key}) : super(key: key);
+  const MainVerificationPage({Key? key}) : super(key: key);
 
   @override
   State<MainVerificationPage> createState() => _MainVerificationPageState();
@@ -33,7 +33,7 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
       key: _key ,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           'Verification',
         ),
         leading: IconButton(
@@ -50,8 +50,8 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                       onTap: (){
                         auth.logout();
                       },
-                      title: Text("Logout"),
-                      trailing: Icon(Icons.logout)
+                      title: const Text("Logout"),
+                      trailing: const Icon(Icons.logout)
                   )
                 ],
               ),
@@ -140,8 +140,8 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                     addVerticalSpace(AppSize.s66.h),
                     ElevatedButton(
                       onPressed:
-                      dataUser.verifiedMobile && dataUser.verifiedEmail == true ? verification.mainOnPressedFunction : null,
-                        child: Text('Continue'))
+                      dataUser.verifiedMobile && dataUser.verifiedEmail == true ? verification.mainOnPressedFunction(userId: dataUser.id) : null,
+                        child: const Text('Continue'))
                   ],
                 ),
           ),

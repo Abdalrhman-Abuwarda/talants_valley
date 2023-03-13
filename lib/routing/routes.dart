@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
 import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
 import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
-import 'package:talants_valley/ui/teamPages/homeTeamDashboard/homeTeamPage.dart';
 
 import '../ui/pages/auth/checkEmailPage.dart';
 import '../ui/pages/auth/crateNewPassword.dart';
@@ -11,12 +10,14 @@ import '../ui/pages/auth/forgetPasswordPage.dart';
 import '../ui/pages/auth/signInPage.dart';
 import '../ui/pages/auth/signUpPage.dart';
 import '../ui/pages/auth/successResetPassword.dart';
-import '../ui/pages/home/homePage.dart';
+import '../ui/pages/home_freelancer/home_freelancer_page.dart';
+import '../ui/pages/main_page_freelancer.dart';
 import '../ui/pages/verification/mainVerificationPage.dart';
 import '../ui/pages/verification/successVerifiedMopile.dart';
 import '../ui/pages/verification/verificationAdressPage.dart';
 import '../ui/pages/verification/verificationIDPage.dart';
 import '../ui/pages/verification/verificationMobilePage.dart';
+import '../ui/teamPages/homeTeamDashboard/mainTeamPage.dart';
 import '../ui/teamPages/homeTeamDashboard/userManagementPages/editUserInformationPage.dart';
 import '../ui/teamPages/homeTeamDashboard/userManagementPages/mainUserManagementPage.dart';
 import '../ui/teamPages/homeTeamDashboard/userManagementPages/userDetailsPage.dart';
@@ -33,14 +34,14 @@ class RoutsGnerate{
         return MaterialPageRoute(builder: (_) => SignInPage());
       case RouteGenerator.signUpPage:
         return MaterialPageRoute(builder: (_) => SignUpPage());
-      case RouteGenerator.homePage:
-        return MaterialPageRoute(builder: (_) =>  HomePage());
+      case RouteGenerator.mainFreelancerPage:
+        return MaterialPageRoute(builder: (_) =>  const MainPageFreelancer());
       case RouteGenerator.forgetPassword:
         return MaterialPageRoute(builder: (_) => ForgetPasswordPage());
       case RouteGenerator.createNewPassword:
         return MaterialPageRoute(builder: (_) =>  CreateNewPasswordPage());
       case RouteGenerator.successResetPage:
-        return MaterialPageRoute(builder: (_) =>  SuccessResetPassword());
+        return MaterialPageRoute(builder: (_) =>  const SuccessResetPassword());
       case RouteGenerator.mainVerificationPage:
         return MaterialPageRoute(builder: (_) =>  MainVerificationPage());
       case RouteGenerator.checkEmailPage:
@@ -48,9 +49,9 @@ class RoutsGnerate{
       case RouteGenerator.verificationEmailPage:
         return MaterialPageRoute(builder: (_) =>  VerificationEmailPage());
       case RouteGenerator.successVerificationEmail:
-        return MaterialPageRoute(builder: (_) =>  SuccessVerifiedEmailPage());
+        return MaterialPageRoute(builder: (_) =>  const SuccessVerifiedEmailPage());
       case RouteGenerator.successVerificationMobile:
-        return MaterialPageRoute(builder: (_) =>  SuccessVerifiedMobilePage());
+        return MaterialPageRoute(builder: (_) =>  const SuccessVerifiedMobilePage());
       case RouteGenerator.verificationMobilePage:
         return MaterialPageRoute(builder: (_) => VerificationMobilePage());
       case RouteGenerator.verificationIDPage:
@@ -59,8 +60,8 @@ class RoutsGnerate{
         return MaterialPageRoute(builder: (_) => VerificationAdressPage());
       case RouteGenerator.getUserDetails:
         return MaterialPageRoute(builder: (_) => UserDetailsPage());
-      case RouteGenerator.homeTeamDashboard:
-        return MaterialPageRoute(builder: (_) => HomeTeamPage());
+      case RouteGenerator.mainTeamPage:
+        return MaterialPageRoute(builder: (_) => const MainTeamPage());
       case RouteGenerator.mainUserManagementPage:
         return MaterialPageRoute(builder: (_) => MainUserManagementPage());
       case RouteGenerator.editUserInformationPage:

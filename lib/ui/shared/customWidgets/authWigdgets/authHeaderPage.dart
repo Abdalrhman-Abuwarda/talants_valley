@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../resources/assetsManager.dart';
+import '../../../../resources/assets_manager.dart';
 import '../../../../resources/valuesManager.dart';
 
 class HeadarAuth extends StatelessWidget {

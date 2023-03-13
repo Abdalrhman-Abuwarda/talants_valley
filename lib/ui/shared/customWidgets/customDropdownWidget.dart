@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../resources/colorsManager.dart';
+import '../../../resources/colors_manager.dart';
 import '../../../resources/valuesManager.dart';
 
 class CustomDropdownWidget extends StatelessWidget {

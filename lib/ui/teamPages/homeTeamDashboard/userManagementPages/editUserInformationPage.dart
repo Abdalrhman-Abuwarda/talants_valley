@@ -6,7 +6,7 @@ import 'package:talants_valley/core/provider/formProvider.dart';
 import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.dart';
 
 import '../../../../core/model/dropdownModel.dart';
-import '../../../../resources/colorsManager.dart';
+import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
 import '../../../../routing/navigations.dart';
 import '../../../../routing/router.dart';

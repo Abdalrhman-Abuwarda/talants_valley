@@ -10,7 +10,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../../../core/model/dropdownModel.dart';
 import '../../../core/provider/authProvider.dart';
 import '../../../core/provider/formProvider.dart';
-import '../../../resources/colorsManager.dart';
+import '../../../resources/colors_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../shared/customWidgets/authWigdgets/authFooterPage.dart';

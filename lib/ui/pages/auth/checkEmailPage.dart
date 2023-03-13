@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
 import 'package:talants_valley/core/provider/verificationProvider.dart';
-import 'package:talants_valley/resources/colorsManager.dart';
+import 'package:talants_valley/resources/colors_manager.dart';
 
-import '../../../resources/assetsManager.dart';
+import '../../../resources/assets_manager.dart';
 import '../../../resources/valuesManager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';

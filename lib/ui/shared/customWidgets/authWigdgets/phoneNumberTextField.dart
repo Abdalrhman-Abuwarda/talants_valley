@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
 import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.dart';
 
-import '../../../../resources/colorsManager.dart';
+import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
 import '../mainTextFormField.dart';
 

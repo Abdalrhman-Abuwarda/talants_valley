@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/ui/shared/customPages/customSuccessPage.dart';
 
-import '../../../resources/assetsManager.dart';
+import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 
