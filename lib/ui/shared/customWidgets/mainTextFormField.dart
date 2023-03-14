@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../resources/colors_manager.dart';
 
-class MainTextformField extends StatelessWidget {
-   MainTextformField({
+class MainTextFormField extends StatelessWidget {
+   MainTextFormField({super.key,
     required this.hintText,
-    required this.inbutType,
+    required this.inputType,
     required this.controller,
     this.isPassword = false,
     required this.validator,
@@ -17,7 +17,7 @@ class MainTextformField extends StatelessWidget {
 
 final TextEditingController controller;
 final String hintText;
-final TextInputType inbutType;
+final TextInputType inputType;
    bool isPassword;
   final String? Function(String?)? validator;
   final IconData? suffixIcon;
@@ -40,7 +40,7 @@ final TextInputType inbutType;
             icon: Icon(suffixIcon, ),
             onPressed: suffixPressed) : null,
       ),
-      keyboardType: inbutType,
+      keyboardType: inputType,
 
 
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/verification_add_bank_page.dart';
 import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
 import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
 
@@ -10,6 +11,8 @@ import '../ui/pages/auth/forgetPasswordPage.dart';
 import '../ui/pages/auth/signInPage.dart';
 import '../ui/pages/auth/signUpPage.dart';
 import '../ui/pages/auth/successResetPassword.dart';
+import '../ui/pages/balance_freelancer/add_bank_account_page.dart';
+import '../ui/pages/balance_freelancer/choose_account_page.dart';
 import '../ui/pages/home_freelancer/home_freelancer_page.dart';
 import '../ui/pages/main_page_freelancer.dart';
 import '../ui/pages/verification/mainVerificationPage.dart';
@@ -23,13 +26,10 @@ import '../ui/teamPages/homeTeamDashboard/userManagementPages/mainUserManagement
 import '../ui/teamPages/homeTeamDashboard/userManagementPages/userDetailsPage.dart';
 
 
-class RoutsGnerate{
+class RoutsGenerate{
   static Route<dynamic> generateRoute(RouteSettings settings){
     switch(settings.name){
       case RouteGenerator.splashPage:
-        // return MaterialPageRoute(builder: (_) => const SplashPage());
-      // case RouteGenerator.messangerPage:
-      // return MaterialPageRoute(builder: (_) => const MessengerScreen());
       case RouteGenerator.signInPage:
         return MaterialPageRoute(builder: (_) => SignInPage());
       case RouteGenerator.signUpPage:
@@ -43,7 +43,7 @@ class RoutsGnerate{
       case RouteGenerator.successResetPage:
         return MaterialPageRoute(builder: (_) =>  const SuccessResetPassword());
       case RouteGenerator.mainVerificationPage:
-        return MaterialPageRoute(builder: (_) =>  MainVerificationPage());
+        return MaterialPageRoute(builder: (_) =>  const MainVerificationPage());
       case RouteGenerator.checkEmailPage:
         return MaterialPageRoute(builder: (_) =>  CheckEmailPage());
       case RouteGenerator.verificationEmailPage:
@@ -66,6 +66,12 @@ class RoutsGnerate{
         return MaterialPageRoute(builder: (_) => MainUserManagementPage());
       case RouteGenerator.editUserInformationPage:
         return MaterialPageRoute(builder: (_) => EditUserInformation());
+      case RouteGenerator.addBankAccountPage:
+        return MaterialPageRoute(builder: (_) => const AddBankAccountPage());
+      case RouteGenerator.chooseBankAccountPage:
+        return MaterialPageRoute(builder: (_) => const ChooseAccountPage());
+      case RouteGenerator.verificationAddBnkPage:
+        return MaterialPageRoute(builder: (_) => VerificationAddBnkPage());
         default:
         throw const FormatException("Route not found");
     }

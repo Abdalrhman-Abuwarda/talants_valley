@@ -19,6 +19,9 @@ class RouteGenerator {
   static const String mainTeamPage = '/homeTeamDashboard';
   static const String mainUserManagementPage = '/mainUserManagement';
   static const String editUserInformationPage = '/editUserInformation';
+  static const String addBankAccountPage = '/addBankAccountPage';
+  static const String chooseBankAccountPage = '/chooseBankAccountPage';
+  static const String verificationAddBnkPage = '/verificationAddBnkPage';
 
   RouteGenerator._();
 

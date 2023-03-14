@@ -91,7 +91,7 @@ class _EditUserInformationState extends State<EditUserInformation> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
             onPressed: () {
-              ServiceNavigations.serviceNavi
+              ServiceNavigation.serviceNavi
                   .pushNamedAndRemoveUtils(RouteGenerator.getUserDetails);
             },
             icon: const Icon(Icons.arrow_back_ios)),
@@ -122,9 +122,9 @@ class _EditUserInformationState extends State<EditUserInformation> {
                                 style: labelStyle,
                               ),
                               addVerticalSpace(AppSize.s5.h),
-                              MainTextformField(
+                              MainTextFormField(
                                   hintText: 'Enter first name',
-                                  inbutType: TextInputType.name,
+                                  inputType: TextInputType.name,
                                   controller: _firstNameController,
                                   validator: (value) =>
                                       Validate.validateUserName(value))
@@ -141,9 +141,9 @@ class _EditUserInformationState extends State<EditUserInformation> {
                                 style: labelStyle,
                               ),
                               addVerticalSpace(AppSize.s5.h),
-                              MainTextformField(
+                              MainTextFormField(
                                   hintText: 'Enter last name',
-                                  inbutType: TextInputType.name,
+                                  inputType: TextInputType.name,
                                   controller: _lastNameController,
                                   validator: (value) =>
                                       Validate.validateUserName(value))
@@ -158,9 +158,9 @@ class _EditUserInformationState extends State<EditUserInformation> {
                       style: labelStyle,
                     ),
                     addVerticalSpace(AppSize.s4.h),
-                    MainTextformField(
+                    MainTextFormField(
                         hintText: 'Enter your email',
-                        inbutType: TextInputType.emailAddress,
+                        inputType: TextInputType.emailAddress,
                         controller: _emailController,
                         validator: (value) => Validate.validateUserName(value)),
                     addVerticalSpace(AppSize.s15.h),
@@ -177,9 +177,9 @@ class _EditUserInformationState extends State<EditUserInformation> {
                       'ID Number',
                       style: labelStyle,
                     ),
-                    MainTextformField(
+                    MainTextFormField(
                         hintText: 'Enter ID number',
-                        inbutType: TextInputType.number,
+                        inputType: TextInputType.number,
                         controller: _idController,
                         validator: (value) => Validate.validateUserName(value)),
                     addVerticalSpace(AppSize.s15.h),
@@ -188,9 +188,9 @@ class _EditUserInformationState extends State<EditUserInformation> {
                       style: labelStyle,
                     ),
                     addVerticalSpace(AppSize.s4.h),
-                    MainTextformField(
+                    MainTextFormField(
                         hintText: 'Address 1',
-                        inbutType: TextInputType.streetAddress,
+                        inputType: TextInputType.streetAddress,
                         controller: _address1Controller,
                         validator: (value) => Validate.validateUserName(value)),
                     addVerticalSpace(AppSize.s15.h),
@@ -199,9 +199,9 @@ class _EditUserInformationState extends State<EditUserInformation> {
                       style: labelStyle,
                     ),
                     addVerticalSpace(AppSize.s4.h),
-                    MainTextformField(
+                    MainTextFormField(
                         hintText: 'Address 2',
-                        inbutType: TextInputType.streetAddress,
+                        inputType: TextInputType.streetAddress,
                         controller: _address2Controller,
                         validator: (value) => Validate.validateUserName(value)),
                     addVerticalSpace(AppSize.s15.h),
@@ -216,9 +216,9 @@ class _EditUserInformationState extends State<EditUserInformation> {
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),
                               addVerticalSpace(AppSize.s4.h),
-                              MainTextformField(
+                              MainTextFormField(
                                   hintText: '',
-                                  inbutType: TextInputType.text,
+                                  inputType: TextInputType.text,
                                   controller: _cityController,
                                   validator: (value) =>
                                       Validate.validateUserName(value))

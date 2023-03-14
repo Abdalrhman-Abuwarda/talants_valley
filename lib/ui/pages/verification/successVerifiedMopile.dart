@@ -25,7 +25,7 @@ class SuccessVerifiedMobilePage extends StatelessWidget {
         // leadingWidth: 30.w,
         leading: IconButton(
           onPressed: () {
-            ServiceNavigations.serviceNavi
+            ServiceNavigation.serviceNavi
                 .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
           },
           icon: const Icon(Icons.arrow_back_ios),

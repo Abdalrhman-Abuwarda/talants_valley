@@ -44,7 +44,7 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
         backgroundColor: Colors.transparent,
         // leadingWidth: 30.w,
         leading: IconButton(
-          onPressed: () {ServiceNavigations.serviceNavi
+          onPressed: () {ServiceNavigation.serviceNavi
               .pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);},
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -69,9 +69,9 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                 ),
                 addVerticalSpace(AppSize.s4.h),
 
-                      MainTextformField(
+                      MainTextFormField(
                           hintText: '********',
-                          inbutType: TextInputType.visiblePassword,
+                          inputType: TextInputType.visiblePassword,
                           controller: _newPasswordController,
                           validator: (value) => Validate.validatePassword(value),
                         isPassword: auth.isPassword,
@@ -87,9 +87,9 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                 ),
                 addVerticalSpace(AppSize.s4.h),
 
-                      MainTextformField(
+                      MainTextFormField(
                         hintText: '********',
-                        inbutType: TextInputType.visiblePassword,
+                        inputType: TextInputType.visiblePassword,
                         controller: _reEnterPasswordController,
                         validator: (value) => Validate.validateRePassword(value, _newPasswordController.text),
                         isPassword: auth.isPassword,

@@ -36,7 +36,7 @@ class _VerificationEmailPageState extends State<VerificationEmailPage> {
         // leadingWidth: 30.w,
         leading: IconButton(
           onPressed: () {
-            ServiceNavigations.serviceNavi
+            ServiceNavigation.serviceNavi
               .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
            },
           icon: const Icon(Icons.arrow_back_ios),
@@ -51,16 +51,16 @@ class _VerificationEmailPageState extends State<VerificationEmailPage> {
                 caption: "We have sent you a verification code to your email ${SharedPrefController().getUser().email.replaceRange(0, 3, "****")}",
                 withImage: true,
                 pathImage: ImageAssets.emailImage,
-                onPressedButtom: () {
+                onPressedButton: () {
                   if (formKye.currentState!.validate()) {
                     verification.verificationEmail(code: _optController.text);
                   }
                 },
-                buttomText: 'Verify',
+                buttonText: 'Verify',
                 fotterText: "Didn't get the code?",
-                futterButtomText: 'Resend',
-                onPressedTextButtom: () => verification.resendCodeEmail(),
-                valedate: (value) => Validate.validateCode(value),
+                futtarButtonText: 'Resend',
+                onPressedTextButton: () => verification.resendCodeEmail(),
+                validator: (value) => Validate.validateCode(value),
               ),
         ),
       ),

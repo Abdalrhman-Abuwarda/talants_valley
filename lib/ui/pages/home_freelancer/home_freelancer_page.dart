@@ -74,7 +74,7 @@ class HomeFreelancerPage extends StatelessWidget {
                       AppSize.s90.w,
                       child: ElevatedButton(
                         onPressed: (){
-                          ServiceNavigations.serviceNavi
+                          ServiceNavigation.serviceNavi
                               .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
                         },
                         child: const Text("Verify"),

@@ -47,7 +47,7 @@ class _CheckEmailPageState extends State<CheckEmailPage> {
           // leadingWidth: 30.w,
           leading: IconButton(
             onPressed: () {
-              ServiceNavigations.serviceNavi
+              ServiceNavigation.serviceNavi
                   .pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
             },
             icon: const Icon(Icons.arrow_back_ios),
@@ -61,17 +61,17 @@ class _CheckEmailPageState extends State<CheckEmailPage> {
               title: "Check Your Email",
               caption:
                   "We have sent you an email that contains a code to reset your password",
-              buttomText: 'Continue',
+              buttonText: 'Continue',
               fotterText: "Didn't get the code?",
-              futterButtomText: 'Resend',
-              onPressedButtom: () {
+              futtarButtonText: 'Resend',
+              onPressedButton: () {
                 if (formKye.currentState!.validate()) {
                   auth.checkEmailPassword(
                       verificationCode: _optController.text);
                   // ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.createNewPassword);
                 }
               },
-              onPressedTextButtom: () {
+              onPressedTextButton: () {
                 auth.resendCode(
                     email: SharedPrefController().getForgetEmail());
                 // auth.seconds = 120;
@@ -79,7 +79,7 @@ class _CheckEmailPageState extends State<CheckEmailPage> {
                 // auth.startTimer();
                 // print("This is after");
               },
-              valedate: (value) => Validate.validateCode(value),
+              validator: (value) => Validate.validateCode(value),
             ),
           ),
         ));

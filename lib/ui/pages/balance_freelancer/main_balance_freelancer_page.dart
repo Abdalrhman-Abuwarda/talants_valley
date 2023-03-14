@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
-import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';
-import '../../shared/customWidgets/TeamUserMangement/userOptionBottomSheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_card_balance.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/withdraeal_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/withdrawal_bottom_sheet.dart';
@@ -29,14 +26,14 @@ class HomeBalanceFreelancerPage extends StatelessWidget {
               HeaderCardBalance(
                 balance: '100',
                 onTap: () => showModalBottomSheet(
-                    isScrollControlled: true,
+                    isScrollControlled: false,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(23.r),
                           topRight: Radius.circular(23.r)),
                     ),
                     context: context,
-                    builder: (context) => WithdrawalBottomSheet()),
+                    builder: (context) => const WithdrawalBottomSheet()),
               ),
               addVerticalSpace(AppSize.s16.h),
               Text("Withdrawals",
@@ -51,24 +48,25 @@ class HomeBalanceFreelancerPage extends StatelessWidget {
                     color: ColorManager.whiteColor,
                     borderRadius: BorderRadius.circular(AppSize.s7.r),
                     border: Border.all(color: ColorManager.mainBorderColor)),
-                child: ListView(shrinkWrap: true,
+                child: ListView(
+                    shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                  WithdrawalCard(
-                    withdrawalBalance: '200',
-                    createdAt: "19 Aug, 12:30 AM",
-                    status: 'Pending',
-                    withdrawalFrom: 'Bank of Palestine',
-                    onTap: () {},
-                  ),
-                  WithdrawalCard(
-                    withdrawalBalance: '200',
-                    createdAt: "19 Aug, 12:30 AM",
-                    status: 'Sent',
-                    withdrawalFrom: 'Bank of Palestine',
-                    onTap: () {},
-                  ),
-                ]),
+                      WithdrawalCard(
+                        withdrawalBalance: '200',
+                        createdAt: "19 Aug, 12:30 AM",
+                        status: 'Pending',
+                        withdrawalFrom: 'Bank of Palestine',
+                        onTap: () {},
+                      ),
+                      WithdrawalCard(
+                        withdrawalBalance: '200',
+                        createdAt: "19 Aug, 12:30 AM",
+                        status: 'Sent',
+                        withdrawalFrom: 'Bank of Palestine',
+                        onTap: () {},
+                      ),
+                    ]),
               )
             ],
           ),

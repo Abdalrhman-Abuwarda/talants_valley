@@ -39,7 +39,7 @@ class UserManagementProvider extends ChangeNotifier {
         await UserManagementRepository().userDetailsRepository(userId);
     debugPrint("This is user Details in provider \n $dataResponse");
     userDetails = dataResponse;
-    ServiceNavigations.serviceNavi
+    ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.getUserDetails);
     notifyListeners();
   }
@@ -77,7 +77,7 @@ class UserManagementProvider extends ChangeNotifier {
   void Function()? onTapEditUser(String userId) {
     int index = listUsers.indexWhere((item) => item.id == userId);
     selectedUser = listUsers[index];
-    ServiceNavigations.serviceNavi
+    ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.editUserInformationPage);
     notifyListeners();
     return null;

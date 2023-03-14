@@ -1,6 +1,20 @@
 import 'dart:core';
 import 'dart:io';
 
+extension ExtendedString  on String {
+  String? validateAccountNumber() {
+    if(trim().isEmpty){
+      return 'Please enter your Account Number';
+    }
+    // Check if the entered email has the right format
+    if (length < 7 || length > 8) {
+      return '🚩Please enter a valid Account Number';
+    }
+    // Return null if the entered email is valid
+    return null;
+  }
+}
+
 class Validate {
   // Validate._();
   static String? validateEmail(value) {

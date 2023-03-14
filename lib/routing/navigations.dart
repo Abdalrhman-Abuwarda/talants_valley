@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-class ServiceNavigations{
-  ServiceNavigations._();
-  static ServiceNavigations serviceNavi = ServiceNavigations._();
+class ServiceNavigation{
+  ServiceNavigation._();
+  static ServiceNavigation serviceNavi = ServiceNavigation._();
   GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
   pushNamedWidget(String name) {

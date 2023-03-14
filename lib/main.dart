@@ -8,12 +8,14 @@ import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.
 import 'package:talants_valley/resources/themeManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/choose_account_page.dart';
 import 'package:talants_valley/ui/splashPage.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/sharedController.dart';
 import 'core/provider/authProvider.dart';
 import 'core/provider/formProvider.dart';
+import 'core/provider/freelancer_provider/balance_freelancer_provider.dart';
 import 'core/provider/verificationProvider.dart';
 
 Future<void> main() async {
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MainTeamProvider(), child: const MyApp()),
         ChangeNotifierProvider(create: (_) => UserManagementProvider(), child: const MyApp()),
         ChangeNotifierProvider(create: (_) => GeneralFreelancerProvider(), child: const MyApp()),
+        ChangeNotifierProvider(create: (_) => BalanceFreelancerProvider(), child: const MyApp()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),
@@ -51,9 +54,9 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Talants Valley',
               theme: ThemeManager.lightTheme,
-              home: const SplashPage() ,
-              navigatorKey: ServiceNavigations.serviceNavi.navKey,
-              onGenerateRoute: RoutsGnerate.generateRoute,
+              home: const ChooseAccountPage() ,
+              navigatorKey: ServiceNavigation.serviceNavi.navKey,
+              onGenerateRoute: RoutsGenerate.generateRoute,
             ),
       ),
     );

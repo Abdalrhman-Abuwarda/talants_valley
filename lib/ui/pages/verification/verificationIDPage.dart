@@ -43,7 +43,7 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
         ),
         leading: IconButton(
           onPressed: () {
-            ServiceNavigations.serviceNavi
+            ServiceNavigation.serviceNavi
                 .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
           },
           icon: const Icon(Icons.arrow_back_ios),
@@ -88,9 +88,9 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: ColorManager.primaryFontColor.withOpacity(0.7))),
                 addVerticalSpace(AppSize.s5.h),
-                MainTextformField(
+                MainTextFormField(
                     hintText: "Enter your ID number",
-                    inbutType: TextInputType.text,
+                    inputType: TextInputType.text,
                     controller: _idController,
                     validator: (value) => Validate.validateCode(value)),
                 addVerticalSpace(AppSize.s30.h),

@@ -44,7 +44,7 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
         ),
         leading: IconButton(
           onPressed: () {
-            ServiceNavigations.serviceNavi
+            ServiceNavigation.serviceNavi
                 .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
           },
           icon: const Icon(Icons.arrow_back_ios),
@@ -90,18 +90,18 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                   Text('Adress 1',
                       style: Theme.of(context).textTheme.subtitle1),
                   addVerticalSpace(AppSize.s5.h),
-                  MainTextformField(
+                  MainTextFormField(
                       hintText: "Neighborhood, building..",
-                      inbutType: TextInputType.text,
+                      inputType: TextInputType.text,
                       controller: _adress_1_Controller,
                       validator: (value) => Validate.validateCode(value)),
                   addVerticalSpace(AppSize.s16.h),
                   Text('Adress 2',
                       style: Theme.of(context).textTheme.subtitle1),
                   addVerticalSpace(AppSize.s5.h),
-                  MainTextformField(
+                  MainTextFormField(
                       hintText: "Street",
-                      inbutType: TextInputType.text,
+                      inputType: TextInputType.text,
                       controller: _adress_2_Controller,
                       validator: (value) => Validate.validateCode(value)),
                   addVerticalSpace(AppSize.s16.h),
@@ -116,9 +116,9 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
                             addVerticalSpace(AppSize.s4.h),
-                            MainTextformField(
+                            MainTextFormField(
                                 hintText: '',
-                                inbutType: TextInputType.name,
+                                inputType: TextInputType.name,
                                 controller: _cityController,
                                 validator: (value) =>
                                     Validate.validateUserName(value))

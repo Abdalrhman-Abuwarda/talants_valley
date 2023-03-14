@@ -76,9 +76,9 @@ class _SignUpPageState extends State<SignUpPage> {
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
                             addVerticalSpace(AppSize.s5.h),
-                            MainTextformField(
+                            MainTextFormField(
                                 hintText: 'Enter first name',
-                                inbutType: TextInputType.name,
+                                inputType: TextInputType.name,
                                 controller: _firstNameController,
                                 validator: (value) =>
                                     Validate.validateUserName(value))
@@ -95,9 +95,9 @@ class _SignUpPageState extends State<SignUpPage> {
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
                             addVerticalSpace(AppSize.s5.h),
-                            MainTextformField(
+                            MainTextFormField(
                                 hintText: 'Enter last name',
-                                inbutType: TextInputType.name,
+                                inputType: TextInputType.name,
                                 controller: _lastNameController,
                                 validator: (value) =>
                                     Validate.validateUserName(value))
@@ -112,9 +112,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   addVerticalSpace(AppSize.s5.h),
-                  MainTextformField(
+                  MainTextFormField(
                       hintText: 'email@gmail.com',
-                      inbutType: TextInputType.emailAddress,
+                      inputType: TextInputType.emailAddress,
                       controller: _emailController,
                       validator: (value) => Validate.validateEmail(value)),
                   addVerticalSpace(AppSize.s16.h),
@@ -124,10 +124,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   addVerticalSpace(AppSize.s5.h),
                   Consumer<AuthProvider>(
-                      builder: (context, auth, child) => MainTextformField(
+                      builder: (context, auth, child) => MainTextFormField(
                             hintText: 'Enter your password',
                             isPassword: auth.isPassword,
-                            inbutType: TextInputType.visiblePassword,
+                            inputType: TextInputType.visiblePassword,
                             controller: _passwordController,
                             validator: (value) =>
                                 Validate.validatePassword(value),
@@ -186,7 +186,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     text: "Alredy have an account?",
                     textButtom: 'Sign In',
                     onPressed: () {
-                      ServiceNavigations.serviceNavi
+                      ServiceNavigation.serviceNavi
                           .pushNamedWidget(RouteGenerator.signInPage);
                     },
                   )

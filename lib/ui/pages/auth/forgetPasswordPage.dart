@@ -42,7 +42,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
           // leadingWidth: 30.w,
           leading: IconButton(
             onPressed: () {
-              ServiceNavigations.serviceNavi
+              ServiceNavigation.serviceNavi
                   .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
             },
             icon: Icon(Icons.arrow_back_ios),
@@ -69,9 +69,9 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   addVerticalSpace(5.h),
-                  MainTextformField(
+                  MainTextFormField(
                       hintText: 'email@gmail.com',
-                      inbutType: TextInputType.emailAddress,
+                      inputType: TextInputType.emailAddress,
                       controller: _emailController,
                       validator: (value) => Validate.validateEmail(value)),
                   addVerticalSpace(AppSize.s55.h),

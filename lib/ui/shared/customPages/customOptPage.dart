@@ -14,65 +14,42 @@ import '../../../utils/validate.dart';
 import '../customWidgets/authWigdgets/authFooterPage.dart';
 
 class CustomOptPage extends StatefulWidget {
-  const CustomOptPage({
+  const CustomOptPage({super.key,
     required  this.optController,
     this.title,
     required this.caption,
-    required this.buttomText,
+    required this.buttonText,
     required this.fotterText,
-    required this.futterButtomText,
-    required this.onPressedButtom,
-    required this.onPressedTextButtom,
-    required this.valedate,
+    required this.futtarButtonText,
+    required this.onPressedButton,
+    required this.onPressedTextButton,
+    required this.validator,
     this.withImage = false,
     this.pathImage,
+    required this.minutes,
+    required this.seconds,
   });
 
   final TextEditingController optController;
   final String? title;
   final String caption;
   final String fotterText;
-  final String buttomText;
-  final String futterButtomText;
-  final void Function()? onPressedButtom;
- final  Function() onPressedTextButtom;
- final String? Function(String?)? valedate;
+  final String buttonText;
+  final String futtarButtonText;
+  final void Function()? onPressedButton;
+ final  Function() onPressedTextButton;
+ final String? Function(String?)? validator;
  final bool withImage ;
  final String? pathImage;
-
+  final String seconds;
+  final String minutes;
 
   @override
   State<CustomOptPage> createState() => _CustomOptPageState();
 }
 class _CustomOptPageState extends State<CustomOptPage> {
 
-  // static const maxSeconds = 120;
-  // int seconds = maxSeconds;
-  // Timer? timer;
-  //
-  // void startTimer() {
-  //   timer = Timer.periodic(Duration(seconds: 1), (_) {
-  //     if(seconds > 0) {
-  //       setState(() => seconds--);
-  //     }else{
-  //       timer?.cancel();
-  //     }
-  //   });
-  // }
-@override
-  void initState() {
-  Provider.of<AuthProvider>(context,listen: false).startTimer();
-  super.initState();
 
-  // TODO: implement initState
-  }
-
-  // @override
-  // void dispose() {
-  //   Provider.of<AuthProvider>(context, listen: false).timer!.cancel();
-  //   // TODO: implement dispose
-  //   super.dispose();
-  // }
 
 
   @override
@@ -93,11 +70,29 @@ class _CustomOptPageState extends State<CustomOptPage> {
               style: Theme.of(context).textTheme.subtitle1),
           addVerticalSpace(AppSize.s30),
           Pinput(
-            validator: widget.valedate,
+            validator: widget.validator,
             controller: widget.optController,
             obscureText: false,
             length: 6,
-            separatorPositions: [3],
+            focusedPinTheme: PinTheme(
+                margin: EdgeInsetsDirectional.only(end: AppMargin.m12.w),
+                width: AppSize.s40.w,
+                height: AppSize.s40.h,
+              decoration: BoxDecoration(
+                border: Border.all(color: ColorManager.foucasBorderColor , width: 2),
+                color: ColorManager.whiteColor,
+                borderRadius: BorderRadius.circular(5.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 0,
+                    blurRadius: 0,
+                    offset: const Offset(0.5, 1.5,), // changes position of shadow
+                  ),
+                ],
+              )
+            ),
+            separatorPositions: const [3],
             separator: addHorizantelSpace(AppSize.s30.w),
             // obscuringCharacter: '*',
             defaultPinTheme: PinTheme(
@@ -121,25 +116,24 @@ class _CustomOptPageState extends State<CustomOptPage> {
             ),
           ),
           addVerticalSpace(AppSize.s66.h),
-          Consumer<AuthProvider>(
-              builder: (context, auth, child) =>
-              Text("${auth.minutes.toString().padLeft(2, '0')} : ${auth.seconds.toString().padLeft(2, '0')}")
-          ),
+
+              Text( "${minutes.padLeft(2, '0')} : ${seconds.padLeft(2, '0')}}"),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(widget.fotterText),
               Consumer<AuthProvider>(
                 builder: (context, auth, child) => TextButton(
-                    onPressed: auth.seconds != 0 ? null : widget.onPressedTextButtom
+                    onPressed: auth.seconds != 0 ? null : widget.onPressedTextButton
                      ,
-                    child: Text(widget.futterButtomText)),
+                    child: Text(widget.futtarButtonText)),
               )
             ],
           ),
 
           addVerticalSpace(AppSize.s60.h),
-          ElevatedButton(onPressed: widget.onPressedButtom, child: Text(widget.buttomText,)),
+          ElevatedButton(onPressed: widget.onPressedButton, child: Text(widget.buttonText,)),
           addVerticalSpace(AppPadding.p44),
         ],
       ),

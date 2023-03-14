@@ -45,7 +45,7 @@ Future<dynamic> sendCodeEmail() async{
   final dateResponse = VerificationRepository().sendCodeEmailRepository();
   debugPrint(dateResponse.toString());
   // Helpers.showSnackBar(message: "The process done successfully");
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.verificationEmailPage);
   notifyListeners();
 }
@@ -56,7 +56,7 @@ Future<dynamic> sendCodeEmail() async{
     final dateResponse = VerificationRepository().sendCodeEmailRepository();
     debugPrint(dateResponse.toString());
     // Helpers.showSnackBar(message: "The process done successfully");
-    final context =ServiceNavigations.serviceNavi.navKey.currentContext;
+    final context =ServiceNavigation.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
     Provider.of<AuthProvider>(context, listen: false).minutes = 1;
     Provider.of<AuthProvider>(context, listen: false).startTimer();
@@ -71,7 +71,7 @@ Future<dynamic> sendCodeEmail() async{
   final dataResponse = VerificationRepository().verificationEmailRepository(code);
   debugPrint(dataResponse.toString());
   Helpers.showSnackBar(message: "The process done successfully");
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.successVerificationEmail);
   notifyListeners();
   }
@@ -83,7 +83,7 @@ Future<dynamic> sendCodeMobile() async{
   final dateResponse = VerificationRepository().sendCodeMobileRepository();
   debugPrint(dateResponse.toString());
   // Helpers.showSnackBar(message: "The process done successfully");
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.verificationMobilePage);
   notifyListeners();
 }
@@ -94,7 +94,7 @@ Future<dynamic> sendCodeMobile() async{
     final dateResponse = VerificationRepository().sendCodeMobileRepository();
     debugPrint(dateResponse.toString());
     // Helpers.showSnackBar(message: "The process done successfully");
-    final context =ServiceNavigations.serviceNavi.navKey.currentContext;
+    final context =ServiceNavigation.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
     Provider.of<AuthProvider>(context, listen: false).minutes = 1;
     Provider.of<AuthProvider>(context, listen: false).startTimer();
@@ -110,7 +110,7 @@ Future<dynamic> sendCodeMobile() async{
   final dataResponse = VerificationRepository().verificationMobileRepository(code);
   debugPrint(dataResponse.toString());
   Helpers.showSnackBar(message: "The process done successfully");
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.successVerificationMobile);
   notifyListeners();
   }
@@ -121,7 +121,7 @@ Future<dynamic> sendCodeMobile() async{
   final dataResponse = await VerificationRepository().getUserRepository();
   debugPrint("This is the data of user\n $dataResponse");
   SharedPrefController().saveData(user: dataResponse);
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
   notifyListeners();
   }
@@ -129,15 +129,15 @@ Future<dynamic> sendCodeMobile() async{
 //------------------------mainVerificationPageOnPressedFunctions----------------
   Function()? mainOnPressedFunction({required String userId}) =>
   userId == "1" ?
-      ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainTeamPage) :
-  ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);
+      ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainTeamPage) :
+  ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);
 
   Function()? idVerifiedPressedFunction() =>
-      ServiceNavigations.serviceNavi
+      ServiceNavigation.serviceNavi
           .pushNamedAndRemoveUtils(RouteGenerator.verificationIDPage);
 
   Function()? addressVerifiedPressedFunction() =>
-      ServiceNavigations.serviceNavi
+      ServiceNavigation.serviceNavi
           .pushNamedAndRemoveUtils(RouteGenerator.verificationAddressPage);
 
 

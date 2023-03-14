@@ -33,7 +33,7 @@ class SuccessResetPassword extends StatelessWidget {
             "Your Password has been Successfully Reset Click below to Login",
         textButtom: 'Login',
         onPressed: () {
-          ServiceNavigations.serviceNavi
+          ServiceNavigation.serviceNavi
               .pushNamedWidget(RouteGenerator.signInPage);
         },
       ),

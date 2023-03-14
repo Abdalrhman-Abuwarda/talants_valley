@@ -30,7 +30,7 @@ class VerificationMobilePage extends StatelessWidget {
         // leadingWidth: 30.w,
         leading: IconButton(
           onPressed: () {
-            ServiceNavigations.serviceNavi
+            ServiceNavigation.serviceNavi
                 .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
           },
           icon: const Icon(Icons.arrow_back_ios),
@@ -46,16 +46,16 @@ class VerificationMobilePage extends StatelessWidget {
                 optController: _optMobileController,
                 caption:
                 'We have sent you a verification code to your mobile number ${SharedPrefController().getUser().mobile!.replaceRange(0, 9, "**********")}',
-                buttomText: 'Verify',
+                buttonText: 'Verify',
                 fotterText: "Didn't get the code? ",
-                futterButtomText: 'Resend',
-                onPressedButtom: () {
+                futtarButtonText: 'Resend',
+                onPressedButton: () {
                   if (formKye.currentState!.validate()) {
                     verification.verificationMobile(code: _optMobileController.text);
                   }
                 },
-                onPressedTextButtom: () => verification.resendCodeMobile(),
-                valedate: (value) => Validate.validateCode(value),
+                onPressedTextButton: () => verification.resendCodeMobile(),
+                validator: (value) => Validate.validateCode(value),
               ),
         ),
       ),

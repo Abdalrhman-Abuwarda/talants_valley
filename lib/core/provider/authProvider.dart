@@ -21,7 +21,7 @@ int seconds = 59;
 int minutes = 1;
 Timer? timer;
  int counterMinutes = 0;
- bool timerCansele = false;
+ bool timerCansel = false;
 
  twoDigits(int n) => n.toString().padLeft(2, "0");
 // final minute = twoDigits(const Duration().inMinutes.remainder(60));
@@ -62,7 +62,7 @@ Future<dynamic> LoginUser(String email, String password) async{
   debugPrint("This is in authProvider after the SharedPreferance");
   debugPrint(dataResponse.email);
   Helpers.showSnackBar(message: "login successfully");
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
   // notifyListeners();
 }
@@ -78,7 +78,7 @@ Future<dynamic> signupUser(
       required String password}) async{
   final dataResponse = await AuthRepository().signupUserRepository(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
   Helpers.showSnackBar(message: "Signup successfully");
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
   notifyListeners();
 }
@@ -90,7 +90,7 @@ Future<dynamic> forgetPassword({required String email}) async{
   final dataResponse = await AuthRepository().forgetPasswordRepository(email: email);
   SharedPrefController().saveId(id: dataResponse.toString());
   Helpers.showSnackBar(message: "Send code successfully");
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedWidget(RouteGenerator.checkEmailPage);
   notifyListeners();
 }
@@ -114,7 +114,7 @@ Future<dynamic> checkEmailPassword({ required String verificationCode}) async {
   final dataResponse = await AuthRepository().checkEmailRrpository(id: SharedPrefController().getId(), verificationCode: verificationCode);
   SharedPrefController().saveRecoverToken(recoverToken: dataResponse);
   Helpers.showSnackBar(message: "The process done successfully");
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedWidget(RouteGenerator.createNewPassword);
   notifyListeners();
 }
@@ -124,7 +124,7 @@ Future<dynamic> checkEmailPassword({ required String verificationCode}) async {
 Future<dynamic> createNewPassword({required String password}) async{
   final dataResponse = await AuthRepository().createNewPasswordRepository(password: password, recoverToken: SharedPrefController().getRecoverToken());
   Helpers.showSnackBar(message: dataResponse["message"]);
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedWidget(RouteGenerator.successResetPage);
   notifyListeners();
 }
@@ -133,7 +133,7 @@ Future<dynamic> createNewPassword({required String password}) async{
 
 Future<dynamic> logout() async {
   SharedPrefController().logout();
-  ServiceNavigations.serviceNavi
+  ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
 }
 

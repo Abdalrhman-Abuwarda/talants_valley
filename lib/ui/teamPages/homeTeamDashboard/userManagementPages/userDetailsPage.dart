@@ -22,7 +22,7 @@ class UserDetailsPage extends StatelessWidget {
       appBar: AppBar(
         // toolbarHeight: AppSize.s80.h,
         backgroundColor: Colors.transparent,
-        leading: IconButton(onPressed: (){ServiceNavigations.serviceNavi
+        leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi
             .pushNamedAndRemoveUtils(RouteGenerator.mainUserManagementPage);},
             icon: const Icon(Icons.arrow_back_ios)),
         title: const Text("User Name"),
@@ -46,7 +46,7 @@ class UserDetailsPage extends StatelessWidget {
                       address: userManagement.userDetails!.address!.country,
                       role: userManagement.userDetails!.role.toString(), password: 'Send Recovery Email'
                       ,
-                       onTapEdit: (){ServiceNavigations.serviceNavi
+                       onTapEdit: (){ServiceNavigation.serviceNavi
                            .pushNamedAndRemoveUtils(RouteGenerator.editUserInformationPage);},
                        onTapRole: (){
                          AlertDialog(

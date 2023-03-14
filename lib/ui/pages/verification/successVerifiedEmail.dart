@@ -24,7 +24,7 @@ class SuccessVerifiedEmailPage extends StatelessWidget {
         // leadingWidth: 30.w,
         leading: IconButton(
           onPressed: () {
-            ServiceNavigations.serviceNavi
+            ServiceNavigation.serviceNavi
                 .pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
           },
           icon: const Icon(Icons.arrow_back_ios),

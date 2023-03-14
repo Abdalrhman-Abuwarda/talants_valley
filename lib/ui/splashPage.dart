@@ -24,23 +24,23 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(seconds: 3), (){
       if(SharedPrefController().accessToken == ""){
         debugPrint("Tis is null ");
-        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
+        ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
       }
       else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail && SharedPrefController().getUser().verifiedMobile && SharedPrefController().getUser().role == 0){
-        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainFreelancerPage);
+        ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.mainFreelancerPage);
       }
       else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail && SharedPrefController().getUser().verifiedMobile && SharedPrefController().getUser().role == 1){
-        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainTeamPage);
+        ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.mainTeamPage);
       }
       else if(isLoggedIn && SharedPrefController().getUser().verifiedEmail != true && SharedPrefController().getUser().verifiedMobile != true){
-        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.mainVerificationPage);
+        ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.mainVerificationPage);
       }
       // else if(SharedPrefController().getUser() == null){
       //   print("Tis is null ");
       //   ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
       // }
       else{
-        ServiceNavigations.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
+        ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.signInPage);
       }
 
     });

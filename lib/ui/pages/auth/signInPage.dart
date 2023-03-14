@@ -56,9 +56,9 @@ class _SignInPageState extends State<SignInPage> {
                     'Email',
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  MainTextformField(
+                  MainTextFormField(
                     hintText: 'email@gmail.com',
-                    inbutType: TextInputType.emailAddress,
+                    inputType: TextInputType.emailAddress,
                     controller: _emailController,
                     validator: (value) => Validate.validateEmail(value),
                   ),
@@ -69,10 +69,10 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   Consumer<AuthProvider>(
                     builder: (context, auth, child)=>
-                        MainTextformField(
+                        MainTextFormField(
                           hintText: 'Enter your password',
                           isPassword: auth.isPassword,
-                          inbutType: TextInputType.visiblePassword,
+                          inputType: TextInputType.visiblePassword,
                           controller: _passwordController,
                           validator: (value) => Validate.validatePassword(value),
                           suffixPressed: (){auth.suffixPressed();},
@@ -87,7 +87,7 @@ class _SignInPageState extends State<SignInPage> {
                       // addHorizantelSpace(160.w),
                       TextButton(
                         onPressed: () {
-                          ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
+                          ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
                         },
                         child:  Text(
                           "Forget Password?",
@@ -112,7 +112,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   addVerticalSpace(38.h),
                   FooterAuth(text: "Don't have an account?", textButtom: 'Sign Up', onPressed: () {
-                    ServiceNavigations.serviceNavi.pushNamedWidget(RouteGenerator.signUpPage);
+                    ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.signUpPage);
                   },)
                 ],
               ),

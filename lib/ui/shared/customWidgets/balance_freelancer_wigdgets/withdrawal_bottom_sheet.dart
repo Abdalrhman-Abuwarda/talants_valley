@@ -10,33 +10,39 @@ class WithdrawalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle? headLine3 = Theme.of(context).textTheme.headline3;
     return Container(
-      padding: EdgeInsetsDirectional.only(
-        top: AppSize.s33.h,
-        start: AppSize.s33.w,
-        end: AppSize.s33.w,
-        bottom: AppSize.s33.h,
+      padding:  EdgeInsetsDirectional.only(
+        top: AppPadding.p20.h,
+        start: AppPadding.p32.w,
+        end: AppPadding.p32.w,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      child: Wrap(
-        // mainAxisAlignment: MainAxisAlignment.start,
+      height: AppSize.s200.h,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // CheckboxListTile(value: true, onChanged: (value){}),
-          ListTile(
-            title: Row(
+           Text("Payment Method" , style: Theme.of(context).textTheme.subtitle1,),
+          addVerticalSpace(AppSize.s18.h),
+          const Divider(),
+          addVerticalSpace(AppSize.s18.h),
+          InkWell(
+            child: Row(
               children: [
-                Text( "Bank" ),
+                SvgPicture.asset(IconAssets.bankIcon , height: AppSize.s25.h,),
                 addHorizantelSpace(AppSize.s33.w),
-                SvgPicture.asset(IconAssets.bankIcon , height: AppSize.s25.h,)
+                Text( "Bank" , style: headLine3, ),
               ],
             ),
             onTap: (){},
           ),
-          ListTile(
-            title: Row(
+          addVerticalSpace(AppSize.s30.h),
+          InkWell(
+            child: Row(
               children: [
-                const Text("Cash"),
+                SvgPicture.asset(IconAssets.cashIcon, height: AppSize.s25.h,),
                 addHorizantelSpace(AppSize.s33.w),
-                SvgPicture.asset(IconAssets.cashIcon, height: AppSize.s25.h,)
+                Text("Cash" , style: headLine3,),
               ],
             ),
 
@@ -44,6 +50,6 @@ class WithdrawalBottomSheet extends StatelessWidget {
           )
         ],
       ),
-    );;
+    );
   }
 }
