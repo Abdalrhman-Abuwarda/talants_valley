@@ -27,9 +27,17 @@ class _CheckEmailPageState extends State<CheckEmailPage> {
   final TextEditingController _optController = TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<AuthProvider>(context,listen: false).startTimer();
+
+    super.initState();
+  }
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    Provider.of<AuthProvider>(context,listen: false).disposeTimer();
     _optController.dispose();
     // Provider.of<AuthProvider>(context, listen: false).timer!.cancel();
   }
@@ -79,7 +87,7 @@ class _CheckEmailPageState extends State<CheckEmailPage> {
                 // auth.startTimer();
                 // print("This is after");
               },
-              validator: (value) => Validate.validateCode(value),
+              validator: (value) => Validate.validateCode(value), minutes: auth.minutes.toString(), seconds: auth.seconds.toString(),
             ),
           ),
         ));

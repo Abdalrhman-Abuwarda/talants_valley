@@ -14,8 +14,9 @@ import '../../../utils/validate.dart';
 import '../customWidgets/authWigdgets/authFooterPage.dart';
 
 class CustomOptPage extends StatefulWidget {
-  const CustomOptPage({super.key,
-    required  this.optController,
+  const CustomOptPage({
+    super.key,
+    required this.optController,
     this.title,
     required this.caption,
     required this.buttonText,
@@ -37,21 +38,19 @@ class CustomOptPage extends StatefulWidget {
   final String buttonText;
   final String futtarButtonText;
   final void Function()? onPressedButton;
- final  Function() onPressedTextButton;
- final String? Function(String?)? validator;
- final bool withImage ;
- final String? pathImage;
+  final Function() onPressedTextButton;
+  final String? Function(String?)? validator;
+  final bool withImage;
+
+  final String? pathImage;
   final String seconds;
   final String minutes;
 
   @override
   State<CustomOptPage> createState() => _CustomOptPageState();
 }
+
 class _CustomOptPageState extends State<CustomOptPage> {
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -60,14 +59,17 @@ class _CustomOptPageState extends State<CustomOptPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           addVerticalSpace(AppSize.s30.h),
-          widget.withImage == true ?
-          Image.asset(widget.pathImage ?? "", height: 68.h, width: 68.w,)
-         : Center(
-              child: Text(widget.title ?? "",
-                  style: Theme.of(context).textTheme.headline2)),
+          widget.withImage == true
+              ? Image.asset(
+                  widget.pathImage ?? "",
+                  height: 68.h,
+                  width: 68.w,
+                )
+              : Center(
+                  child: Text(widget.title ?? "",
+                      style: Theme.of(context).textTheme.headline2)),
           addVerticalSpace(AppSize.s18.h),
-          Text(widget.caption,
-              style: Theme.of(context).textTheme.subtitle1),
+          Text(widget.caption, style: Theme.of(context).textTheme.subtitle1),
           addVerticalSpace(AppSize.s30),
           Pinput(
             validator: widget.validator,
@@ -78,20 +80,23 @@ class _CustomOptPageState extends State<CustomOptPage> {
                 margin: EdgeInsetsDirectional.only(end: AppMargin.m12.w),
                 width: AppSize.s40.w,
                 height: AppSize.s40.h,
-              decoration: BoxDecoration(
-                border: Border.all(color: ColorManager.foucasBorderColor , width: 2),
-                color: ColorManager.whiteColor,
-                borderRadius: BorderRadius.circular(5.r),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 0,
-                    blurRadius: 0,
-                    offset: const Offset(0.5, 1.5,), // changes position of shadow
-                  ),
-                ],
-              )
-            ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: ColorManager.foucasBorderColor, width: 2),
+                  color: ColorManager.whiteColor,
+                  borderRadius: BorderRadius.circular(5.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 0,
+                      blurRadius: 0,
+                      offset: const Offset(
+                        0.5,
+                        1.5,
+                      ), // changes position of shadow
+                    ),
+                  ],
+                )),
             separatorPositions: const [3],
             separator: addHorizantelSpace(AppSize.s30.w),
             // obscuringCharacter: '*',
@@ -109,31 +114,33 @@ class _CustomOptPageState extends State<CustomOptPage> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 0,
                       blurRadius: 0,
-                      offset: const Offset(0.5, 1.5,), // changes position of shadow
+                      offset: const Offset(
+                        0.5,
+                        1.5,
+                      ), // changes position of shadow
                     ),
                   ],
-                )
-            ),
+                )),
           ),
           addVerticalSpace(AppSize.s66.h),
-
-              Text( "${minutes.padLeft(2, '0')} : ${seconds.padLeft(2, '0')}}"),
-
+          Text(
+              "${widget.minutes.padLeft(2, '0')} : ${widget.seconds.padLeft(2, '0')}"),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(widget.fotterText),
-              Consumer<AuthProvider>(
-                builder: (context, auth, child) => TextButton(
-                    onPressed: auth.seconds != 0 ? null : widget.onPressedTextButton
-                     ,
-                    child: Text(widget.futtarButtonText)),
-              )
+              TextButton(
+                  onPressed:
+                      widget.seconds != "0" ? null : widget.onPressedTextButton,
+                  child: Text(widget.futtarButtonText)),
             ],
           ),
-
           addVerticalSpace(AppSize.s60.h),
-          ElevatedButton(onPressed: widget.onPressedButton, child: Text(widget.buttonText,)),
+          ElevatedButton(
+              onPressed: widget.onPressedButton,
+              child: Text(
+                widget.buttonText,
+              )),
           addVerticalSpace(AppPadding.p44),
         ],
       ),

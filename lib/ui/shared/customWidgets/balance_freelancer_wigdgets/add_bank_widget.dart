@@ -32,10 +32,7 @@ class AddBankWidgets extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(vertical: AppPadding.p27.h , horizontal: AppPadding.p27.w),
               width: double.infinity,
-              height: AppSize.s90,
-              decoration: const BoxDecoration(
-                color: ColorManager.whiteColor,
-              ),
+              height: AppSize.s100,
               child: Row(
                 children: [
                   SvgPicture.asset(IconAssets.bankIcon , height: AppSize.s40.h,),

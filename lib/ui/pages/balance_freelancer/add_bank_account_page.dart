@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
+import '../../../core/model/freelancer/bank_account_model.dart';
 import '../../../core/provider/freelancer_provider/balance_freelancer_provider.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/branch_bottom_sheet.dart';
@@ -79,7 +80,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                     MainTextFormField(
                       controller: _accountNumberController,
                       hintText: "",
-                      inputType: TextInputType.text,
+                      inputType: TextInputType.number,
                       validator:  (value) => value!.validateAccountNumber(),
                     ),
                     addVerticalSpace(AppSize.s16.h),
@@ -97,7 +98,9 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                     addVerticalSpace(AppSize.s40.h),
                     ElevatedButton(onPressed: (){
                       if(formKey.currentState!.validate()){
-                        balance.confirmAddBankAccount();
+                        balance.confirmAddBankAccount( bankAccount: BankAccountModel(accountFullName: _fullNameController.text, accountNumber: _accountNumberController.text, branch: balance.branchSelected, ledger: balance.ledgerSelected
+
+                        ));
                       }
                     },
                         child: const Text("Confirm")),

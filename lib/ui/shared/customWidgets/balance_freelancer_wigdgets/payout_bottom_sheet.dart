@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:talants_valley/routing/navigations.dart';
+import 'package:talants_valley/routing/routes.dart';
 
 import '../../../../resources/assets_manager.dart';
 import '../../../../resources/valuesManager.dart';
+import '../../../../routing/router.dart';
 
-class WithdrawalBottomSheet extends StatelessWidget {
-  const WithdrawalBottomSheet({Key? key}) : super(key: key);
+class PayoutBottomSheet extends StatelessWidget {
+  const PayoutBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,10 @@ class WithdrawalBottomSheet extends StatelessWidget {
                 Text( "Bank" , style: headLine3, ),
               ],
             ),
-            onTap: (){},
+            onTap: (){
+              ServiceNavigation.serviceNavi
+                  .pushNamedAndRemoveUtils(RouteGenerator.addBalanceToWithdrawPage);
+            },
           ),
           addVerticalSpace(AppSize.s30.h),
           InkWell(

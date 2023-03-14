@@ -1,20 +1,24 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../../routing/navigations.dart';
+import '../../../utils/helper.dart';
 import '../../model/freelancer/bank_account_model.dart';
 
 class BalanceFreelancerProvider extends ChangeNotifier{
-   bool isVisible = false;
+   bool isVisibleHomeError = false;
    String branchSelected = "";
    String ledgerSelected = "";
+   BankAccountModel? bankAccountSelected ;
   List<BankAccountModel> bankAccounts = [];
   final List<String> branchesBank =["0446 - Naser" , "0454 - Rimal" , "0448 - Nussairat" , "0451 - Main Branch" , "0452 - Khan Younis" , "0453 - Jabalia" ,"0454 - Rafah" ];
   final List<String> ledgersBank = ["3000 - Current" , "3100 - Saving" , "3102 - Saving For Every Citizen"];
   bool isVisibleLedgerError = false;
   bool isVisibleBranchError = false;
+   final contextKey = ServiceNavigation.serviceNavi.navKey.currentContext!;
+
 
    int seconds = 59;
    int minutes = 1;
@@ -49,13 +53,16 @@ class BalanceFreelancerProvider extends ChangeNotifier{
     notifyListeners();
   }
   continueWithdraw(){
-    if(bankAccounts.isEmpty){
-      isVisible = true;
+    if(bankAccountSelected == null){
+      isVisibleHomeError = true;
       notifyListeners();
-    }
+    } else{
+      ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.withdrawalPreviewPage);   }
   }
 
   disposeTimer(){
+    seconds = 0;
+    minutes = 0;
     timer?.cancel();
     notifyListeners();
   }
@@ -72,7 +79,7 @@ class BalanceFreelancerProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  confirmAddBankAccount(){
+  confirmAddBankAccount({ required BankAccountModel bankAccount}){
     if(branchSelected.isEmpty && ledgerSelected.isEmpty){
       isVisibleLedgerError = true;
       isVisibleBranchError = true;
@@ -85,7 +92,44 @@ class BalanceFreelancerProvider extends ChangeNotifier{
       isVisibleLedgerError = true;
       notifyListeners();
     } else {
+      bankAccounts.add(bankAccount);
+      isVisibleHomeError = false;
+      notifyListeners();
       ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.verificationAddBnkPage);
     }
   }
-}
+
+  verificationAddBnkPage(){
+    Helpers.balanceShowSnackBar(message: "Bank account has been added.");
+    ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseBankAccountPage);
+  }
+
+  deleteBankAccount({required String accountNumber}){
+    showDialog(
+        context: contextKey,
+        builder: (context) =>  BalanceAlertDialog(
+          content: "Are you sure you want to delete your bank account?",
+          onPressed: (){
+            bankAccounts.removeWhere((item) => item.accountNumber == accountNumber);
+            notifyListeners();
+            Helpers.balanceShowSnackBar(message: "Bank account has been deleted.");
+            ServiceNavigation.serviceNavi.popFunction();
+          },
+        ));
+  }
+
+  selectBankAccount({required String accountNumber}){
+    for (var element in bankAccounts) {
+      element.isSelected = false;
+    }
+    final int index = bankAccounts.indexWhere((element) => element.accountNumber == accountNumber );
+    bankAccounts[index].isSelected = true;
+    bankAccountSelected = bankAccounts[index];
+    notifyListeners();
+  }
+  
+  approvedWithdrawal(){
+    Helpers.balanceShowSnackBar(message: "Wait for the payment to be ready within \n 24 hours.");
+    ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);
+  }
+  }

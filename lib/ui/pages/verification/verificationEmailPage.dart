@@ -22,6 +22,20 @@ class _VerificationEmailPageState extends State<VerificationEmailPage> {
 
    final TextEditingController _optController = TextEditingController();
 
+   @override
+  void initState() {
+    // TODO: implement initState
+     Provider.of<VerificationProvider>(context,listen: false).startTimer();
+
+     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Provider.of<VerificationProvider>(context,listen: false).disposeTimer();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +74,8 @@ class _VerificationEmailPageState extends State<VerificationEmailPage> {
                 fotterText: "Didn't get the code?",
                 futtarButtonText: 'Resend',
                 onPressedTextButton: () => verification.resendCodeEmail(),
-                validator: (value) => Validate.validateCode(value),
+                validator: (value) => Validate.validateCode(value), minutes: verification.minutes.toString(),
+                seconds: verification.seconds.toString(),
               ),
         ),
       ),

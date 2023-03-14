@@ -1,7 +1,5 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
@@ -9,8 +7,8 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../../core/provider/freelancer_provider/balance_freelancer_provider.dart';
-import '../../../resources/assets_manager.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/add_bank_widget.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/bank_account_card.dart';
 import '../../shared/second_custom_buttom.dart';
 
 class ChooseAccountPage extends StatelessWidget {
@@ -26,22 +24,47 @@ class ChooseAccountPage extends StatelessWidget {
             onPressed: () {},
             icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
-      body: SingleChildScrollView(
-        child: Consumer<BalanceFreelancerProvider>(
-          builder: (context , balance , child) => Padding(
+      body: Consumer<BalanceFreelancerProvider>(
+        builder: (context, balance, child) => SingleChildScrollView(
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 addVerticalSpace(AppSize.s35.h),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: balance.bankAccounts.length,
+                  itemBuilder: (context, index) => BankAccountCardWidget(
+                    accountName: balance.bankAccounts[index].accountFullName,
+                    accountNumber: balance.bankAccounts[index].accountNumber,
+                    onPressedIcon: () => balance.deleteBankAccount(
+                        accountNumber:
+                            balance.bankAccounts[index].accountNumber),
+                    onTap: () {
+                      balance.selectBankAccount(
+                          accountNumber:
+                              balance.bankAccounts[index].accountNumber);
+                    },
+                    isSelected: balance.bankAccounts[index].isSelected,
+                  ),
+                ),
+                addVerticalSpace(AppSize.s14.h),
                 AddBankWidgets(
                   onTap: () {
-                    ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.addBankAccountPage);
+                    ServiceNavigation.serviceNavi
+                        .pushNamedWidget(RouteGenerator.addBankAccountPage);
                   },
                 ),
-                addVerticalSpace(400.h),
+                // Spacer(),
+                balance.bankAccounts.length < 4
+                    ? addVerticalSpace(40)
+                    : balance.bankAccounts.length == 4
+                        ? addVerticalSpace(AppSize.s20.h)
+                        : addVerticalSpace(AppSize.s10.h),
                 Visibility(
-                    visible: balance.isVisible,
+                    visible: balance.isVisibleHomeError,
                     child: Text(
                       "❗ Please select a bank account.",
                       style: Theme.of(context)
@@ -50,11 +73,18 @@ class ChooseAccountPage extends StatelessWidget {
                           .copyWith(color: ColorManager.redColor),
                     )),
                 addVerticalSpace(AppSize.s10.h),
-
-                ElevatedButton(onPressed: () => balance.continueWithdraw(),
+                ElevatedButton(
+                    onPressed: () => balance.continueWithdraw(),
                     child: const Text("Continue")),
                 addVerticalSpace(AppSize.s16.h),
-                SecondCustomButton(text: "Add Account", onPressed: () {ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.addBankAccountPage);},)
+                SecondCustomButton(
+                  text: "Add Account",
+                  onPressed: () {
+                    ServiceNavigation.serviceNavi
+                        .pushNamedWidget(RouteGenerator.addBankAccountPage);
+                  },
+                ),
+                addVerticalSpace(AppSize.s60.h),
               ],
             ),
           ),
@@ -63,4 +93,3 @@ class ChooseAccountPage extends StatelessWidget {
     );
   }
 }
-

@@ -10,11 +10,32 @@ import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
 
-class VerificationMobilePage extends StatelessWidget {
+class VerificationMobilePage extends StatefulWidget {
   VerificationMobilePage({Key? key}) : super(key: key);
+
+  @override
+  State<VerificationMobilePage> createState() => _VerificationMobilePageState();
+}
+
+class _VerificationMobilePageState extends State<VerificationMobilePage> {
   final TextEditingController _optMobileController = TextEditingController();
 
   var formKye = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<VerificationProvider>(context,listen: false).startTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Provider.of<VerificationProvider>(context,listen: false).disposeTimer();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +76,7 @@ class VerificationMobilePage extends StatelessWidget {
                   }
                 },
                 onPressedTextButton: () => verification.resendCodeMobile(),
-                validator: (value) => Validate.validateCode(value),
+                validator: (value) => Validate.validateCode(value), minutes: verification.minutes.toString(), seconds: verification.seconds.toString(),
               ),
         ),
       ),

@@ -29,7 +29,8 @@ class _VerificationAddBnkPageState extends State<VerificationAddBnkPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<BalanceFreelancerProvider>(
+      builder: (context, balance, child) => Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Image.asset(
@@ -41,34 +42,34 @@ class _VerificationAddBnkPageState extends State<VerificationAddBnkPage> {
         // leadingWidth: 30.w,
         leading: IconButton(
           onPressed: () {
-            ServiceNavigation.serviceNavi
-                .pushNamedAndRemoveUtils(RouteGenerator.addBankAccountPage);
+            balance.disposeTimer();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Form(
-        key: formKye,
-        child: Consumer<BalanceFreelancerProvider>(
-          builder: (context, balance, child) =>
-              CustomOptPage(
-                withImage: true,
-                pathImage: ImageAssets.mobileSuccessImage,
-                optController: _optMobileController,
-                caption:
-                'We have sent you a verification code to your mobile number ${SharedPrefController().getUser().mobile!.replaceRange(0, 9, "**********")}',
-                buttonText: 'Verify',
-                fotterText: "Didn't get the code? ",
-                futtarButtonText: 'Resend',
-                onPressedButton: () {
-                  if (formKye.currentState!.validate()) {
-                    balance.disposeTimer();
-                    ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseBankAccountPage);
-                  }
-                },
-                onPressedTextButton: () => balance.resendCode(),
-                validator: (value) => Validate.validateCode(value), minutes: balance.minutes.toString(), seconds: balance.seconds.toString(),
-              ),
+      body: SingleChildScrollView(
+        child: Form(
+          key: formKye,
+          child:
+                CustomOptPage(
+                  withImage: true,
+                  pathImage: ImageAssets.mobileSuccessImage,
+                  optController: _optMobileController,
+                  caption:
+                  'We have sent you a verification code to your mobile number ${SharedPrefController().getUser().mobile!.replaceRange(0, 9, "**********")}',
+                  buttonText: 'Verify',
+                  fotterText: "Didn't get the code? ",
+                  futtarButtonText: 'Resend',
+                  onPressedButton: () {
+                    if (formKye.currentState!.validate()) {
+                      balance.disposeTimer();
+                      balance.verificationAddBnkPage();
+                    }
+                  },
+                  onPressedTextButton: () => balance.resendCode(),
+                  validator: (value) => Validate.validateCode(value), minutes: balance.minutes.toString(), seconds: balance.seconds.toString(),
+                ),
+          ),
         ),
       ),
     );

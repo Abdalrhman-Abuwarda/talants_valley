@@ -19,6 +19,43 @@ class VerificationProvider with ChangeNotifier{
 
   String? validateFunction(String? value) => Validate.validateEmail(value);
 
+  int seconds = 59;
+  int minutes = 1;
+  Timer? timer;
+  int counterMinutes = 0;
+  bool timerCansel = false;
+
+  twoDigits(int n) => n.toString().padLeft(2, "0");
+// final minute = twoDigits(const Duration().inMinutes.remainder(60));
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if(seconds != 0 ) {
+        seconds--;
+        notifyListeners();
+      }else if(seconds == 0 && minutes != 0){
+        if (minutes != 0 ){
+          minutes--;
+          seconds += 60;
+        }
+      }
+      else {
+        timer?.cancel();
+        notifyListeners();
+      }
+    });
+  }
+
+  resendCode(){
+    seconds = 60;
+    minutes = 1;
+    startTimer();
+    notifyListeners();
+  }
+  disposeTimer(){
+    timer?.cancel();
+    notifyListeners();
+  }
+
 
 //-----------------------------variablesForIDVerification-----------------------
 

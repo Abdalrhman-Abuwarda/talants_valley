@@ -24,6 +24,7 @@ const String iconPath='assets/icons';
   static const String withdrawIcon='$iconPath/withdraw_icon.svg';
   static const String bankIcon='$iconPath/bank_icon.svg';
   static const String cashIcon='$iconPath/cash_icon.svg';
+  static const String doneIcon='$iconPath/done_icon.svg';
   // static const String location='$Icon_Path/Light/Location.svg';
   // static const String delete='$Icon_Path/Light/Delete.svg';
   // static const String time_circle='$Icon_Path/Light/Time Circle.svg';

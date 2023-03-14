@@ -42,6 +42,11 @@ void startTimer() {
     }
   });
 }
+
+  disposeTimer(){
+    timer?.cancel();
+    notifyListeners();
+  }
 // void savePsotCode(String code){}
 
 void suffixPressed(){

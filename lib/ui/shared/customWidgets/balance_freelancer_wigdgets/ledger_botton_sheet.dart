@@ -20,47 +20,49 @@ class LedgerBottomSheet extends StatelessWidget {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         height: AppSize.s250.h,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: AppSize.s25.h,
-              child: Row(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: AppSize.s25.h,
+                child: Row(
 
-                children: [
-                  Text("Ledger", style: subtitleStyle,),
-                  const Spacer(),
-                  IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.cancel_outlined))
-                ],
+                  children: [
+                    Text("Ledger", style: subtitleStyle,),
+                    const Spacer(),
+                    IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.cancel_outlined))
+                  ],
+                ),
               ),
-            ),
-            addVerticalSpace(AppSize.s18.h),
-            const Divider(),
-            addVerticalSpace(AppSize.s18.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppPadding.p12.w),
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: balance.ledgersBank.length,
-                itemBuilder: (context, index) =>  InkWell(
-                  child: Container(
-                    margin: EdgeInsetsDirectional.only(bottom: AppMargin.m24.h),
-                    child:
-                    Row(
-                      children: [
-                        Text( balance.ledgersBank[index] , style: subtitleStyle, ),
-                        const Spacer(),
-                        Text(index == 0 ? "جاري" : index == 1 ? "توفير" : "توفير لكل مواطن" , style: Theme.of(context).textTheme.labelMedium,)
-                      ],
+              addVerticalSpace(AppSize.s18.h),
+              const Divider(),
+              addVerticalSpace(AppSize.s18.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppPadding.p12.w),
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: balance.ledgersBank.length,
+                  itemBuilder: (context, index) =>  InkWell(
+                    child: Container(
+                      margin: EdgeInsetsDirectional.only(bottom: AppMargin.m24.h),
+                      child:
+                      Row(
+                        children: [
+                          Text( balance.ledgersBank[index] , style: subtitleStyle, ),
+                          const Spacer(),
+                          Text(index == 0 ? "جاري" : index == 1 ? "توفير" : "توفير لكل مواطن" , style: Theme.of(context).textTheme.labelMedium,)
+                        ],
+                      ),
                     ),
-                  ),
-                  onTap: () => balance.selectLedger(ledger: balance.ledgersBank[index]),
-                ),),
-            )
+                    onTap: () => balance.selectLedger(ledger: balance.ledgersBank[index]),
+                  ),),
+              )
 
 
-          ],
+            ],
+          ),
         ),
       ),
     );

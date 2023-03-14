@@ -5,7 +5,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import '../../../resources/colors_manager.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_card_balance.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/withdraeal_card.dart';
-import '../../shared/customWidgets/balance_freelancer_wigdgets/withdrawal_bottom_sheet.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/payout_bottom_sheet.dart';
 
 class HomeBalanceFreelancerPage extends StatelessWidget {
   const HomeBalanceFreelancerPage({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class HomeBalanceFreelancerPage extends StatelessWidget {
                           topRight: Radius.circular(23.r)),
                     ),
                     context: context,
-                    builder: (context) => const WithdrawalBottomSheet()),
+                    builder: (context) => const PayoutBottomSheet()),
               ),
               addVerticalSpace(AppSize.s16.h),
               Text("Withdrawals",

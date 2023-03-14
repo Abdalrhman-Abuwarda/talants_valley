@@ -27,12 +27,7 @@ class WithdrawalCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: AppPadding.p20.h),
         decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: ColorManager.mainBorderColor,
-                width: 1.0,
-              ),
-            )
+
         ),
         child: Row(
           children: [

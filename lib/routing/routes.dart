@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/add_balance_to_withdraw_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/verification_add_bank_page.dart';
 import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
 import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
@@ -13,6 +14,7 @@ import '../ui/pages/auth/signUpPage.dart';
 import '../ui/pages/auth/successResetPassword.dart';
 import '../ui/pages/balance_freelancer/add_bank_account_page.dart';
 import '../ui/pages/balance_freelancer/choose_account_page.dart';
+import '../ui/pages/balance_freelancer/withdrawal_preview_page.dart';
 import '../ui/pages/home_freelancer/home_freelancer_page.dart';
 import '../ui/pages/main_page_freelancer.dart';
 import '../ui/pages/verification/mainVerificationPage.dart';
@@ -72,6 +74,10 @@ class RoutsGenerate{
         return MaterialPageRoute(builder: (_) => const ChooseAccountPage());
       case RouteGenerator.verificationAddBnkPage:
         return MaterialPageRoute(builder: (_) => VerificationAddBnkPage());
+      case RouteGenerator.addBalanceToWithdrawPage:
+        return MaterialPageRoute(builder: (_) => AddBalanceToWithdrawPage());
+      case RouteGenerator.withdrawalPreviewPage:
+        return MaterialPageRoute(builder: (_) => WithdrawalPreviewPage());
         default:
         throw const FormatException("Route not found");
     }
