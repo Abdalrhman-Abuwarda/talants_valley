@@ -69,7 +69,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                     addVerticalSpace(AppSize.s16.h),
                     const Text("Branch"),
                     addVerticalSpace(AppSize.s5.h),
-                    PressedCardWidget(title: balance.branchSelected,sheetPage: (context) => const BranchBottomSheet()),
+                    PressedCardWidget(title: balance.branchSelected, sheetPage: (context) => const BranchBottomSheet()),
                     addVerticalSpace(AppSize.s8.h),
                     Visibility(
                         visible: balance.isVisibleBranchError,

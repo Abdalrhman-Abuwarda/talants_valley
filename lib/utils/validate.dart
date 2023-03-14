@@ -13,6 +13,17 @@ extension ExtendedString  on String {
     // Return null if the entered email is valid
     return null;
   }
+
+  String? validateBankAmount(){
+    if(length < 2){
+      return "please enter valid amount";
+    }
+
+    if(int.parse(this) < 10){
+      return "The minimum amount to withdraw 10 \$";
+    }
+    return null;
+  }
 }
 
 class Validate {

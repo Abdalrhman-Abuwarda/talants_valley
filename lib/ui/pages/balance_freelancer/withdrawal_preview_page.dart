@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/provider/freelancer_provider/balance_freelancer_provider.dart';
 import '../../../resources/colors_manager.dart';
-import '../../shared/customWidgets/balance_freelancer_wigdgets/plicy_withdrawal_widget.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/policy_withdrawal_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/preview_account_details_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/transfer_amount_details.dart';
 

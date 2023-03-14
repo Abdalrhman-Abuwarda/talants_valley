@@ -5,12 +5,12 @@ import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
 
 class WithdrawalCard extends StatelessWidget {
-  const WithdrawalCard({
+  WithdrawalCard({
     required this.withdrawalBalance,
     required this.createdAt,
     required this.status,
     required this.withdrawalFrom,
-    required this.onTap,
+    required this.sheetPage,
     Key? key,
   }) : super(key: key);
 
@@ -18,12 +18,20 @@ class WithdrawalCard extends StatelessWidget {
   final String createdAt;
   final String status;
   final String withdrawalFrom;
-  final void Function()? onTap;
+  Widget Function(BuildContext) sheetPage;
   @override
   Widget build(BuildContext context) {
     final TextStyle? bodyText = Theme.of(context).textTheme.bodyText2 ;
     return InkWell(
-      onTap: onTap,
+      onTap: ()=> showModalBottomSheet(
+      isScrollControlled: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(23.r),
+            topRight: Radius.circular(23.r)),
+      ),
+      context: context,
+      builder: sheetPage,),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: AppPadding.p20.h),
         decoration: const BoxDecoration(

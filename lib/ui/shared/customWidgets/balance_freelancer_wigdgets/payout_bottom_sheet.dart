@@ -39,7 +39,7 @@ class PayoutBottomSheet extends StatelessWidget {
             ),
             onTap: (){
               ServiceNavigation.serviceNavi
-                  .pushNamedAndRemoveUtils(RouteGenerator.addBalanceToWithdrawPage);
+                  .pushNamedAndRemoveUtils(RouteGenerator.addBalanceBankWithdrawPage);
             },
           ),
           addVerticalSpace(AppSize.s30.h),
@@ -52,7 +52,10 @@ class PayoutBottomSheet extends StatelessWidget {
               ],
             ),
 
-            onTap: (){},
+            onTap: (){
+              ServiceNavigation.serviceNavi
+                  .pushNamedAndRemoveUtils(RouteGenerator.addBalanceCashWithdrawPage);
+            },
           )
         ],
       ),

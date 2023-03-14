@@ -21,7 +21,7 @@ class ChooseAccountPage extends StatelessWidget {
         title: const Text("Bank Withdraw"),
         backgroundColor: Colors.transparent,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.addBalanceBankWithdrawPage);},
             icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
       body: Consumer<BalanceFreelancerProvider>(

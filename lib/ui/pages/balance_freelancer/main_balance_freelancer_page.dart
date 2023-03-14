@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
+import '../../../core/provider/freelancer_provider/balance_freelancer_provider.dart';
 import '../../../resources/colors_manager.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_card_balance.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/status_withdrawal_bottom_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/withdraeal_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/payout_bottom_sheet.dart';
 
@@ -25,16 +28,8 @@ class HomeBalanceFreelancerPage extends StatelessWidget {
             children: [
               HeaderCardBalance(
                 balance: '100',
-                onTap: () => showModalBottomSheet(
-                    isScrollControlled: false,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(23.r),
-                          topRight: Radius.circular(23.r)),
-                    ),
-                    context: context,
-                    builder: (context) => const PayoutBottomSheet()),
-              ),
+                sheetPage: (context) => const PayoutBottomSheet()),
+
               addVerticalSpace(AppSize.s16.h),
               Text("Withdrawals",
                   style: Theme.of(context)
@@ -48,25 +43,20 @@ class HomeBalanceFreelancerPage extends StatelessWidget {
                     color: ColorManager.whiteColor,
                     borderRadius: BorderRadius.circular(AppSize.s7.r),
                     border: Border.all(color: ColorManager.mainBorderColor)),
-                child: ListView(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      WithdrawalCard(
-                        withdrawalBalance: '200',
-                        createdAt: "19 Aug, 12:30 AM",
-                        status: 'Pending',
-                        withdrawalFrom: 'Bank of Palestine',
-                        onTap: () {},
+                child: Consumer<BalanceFreelancerProvider>(
+                  builder: (context, balance, child) => ListView.builder(
+                    itemCount: balance.withdrawals.length,
+                    itemBuilder: (context , index) => WithdrawalCard(
+                      withdrawalBalance: balance.withdrawals[index].balance,
+                      createdAt: balance.withdrawals[index].createdAt,
+                      status: balance.withdrawals[index].status,
+                      withdrawalFrom: balance.withdrawals[index].withdrawalFrom,
+                      sheetPage: (context) => StatusWithdrawalBottomSheet(withdrawal: balance.withdrawals[index],),
+                    ) ,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       ),
-                      WithdrawalCard(
-                        withdrawalBalance: '200',
-                        createdAt: "19 Aug, 12:30 AM",
-                        status: 'Sent',
-                        withdrawalFrom: 'Bank of Palestine',
-                        onTap: () {},
-                      ),
-                    ]),
+                ),
               )
             ],
           ),

@@ -8,6 +8,7 @@ import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.
 import 'package:talants_valley/resources/themeManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/add_balance_bank_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/choose_account_page.dart';
 import 'package:talants_valley/ui/splashPage.dart';
 import 'package:talants_valley/utils/helper.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Talants Valley',
               theme: ThemeManager.lightTheme,
-              home: const ChooseAccountPage() ,
+              home: const SplashPage() ,
               navigatorKey: ServiceNavigation.serviceNavi.navKey,
               onGenerateRoute: RoutsGenerate.generateRoute,
             ),

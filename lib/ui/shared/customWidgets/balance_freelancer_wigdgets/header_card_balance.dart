@@ -7,13 +7,13 @@ import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
 
 class HeaderCardBalance extends StatelessWidget {
-  const HeaderCardBalance({
+  HeaderCardBalance({
+    required this.sheetPage,
     required this.balance,
-    required this.onTap,
     Key? key,
   }) : super(key: key);
   final String balance;
-  final void Function()? onTap;
+  Widget Function(BuildContext) sheetPage;
 
 
   @override
@@ -37,7 +37,15 @@ class HeaderCardBalance extends StatelessWidget {
           ),
           const Spacer(),
           InkWell(
-            onTap: onTap,
+            onTap: ()=> showModalBottomSheet(
+            isScrollControlled: false,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(23.r),
+                  topRight: Radius.circular(23.r)),
+            ),
+            context: context,
+            builder: sheetPage,),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: AppPadding.p27.w),
               width: AppSize.s140.w,

@@ -6,6 +6,7 @@ import 'package:talants_valley/routing/router.dart';
 import '../../../routing/navigations.dart';
 import '../../../utils/helper.dart';
 import '../../model/freelancer/bank_account_model.dart';
+import '../../model/freelancer/withdrawal_freelancer_model.dart';
 
 class BalanceFreelancerProvider extends ChangeNotifier{
    bool isVisibleHomeError = false;
@@ -15,6 +16,10 @@ class BalanceFreelancerProvider extends ChangeNotifier{
   List<BankAccountModel> bankAccounts = [];
   final List<String> branchesBank =["0446 - Naser" , "0454 - Rimal" , "0448 - Nussairat" , "0451 - Main Branch" , "0452 - Khan Younis" , "0453 - Jabalia" ,"0454 - Rafah" ];
   final List<String> ledgersBank = ["3000 - Current" , "3100 - Saving" , "3102 - Saving For Every Citizen"];
+  List<WithdrawalModel> withdrawals = [
+    WithdrawalModel(status: "Pending", createdAt: "21 Aug, 12:30 AM", balance: "500", fees: "free", freelancerName: "داليا محمد شحادة", withdrawalFrom: "غزة - مكتب الدانا"),
+    WithdrawalModel(status: "Pending", createdAt: "21 Aug, 12:30 AM", balance: "500", fees: "free", freelancerName: "داليا محمد شحادة", withdrawalFrom: "غزة - مكتب الدانا"),
+  ];
   bool isVisibleLedgerError = false;
   bool isVisibleBranchError = false;
    final contextKey = ServiceNavigation.serviceNavi.navKey.currentContext!;
@@ -131,5 +136,9 @@ class BalanceFreelancerProvider extends ChangeNotifier{
   approvedWithdrawal(){
     Helpers.balanceShowSnackBar(message: "Wait for the payment to be ready within \n 24 hours.");
     ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);
+  }
+
+  showStatusWithdrawal({ required BankAccountModel bankAccount}){
+
   }
   }
