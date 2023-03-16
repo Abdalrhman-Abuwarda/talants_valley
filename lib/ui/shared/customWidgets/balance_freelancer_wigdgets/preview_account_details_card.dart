@@ -10,11 +10,13 @@ class PreviewAccountDetailsCard extends StatelessWidget {
   PreviewAccountDetailsCard({
     required this.accountName,
     required this.accountNumber,
+    required this.bankName,
     Key? key,
   }) : super(key: key);
 
   final String accountName;
   final String accountNumber;
+  final String bankName;
 
 
   @override
@@ -50,7 +52,7 @@ class PreviewAccountDetailsCard extends StatelessWidget {
                     Row(children: [
                       Text(accountName, style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
                       addHorizantelSpace(AppSize.s8.w),
-                      Text("[Bank of Palestine]" , style: subTitle!.copyWith(color: ColorManager.grayColor),)
+                      Text("[$bankName]", overflow: TextOverflow.ellipsis , style: subTitle!.copyWith(color: ColorManager.grayColor),)
                     ]),
                     addVerticalSpace(AppSize.s10.h),
                     Text(accountNumber , style: Theme.of(context).textTheme.labelMedium!.copyWith(color: ColorManager.grayColor),),

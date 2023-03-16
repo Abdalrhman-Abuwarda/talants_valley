@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/utils/validate.dart';
 
+import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../../routing/router.dart';
-
 
 class AddBalanceBankPage extends StatefulWidget {
   const AddBalanceBankPage({Key? key}) : super(key: key);
@@ -19,8 +21,16 @@ class AddBalanceBankPage extends StatefulWidget {
 class _AddBalanceBankPageState extends State<AddBalanceBankPage> {
   final _formKey = GlobalKey<FormState>();
   bool visible = false;
-  String availableMoney = "800.5";
+  String availableMoney = SharedPrefController().getUser().balance.toString();
   String userMoney = "";
+  final TextEditingController _amountController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _amountController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +45,16 @@ class _AddBalanceBankPageState extends State<AddBalanceBankPage> {
                 color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi.popFunction();}, icon: const Icon(Icons.arrow_back_ios_new_outlined , color: ColorManager.blackColor,),),
+          leading: IconButton(
+            onPressed: () {
+              ServiceNavigation.serviceNavi
+                  .pushNamedReplacement(RouteGenerator.mainFreelancerPage);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: ColorManager.blackColor,
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -61,7 +80,7 @@ class _AddBalanceBankPageState extends State<AddBalanceBankPage> {
                     child: Form(
                       key: _formKey,
                       child: TextFormField(
-                        controller: TextEditingController(text: userMoney),
+                        controller: _amountController,
                         autocorrect: true,
                         validator: (value) => value!.validateBankAmount(),
                         keyboardType: TextInputType.number,
@@ -76,9 +95,7 @@ class _AddBalanceBankPageState extends State<AddBalanceBankPage> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 8,
-              ),
+              addVerticalSpace(AppSize.s8.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -90,72 +107,29 @@ class _AddBalanceBankPageState extends State<AddBalanceBankPage> {
                   TextButton(
                       onPressed: () {
                         setState(() {
-                          userMoney = availableMoney;
+                          _amountController.text = availableMoney;
                         });
                       },
                       child: Text("\$$availableMoney"))
                 ],
               ),
               addVerticalSpace(AppSize.s20.h),
-              // Visibility(
-              //     visible: visible,
-              //     child: Container(
-              //       width: 342,
-              //       height: 58,
-              //       decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(7),
-              //           color: const Color.fromRGBO(253, 248, 248, 1),
-              //           border: Border.all(
-              //               color: const Color.fromRGBO(255, 209, 209, 1))),
-              //       child: Padding(
-              //         padding: const EdgeInsets.only(
-              //           left: 17,
-              //         ),
-              //         child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //           children: [
-              //             SvgPicture.asset("assets/warning.svg"),
-              //             const Text(
-              //               "  Sorry, cents can't be withdrawn for \n  cash payout.",
-              //               style:
-              //               TextStyle(color: Color.fromRGBO(238, 64, 76, 1)),
-              //             ),
-              //             const SizedBox(
-              //               width: 20,
-              //             ),
-              //             IconButton(
-              //               onPressed: () {
-              //                 setState(() {
-              //                   visible = false;
-              //                 });
-              //               },
-              //               icon: SizedBox(
-              //                   height: 15,
-              //                   width: 15,
-              //                   child: SvgPicture.asset("assets/close.svg")),
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //     )),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              SizedBox(
-                height: 44,
-                width: 326,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      debugPrint("Done");
-                      ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseBankAccountPage);
-
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(),
-                  child: const Text(
-                    "Continue",
-                    style: TextStyle(fontSize: 20),
+              Consumer<WithdrawFreelancerProvider>(
+                builder: (context, balance, child) => SizedBox(
+                  height: 44,
+                  width: 326,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        balance.addAmountToWithdraw(
+                            amount: _amountController.text);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(),
+                    child: const Text(
+                      "Continue",
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ),
                 ),
               )

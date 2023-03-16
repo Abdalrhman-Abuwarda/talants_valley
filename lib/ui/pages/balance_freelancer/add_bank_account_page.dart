@@ -5,7 +5,8 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
 import '../../../core/model/freelancer/bank_account_model.dart';
-import '../../../core/provider/freelancer_provider/balance_freelancer_provider.dart';
+import '../../../core/model/freelancer/withdrawal_model.dart';
+import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/branch_bottom_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/disable_card_widget.dart';
@@ -50,7 +51,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
           key: formKey,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
-            child: Consumer<BalanceFreelancerProvider>(
+            child: Consumer<WithdrawFreelancerProvider>(
               builder: (context , balance , child) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -98,9 +99,9 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                     addVerticalSpace(AppSize.s40.h),
                     ElevatedButton(onPressed: (){
                       if(formKey.currentState!.validate()){
-                        balance.confirmAddBankAccount( bankAccount: BankAccountModel(accountFullName: _fullNameController.text, accountNumber: _accountNumberController.text, branch: balance.branchSelected, ledger: balance.ledgerSelected
-
-                        ));
+                        balance.sendCodeAddBankAccount(
+                             accountName: _fullNameController.text, accountNumber: _accountNumberController.text, bankBranch: balance.branchSelected, ledger: balance.ledgerSelected
+                        );
                       }
                     },
                         child: const Text("Confirm")),

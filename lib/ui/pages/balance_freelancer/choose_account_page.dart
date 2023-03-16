@@ -6,14 +6,25 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/router.dart';
 
-import '../../../core/provider/freelancer_provider/balance_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/add_bank_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/bank_account_card.dart';
 import '../../shared/second_custom_buttom.dart';
 
-class ChooseAccountPage extends StatelessWidget {
+class ChooseAccountPage extends StatefulWidget {
   const ChooseAccountPage({Key? key}) : super(key: key);
 
+  @override
+  State<ChooseAccountPage> createState() => _ChooseAccountPageState();
+}
+class _ChooseAccountPageState extends State<ChooseAccountPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<WithdrawFreelancerProvider>(context , listen: false).getBankAccountList();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +35,7 @@ class ChooseAccountPage extends StatelessWidget {
             onPressed: () {ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.addBalanceBankWithdrawPage);},
             icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
-      body: Consumer<BalanceFreelancerProvider>(
+      body: Consumer<WithdrawFreelancerProvider>(
         builder: (context, balance, child) => SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
@@ -37,11 +48,10 @@ class ChooseAccountPage extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: balance.bankAccounts.length,
                   itemBuilder: (context, index) => BankAccountCardWidget(
-                    accountName: balance.bankAccounts[index].accountFullName,
+                    accountName: balance.bankAccounts[index].accountName,
                     accountNumber: balance.bankAccounts[index].accountNumber,
                     onPressedIcon: () => balance.deleteBankAccount(
-                        accountNumber:
-                            balance.bankAccounts[index].accountNumber),
+                        bankId: balance.bankAccounts[index].id,),
                     onTap: () {
                       balance.selectBankAccount(
                           accountNumber:

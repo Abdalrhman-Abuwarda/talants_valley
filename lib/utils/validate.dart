@@ -1,6 +1,11 @@
 import 'dart:core';
 import 'dart:io';
 
+import 'package:provider/provider.dart';
+import 'package:talants_valley/utils/helper.dart';
+
+import '../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+
 extension ExtendedString  on String {
   String? validateAccountNumber() {
     if(trim().isEmpty){
@@ -15,6 +20,9 @@ extension ExtendedString  on String {
   }
 
   String? validateBankAmount(){
+    if(trim().isEmpty){
+      return 'Please enter amount';
+    }
     if(length < 2){
       return "please enter valid amount";
     }
@@ -24,6 +32,39 @@ extension ExtendedString  on String {
     }
     return null;
   }
+
+  String? validateUserName() {
+    if (trim().isEmpty) {
+      return 'Please enter your name';
+    }
+    if (trim().length < 3) {
+      return 'Please entar valid name';
+    }
+    return null;
+  }
+
+  String? validatePhoneNumber() {
+    if (trim().isEmpty) {
+      return '📱Please enter Phone Number';
+    }
+    if (trim().length < 10 || length > 15) {
+      return 'Please enter valid Phone Number';
+    }
+
+    // Return null if the entered password is valid
+    return null;
+  }
+
+  String? validateIdNumber() {
+    if (trim().isEmpty) {
+      return '📱Please enter Id Number';
+    }
+    if (trim().length < 12) {
+      return 'Please enter valid Phone Number';
+    }
+    return null;
+  }
+
 }
 
 class Validate {

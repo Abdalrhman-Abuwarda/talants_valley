@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talants_valley/routing/navigations.dart';
+import 'package:talants_valley/routing/router.dart';
 
-import '../../../core/provider/freelancer_provider/balance_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../../resources/colors_manager.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/policy_withdrawal_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/preview_account_details_card.dart';
@@ -11,7 +14,9 @@ import '../../shared/customWidgets/balance_freelancer_wigdgets/transfer_amount_d
 
 
 class WithdrawalPreviewPage extends StatelessWidget {
-  const WithdrawalPreviewPage({Key? key}) : super(key: key);
+  WithdrawalPreviewPage({Key? key}) : super(key: key);
+
+  final String amountToWithdraw = SharedPrefController().getAmountToWithdraw();
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +27,16 @@ class WithdrawalPreviewPage extends StatelessWidget {
           "Withdrawal Preview",
         ),
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseBankAccountPage);
+            },
             icon: const Icon(
               Icons.arrow_back_ios,
               color: Colors.black,
             )),
       ),
 
-      body: Consumer<BalanceFreelancerProvider>(
+      body: Consumer<WithdrawFreelancerProvider>(
         builder: (context ,balance, child) => Padding(
           padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
           child: Column(
@@ -43,18 +50,19 @@ class WithdrawalPreviewPage extends StatelessWidget {
               addVerticalSpace(AppSize.s5.h),
               Align(
                   alignment: Alignment.center,
-                  child: Text("300.00 USD",
+                  child: Text(amountToWithdraw,
                       style: TextStyle(
                           color: Colors.blue,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w700))),
-              const SizedBox(height: 13),
+              addVerticalSpace(AppSize.s12.h),
               const Text("Transferred to:",
                   style: TextStyle(color: Colors.grey, fontSize: 16)),
               addVerticalSpace(AppSize.s12.h),
-              PreviewAccountDetailsCard(accountName: 'Abdalrhman', accountNumber: '0452-1064559-001-3100-000', ),
+
+              PreviewAccountDetailsCard(accountName: balance.bankAccountSelected!.accountName, accountNumber: balance.bankAccountSelected!.accountNumber, bankName: balance.bankAccountSelected!.bankName,),
               const SizedBox(height: 12),
-              const TransferAmountDetails(fee: 'free', transferAmount: "400", youWillGet: '390',),
+              TransferAmountDetails(fee: 'free', transferAmount: amountToWithdraw, youWillGet: amountToWithdraw,),
               addVerticalSpace(AppSize.s12.h),
               const PolicyWithdrawalWidget(),
               addVerticalSpace(AppSize.s45.h),
@@ -63,7 +71,7 @@ class WithdrawalPreviewPage extends StatelessWidget {
                   height: 44,
                   width: 326,
                   child: ElevatedButton(
-                    onPressed: () => balance.approvedWithdrawal(),
+                    onPressed: () => balance.requestBankWithdraw(amount: int.parse(amountToWithdraw), bankId:  balance.bankAccountSelected!.id, ),
                     child: const Text(
                       "Continue",
                     ),
@@ -77,5 +85,3 @@ class WithdrawalPreviewPage extends StatelessWidget {
     );
   }
 }
-
-

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/add_balance_bank_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/add_recipient_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/verification_add_bank_page.dart';
 import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
 import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
@@ -14,7 +15,11 @@ import '../ui/pages/auth/signUpPage.dart';
 import '../ui/pages/auth/successResetPassword.dart';
 import '../ui/pages/balance_freelancer/add_balane_cash_page.dart';
 import '../ui/pages/balance_freelancer/add_bank_account_page.dart';
+import '../ui/pages/balance_freelancer/choose_office_page.dart';
 import '../ui/pages/balance_freelancer/choose_account_page.dart';
+import '../ui/pages/balance_freelancer/balance_freelancer_page.dart';
+import '../ui/pages/balance_freelancer/choose_recipient_page.dart';
+import '../ui/pages/balance_freelancer/verifcation_add_recipient.dart';
 import '../ui/pages/balance_freelancer/withdrawal_preview_page.dart';
 import '../ui/pages/home_freelancer/home_freelancer_page.dart';
 import '../ui/pages/main_page_freelancer.dart';
@@ -80,7 +85,17 @@ class RoutsGenerate{
       case RouteGenerator.addBalanceCashWithdrawPage:
         return MaterialPageRoute(builder: (_) => AddBalanceCashPage());
       case RouteGenerator.withdrawalPreviewPage:
-        return MaterialPageRoute(builder: (_) => const WithdrawalPreviewPage());
+        return MaterialPageRoute(builder: (_) =>  WithdrawalPreviewPage());
+      case RouteGenerator.balanceFreelancerPage:
+        return MaterialPageRoute(builder: (_) => const BalanceFreelancerPage());
+      case RouteGenerator.chooseOfficePage:
+        return MaterialPageRoute(builder: (_) => const ChooseOfficePage());
+      case RouteGenerator.addRecipientPage:
+        return MaterialPageRoute(builder: (_) => AddRecipientPage());
+      case RouteGenerator.verificationAddRecipientPage:
+        return MaterialPageRoute(builder: (_) => VerificationAddRecipientPage());
+      case RouteGenerator.chooseRecipientPage:
+        return MaterialPageRoute(builder: (_) => ChooseRecipientPage());
         default:
         throw const FormatException("Route not found");
     }

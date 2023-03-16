@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 
-import '../../../../core/model/freelancer/withdrawal_freelancer_model.dart';
+import '../../../../core/model/freelancer/withdrawal_model.dart';
 import '../../../../resources/assets_manager.dart';
 import '../../../../resources/valuesManager.dart';
 import '../../../../routing/navigations.dart';
@@ -16,7 +17,7 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
     required this.withdrawal,
   }) : super(key: key);
 
-  final WithdrawalModel withdrawal;
+  final WithdrawModel withdrawal;
 
   @override
   Widget build(BuildContext context) {
@@ -67,21 +68,21 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
             ],
           ),
           addVerticalSpace(AppSize.s20.h),
-          Text(withdrawal.freelancerName),
+          Text(SharedPrefController().getUser().firstName),
           addVerticalSpace(AppSize.s10.h),
           Row(
             children: [
-              Text(withdrawal.withdrawalFrom),
+              Text(withdrawal.bank == null ? withdrawal.office!.name : withdrawal.bank!.bankName),
               const Spacer(),
-              Text("\$ ${withdrawal.balance}"),
+              Text("\$ ${withdrawal.amount}"),
             ],
           ),
           addVerticalSpace(AppSize.s8.h),
           Row(
             children: [
-              Text("الرمال - مفترق شارع فلسطين مع الشهدا"),
+              Text(withdrawal.bank == null ? withdrawal.office!.address : withdrawal.bank!.bankName),
               const Spacer(),
-              Text(withdrawal.fees)
+              Text(withdrawal.bank == null ? "3.3" : "no fees")
             ],
           ),
           addVerticalSpace(AppSize.s25.h),

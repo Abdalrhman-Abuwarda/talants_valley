@@ -110,7 +110,58 @@ class SharedPrefController {
     return _sharedPreferences.getString("id");
   }
 
+  Future<bool> savaBankAccountToVerify({required String accountName, required String accountNumber, required String bankBranch, required String ledger, required String bankName}) async{
+    await _sharedPreferences.setString("accountName", accountName);
+    await _sharedPreferences.setString("accountNumber", accountNumber);
+    await _sharedPreferences.setString("bankBranch", bankBranch);
+    await _sharedPreferences.setString("bankName", bankName);
+    return await _sharedPreferences.setString("ledger", ledger);
+
+  }
+
+  getBankAccountName() {
+    return _sharedPreferences.getString("accountName");
+  }
+
+  getBankAccountNumber() {
+    return _sharedPreferences.getString("accountNumber");
+  }
+
+  getBankAccountBranch() {
+    return _sharedPreferences.getString("bankBranch");
+  }
+
+  getBankAccountLeger() {
+    return _sharedPreferences.getString("ledger");
+  }
+
+
   Future<bool> logout() {
     return _sharedPreferences.clear();
+  }
+
+  Future<bool> saveAmountToWithdraw({required String amountToWithdraw}) async {
+    return _sharedPreferences.setString("amountToWithdraw", amountToWithdraw);
+  }
+
+  getAmountToWithdraw() {
+    return _sharedPreferences.getString("amountToWithdraw");
+  }
+
+  Future<bool> saveRecipientData({required String mobile, required String idNumber, required String name}) async {
+    await _sharedPreferences.setString("mobileRecipient", mobile);
+    await _sharedPreferences.setString("idNumberRecipient", idNumber);
+    return _sharedPreferences.setString("nameRecipient", name);
+  }
+
+  getNameRecipient() {
+    return _sharedPreferences.getString("nameRecipient");
+  }
+  getIdNumberRecipient (){
+    _sharedPreferences.getString("idNumberRecipient");
+  }
+
+  getMobileRecipient(){
+    _sharedPreferences.getString("mobileRecipient");
   }
 }

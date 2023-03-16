@@ -39,6 +39,10 @@ class IconAssets {
   static const String cashIcon = '$iconPath/cash_icon.svg';
   static const String doneIcon = '$iconPath/done_icon.svg';
   static const String pendingIcon = '$iconPath/pending_icon.svg';
+  static const String warningIcon = '$iconPath/warning.svg';
+  static const String closeIcon = '$iconPath/close_icon.svg';
+  static const String deleteIcon = '$iconPath/delete_icon.svg';
+  static const String pencilIcon = '$iconPath/pencil.svg';
 
 
 }

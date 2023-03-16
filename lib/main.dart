@@ -9,14 +9,17 @@ import 'package:talants_valley/resources/themeManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/add_balance_bank_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/add_recipient_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/choose_office_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/choose_account_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/choose_recipient_page.dart';
 import 'package:talants_valley/ui/splashPage.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/sharedController.dart';
 import 'core/provider/authProvider.dart';
 import 'core/provider/formProvider.dart';
-import 'core/provider/freelancer_provider/balance_freelancer_provider.dart';
+import 'core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import 'core/provider/verificationProvider.dart';
 
 Future<void> main() async {
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MainTeamProvider(), child: const MyApp()),
         ChangeNotifierProvider(create: (_) => UserManagementProvider(), child: const MyApp()),
         ChangeNotifierProvider(create: (_) => GeneralFreelancerProvider(), child: const MyApp()),
-        ChangeNotifierProvider(create: (_) => BalanceFreelancerProvider(), child: const MyApp()),
+        ChangeNotifierProvider(create: (_) => WithdrawFreelancerProvider(), child: const MyApp()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),

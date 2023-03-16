@@ -21,5 +21,15 @@ class Endpoints {
   static const String blockUser = '/team/user/block/';
   static const String editInformationUser = 'team/user/details/';
   static const String changeRole = '/team/user/change-role/';
+  static const String sendCodeAddAccount = 'bank/send-code';
+  static const String addBankAccount = 'bank/add';
+  static const String getBankAccountList = 'bank/listing?offset=0&limit=10';
+  static const String deleteBankAccount = 'bank/delete/';
+  static const String getWithdrawalRequestList = 'withdraw/list?offset=0&limit=10';
+  static const String requestBankWithdraw = 'withdraw/bank';
+  static const String getOfficeList = 'withdraw/office-list?office=0&limit=10';
+  static const String sendCodeRecipient = 'recipient/send-code';
+  static const String addRecipientRecipient = 'recipient/create';
+  static const String getRecipients = 'recipient/list?offset=0&limit=10';
 
 }

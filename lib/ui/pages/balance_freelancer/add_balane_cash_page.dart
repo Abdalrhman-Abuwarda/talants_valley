@@ -2,9 +2,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/core/data/local/sharedController.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/utils/validate.dart';
 
+import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/valuesManager.dart';
 import '../../../routing/router.dart';
@@ -19,14 +24,33 @@ class AddBalanceCashPage extends StatefulWidget {
 class _AddBalanceCashPageState extends State<AddBalanceCashPage> {
   final _formKey = GlobalKey<FormState>();
 
-  bool visible = false;
+  bool isVisible = false;
 
-  String availableMoney = "800.5";
+  TextEditingController _amountController = TextEditingController();
+  String availableMoney = SharedPrefController().getUser().balance.toString();
 
   String userMoney = "";
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _amountController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String? validateAmount(value) {
+      if (value == null || value.trim().isEmpty) {
+        return 'Please enter your amount';
+      }
+      if (value!.toString().contains(".")) {
+        setState(() {
+          isVisible = true;
+        });
+        return "Do not write (.)";
+      }
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -34,140 +58,134 @@ class _AddBalanceCashPageState extends State<AddBalanceCashPage> {
         leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi.popFunction();}, icon: const Icon(Icons.arrow_back_ios_new_outlined),),
       ),
 
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            addVerticalSpace(AppSize.s200.h),
-            const Text(
-              "Amount",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: ColorManager.grayColor),
-            ),
-            addVerticalSpace(AppSize.s8.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
+        child: SingleChildScrollView(
+          child: Consumer<WithdrawFreelancerProvider>(
+            builder: (context, balance, child) => Column(
               children: [
+                addVerticalSpace(AppSize.s120.h),
                 const Text(
-                  "\$ ",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  "Amount",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: ColorManager.grayColor),
                 ),
-                SizedBox(
-                  width: 115,
-                  child: Form(
-                    key: _formKey,
-                    child: TextFormField(
-                      controller: TextEditingController(text: userMoney),
-                      autocorrect: true,
-                      validator: (value) => value!.validateBankAmount(),
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.bold),
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.transparent,
-                        hintText: "000.00",
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(7.r),
-                            borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10.r)),
-                          borderSide: BorderSide.none,
+                addVerticalSpace(AppSize.s8.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "\$ ",
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: AppSize.s160.w,
+                      child: Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          controller: TextEditingController(text: userMoney),
+                          autocorrect: true,
+                          validator: (value) => validateAmount(value),
+                          keyboardType: TextInputType.number,
+                          style: const TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            hintText: "000.00",
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7.r),
+                                borderSide: BorderSide.none,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(AppSize.s10.r)),
+                              borderSide: BorderSide.none,
+                              ),
+                            ),
                           ),
                         ),
                       ),
+            ]
+                    ),
+
+                addVerticalSpace(AppSize.s8.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                     Text(
+                      "Available",
+                      style: Theme.of(context).textTheme.labelMedium!.copyWith(color:  Color(0xFF9E9E9E)),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _amountController.text = availableMoney;
+                          });
+                        },
+                        child: Text("\$ ${SharedPrefController().getUser().balance}"))
+                  ],
+                ),
+                addVerticalSpace(AppSize.s20.h),
+                Visibility(
+                    visible: isVisible,
+                    child: Container(
+                      height: AppSize.s60.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          color: const Color.fromRGBO(253, 248, 248, 1),
+                          border: Border.all(
+                              color: const Color.fromRGBO(255, 209, 209, 1))),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 17,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SvgPicture.asset(IconAssets.warningIcon),
+                            Text(
+                              "  Sorry, cents can't be withdrawn for \n  cash payout.",
+                              style:
+                              Theme.of(context).textTheme.subtitle1!.copyWith( color:  ColorManager.redColor ,fontSize: 15),
+                            ),
+                            const Spacer(),
+                            IconButton(onPressed: (){
+                              setState(() {
+                                isVisible = false;
+                              });
+                            }, icon: SvgPicture.asset(IconAssets.closeIcon, width: 8, height: 8, ),)
+                          ],
+                        ),
+                      ),
+                    )),
+                addVerticalSpace(AppSize.s20.h),
+                SizedBox(
+                  height: 44,
+                  width: 326,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseOfficePage);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(),
+                    child: const Text(
+                      "Continue",
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
-        ]
-                ),
-
-            const SizedBox(
-              height: 8,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Available",
-                  style: TextStyle(
-                      fontSize: 16, color: Color.fromRGBO(140, 140, 140, 1)),
-                ),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        userMoney = availableMoney;
-                      });
-                    },
-                    child: Text("\$$availableMoney"))
+                )
               ],
             ),
-            addVerticalSpace(AppSize.s20.h),
-            // Visibility(
-            //     visible: visible,
-            //     child: Container(
-            //       width: 342,
-            //       height: 58,
-            //       decoration: BoxDecoration(
-            //           borderRadius: BorderRadius.circular(7),
-            //           color: const Color.fromRGBO(253, 248, 248, 1),
-            //           border: Border.all(
-            //               color: const Color.fromRGBO(255, 209, 209, 1))),
-            //       child: Padding(
-            //         padding: const EdgeInsets.only(
-            //           left: 17,
-            //         ),
-            //         child: Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //             SvgPicture.asset("assets/warning.svg"),
-            //             const Text(
-            //               "  Sorry, cents can't be withdrawn for \n  cash payout.",
-            //               style:
-            //               TextStyle(color: Color.fromRGBO(238, 64, 76, 1)),
-            //             ),
-            //             const SizedBox(
-            //               width: 20,
-            //             ),
-            //             IconButton(
-            //               onPressed: () {
-            //                 setState(() {
-            //                   visible = false;
-            //                 });
-            //               },
-            //               icon: SizedBox(
-            //                   height: 15,
-            //                   width: 15,
-            //                   child: SvgPicture.asset("assets/close.svg")),
-            //             )
-            //           ],
-            //         ),
-            //       ),
-            //     )),
-            // const SizedBox(
-            //   height: 20,
-            // ),
-            SizedBox(
-              height: 44,
-              width: 326,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    debugPrint("Done");
-                    ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseBankAccountPage);
-                  }
-                },
-                style: ElevatedButton.styleFrom(),
-                child: const Text(
-                  "Continue",
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            )
-          ],
+          ),
         ),
       ),
+
+
     );
+
+
   }
 }

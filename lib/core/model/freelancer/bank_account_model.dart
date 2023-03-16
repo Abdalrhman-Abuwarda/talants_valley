@@ -1,9 +1,10 @@
-class BankAccountModel{
-  BankAccountModel({required this.accountFullName, required this.accountNumber, required this.branch, required this.ledger, this.isSelected = false});
+class SecondBankModel{
+  SecondBankModel({required this.accountFullName, required this.accountNumber, required this.bankBranch, required this.ledger, this.isSelected = false, this.bankName = "Palestine"});
   final String accountFullName;
   final String accountNumber;
-  final String branch;
+  final String bankBranch;
   final String ledger;
-   bool isSelected;
+  final String bankName;
+  bool isSelected;
 
 }

@@ -25,6 +25,11 @@ class RouteGenerator {
   static const String addBalanceBankWithdrawPage = '/addBalanceBankWithdrawPage';
   static const String addBalanceCashWithdrawPage = '/addBalanceCashWithdrawPage';
   static const String withdrawalPreviewPage = '/withdrawalPreviewPage';
+  static const String balanceFreelancerPage = '/balanceFreelancerPage';
+  static const String chooseOfficePage = '/chooseOfficePage';
+  static const String addRecipientPage = '/addRecipientPage';
+  static const String verificationAddRecipientPage = '/verificationAddRecipientPage';
+  static const String chooseRecipientPage = '/verificationAddRecipientPage';
 
   RouteGenerator._();
 

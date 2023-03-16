@@ -50,22 +50,33 @@ class DioInterceptor extends Interceptor {
         break;
       case DioErrorType.response:
 
-          debugPrint('This is response err $err');
-          debugPrint(err.response!.data);
+        debugPrint("This is the statusCode ${err.response!.statusCode}");
+        debugPrint("${err.response!.statusCode == 400}");
+          debugPrint('This is response error  $err');
+          debugPrint('This is response error message ${err.message}');
+          debugPrint('This is data ${err.response!.data}');
+          debugPrint('This is dataResponse ${err.response}');
+          debugPrint('This is message ${err.message}');
+          debugPrint('This is dataError ${err.error}');
+
+
           if(err.response!.statusCode == 400){
             Helpers.showSnackBar(message: err.response!.data["message"]);
             debugPrint("after Pro this is 400");
           }
           else if(err.response!.statusCode == 404){
             Helpers.showSnackBar(message: err.response!.data["message"]);
+            // Helpers.showSnackBar(message: "not verified address");
           }
           else if(err.response!.statusCode == 401){
             Helpers.showSnackBar(message: err.response!.data["message"]);
           }
           else if(err.response!.statusCode == 422) {
-            Helpers.showSnackBar(message: err.response!.data["message"]);
+            debugPrint("This is error message \n ${err.response!.data["message"].toString()}");
+            Helpers.showSnackBar(message: err.response?.data["message"] ?? "Error");
           }
           debugPrint(err.response!.statusCode.toString());
+          debugPrint(err.response!.data.toString());
 
         break;
       case DioErrorType.other:
@@ -76,4 +87,3 @@ class DioInterceptor extends Interceptor {
     super.onError(err, handler);
   }
 }
-
