@@ -64,25 +64,26 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              Text(withdrawal.createdAt),
+              Text(withdrawal.createdAt.substring(0, 10), ),
             ],
           ),
           addVerticalSpace(AppSize.s20.h),
-          Text(SharedPrefController().getUser().firstName),
           addVerticalSpace(AppSize.s10.h),
           Row(
             children: [
-              Text(withdrawal.bank == null ? withdrawal.office!.name : withdrawal.bank!.bankName),
+              Text(SharedPrefController().getUser().firstName, style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
+              addHorizantelSpace(AppSize.s10.w),
+              Text(withdrawal.bank == null ? withdrawal.office!.name : withdrawal.bank!.bankName , style: Theme.of(context).textTheme.headline4),
               const Spacer(),
-              Text("\$ ${withdrawal.amount}"),
+              Text("\$ ${withdrawal.amount}" , style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: "Segoe UI", color: ColorManager.blackColor),),
             ],
           ),
           addVerticalSpace(AppSize.s8.h),
           Row(
             children: [
-              Text(withdrawal.bank == null ? withdrawal.office!.address : withdrawal.bank!.bankName),
+              Text(withdrawal.bank == null ? withdrawal.office!.id : withdrawal.bank!.accountNumber, style: Theme.of(context).textTheme.headline6, ),
               const Spacer(),
-              Text(withdrawal.bank == null ? "3.3" : "no fees")
+              Text(withdrawal.bank == null ? "3.3" : "no fees",  style: Theme.of(context).textTheme.headline6)
             ],
           ),
           addVerticalSpace(AppSize.s25.h),

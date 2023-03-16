@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/add_balance_bank_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/add_recipient_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/editRecipientPage.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/p_review_withdrawal_cash_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/verificationEditRecipientPage.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/verification_add_bank_page.dart';
 import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
 import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
@@ -85,17 +88,23 @@ class RoutsGenerate{
       case RouteGenerator.addBalanceCashWithdrawPage:
         return MaterialPageRoute(builder: (_) => AddBalanceCashPage());
       case RouteGenerator.withdrawalPreviewPage:
-        return MaterialPageRoute(builder: (_) =>  WithdrawalPreviewPage());
+        return MaterialPageRoute(builder: (_) =>  PreviewWithdrawalBankPage());
       case RouteGenerator.balanceFreelancerPage:
         return MaterialPageRoute(builder: (_) => const BalanceFreelancerPage());
       case RouteGenerator.chooseOfficePage:
         return MaterialPageRoute(builder: (_) => const ChooseOfficePage());
       case RouteGenerator.addRecipientPage:
         return MaterialPageRoute(builder: (_) => AddRecipientPage());
+      case RouteGenerator.chooseRecipientFreelancerPage:
+        return MaterialPageRoute(builder: (_) =>  const ChooseRecipientPage());
+      case RouteGenerator.editRecipientPage:
+        return MaterialPageRoute(builder: (_) =>   EditRecipientPage());
       case RouteGenerator.verificationAddRecipientPage:
         return MaterialPageRoute(builder: (_) => VerificationAddRecipientPage());
-      case RouteGenerator.chooseRecipientPage:
-        return MaterialPageRoute(builder: (_) => ChooseRecipientPage());
+      case RouteGenerator.verificationEditRecipient:
+        return MaterialPageRoute(builder: (_) => VerificationEditRecipientPage());
+      case RouteGenerator.previewCashWithdrawalRecipient:
+        return MaterialPageRoute(builder: (_) => PreviewWithdrawalCashPage());
         default:
         throw const FormatException("Route not found");
     }

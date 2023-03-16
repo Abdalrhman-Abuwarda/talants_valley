@@ -164,11 +164,12 @@ Future<dynamic> sendCodeMobile() async{
   }
 
 //------------------------mainVerificationPageOnPressedFunctions----------------
-  Function()? mainOnPressedFunction({required String userId}) =>
-  userId == "1" ?
-      ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainTeamPage) :
+  Function()? mainOnPressedFunction({required String userId}) {
+    ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);
+  }
+  // userId == "1" ?
+  //     ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainTeamPage) :
 
-  ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);
 
   Function()? idVerifiedPressedFunction() =>
       ServiceNavigation.serviceNavi

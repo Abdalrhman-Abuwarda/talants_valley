@@ -1,14 +1,14 @@
 class WithdrawModel {
-  String id;
-  int amount;
-  BankModel? bank;
-  OfficeModel? office;
-  String typeWithdraw;
-  String status;
-  String createdAt;
-  String updatedAt;
-  String? confirmDocument;
-  List<HistoryModel> history;
+  final String id;
+  final String amount;
+  final BankModel? bank;
+  final OfficeModel? office;
+  final String typeWithdraw;
+  final String status;
+  final String createdAt;
+  final String? updatedAt;
+  final String? confirmDocument;
+  final List<HistoryModel>? history;
 
   WithdrawModel._(
       {required this.id,
@@ -24,7 +24,7 @@ class WithdrawModel {
 
   factory WithdrawModel.formJson(Map<String, dynamic> json) => WithdrawModel._(
       id: json['_id'],
-      amount: json['amount'],
+      amount: json["amount"].toString(),
       bank: json['bank'] == null ? null : BankModel.formJson(json["bank"]),
       office: json['office'] == null ? null : OfficeModel.fromJson(json["office"]),
       typeWithdraw: json['typeWithdraw'],
@@ -40,7 +40,7 @@ class BankModel {
   final String id;
   final String accountName;
   final String accountNumber;
-  final String bankBranch;
+  final String? bankBranch;
   final String bankName;
   final String? ledger;
   final String? currency;

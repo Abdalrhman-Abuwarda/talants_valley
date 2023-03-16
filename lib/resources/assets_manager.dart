@@ -43,6 +43,7 @@ class IconAssets {
   static const String closeIcon = '$iconPath/close_icon.svg';
   static const String deleteIcon = '$iconPath/delete_icon.svg';
   static const String pencilIcon = '$iconPath/pencil.svg';
+  static const String officeIcon = '$iconPath/office_icon.svg';
 
 
 }

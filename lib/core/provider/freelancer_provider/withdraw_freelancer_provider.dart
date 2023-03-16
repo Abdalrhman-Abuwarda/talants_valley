@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/data/repository/freelancer/withdraw_freelancer_repo.dart';
-import 'package:talants_valley/core/model/freelancer/bank_account_model.dart';
 import 'package:talants_valley/core/model/recipient_model.dart';
 import 'package:talants_valley/routing/router.dart';
 
@@ -21,7 +20,6 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
    BankModel? bankAccountSelected ;
    OfficeModel? officeSelected;
    RecipientModel?  recipientSelected;
-   SecondBankModel? mediatorAccount;
   List<BankModel> bankAccounts = [];
   final List<String> branchesBank =["0446 - Naser" , "0454 - Rimal" , "0448 - Nussairat" , "0451 - Main Branch" , "0452 - Khan Younis" , "0453 - Jabalia" ,"0454 - Rafah" ];
   final List<String> ledgersBank = ["3000 - Current" , "3100 - Saving" , "3102 - Saving For Every Citizen"];
@@ -120,7 +118,6 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
       final dataResponse = await WithdrawFreelancerRep().sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger!);
       sharedPref.savaBankAccountToVerify(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger, bankName: "Palestine");
       isVisibleHomeError = false;
-      mediatorAccount = SecondBankModel(accountFullName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger);
       notifyListeners();
       ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.verificationAddBnkPage);
     }
@@ -181,7 +178,7 @@ Future<dynamic> getWithdrawList() async {
 
   Future<dynamic> sendCodeRecipient({required String mobile, required String idNumber, required String name}) async {
     final dataResponse = await WithdrawFreelancerRep().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
-    sharedPref.saveRecipientData(mobile: mobile, idNumber: idNumber, name: name);
+    SharedPrefController().saveRecipientData(mobile: mobile, idNumber: idNumber, name: name);
     notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.verificationAddRecipientPage);
   }
@@ -189,8 +186,8 @@ Future<dynamic> getWithdrawList() async {
 //------------------------------------------------------------------------------
 
  Future<dynamic> verificationAddRecipient({required String code}) async{
-    final dataResponse = await WithdrawFreelancerRep().verificationAddRecipient(code: code, mobile: sharedPref.getMobileRecipient(), idNumber: sharedPref.getIdNumberRecipient(), name: sharedPref.getNameRecipient());
-    ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientPage);
+    final dataResponse = await WithdrawFreelancerRep().verificationAddRecipient(code: code, mobile: SharedPrefController().getMobileRecipient(), idNumber: SharedPrefController().getIdNumberRecipient(), name: SharedPrefController().getNameRecipient());
+    ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);
  }
 
 //------------------------------------------------------------------------------
@@ -201,6 +198,38 @@ Future<dynamic> getWithdrawList() async {
     recipientSelected = recipients.first;
     notifyListeners();
   }
+
+ //-----------------------------------------------------------------------------
+
+  Future<dynamic> deleteRecipient({required String? id}) async {
+    showDialog(
+        context: contextKey,
+        builder: (context) =>  BalanceAlertDialog(
+          content: "Are you sure you want to delete this recipient?",
+          onPressed: () async {
+            final dataResponse = await WithdrawFreelancerRep().deleteRecipientRepo(id: id!);
+            recipients.removeWhere((item) => item.id == id);
+            notifyListeners();
+            ServiceNavigation.serviceNavi.popFunction();
+            Helpers.balanceShowSnackBar(message: "Recipient has been deleted.");
+          },
+        ));
+  }
+
+//------------------------------------------------------------------------------
+
+Future<dynamic> saveUpdateRecipient({required String mobile, required String idNumber, required String name }) async{
+  final dataResponse = await WithdrawFreelancerRep().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
+  SharedPrefController().saveRecipientData(mobile: mobile, idNumber: idNumber, name: name);
+  notifyListeners();
+  ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.verificationEditRecipient);
+}
+
+Future<dynamic> updateRecipient({required String code, required String id, required String mobile , required String idNumber, required String name}) async{
+    final dataResponse = WithdrawFreelancerRep().updateRecipientRepo(id: id, code: code, mobile: mobile, idNumber: idNumber, name: name);
+    Helpers.balanceShowSnackBar(message: "Recipient has been Edited.");
+    ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);
+}
 
   addAmountToWithdraw({required String amount}) {
     sharedPref.saveAmountToWithdraw(amountToWithdraw: amount);

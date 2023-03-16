@@ -29,7 +29,10 @@ class RouteGenerator {
   static const String chooseOfficePage = '/chooseOfficePage';
   static const String addRecipientPage = '/addRecipientPage';
   static const String verificationAddRecipientPage = '/verificationAddRecipientPage';
-  static const String chooseRecipientPage = '/verificationAddRecipientPage';
+  static const String chooseRecipientFreelancerPage = '/chooseRecipientFreelancerPage';
+  static const String editRecipientPage = '/editRecipientPage';
+  static const String verificationEditRecipient = '/verificationEditRecipient';
+  static const String previewCashWithdrawalRecipient = '/previewCashWithdrawalRecipient';
 
   RouteGenerator._();
 

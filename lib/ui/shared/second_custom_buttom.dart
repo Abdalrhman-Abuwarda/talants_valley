@@ -26,7 +26,7 @@ class SecondCustomButton extends StatelessWidget {
             ),
             elevation: 0
         ),
-        onPressed: onPressed, child: Text(text , style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),)
+        onPressed: onPressed, child: Text(text , style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blueColor),)
     );
   }
 }

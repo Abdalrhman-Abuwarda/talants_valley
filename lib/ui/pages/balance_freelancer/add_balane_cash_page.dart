@@ -55,7 +55,7 @@ class _AddBalanceCashPageState extends State<AddBalanceCashPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text("Cash Withdraw"),
-        leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi.popFunction();}, icon: const Icon(Icons.arrow_back_ios_new_outlined),),
+        leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.mainFreelancerPage);}, icon: const Icon(Icons.arrow_back_ios_new_outlined),),
       ),
 
       body: Padding(
@@ -167,6 +167,7 @@ class _AddBalanceCashPageState extends State<AddBalanceCashPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        SharedPrefController().saveAmountToWithdraw(amountToWithdraw: _amountController.text);
                         ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseOfficePage);
                       }
                     },

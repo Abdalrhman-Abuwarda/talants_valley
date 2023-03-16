@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
-import '../../../core/model/freelancer/bank_account_model.dart';
 import '../../../core/model/freelancer/withdrawal_model.dart';
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../../utils/validate.dart';

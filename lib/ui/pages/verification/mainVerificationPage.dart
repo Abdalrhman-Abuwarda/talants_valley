@@ -140,7 +140,7 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
                     addVerticalSpace(AppSize.s66.h),
                     ElevatedButton(
                       onPressed:
-                      dataUser.verifiedMobile && dataUser.verifiedEmail == true ? verification.mainOnPressedFunction(userId: dataUser.id) : null,
+                      dataUser.verifiedMobile && dataUser.verifiedEmail == true ? (){ ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);} : null,
                         child: const Text('Continue'))
                   ],
                 ),

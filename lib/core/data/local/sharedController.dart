@@ -154,6 +154,14 @@ class SharedPrefController {
     return _sharedPreferences.setString("nameRecipient", name);
   }
 
+  Future<bool> saveIdRecipient({required String id}) async {
+    return await _sharedPreferences.setString("idRecipient", id);
+  }
+
+  getIdRecipient() {
+    return _sharedPreferences.getString("idRecipient");
+  }
+
   getNameRecipient() {
     return _sharedPreferences.getString("nameRecipient");
   }
@@ -164,4 +172,5 @@ class SharedPrefController {
   getMobileRecipient(){
     _sharedPreferences.getString("mobileRecipient");
   }
+
 }

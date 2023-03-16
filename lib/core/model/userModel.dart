@@ -6,7 +6,7 @@ class UserModel {
   final String lastName;
   final String email;
   final String? mobile;
-  final int balance;
+  final double balance;
   bool verifiedEmail;
   bool verifiedMobile;
   final VerifiedAddress verifiedAddress;

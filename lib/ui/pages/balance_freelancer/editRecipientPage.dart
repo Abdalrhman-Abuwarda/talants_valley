@@ -7,14 +7,14 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/mainTextFormField.dart';
 import 'package:talants_valley/utils/validate.dart';
 
-class AddRecipientPage extends StatefulWidget {
-  AddRecipientPage({Key? key}) : super(key: key);
+class EditRecipientPage extends StatefulWidget {
+  EditRecipientPage({Key? key}) : super(key: key);
 
   @override
-  State<AddRecipientPage> createState() => _AddRecipientPageState();
+  State<EditRecipientPage> createState() => _EditRecipientPageState();
 }
 
-class _AddRecipientPageState extends State<AddRecipientPage> {
+class _EditRecipientPageState extends State<EditRecipientPage> {
   final TextEditingController _recipientsFullNameController = TextEditingController();
   final TextEditingController _recipientsIdNumberController = TextEditingController();
   final TextEditingController _recipientsPhoneNumberController = TextEditingController();
@@ -34,7 +34,7 @@ class _AddRecipientPageState extends State<AddRecipientPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text("Add Recipient"),
+        title: const Text("Edit Recipient"),
         leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi.popFunction();}, icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
 
@@ -60,11 +60,11 @@ class _AddRecipientPageState extends State<AddRecipientPage> {
                 MainTextFormField(hintText: "Enter ID number", inputType: TextInputType.number, controller: _recipientsIdNumberController, validator: (value) => value!.validateIdNumber()),
                 addVerticalSpace(AppSize.s80.h),
                 Consumer<WithdrawFreelancerProvider>(
-                  builder: (context , balane , child) => ElevatedButton(
+                  builder: (context , balance , child) => ElevatedButton(
                       onPressed: (){
-                        balane.sendCodeRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);
+                        balance.saveUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);
                       }
-                      , child: const Text("Confirm")),
+                      , child: const Text("Save Changes")),
                 )
               ],
             ),

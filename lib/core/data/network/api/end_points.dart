@@ -31,5 +31,7 @@ class Endpoints {
   static const String sendCodeRecipient = 'recipient/send-code';
   static const String addRecipientRecipient = 'recipient/create';
   static const String getRecipients = 'recipient/list?offset=0&limit=10';
+  static const String deleteRecipient = 'recipient/delete/';
+  static const String updateRecipient = '/recipient/edit/';
 
 }

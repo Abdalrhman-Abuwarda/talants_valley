@@ -93,11 +93,12 @@ class WithdrawFreelancerRep{
       "mobile" : "+970597039224",
       "idNumber" : "1234567090",
       "name" : "Heba Skhail"
+
+    }
       // "code" : code,
       // "mobile" : "+970597039225",
       // "idNumber" : idNumber,
       // "name" : name,
-    }
     );
     debugPrint("This is verificationAddRecipient response in repo \n $response");
     debugPrint("This is verificationAddRecipient response in repo \n ${response.data}");
@@ -111,4 +112,22 @@ class WithdrawFreelancerRep{
     final List<RecipientModel> recipients = dataList.map((e) => RecipientModel.fromJson(e)).toList();
     return recipients;
   }
+
+  Future<dynamic> deleteRecipientRepo({required String id}) async {
+    final response = await DioClient(dio).delete("${Endpoints.deleteRecipient}$id");
+    debugPrint("This is deleteRecipientRepo response in repo \n $response");
+    debugPrint("This is deleteRecipientRepo in repo \n ${response.data["message"]}");
+  }
+
+  Future<dynamic> updateRecipientRepo ({required String id, required String code, required String mobile , required String idNumber, required String name}) async  {
+    final response = await DioClient(dio).put("${Endpoints.updateRecipient}$id" , data:
+    {
+      "code" : code,
+      "mobile" : "+972592426177",
+      "idNumber" : "21515151511",
+      "name" : "عبدالرحمن ماجد أبووردة"
+    }
+    );
+  }
+
 }

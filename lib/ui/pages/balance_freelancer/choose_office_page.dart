@@ -35,7 +35,7 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
         title: const Text("Cash"),
         backgroundColor: Colors.transparent,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.addBalanceCashWithdrawPage);},
             icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
       body: Padding(
@@ -71,7 +71,9 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
                             style: TextButton.styleFrom(
                               padding: const EdgeInsets.all(0),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.editRecipientPage);
+                            },
                             child: Text(
                               "Edit",
                               style: TextStyle(fontSize: 12.sp),
@@ -79,17 +81,18 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
                       ],
                     ),
                     ChooseRecipientCard(
-                      onTap: () {ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientPage);},
+                      onTap: () {ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);}, recipient: balance.recipientSelected,
                     ),
                     // addVerticalSpace(AppSize.s8.h),
                     Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.addRecipientPage);},
+                            onPressed: () {ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.editRecipientPage);},
                             child: const Text("+ Add recipient"))),
                     addVerticalSpace(AppSize.s70.h),
                     ElevatedButton(
-                        onPressed: () {}, child: const Text("Continue"))
+                        onPressed: () {ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.previewCashWithdrawalRecipient);},
+                        child: const Text("Continue"))
                   ],
                 ),
         ),

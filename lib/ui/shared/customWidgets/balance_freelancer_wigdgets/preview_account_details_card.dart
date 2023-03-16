@@ -7,7 +7,8 @@ import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
 
 class PreviewAccountDetailsCard extends StatelessWidget {
-  PreviewAccountDetailsCard({
+  const PreviewAccountDetailsCard({
+    required this.assetIcon,
     required this.accountName,
     required this.accountNumber,
     required this.bankName,
@@ -17,6 +18,7 @@ class PreviewAccountDetailsCard extends StatelessWidget {
   final String accountName;
   final String accountNumber;
   final String bankName;
+  final String assetIcon;
 
 
   @override
@@ -41,7 +43,7 @@ class PreviewAccountDetailsCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  IconAssets.bankIcon,
+                  assetIcon,
                   height: AppSize.s40.h,
                 ),
                 addHorizantelSpace(AppSize.s20.w),
@@ -50,9 +52,9 @@ class PreviewAccountDetailsCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(children: [
-                      Text(accountName, style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
+                      Text(accountName.substring(0 , 13), style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
                       addHorizantelSpace(AppSize.s8.w),
-                      Text("[$bankName]", overflow: TextOverflow.ellipsis , style: subTitle!.copyWith(color: ColorManager.grayColor),)
+                      Text("[$bankName]", overflow: TextOverflow.ellipsis , style: subTitle!.copyWith(color: ColorManager.grayColor, fontSize: 13),)
                     ]),
                     addVerticalSpace(AppSize.s10.h),
                     Text(accountNumber , style: Theme.of(context).textTheme.labelMedium!.copyWith(color: ColorManager.grayColor),),

@@ -4,9 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
+import 'package:talants_valley/routing/navigations.dart';
+import 'package:talants_valley/routing/router.dart';
 
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../../resources/valuesManager.dart';
+import '../../shared/customWidgets/customElevatedbutton.dart';
+import '../../shared/second_custom_buttom.dart';
 
 class ChooseRecipientPage extends StatefulWidget {
   const ChooseRecipientPage({Key? key}) : super(key: key);
@@ -29,34 +33,57 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text("Recipients"),
-        leading: IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_back_ios_new_outlined)),
+        leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseOfficePage);}, icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Consumer<WithdrawFreelancerProvider>(
-          builder: (context , balance , child) => Column(
-            children: [
-              addVerticalSpace(AppSize.s15.h),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: balance.recipients.length,
-                  itemBuilder: ((context, index) =>
-                      CustomInformationCard(
-                        name: balance.recipients[index].name,
-                        id: balance.recipients[index].idNumber,
-                        select: balance.recipients[index].isSelected,
-                        phone: balance.recipients[index].mobile,
-                        onTap: () {
-                          balance.selectRecipient(idNumber: balance.recipients[index].idNumber);
-                        },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Consumer<WithdrawFreelancerProvider>(
+            builder: (context , balance , child) => Column(
+              children: [
+                addVerticalSpace(AppSize.s15.h),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: balance.recipients.length,
+                    itemBuilder: ((context, index) =>
+                        CustomInformationCard(
+                          onPressedDelete: ()=> balance.deleteRecipient(id: balance.recipients[index].id),
+                          onPressedEdit: (){
+                            ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.editRecipientPage);
+                          },
+                          name: balance.recipients[index].name,
+                          id: balance.recipients[index].idNumber,
+                          select: balance.recipients[index].isSelected,
+                          phone: balance.recipients[index].mobile,
+                          onTap: () {
+                            balance.selectRecipient(idNumber: balance.recipients[index].idNumber);
+                          },
+                        )
 
-                      )
 
-
-                  )
-              )
-            ],
+                    )
+                ),
+                addVerticalSpace(AppSize.s40.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: AppSize.s160.w,
+                      child: SecondCustomButton(text: "Add", onPressed: (){ ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.addRecipientPage);},),
+                    ),
+                    SizedBox(
+                      width: AppSize.s160.w,
+                      child: ElevatedButton(onPressed: (){
+                        ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseOfficePage);
+                      }, child: Text("Select"),),
+                    )
+                  ],
+                ),
+                addVerticalSpace(AppSize.s50.h),
+              ],
+            ),
           ),
         ),
       ),
@@ -65,12 +92,14 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
 }
 
 class CustomInformationCard extends StatelessWidget {
-  const CustomInformationCard({required this.name, this.onTap,required this.id,required this.phone, this.select =false,Key? key}) : super(key: key);
+  const CustomInformationCard({required this.name, this.onTap,required this.id,required this.phone, required this.onPressedEdit, required this.onPressedDelete,this.select =false,Key? key}) : super(key: key);
   final String name;
   final String id;
   final String phone;
   final bool select;
   final Function()? onTap;
+  final void Function()? onPressedDelete;
+  final void Function()? onPressedEdit;
 
 
   @override
@@ -87,9 +116,14 @@ class CustomInformationCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      SvgPicture.asset(IconAssets.deleteIcon),
+
+                      InkWell(
+                        onTap: onPressedDelete,
+                          child: SvgPicture.asset(IconAssets.deleteIcon)),
                       addHorizantelSpace(AppSize.s16.w),
-                      SvgPicture.asset(IconAssets.pencilIcon),
+                      InkWell(
+                        onTap: onPressedEdit,
+                          child: SvgPicture.asset(IconAssets.pencilIcon)),
                     ],
                   ),
                   Text(name,
