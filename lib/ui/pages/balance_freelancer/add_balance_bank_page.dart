@@ -22,7 +22,6 @@ class _AddBalanceBankPageState extends State<AddBalanceBankPage> {
   final _formKey = GlobalKey<FormState>();
   bool visible = false;
   String availableMoney = SharedPrefController().getUser().balance.toString();
-  String userMoney = "";
   final TextEditingController _amountController = TextEditingController();
 
   @override
@@ -121,7 +120,7 @@ class _AddBalanceBankPageState extends State<AddBalanceBankPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        balance.addAmountToWithdraw(
+                        balance.addAmountBankToWithdraw(
                             amount: _amountController.text);
                       }
                     },

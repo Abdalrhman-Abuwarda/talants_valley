@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
@@ -28,6 +29,7 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Balance"),
         backgroundColor: Colors.transparent,
       ),
@@ -38,7 +40,7 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeaderCardBalance(
-                balance: '100',
+                balance: SharedPrefController().getUser().balance,
                 sheetPage: (context) =>  PayoutBottomSheet()),
 
               addVerticalSpace(AppSize.s16.h),

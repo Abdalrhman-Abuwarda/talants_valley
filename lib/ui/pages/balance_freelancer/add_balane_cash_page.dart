@@ -26,10 +26,9 @@ class _AddBalanceCashPageState extends State<AddBalanceCashPage> {
 
   bool isVisible = false;
 
-  TextEditingController _amountController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
   String availableMoney = SharedPrefController().getUser().balance.toString();
 
-  String userMoney = "";
 
   @override
   void dispose() {
@@ -85,7 +84,7 @@ class _AddBalanceCashPageState extends State<AddBalanceCashPage> {
                       child: Form(
                         key: _formKey,
                         child: TextFormField(
-                          controller: TextEditingController(text: userMoney),
+                          controller: _amountController,
                           autocorrect: true,
                           validator: (value) => validateAmount(value),
                           keyboardType: TextInputType.number,
@@ -168,6 +167,7 @@ class _AddBalanceCashPageState extends State<AddBalanceCashPage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         SharedPrefController().saveAmountToWithdraw(amountToWithdraw: _amountController.text);
+                        debugPrint("This is amount ${SharedPrefController().getAmountToWithdraw()}");
                         ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseOfficePage);
                       }
                     },

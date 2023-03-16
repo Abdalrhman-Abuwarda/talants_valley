@@ -89,16 +89,11 @@ class WithdrawFreelancerRep{
   Future<dynamic> verificationAddRecipient({required String code, required String mobile, required String idNumber, required String name}) async {
     final response = await DioClient(dio).post(Endpoints.addRecipientRecipient, data:
     {
-      "code" : "123456",
-      "mobile" : "+970597039224",
-      "idNumber" : "1234567090",
-      "name" : "Heba Skhail"
-
+      "code" : code,
+      "mobile" : "+970597039225",
+      "idNumber" : idNumber,
+      "name" : name
     }
-      // "code" : code,
-      // "mobile" : "+970597039225",
-      // "idNumber" : idNumber,
-      // "name" : name,
     );
     debugPrint("This is verificationAddRecipient response in repo \n $response");
     debugPrint("This is verificationAddRecipient response in repo \n ${response.data}");
@@ -128,6 +123,18 @@ class WithdrawFreelancerRep{
       "name" : "عبدالرحمن ماجد أبووردة"
     }
     );
+  }
+
+  Future<dynamic> requestWithdrawCashRepo({required int amount, required String officeId, required String recipientId}) async {
+    final response = await DioClient(dio).post(Endpoints.requestWithdrawCash, data:
+    {
+      "amount": amount,
+      "officeId": officeId,
+      "recipientId": recipientId
+    });
+    debugPrint("This is withdrawRequestCash response in repo \n $response");
+    debugPrint("This is withdrawRequestCash in repo \n ${response.data}");
+
   }
 
 }

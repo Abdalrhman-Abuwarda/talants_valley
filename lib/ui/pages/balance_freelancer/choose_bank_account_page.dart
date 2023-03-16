@@ -11,13 +11,13 @@ import '../../shared/customWidgets/balance_freelancer_wigdgets/add_bank_widget.d
 import '../../shared/customWidgets/balance_freelancer_wigdgets/bank_account_card.dart';
 import '../../shared/second_custom_buttom.dart';
 
-class ChooseAccountPage extends StatefulWidget {
-  const ChooseAccountPage({Key? key}) : super(key: key);
+class ChooseBankAccountPage extends StatefulWidget {
+  const ChooseBankAccountPage({Key? key}) : super(key: key);
 
   @override
-  State<ChooseAccountPage> createState() => _ChooseAccountPageState();
+  State<ChooseBankAccountPage> createState() => _ChooseBankAccountPageState();
 }
-class _ChooseAccountPageState extends State<ChooseAccountPage> {
+class _ChooseBankAccountPageState extends State<ChooseBankAccountPage> {
 
   @override
   void initState() {

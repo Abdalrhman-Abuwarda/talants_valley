@@ -6,7 +6,7 @@ class UserModel {
   final String lastName;
   final String email;
   final String? mobile;
-  final double balance;
+  final String balance;
   bool verifiedEmail;
   bool verifiedMobile;
   final VerifiedAddress verifiedAddress;
@@ -46,7 +46,7 @@ class UserModel {
       lastName: json['lastName'],
       email: json['email'],
       mobile: json['mobile'],
-      balance: json['balance'],
+      balance: json['balance'].toString(),
       verifiedEmail: json['verifiedEmail'],
       verifiedMobile: json['verifiedMobile'],
       verifiedAddress: VerifiedAddress.fromJson(json['verifiedAddress']),

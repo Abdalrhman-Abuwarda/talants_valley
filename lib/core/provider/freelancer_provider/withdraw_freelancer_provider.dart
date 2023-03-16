@@ -116,7 +116,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
       notifyListeners();
     } else {
       final dataResponse = await WithdrawFreelancerRep().sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger!);
-      sharedPref.savaBankAccountToVerify(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger, bankName: "Palestine");
+      SharedPrefController().savaBankAccountToVerify(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger, bankName: "Palestine");
       isVisibleHomeError = false;
       notifyListeners();
       ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.verificationAddBnkPage);
@@ -126,7 +126,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 //-----------------------------verifyAddBnkPage---------------------------------
 
   Future<dynamic> verifyAddBnkPage({ required String code}) async{
-    final dataResponse = await WithdrawFreelancerRep().verifyAddAccountRepo(accountName: sharedPref.getBankAccountName(), accountNumber: sharedPref.getBankAccountNumber(), bankBranch: sharedPref.getBankAccountBranch(), ledger: sharedPref.getBankAccountLeger(), code: code, bankName: "Palestine");
+    final dataResponse = await WithdrawFreelancerRep().verifyAddAccountRepo(accountName: SharedPrefController().getBankAccountName(), accountNumber: SharedPrefController().getBankAccountNumber(), bankBranch: SharedPrefController().getBankAccountBranch(), ledger: SharedPrefController().getBankAccountLeger(), code: code, bankName: "Palestine");
     disposeTimer();
     Helpers.balanceShowSnackBar(message: "Bank account has been added.");
     ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseBankAccountPage);
@@ -178,15 +178,16 @@ Future<dynamic> getWithdrawList() async {
 
   Future<dynamic> sendCodeRecipient({required String mobile, required String idNumber, required String name}) async {
     final dataResponse = await WithdrawFreelancerRep().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
-    SharedPrefController().saveRecipientData(mobile: mobile, idNumber: idNumber, name: name);
+    sharedPref.saveRecipientData(mobile: mobile, idNumber: idNumber, name: name);
+    debugPrint("This is data Recipient in Shared Pref ${sharedPref.getNameRecipient()} , ${sharedPref.getIdNumberRecipient()} , ${sharedPref.getMobileRecipient()}");
     notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.verificationAddRecipientPage);
   }
 
 //------------------------------------------------------------------------------
 
- Future<dynamic> verificationAddRecipient({required String code}) async{
-    final dataResponse = await WithdrawFreelancerRep().verificationAddRecipient(code: code, mobile: SharedPrefController().getMobileRecipient(), idNumber: SharedPrefController().getIdNumberRecipient(), name: SharedPrefController().getNameRecipient());
+ Future<dynamic> verificationAddRecipient({required String code , required String mobile, required String idNumber, required String name}) async{
+    final dataResponse = await WithdrawFreelancerRep().verificationAddRecipient(code: code, mobile: mobile, idNumber: idNumber, name: name);
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);
  }
 
@@ -220,7 +221,8 @@ Future<dynamic> getWithdrawList() async {
 
 Future<dynamic> saveUpdateRecipient({required String mobile, required String idNumber, required String name }) async{
   final dataResponse = await WithdrawFreelancerRep().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
-  SharedPrefController().saveRecipientData(mobile: mobile, idNumber: idNumber, name: name);
+  sharedPref.saveRecipientData(name: name, mobile: mobile, idNumber: idNumber);
+
   notifyListeners();
   ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.verificationEditRecipient);
 }
@@ -231,8 +233,8 @@ Future<dynamic> updateRecipient({required String code, required String id, requi
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);
 }
 
-  addAmountToWithdraw({required String amount}) {
-    sharedPref.saveAmountToWithdraw(amountToWithdraw: amount);
+  addAmountBankToWithdraw({required String amount}) {
+    SharedPrefController().saveAmountToWithdraw(amountToWithdraw: amount);
     notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseBankAccountPage);
   }
@@ -264,11 +266,33 @@ Future<dynamic> updateRecipient({required String code, required String id, requi
     ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);
   }
 
+  Future<dynamic> requestCashWithdraw({required String amount, required String officeId, required String recipientId}) async{
+    final dataResponse = await WithdrawFreelancerRep().requestWithdrawCashRepo(amount: int.parse(amount), officeId: officeId, recipientId: recipientId);
+    Helpers.balanceShowSnackBar(message: "Wait for the payment to be ready within \n 24 hours.");
+    ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.mainFreelancerPage);
+  }
+
   takeAmountCash(TextEditingController controller){
     controller.text = SharedPrefController().getUser().balance.toString();
     notifyListeners();
   }
 
   showStatusWithdrawal({ required BankModel bankAccount}){
+  }
+
+
+  Future<dynamic> logoutBalance() async {
+     mountUserToWithdrawal  = null;branchSelected = "";
+    ledgerSelected = "";
+    bankAccountSelected  = null;
+    officeSelected = null;
+    recipientSelected = null;
+    bankAccounts = [];
+    withdrawals = [];
+    officeList = [];
+    recipients = [];
+     isVisibleLedgerError = false;
+     isVisibleBranchError = false;
+     notifyListeners();
   }
   }

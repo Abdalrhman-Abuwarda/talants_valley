@@ -166,11 +166,11 @@ class SharedPrefController {
     return _sharedPreferences.getString("nameRecipient");
   }
   getIdNumberRecipient (){
-    _sharedPreferences.getString("idNumberRecipient");
+    return _sharedPreferences.getString("idNumberRecipient");
   }
 
   getMobileRecipient(){
-    _sharedPreferences.getString("mobileRecipient");
+    return _sharedPreferences.getString("mobileRecipient");
   }
 
 }

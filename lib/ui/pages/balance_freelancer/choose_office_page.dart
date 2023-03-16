@@ -81,17 +81,21 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
                       ],
                     ),
                     ChooseRecipientCard(
-                      onTap: () {ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);}, recipient: balance.recipientSelected,
+                      onTap: () {
+                        ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.chooseRecipientFreelancerPage);
+                        }, recipient: balance.recipientSelected,
                     ),
                     // addVerticalSpace(AppSize.s8.h),
                     Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.editRecipientPage);},
+                            onPressed: () {ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.addRecipientPage);},
                             child: const Text("+ Add recipient"))),
                     addVerticalSpace(AppSize.s70.h),
                     ElevatedButton(
-                        onPressed: () {ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.previewCashWithdrawalRecipient);},
+                        onPressed: () {
+                          ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.previewCashWithdrawalRecipient);
+                          },
                         child: const Text("Continue"))
                   ],
                 ),

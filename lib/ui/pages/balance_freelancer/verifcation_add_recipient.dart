@@ -55,7 +55,7 @@ class _VerificationAddRecipientPageState extends State<VerificationAddRecipientP
               futtarButtonText: 'Resend',
               onPressedButton: () {
                 if (formKye.currentState!.validate()) {
-                  balance.verificationAddRecipient(code: _optMobileController.text);
+                  balance.verificationAddRecipient( name: SharedPrefController().getNameRecipient(),code: _optMobileController.text, mobile: SharedPrefController().getMobileRecipient(), idNumber: SharedPrefController().getIdNumberRecipient());
                 }
               },
               onPressedTextButton: () => balance.resendCode(),

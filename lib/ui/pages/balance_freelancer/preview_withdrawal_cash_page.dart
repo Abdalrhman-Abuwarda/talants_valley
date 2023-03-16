@@ -109,7 +109,7 @@ class PreviewWithdrawalCashPage extends StatelessWidget {
                   height: 44,
                   width: 326,
                   child: ElevatedButton(
-                    onPressed: () => balance.requestBankWithdraw(amount: int.parse(amountToWithdraw), bankId:  balance.bankAccountSelected!.id, ),
+                    onPressed: () => balance.requestCashWithdraw(amount: SharedPrefController().getAmountToWithdraw(), officeId: balance.officeSelected!.id, recipientId: balance.recipientSelected!.id ?? ""),
                     child: const Text(
                       "Continue",
                     ),

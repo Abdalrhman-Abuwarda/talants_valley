@@ -9,6 +9,7 @@ import 'package:talants_valley/routing/router.dart';
 
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../../resources/valuesManager.dart';
+import '../../shared/customWidgets/CustomContanerWidget.dart';
 import '../../shared/customWidgets/customElevatedbutton.dart';
 import '../../shared/second_custom_buttom.dart';
 
@@ -33,7 +34,7 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text("Recipients"),
-        leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseOfficePage);}, icon: const Icon(Icons.arrow_back_ios_new_outlined)),
+        leading: IconButton(onPressed: (){ServiceNavigation.serviceNavi.popFunction();}, icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
 
       body: SingleChildScrollView(
@@ -151,23 +152,4 @@ class CustomInformationCard extends StatelessWidget {
     );
   }
 }
-class CustomContainer extends StatelessWidget {
-  const CustomContainer({required this.child,this.select = false, Key? key}) : super(key: key);
-  final Widget child;
-  final bool select;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(7),
-          border:(select)? Border.all(color: ColorManager.blueColor,width: 2):Border.all(color: ColorManager.mainBorderColor,width: 2),
-          color: ColorManager.whiteColor
-      ),
-      child: child,
-
-    );
-  }
-}
