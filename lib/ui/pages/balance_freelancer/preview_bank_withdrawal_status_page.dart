@@ -14,6 +14,7 @@ import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart
 import '../../shared/customWidgets/balance_freelancer_wigdgets/details_status_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_status_bank_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/instruction_bank_withdrawal.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/time_line_widget.dart';
 
 class PreviewBankWithdrawalStatusPage extends StatelessWidget {
   const PreviewBankWithdrawalStatusPage({Key? key}) : super(key: key);
@@ -46,97 +47,7 @@ class PreviewBankWithdrawalStatusPage extends StatelessWidget {
                   accountName: balance.withdrawForPreview!.bank!.accountName,
                   status: balance.withdrawForPreview!.status,
                 ),
-                CustomContainer(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Timeline",
-                      style: textStyle.headline4!
-                          .copyWith(color: ColorManager.blackColor),
-                    ),
-                    addVerticalSpace(AppSize.s12.h),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "7:30 am",
-                              style: textStyle.headline6,
-                            ),
-                            Text(
-                              "Today",
-                              style: textStyle.bodyText1,
-                            ),
-                          ],
-                        ),
-                        Transform.translate(
-                          offset: Offset(0, 5.h),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 4.r,
-                                backgroundColor: ColorManager.blueColor,
-                              ),
-                              SizedBox(
-                                height: AppSize.s40.h,
-                                child: const VerticalDivider(
-                                  thickness: 1,
-                                  color: ColorManager.blueColor,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        addHorizantelSpace(AppSize.s55.w),
-                        Text(
-                          "Requested",
-                          style: textStyle.headline5,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "7:30 am",
-                              style: textStyle.headline6,
-                            ),
-                            Text(
-                              "Today",
-                              style: textStyle.bodyText1,
-                            ),
-                          ],
-                        ),
-                        Transform.translate(
-                          offset: Offset(0, 5.h),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 4.r,
-                                backgroundColor: ColorManager.blueColor,
-                              ),
-                              const VerticalDivider(
-                                thickness: 1,
-                                color: ColorManager.blueColor,
-                              )
-                            ],
-                          ),
-                        ),
-                        addHorizantelSpace(AppSize.s55.w),
-                        Text(
-                          "Requested",
-                          style: textStyle.headline5,
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
+                const TimeLineCardWidget(),
                 DetailsStatusCard(
                   accountName: balance.withdrawForPreview!.bank!.accountName,
                 ),

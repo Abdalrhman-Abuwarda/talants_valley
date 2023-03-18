@@ -14,6 +14,8 @@ import '../../shared/customWidgets/balance_freelancer_wigdgets/header_cash_statu
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_status_bank_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/instruction_bank_withdrawal.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/instruction_cash_withdrawal.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/time_line_widget.dart';
+import '../../shared/customWidgets/main_elevated_button.dart';
 
 class PreviewCashWithdrawalStatusPage extends StatelessWidget {
   const PreviewCashWithdrawalStatusPage({Key? key}) : super(key: key);
@@ -43,51 +45,36 @@ class PreviewCashWithdrawalStatusPage extends StatelessWidget {
                   officeName: balance.withdrawForPreview!.office!.name,
                   status: balance.withdrawForPreview!.status,
                 ),
-                CustomContainer(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Timeline",
-                      style: textStyle.headline4!
-                          .copyWith(color: ColorManager.blackColor),
-                    ),
-                    addVerticalSpace(AppSize.s12.h),
-                    Row(
-                      children: [
-                        Text(
-                          "7:30 am",
-                          style: textStyle.headline6,
-                        ),
-                        addHorizantelSpace(AppSize.s55.w),
-                        Text(
-                          "Requested",
-                          style: textStyle.headline5,
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Today",
-                      style: textStyle.bodyText1,
-                    ),
-                  ],
-                )),
+                const TimeLineCardWidget(),
                 DetailsStatusCard(
                   accountName: balance.withdrawForPreview!.office!.name,
                   forBank: false,
                 ),
                 InstructionsCashWithdrawalWidget(address: balance.withdrawForPreview!.office!.address, officeFees: balance.withdrawForPreview!.office!.fees.toString(), ),
                 addVerticalSpace(AppSize.s20.h),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorManager.whiteColor,
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      "Cancel Withdrawal",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: ColorManager.blackColor),
-                    ))
+                MainElevatedButton(
+                    textColor: ColorManager.blackColor,
+                    onPressed: balance.withdrawForPreview!.status == "Requested" ? () {
+                      balance.cancelWithdraw(
+                          withdrawId: balance.withdrawForPreview!.id) ;
+                    } : (){
+                      balance.confirmWithdraw(id:  balance.withdrawForPreview!.id);
+                    },
+                    isLoading: balance.isLoading,
+                    text: balance.withdrawForPreview!.status == "Requested" ?
+                    "Cancel Withdrawal" : "Confirm Recipient",
+                    isMain: false),
+                Visibility(
+                  visible: balance.withdrawForPreview!.status == "Ready",
+                    child: MainElevatedButton(
+                        textColor: ColorManager.blackColor,
+                        onPressed:  () {
+                          balance.cancelWithdraw(
+                              withdrawId: balance.withdrawForPreview!.id) ;
+                        } ,
+                        isLoading: balance.isLoading,
+                        text: "Cancel Withdrawal",
+                        isMain: false))
               ],
             ),
           ),
@@ -96,5 +83,6 @@ class PreviewCashWithdrawalStatusPage extends StatelessWidget {
     );
   }
 }
+
 
 
