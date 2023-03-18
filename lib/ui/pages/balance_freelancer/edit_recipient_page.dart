@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
-import 'package:talants_valley/ui/shared/customWidgets/mainTextFormField.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart';
 import 'package:talants_valley/utils/validate.dart';
 
 class EditRecipientPage extends StatefulWidget {

@@ -19,8 +19,6 @@ class AuthRepository {
       "email": email,
       "password": password,
     });
-    debugPrint(response.statusCode.toString());
-    // debugPrint(response.data);
     SharedPrefController().saveAccessToken(tocken: response.data["data"]["accessToken"]);
     SharedPrefController().saveRefreshToken(tocken: response.data["data"]["refreshToken"]);
     final user = UserModel.fromJson(response.data["data"]["user"]);
@@ -44,10 +42,7 @@ class AuthRepository {
       "password": password,
       "country": country,
     });
-    debugPrint(response.statusCode.toString());
-    debugPrint(response.data);
     final data = DataModel.fromJson(response.data["data"]);
-    debugPrint("This is user id ${data.user.id}");
     return data;
   }
   
@@ -57,9 +52,7 @@ Future<dynamic> forgetPasswordRepository({required String email}) async{
     final response = await DioClient(dio).post(Endpoints.userForgetPassword, data: {
       "email": email,
     });
-    debugPrint(response.data);
     final userId = response.data["data"]["_id"];
-    debugPrint("This is user id $userId");
     return userId;
 }
 
@@ -70,9 +63,7 @@ Future<dynamic> checkEmailRrpository({required String id, required String verifi
     "_id": id,
     "verificationCode": verificationCode,
   });
-  debugPrint(response.data);
   final recoverToken = response.data["data"]["recoverToken"];
-  debugPrint(recoverToken);
   return recoverToken;
 }
 
@@ -83,7 +74,6 @@ Future<dynamic> createNewPasswordRepository({required String password, required 
       "password": password,
       "recoverToken": recoverToken,
     });
-    debugPrint(response.data);
     return response.data;
 }
 }

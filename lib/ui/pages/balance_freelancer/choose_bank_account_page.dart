@@ -36,28 +36,31 @@ class _ChooseBankAccountPageState extends State<ChooseBankAccountPage> {
             icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
       body: Consumer<WithdrawFreelancerProvider>(
-        builder: (context, balance, child) => SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+        builder: (context, balance, child) => Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 addVerticalSpace(AppSize.s35.h),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: balance.bankAccounts.length,
-                  itemBuilder: (context, index) => BankAccountCardWidget(
-                    accountName: balance.bankAccounts[index].accountName,
-                    accountNumber: balance.bankAccounts[index].accountNumber,
-                    onPressedIcon: () => balance.deleteBankAccount(
-                        bankId: balance.bankAccounts[index].id,),
-                    onTap: () {
-                      balance.selectBankAccount(
-                          accountNumber:
-                              balance.bankAccounts[index].accountNumber);
-                    },
-                    isSelected: balance.bankAccounts[index].isSelected,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.45,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    // physics: const NeverScrollableScrollPhysics(),
+                    itemCount: balance.bankAccounts.length,
+                    itemBuilder: (context, index) => BankAccountCardWidget(
+                      accountName: balance.bankAccounts[index].accountName,
+                      accountNumber: balance.bankAccounts[index].accountNumber,
+                      onPressedIcon: () => balance.deleteBankAccount(
+                          bankId: balance.bankAccounts[index].id,),
+                      onTap: () {
+                        balance.selectBankAccount(
+                            accountNumber:
+                                balance.bankAccounts[index].accountNumber);
+                      },
+                      isSelected: balance.bankAccounts[index].isSelected,
+                    ),
                   ),
                 ),
                 addVerticalSpace(AppSize.s14.h),
@@ -67,12 +70,11 @@ class _ChooseBankAccountPageState extends State<ChooseBankAccountPage> {
                         .pushNamedWidget(RouteGenerator.addBankAccountPage);
                   },
                 ),
-                // Spacer(),
-                balance.bankAccounts.length < 4
-                    ? addVerticalSpace(40)
-                    : balance.bankAccounts.length == 4
-                        ? addVerticalSpace(AppSize.s20.h)
-                        : addVerticalSpace(AppSize.s10.h),
+                // balance.bankAccounts.length < 4
+                //     ? addVerticalSpace(40)
+                //     : balance.bankAccounts.length == 4
+                //         ? addVerticalSpace(AppSize.s20.h)
+                //         : addVerticalSpace(AppSize.s10.h),
                 Visibility(
                     visible: balance.isVisibleHomeError,
                     child: Text(
@@ -88,13 +90,14 @@ class _ChooseBankAccountPageState extends State<ChooseBankAccountPage> {
                     child: const Text("Continue")),
                 addVerticalSpace(AppSize.s16.h),
                 SecondCustomButton(
+                  isLoading: false,
                   text: "Add Account",
                   onPressed: () {
                     ServiceNavigation.serviceNavi
                         .pushNamedWidget(RouteGenerator.addBankAccountPage);
                   },
                 ),
-                addVerticalSpace(AppSize.s60.h),
+                addVerticalSpace(AppSize.s10.h),
               ],
             ),
           ),

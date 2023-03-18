@@ -43,6 +43,7 @@ class _VerificationAddBnkPageState extends State<VerificationAddBnkPage> {
         leading: IconButton(
           onPressed: () {
             balance.disposeTimer();
+            ServiceNavigation.serviceNavi.popFunction();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -52,6 +53,7 @@ class _VerificationAddBnkPageState extends State<VerificationAddBnkPage> {
           key: formKye,
           child:
                 CustomOptPage(
+                  isLoading: balance.isLoading,
                   withImage: true,
                   pathImage: ImageAssets.mobileSuccessImage,
                   optController: _optMobileController,

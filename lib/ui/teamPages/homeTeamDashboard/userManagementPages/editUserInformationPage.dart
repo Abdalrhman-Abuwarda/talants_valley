@@ -12,8 +12,8 @@ import '../../../../routing/navigations.dart';
 import '../../../../routing/router.dart';
 import '../../../../utils/validate.dart';
 import '../../../shared/customWidgets/authWigdgets/phoneNumberTextField.dart';
-import '../../../shared/customWidgets/customDropdownWidget.dart';
-import '../../../shared/customWidgets/mainTextFormField.dart';
+import '../../../shared/customWidgets/custom_dropdown_widget.dart';
+import '../../../shared/customWidgets/main_text_form_field.dart';
 
 class EditUserInformation extends StatefulWidget {
   EditUserInformation({Key? key}) : super(key: key);

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
 import '../../../core/model/freelancer/withdrawal_model.dart';
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
@@ -11,7 +12,7 @@ import '../../shared/customWidgets/balance_freelancer_wigdgets/branch_bottom_she
 import '../../shared/customWidgets/balance_freelancer_wigdgets/disable_card_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/ledger_botton_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/pressed_card_widget.dart';
-import '../../shared/customWidgets/mainTextFormField.dart';
+import '../../shared/customWidgets/main_text_form_field.dart';
 import '../../shared/second_custom_buttom.dart';
 
 class AddBankAccountPage extends StatefulWidget {
@@ -96,16 +97,20 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                       visible: balance.isVisibleLedgerError,
                         child: Text("     Please choose a ledger", style: TextStyle(color: ColorManager.redColor, fontSize: 12.sp),)),
                     addVerticalSpace(AppSize.s40.h),
-                    ElevatedButton(onPressed: (){
-                      if(formKey.currentState!.validate()){
-                        balance.sendCodeAddBankAccount(
-                             accountName: _fullNameController.text, accountNumber: _accountNumberController.text, bankBranch: balance.branchSelected, ledger: balance.ledgerSelected
-                        );
-                      }
-                    },
-                        child: const Text("Confirm")),
+                    MainElevatedButton(textColor: ColorManager.whiteColor,
+                        onPressed: (){
+                          if(formKey.currentState!.validate()){
+                            balance.sendCodeAddBankAccount(
+                                accountName: _fullNameController.text, accountNumber: _accountNumberController.text, bankBranch: balance.branchSelected, ledger: balance.ledgerSelected
+                            );
+                          }
+                        },
+                        isLoading: balance.isLoading,
+                        text: "Confirm", isMain: true),
+
                     addVerticalSpace(AppSize.s16.h),
-                    SecondCustomButton(text: "Back", onPressed: () {Navigator.pop(context);},)
+                    SecondCustomButton( isLoading: balance.isLoading,
+                      text: "Back", onPressed: () {Navigator.pop(context);},)
               ],
           ),
             ),

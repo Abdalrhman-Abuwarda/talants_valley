@@ -33,7 +33,7 @@ class SuccessVerifiedEmailPage extends StatelessWidget {
       body: Consumer<VerificationProvider>(
         builder: (context, verification, child) => CustomSuccessPage(
           caption: 'You Verified Your Email Successfully',
-          textButtom: 'Continue',
+          textButton: 'Continue',
           onPressed: () {
             verification.getUser();
           },

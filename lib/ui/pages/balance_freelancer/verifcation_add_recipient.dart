@@ -45,6 +45,7 @@ class _VerificationAddRecipientPageState extends State<VerificationAddRecipientP
             key: formKye,
             child:
             CustomOptPage(
+              isLoading: balance.isLoading,
               withImage: true,
               pathImage: ImageAssets.mobileSuccessImage,
               optController: _optMobileController,
@@ -58,7 +59,10 @@ class _VerificationAddRecipientPageState extends State<VerificationAddRecipientP
                   balance.verificationAddRecipient( name: SharedPrefController().getNameRecipient(),code: _optMobileController.text, mobile: SharedPrefController().getMobileRecipient(), idNumber: SharedPrefController().getIdNumberRecipient());
                 }
               },
-              onPressedTextButton: () => balance.resendCode(),
+              onPressedTextButton: () => (){
+                balance.resendCode();
+                balance.verificationAddRecipient( name: SharedPrefController().getNameRecipient(),code: _optMobileController.text, mobile: SharedPrefController().getMobileRecipient(), idNumber: SharedPrefController().getIdNumberRecipient());
+              },
               validator: (value) => Validate.validateCode(value),
               minutes: balance.minutes.toString(),
               seconds: balance.seconds.toString(),

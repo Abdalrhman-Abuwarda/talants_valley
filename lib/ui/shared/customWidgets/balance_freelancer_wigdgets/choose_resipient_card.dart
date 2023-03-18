@@ -6,20 +6,29 @@ import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
 
 class ChooseRecipientCard extends StatelessWidget {
-  const ChooseRecipientCard({
-    required this.onTap,
+   ChooseRecipientCard({
     required this.recipient,
+    required this.sheetPage,
     Key? key,
   }) : super(key: key);
 
   final RecipientModel? recipient;
-  final void Function()? onTap;
+  Widget Function(BuildContext) sheetPage;
+
 
   @override
   Widget build(BuildContext context) {
     return
       InkWell(
-      onTap: onTap,
+      onTap: () => showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(23.r),
+              topRight: Radius.circular(23.r)),
+        ),
+        context: context,
+        builder: sheetPage,),
       child: Container(
         padding: EdgeInsets.symmetric(
             horizontal: AppPadding.p16.w, vertical: AppPadding.p12.h),
@@ -42,13 +51,9 @@ class ChooseRecipientCard extends StatelessWidget {
               width: AppSize.s250.w,
               child: Column(
                 children: [
-                  Row(
-                    children: [
-
-                      // const Spacer(),?
-                      Text(recipient!.name , overflow: TextOverflow.ellipsis , style: Theme.of(context).textTheme.labelMedium!.copyWith(color: ColorManager.blackColor),),
-                    ],
-                  ),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(recipient!.name , overflow: TextOverflow.ellipsis , style: Theme.of(context).textTheme.labelMedium!.copyWith(color: ColorManager.blackColor),)),
                   addVerticalSpace(AppSize.s8.h),
                   Row(
                     children: [

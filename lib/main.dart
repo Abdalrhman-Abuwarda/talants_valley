@@ -13,7 +13,8 @@ import 'package:talants_valley/ui/pages/balance_freelancer/add_recipient_page.da
 import 'package:talants_valley/ui/pages/balance_freelancer/choose_office_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/choose_bank_account_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/choose_recipient_page.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/withdrawal_preview_status_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/preview_bank_withdrawal_status_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/preview_cash_withdrawal_status_page.dart';
 import 'package:talants_valley/ui/splashPage.dart';
 import 'package:talants_valley/utils/helper.dart';
 
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Talants Valley',
               theme: ThemeManager.lightTheme,
-              home: const WithdrawalPreviewStatusPage() ,
+              home: const SplashPage() ,
               navigatorKey: ServiceNavigation.serviceNavi.navKey,
               onGenerateRoute: RoutsGenerate.generateRoute,
             ),

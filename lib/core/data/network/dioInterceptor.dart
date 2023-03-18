@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/core/provider/authProvider.dart';
 
 import '../../../utils/helper.dart';
+import '../../provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../local/sharedController.dart';
 
 class DioInterceptor extends Interceptor {
@@ -9,19 +12,25 @@ class DioInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // if(options.headers.containsKey("Authorization")){
     options.headers['Authorization'] = "Bearer ${SharedPrefController().accessToken}";
     super.onRequest(options, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
+
+    Provider.of<AuthProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
+    Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
+    debugPrint("This is withdrawRequestCash response in repo \n $response");
+    debugPrint("This is withdrawRequestCash in repo \n ${response.data}");
     // TODO: implement onResponse
     super.onResponse(response, handler);
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
+    Provider.of<AuthProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
+    Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
 
     switch(err.type){
       case DioErrorType.connectTimeout:

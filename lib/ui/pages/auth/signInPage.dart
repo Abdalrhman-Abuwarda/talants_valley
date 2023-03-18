@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
@@ -12,8 +13,7 @@ import '../../../utils/helper.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customWidgets/authWigdgets/authFooterPage.dart';
 import '../../shared/customWidgets/authWigdgets/authHeaderPage.dart';
-import '../../shared/customWidgets/mainTextFormField.dart';
-
+import '../../shared/customWidgets/main_text_form_field.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -36,6 +36,7 @@ class _SignInPageState extends State<SignInPage> {
     _emailController.dispose();
     _passwordController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +51,9 @@ class _SignInPageState extends State<SignInPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   addVerticalSpace(AppSize.s30.h),
-                  const HeadarAuth(heightSpace: 100,),
+                  const HeadarAuth(
+                    heightSpace: 100,
+                  ),
                   addVerticalSpace(55.h),
                   Text(
                     'Email',
@@ -68,52 +71,58 @@ class _SignInPageState extends State<SignInPage> {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   Consumer<AuthProvider>(
-                    builder: (context, auth, child)=>
-                        MainTextFormField(
-                          hintText: 'Enter your password',
-                          isPassword: auth.isPassword,
-                          inputType: TextInputType.visiblePassword,
-                          controller: _passwordController,
-                          validator: (value) => Validate.validatePassword(value),
-                          suffixPressed: (){auth.suffixPressed();},
-                          suffixIcon:
-                          auth.isPassword ? Icons.visibility : Icons.visibility_off,
-                        )
-                  ),
-
-                  Row(
-                    children: [
-                      Expanded(child: SizedBox()),
-                      // addHorizantelSpace(160.w),
-                      TextButton(
-                        onPressed: () {
-                          ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.forgetPassword);
-                        },
-                        child:  Text(
-                          "Forget Password?",
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
+                      builder: (context, auth, child) => MainTextFormField(
+                            hintText: 'Enter your password',
+                            isPassword: auth.isPassword,
+                            inputType: TextInputType.visiblePassword,
+                            controller: _passwordController,
+                            validator: (value) =>
+                                Validate.validatePassword(value),
+                            suffixPressed: () {
+                              auth.suffixPressed();
+                            },
+                            suffixIcon: auth.isPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          )),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        ServiceNavigation.serviceNavi.pushNamedWidget(
+                            RouteGenerator.forgetPassword);
+                      },
+                      child: Text(
+                        "Forget Password?",
+                        style: Theme.of(context).textTheme.subtitle1,
                       ),
-                    ],
+                    ),
                   ),
                   addVerticalSpace(60.h),
                   Consumer<AuthProvider>(
-                    builder: (context, auth, child) =>
-                        ElevatedButton(
-                            onPressed: (){
-                              // print("before the if");
-                              if (formKye.currentState!.validate()){
-                                // print("after the if");
-                                auth.LoginUser(_emailController.text, _passwordController.text);
-                                // print("Fuckkkkkk");
+                      builder: (context, auth, child) =>
+                          MainElevatedButton(
+                            textColor: ColorManager.whiteColor,
+                            onPressed: () {
+                              if (formKye.currentState!.validate()) {
+                                auth.loginUser(_emailController.text,
+                                    _passwordController.text);
                               }
                             },
-                            child: const Text('Sign In')),
-                  ),
+                            isLoading: auth.isLoading,
+                            text: 'Sign In',
+                            isMain: true,
+                          )
+                      ),
                   addVerticalSpace(38.h),
-                  FooterAuth(text: "Don't have an account?", textButtom: 'Sign Up', onPressed: () {
-                    ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.signUpPage);
-                  },)
+                  FooterAuth(
+                    text: "Don't have an account?",
+                    textButtom: 'Sign Up',
+                    onPressed: () {
+                      ServiceNavigation.serviceNavi
+                          .pushNamedWidget(RouteGenerator.signUpPage);
+                    },
+                  )
                 ],
               ),
             ),

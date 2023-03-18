@@ -9,8 +9,8 @@ import 'package:talants_valley/routing/router.dart';
 
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../../resources/valuesManager.dart';
-import '../../shared/customWidgets/CustomContanerWidget.dart';
-import '../../shared/customWidgets/customElevatedbutton.dart';
+import '../../shared/customWidgets/custom_contaner_widget.dart';
+import '../../shared/customWidgets/custom_elevated_button.dart';
 import '../../shared/second_custom_buttom.dart';
 
 class ChooseRecipientPage extends StatefulWidget {
@@ -41,44 +41,46 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Consumer<WithdrawFreelancerProvider>(
-            builder: (context , balance , child) => Column(
+            builder: (context , balance , child) => balance.isLoading ? const Center(child: CircularProgressIndicator(),) : Column(
               children: [
                 addVerticalSpace(AppSize.s15.h),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: balance.recipients.length,
-                    itemBuilder: ((context, index) =>
-                        CustomInformationCard(
-                          onPressedDelete: ()=> balance.deleteRecipient(id: balance.recipients[index].id),
-                          onPressedEdit: (){
-                            ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.editRecipientPage);
-                          },
-                          name: balance.recipients[index].name,
-                          id: balance.recipients[index].idNumber,
-                          select: balance.recipients[index].isSelected,
-                          phone: balance.recipients[index].mobile,
-                          onTap: () {
-                            balance.selectRecipient(idNumber: balance.recipients[index].idNumber);
-                          },
-                        )
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.65,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: balance.recipients.length,
+                      itemBuilder: ((context, index) =>
+                          CustomInformationCard(
+                            onPressedDelete: ()=> balance.deleteRecipient(id: balance.recipients[index].id),
+                            onPressedEdit: (){
+                              ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.editRecipientPage);
+                            },
+                            name: balance.recipients[index].name,
+                            id: balance.recipients[index].idNumber,
+                            select: balance.recipients[index].isSelected,
+                            phone: balance.recipients[index].mobile,
+                            onTap: () {
+                              balance.selectRecipient(idNumber: balance.recipients[index].idNumber);
+                            },
+                          )
 
 
-                    )
+                      )
+                  ),
                 ),
-                addVerticalSpace(AppSize.s40.h),
+                addVerticalSpace(AppSize.s16.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: AppSize.s160.w,
-                      child: SecondCustomButton(text: "Add", onPressed: (){ ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.addRecipientPage);},),
+                      child: SecondCustomButton(isLoading: false,
+                      text: "Add", onPressed: (){ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.addRecipientPage);} ,),
                     ),
                     SizedBox(
                       width: AppSize.s160.w,
-                      child: ElevatedButton(onPressed: (){
-                        ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseOfficePage);
-                      }, child: Text("Select"),),
+                      child: ElevatedButton(onPressed:balance.checkSelectRecipients ,
+                        child: const Text("Select"),),
                     )
                   ],
                 ),

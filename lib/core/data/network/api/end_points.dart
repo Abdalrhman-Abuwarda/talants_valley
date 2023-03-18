@@ -34,5 +34,8 @@ class Endpoints {
   static const String deleteRecipient = 'recipient/delete/';
   static const String updateRecipient = '/recipient/edit/';
   static const String requestWithdrawCash = 'withdraw/request-cash';
+  static const String getWithdrawDetails = 'withdraw/details/';
+  static const String cancelWithdraw = 'withdraw/cancel/';
+  static const String confirmWithdraw = 'withdraw/confirm-payout/';
 
 }

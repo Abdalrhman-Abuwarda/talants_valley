@@ -7,14 +7,14 @@ import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
-import 'package:talants_valley/ui/shared/customWidgets/customDropdownWidget.dart';
-import 'package:talants_valley/ui/shared/customWidgets/mainTextFormField.dart';
+import 'package:talants_valley/ui/shared/customWidgets/custom_dropdown_widget.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart';
 
 import '../../../core/model/dropdownModel.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
-import '../../shared/customWidgets/customElevatedbutton.dart';
+import '../../shared/customWidgets/custom_elevated_button.dart';
 import '../../shared/customWidgets/verificationWidgets/customButtonWhenUploudFile.dart';
 
 class VerificationIDPage extends StatefulWidget {

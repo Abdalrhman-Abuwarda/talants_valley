@@ -4,14 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../resources/colors_manager.dart';
 
 class SecondCustomButton extends StatelessWidget {
-  const SecondCustomButton({
+   SecondCustomButton({
     required this.text,
     required this.onPressed,
+    required this.isLoading,
     Key? key,
   }) : super(key: key);
 
   final String text;
   final void Function()? onPressed;
+  bool isLoading;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -26,7 +28,7 @@ class SecondCustomButton extends StatelessWidget {
             ),
             elevation: 0
         ),
-        onPressed: onPressed, child: Text(text , style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blueColor),)
+        onPressed: isLoading ? null : onPressed, child: isLoading ? const CircularProgressIndicator() : Text(text , style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blueColor),)
     );
   }
 }

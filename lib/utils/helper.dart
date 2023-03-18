@@ -26,7 +26,6 @@ class Helpers {
     debugPrint("After Snak");
   }
 
-
   static balanceShowSnackBar({required String message}) {
     debugPrint("ssss");
     scaffoldKey.currentState?.showSnackBar(SnackBar(
@@ -35,13 +34,24 @@ class Helpers {
         children: [
           SvgPicture.asset(IconAssets.doneIcon),
           addHorizantelSpace(AppSize.s10.w),
-          Text(message , overflow: TextOverflow.ellipsis , style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, fontFamily: "Segoe UI" , color: ColorManager.blackColor),)
+          Text(
+            message,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                fontFamily: "Segoe UI",
+                color: ColorManager.blackColor),
+          )
         ],
       ),
       duration: const Duration(seconds: 3),
       backgroundColor: const Color(0xFFE9F7E7),
       elevation: 5,
-      margin: EdgeInsetsDirectional.only(bottom: AppSize.s250.h, start: AppPadding.p25.w , end: AppPadding.p25.w),
+      margin: EdgeInsetsDirectional.only(
+          bottom: AppSize.s250.h,
+          start: AppPadding.p25.w,
+          end: AppPadding.p25.w),
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: Color(0xFF70B668), width: 1),
         borderRadius: BorderRadius.circular(3.r),
@@ -51,8 +61,6 @@ class Helpers {
     debugPrint("After Snack");
   }
 }
-
-
 
 class alertDialog extends StatelessWidget {
   alertDialog({super.key, required this.content, required this.onPressed});
@@ -117,14 +125,15 @@ class alertDialog extends StatelessWidget {
 }
 
 class BalanceAlertDialog extends StatelessWidget {
-  BalanceAlertDialog({
-    required this.content,
-    required this.onPressed,
-    Key? key
-  }) : super(key: key);
+   BalanceAlertDialog(
+      {required this.content,
+        required this.isLoading,
+        required this.onPressed, Key? key})
+      : super(key: key);
 
   final String content;
   final Function() onPressed;
+  bool isLoading ;
 
   @override
   Widget build(BuildContext context) {
@@ -136,44 +145,62 @@ class BalanceAlertDialog extends StatelessWidget {
         child: Stack(children: [
           Align(
             alignment: Alignment.topRight,
-            child: IconButton(onPressed: (){ServiceNavigation.serviceNavi.popFunction();}, icon: const Icon(Icons.cancel, size: 20,)),
+            child: IconButton(
+                onPressed: () {
+                  ServiceNavigation.serviceNavi.popFunction();
+                },
+                icon: const Icon(
+                  Icons.cancel,
+                  size: 20,
+                )),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: AppPadding.p22.w, vertical: AppPadding.p32.h),
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 addVerticalSpace(AppSize.s5.h),
-               Text(content, style: Theme.of(context).textTheme.subtitle1,),
+                Text(
+                  content,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
                 addVerticalSpace(AppSize.s25.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      height: AppSize.s35.h,
+                        height: AppSize.s35.h,
                         width: AppSize.s120.w,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               elevation: 0,
-                                side: const BorderSide(
-                                    color: ColorManager.mainBorderColor, width: 1),
-                                backgroundColor: ColorManager.whiteColor,
-                                ),
-                            onPressed: (){ ServiceNavigation.serviceNavi.popFunction();}, child: Text("Cancel" , style: Theme.of(context).textTheme.bodyText2,))
-                    ),
-              SizedBox(
-                height: AppSize.s35.h,
-                width: AppSize.s120.w,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: ColorManager.redColor,
-                    ),
-                    onPressed: onPressed, child: Text("Delete" , style: Theme.of(context).textTheme.bodyText2,)),
-              )
-
+                              side: const BorderSide(
+                                  color: ColorManager.mainBorderColor,
+                                  width: 1),
+                              backgroundColor: ColorManager.whiteColor,
+                            ),
+                            onPressed: () {
+                              ServiceNavigation.serviceNavi.popFunction();
+                            },
+                            child: Text(
+                              "Cancel",
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ))),
+                    SizedBox(
+                      height: AppSize.s35.h,
+                      width: AppSize.s120.w,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: ColorManager.redColor,
+                            disabledBackgroundColor: ColorManager.redColor.withOpacity(0.4)
+                          ),
+                          onPressed: isLoading ? null : onPressed ,
+                          child: isLoading ? const CircularProgressIndicator() : Text(
+                            "Delete",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          )),
+                    )
                   ],
                 )
               ],

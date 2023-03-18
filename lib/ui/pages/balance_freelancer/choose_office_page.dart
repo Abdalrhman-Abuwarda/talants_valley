@@ -9,6 +9,7 @@ import 'package:talants_valley/routing/router.dart';
 
 import '../../shared/customWidgets/balance_freelancer_wigdgets/chooseOfficeCard.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_office_button_sheet.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_recipient_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_resipient_card.dart';
 
 class ChooseOfficePage extends StatefulWidget {
@@ -22,8 +23,8 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<WithdrawFreelancerProvider>(context, listen: false)
-        .getOfficeList();
+    Provider.of<WithdrawFreelancerProvider>(context, listen: false).checkOfficeList();
+    Provider.of<WithdrawFreelancerProvider>(context, listen: false).getRecipients();
     super.initState();
   }
 
@@ -72,7 +73,7 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
                               padding: const EdgeInsets.all(0),
                             ),
                             onPressed: () {
-                              ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.editRecipientPage);
+                              ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.chooseRecipientFreelancerPage);
                             },
                             child: Text(
                               "Edit",
@@ -81,9 +82,8 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
                       ],
                     ),
                     ChooseRecipientCard(
-                      onTap: () {
-                        ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.chooseRecipientFreelancerPage);
-                        }, recipient: balance.recipientSelected,
+
+                      recipient: balance.recipientSelected, sheetPage: (context ) => const ChooseRecipientButtonSheet(),
                     ),
                     // addVerticalSpace(AppSize.s8.h),
                     Align(

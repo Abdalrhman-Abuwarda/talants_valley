@@ -61,6 +61,7 @@ class _VerificationEmailPageState extends State<VerificationEmailPage> {
         child: Consumer<VerificationProvider>(
           builder: (context, verification, child) =>
               CustomOptPage(
+                isLoading: false,
                 optController: _optController,
                 caption: "We have sent you a verification code to your email ${SharedPrefController().getUser().email.replaceRange(0, 3, "****")}",
                 withImage: true,

@@ -17,9 +17,4 @@ static const Color grayColor = Color(0xFF8C8C8C);
 static const Color unselectedAppBarColor = Color(0xFFBEC2C6);
 static const Color yellowColor = Color(0xFFDAA545);
 static const Color disableIconColor = Color(0xFF707070);
-// static const Color secondaryButtomColor = Color(0xFF1F272E);
-// static const Color backgroundColorMainPage = Color(0xFFF7F7F7);
-// static const Color backgroundColorIntroPage = Color(0xFFFFFFFF);
-// static const Color secondaryGreenColor = Color(0xFFD5DED4);
-// static const Color grayWhite = Color(0xFFECE9F1);
 }

@@ -11,9 +11,9 @@ import '../../../resources/colors_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
-import '../../shared/customWidgets/customElevatedbutton.dart';
-import '../../shared/customWidgets/customDropdownWidget.dart';
-import '../../shared/customWidgets/mainTextFormField.dart';
+import '../../shared/customWidgets/custom_elevated_button.dart';
+import '../../shared/customWidgets/custom_dropdown_widget.dart';
+import '../../shared/customWidgets/main_text_form_field.dart';
 import '../../shared/customWidgets/verificationWidgets/customButtonWhenUploudFile.dart';
 
 class VerificationAdressPage extends StatefulWidget {

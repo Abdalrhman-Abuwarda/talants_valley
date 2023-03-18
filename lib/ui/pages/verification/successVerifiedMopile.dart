@@ -35,7 +35,7 @@ class SuccessVerifiedMobilePage extends StatelessWidget {
         builder: (context, verification, child) =>
             CustomSuccessPage(
               caption: 'You Verified Your Phone Number Successfully',
-              textButtom: 'Continue',
+              textButton: 'Continue',
               onPressed: () {
                 verification.getUser();
               },

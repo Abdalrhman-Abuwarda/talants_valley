@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/authWigdgets/authHeaderPage.dart';
-import 'package:talants_valley/ui/shared/customWidgets/mainTextFormField.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart';
 import 'package:talants_valley/utils/validate.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
@@ -15,7 +16,7 @@ import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../shared/customWidgets/authWigdgets/authFooterPage.dart';
 import '../../shared/customWidgets/authWigdgets/phoneNumberTextField.dart';
-import '../../shared/customWidgets/customDropdownWidget.dart';
+import '../../shared/customWidgets/custom_dropdown_widget.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key? key}) : super(key: key);
@@ -36,7 +37,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   final TextEditingController _phoneNumberController = TextEditingController();
-  // final TextEditingController _countryController = TextEditingController();
   var formKye = GlobalKey<FormState>();
 
   @override
@@ -140,7 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           )),
                   addVerticalSpace(AppSize.s16.h),
                   Text(
-                    'Phone Numper',
+                    'Phone Number',
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   addVerticalSpace(5.h),
@@ -167,19 +167,34 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   addVerticalSpace(AppSize.s66.h),
                   Consumer2<AuthProvider, FormProvider>(
-                    builder: (context, auth, form,child) => ElevatedButton(
-                        onPressed: () {
-                          if (formKye.currentState!.validate()) {
-                            auth.signupUser(
-                                firstName: _firstNameController.text,
-                                lastName: _lastNameController.text,
-                                email: _emailController.text,
-                                country: form.selectedCountrySignUp!,
-                                mobile: "${auth.postCode}${_phoneNumberController.text}",
-                                password: _passwordController.text);
-                          }
-                        },
-                        child: const Text('Sign Up')),
+                    builder: (context, auth, form,child) =>
+                        MainElevatedButton(textColor: ColorManager.whiteColor,
+                            onPressed: () {
+                              if (formKye.currentState!.validate()) {
+                                auth.signupUser(
+                                    firstName: _firstNameController.text,
+                                    lastName: _lastNameController.text,
+                                    email: _emailController.text,
+                                    country: form.selectedCountrySignUp!,
+                                    mobile: "${auth.postCode}${_phoneNumberController.text}",
+                                    password: _passwordController.text);
+                              }
+                            },
+                            isLoading: auth.isLoading, text: "Sign Up", isMain: true)
+                        // ElevatedButton(
+                        //
+                        // onPressed: () {
+                        //   if (formKye.currentState!.validate()) {
+                        //     auth.signupUser(
+                        //         firstName: _firstNameController.text,
+                        //         lastName: _lastNameController.text,
+                        //         email: _emailController.text,
+                        //         country: form.selectedCountrySignUp!,
+                        //         mobile: "${auth.postCode}${_phoneNumberController.text}",
+                        //         password: _passwordController.text);
+                        //   }
+                        // },
+                        // child: const Text('Sign Up')),
                   ),
                   addVerticalSpace(AppSize.s28.h),
                   FooterAuth(

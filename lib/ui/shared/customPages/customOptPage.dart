@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
 import 'package:talants_valley/core/provider/verificationProvider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
 import '../../../resources/colors_manager.dart';
 import '../../../resources/valuesManager.dart';
@@ -15,6 +16,7 @@ import '../customWidgets/authWigdgets/authFooterPage.dart';
 
 class CustomOptPage extends StatefulWidget {
   const CustomOptPage({
+    required this.isLoading,
     super.key,
     required this.optController,
     this.title,
@@ -45,6 +47,7 @@ class CustomOptPage extends StatefulWidget {
   final String? pathImage;
   final String seconds;
   final String minutes;
+  final bool isLoading;
 
   @override
   State<CustomOptPage> createState() => _CustomOptPageState();
@@ -136,11 +139,13 @@ class _CustomOptPageState extends State<CustomOptPage> {
             ],
           ),
           addVerticalSpace(AppSize.s60.h),
-          ElevatedButton(
-              onPressed: widget.onPressedButton,
-              child: Text(
-                widget.buttonText,
-              )),
+          MainElevatedButton(textColor: ColorManager.whiteColor,
+              onPressed: widget.onPressedButton, isLoading: widget.isLoading, text: widget.buttonText, isMain: true),
+          // ElevatedButton(
+          //     onPressed: widget.onPressedButton,
+          //     child: Text(
+          //       widget.buttonText,
+          //     )),
           addVerticalSpace(AppPadding.p44),
         ],
       ),

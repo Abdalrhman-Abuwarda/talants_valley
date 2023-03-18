@@ -45,6 +45,7 @@ class _VerificationEditRecipientPageState extends State<VerificationEditRecipien
             key: formKye,
             child:
             CustomOptPage(
+              isLoading: false,
               withImage: true,
               pathImage: ImageAssets.mobileSuccessImage,
               optController: _optMobileController,

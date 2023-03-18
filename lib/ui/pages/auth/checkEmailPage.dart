@@ -13,10 +13,10 @@ import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customPages/customOptPage.dart';
-import '../../shared/customWidgets/authWigdgets/authFooterPage.dart';
-import '../../shared/customWidgets/mainTextFormField.dart';
 
 class CheckEmailPage extends StatefulWidget {
+  const CheckEmailPage({super.key});
+
   @override
   State<CheckEmailPage> createState() => _CheckEmailPageState();
 }
@@ -65,6 +65,7 @@ class _CheckEmailPageState extends State<CheckEmailPage> {
           key: formKye,
           child: Consumer<AuthProvider>(
             builder: (context, auth, child) => CustomOptPage(
+              isLoading: auth.isLoading,
               optController: _optController,
               title: "Check Your Email",
               caption:
@@ -76,7 +77,6 @@ class _CheckEmailPageState extends State<CheckEmailPage> {
                 if (formKye.currentState!.validate()) {
                   auth.checkEmailPassword(
                       verificationCode: _optController.text);
-                  // ServiceNavigations.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.createNewPassword);
                 }
               },
               onPressedTextButton: () {

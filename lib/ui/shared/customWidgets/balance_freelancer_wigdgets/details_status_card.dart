@@ -3,12 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 
 import '../../../../resources/valuesManager.dart';
-import '../CustomContanerWidget.dart';
+import '../custom_contaner_widget.dart';
 
 class DetailsStatusCard extends StatelessWidget {
   const DetailsStatusCard({
+    required this.accountName,
     Key? key,
+    this.forBank = true
   }) : super(key: key);
+
+  final String accountName;
+  final bool forBank ;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +26,9 @@ class DetailsStatusCard extends StatelessWidget {
         addVerticalSpace(AppSize.s12.h),
         Row(
           children: [
-            Text("Bank Account Name", style: supTitleStyle,),
+            Text(forBank ? "Bank Account Name" : "Office Name", style: supTitleStyle,),
             const Spacer(),
-            Text("Safa K. Mousa" , style: headLineStyle,),
+            Text(accountName , style: headLineStyle,),
           ],
         ),
         addVerticalSpace(AppSize.s12.h),

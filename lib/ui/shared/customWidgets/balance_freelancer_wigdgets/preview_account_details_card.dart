@@ -38,7 +38,7 @@ class PreviewAccountDetailsCard extends StatelessWidget {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppPadding.p25.w),
+            padding: EdgeInsets.symmetric(horizontal: AppPadding.p22.w),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -52,7 +52,9 @@ class PreviewAccountDetailsCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(children: [
-                      Text(accountName, style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
+                      Text(accountName.length > 10 ? accountName.substring(0 , 11) : accountName,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
                       addHorizantelSpace(AppSize.s8.w),
                       Text("[$bankName]", overflow: TextOverflow.ellipsis , style: subTitle!.copyWith(color: ColorManager.grayColor, fontSize: 13),)
                     ]),

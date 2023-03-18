@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/data/repository/auth_repository.dart';
-import 'package:talants_valley/core/model/responseDataModel.dart';
-import 'package:talants_valley/core/provider/verificationProvider.dart';
 
 import '../../routing/navigations.dart';
 import '../../routing/router.dart';
@@ -16,8 +14,8 @@ class AuthProvider with ChangeNotifier{
 bool isPassword = true;
 String? postCode;
 Duration duration = const Duration();
+bool isLoading = false;
 
- // maxSeconds = 120;
 int seconds = 59;
 int minutes = 1;
 Timer? timer;
@@ -48,7 +46,6 @@ void startTimer() {
     timer?.cancel();
     notifyListeners();
   }
-// void savePsotCode(String code){}
 
 void suffixPressed(){
   isPassword = !isPassword;
@@ -57,20 +54,14 @@ void suffixPressed(){
 
 //-----------------------------LoginUser----------------------------------------
 
-Future<dynamic> LoginUser(String email, String password) async{
-  debugPrint("This is in authProvider before the function repository");
+Future<dynamic> loginUser(String email, String password) async{
+  isLoading = true;
+  notifyListeners();
   final dataResponse = await AuthRepository().loginUserRepository(email: email, password: password);
-  debugPrint("This is in authProvider after the function repository");
- // final context= ServiceNavigations.serviceNavi.navKey.currentContext;
- //      Provider.of<VerificationProvider>(context!,listen: false).getUser();
-  debugPrint("This is in authProvider before the SharedPreferance");
   SharedPrefController().saveData(user: dataResponse);
-  debugPrint("This is in authProvider after the SharedPreferance");
-  debugPrint(dataResponse.email);
   Helpers.showSnackBar(message: "login successfully");
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
-  // notifyListeners();
 }
 
 
@@ -82,17 +73,21 @@ Future<dynamic> signupUser(
       required String country,
       required String email,
       required String password}) async{
+  isLoading = true;
+  notifyListeners();
   final dataResponse = await AuthRepository().signupUserRepository(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
   Helpers.showSnackBar(message: "Signup successfully");
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
-  notifyListeners();
+
 }
 
 
 //-------------------------------forgetPassword---------------------------------
 
 Future<dynamic> forgetPassword({required String email}) async{
+  isLoading = true;
+  notifyListeners();
   final dataResponse = await AuthRepository().forgetPasswordRepository(email: email);
   SharedPrefController().saveId(id: dataResponse.toString());
   Helpers.showSnackBar(message: "Send code successfully");
@@ -108,15 +103,15 @@ Future<dynamic> forgetPassword({required String email}) async{
     SharedPrefController().saveId(id: dataResponse.toString());
     seconds = 60;
     minutes = 1;
-    debugPrint("This is before");
     startTimer();
-    debugPrint("This is after");
     Helpers.showSnackBar(message: "resend code successfully");
   }
 
 //---------------------------------checkEmailPassword---------------------------
 
 Future<dynamic> checkEmailPassword({ required String verificationCode}) async {
+  isLoading = true;
+  notifyListeners();
   final dataResponse = await AuthRepository().checkEmailRrpository(id: SharedPrefController().getId(), verificationCode: verificationCode);
   SharedPrefController().saveRecoverToken(recoverToken: dataResponse);
   Helpers.showSnackBar(message: "The process done successfully");
@@ -128,6 +123,8 @@ Future<dynamic> checkEmailPassword({ required String verificationCode}) async {
 //-------------------------------createNewPassword------------------------------
 
 Future<dynamic> createNewPassword({required String password}) async{
+  isLoading = true;
+  notifyListeners();
   final dataResponse = await AuthRepository().createNewPasswordRepository(password: password, recoverToken: SharedPrefController().getRecoverToken());
   Helpers.showSnackBar(message: dataResponse["message"]);
   ServiceNavigation.serviceNavi
@@ -142,6 +139,11 @@ Future<dynamic> logout() async {
   SharedPrefController().logout();
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
+}
+
+disposeIsLoading() {
+  isLoading = false;
+  notifyListeners();
 }
 
 }

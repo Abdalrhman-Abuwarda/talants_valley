@@ -22,9 +22,12 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<WithdrawFreelancerProvider>(context , listen: false).getWithdrawList();
+
+    Provider.of<WithdrawFreelancerProvider>(context, listen: false)
+        .getWithdrawList();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +43,8 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeaderCardBalance(
-                balance: SharedPrefController().getUser().balance,
-                sheetPage: (context) =>  PayoutBottomSheet()),
-
+                  balance: SharedPrefController().getUser().balance,
+                  sheetPage: (context) => const PayoutBottomSheet()),
               addVerticalSpace(AppSize.s16.h),
               Text("Withdrawals",
                   style: Theme.of(context)
@@ -50,27 +52,53 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
                       .subtitle1!
                       .copyWith(fontWeight: FontWeight.w600)),
               addVerticalSpace(AppSize.s10.h),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: AppPadding.p18.w),
-                decoration: BoxDecoration(
-                    color: ColorManager.whiteColor,
-                    borderRadius: BorderRadius.circular(AppSize.s7.r),
-                    border: Border.all(color: ColorManager.mainBorderColor)),
-                child: Consumer<WithdrawFreelancerProvider>(
-                  builder: (context, balance, child) => ListView.builder(
-                    itemCount: balance.withdrawals.length,
-                    itemBuilder: (context , index) => WithdrawalCard(
-                      withdrawalBalance: balance.withdrawals[index].amount.toString(),
-                      createdAt: balance.withdrawals[index].createdAt,
-                      status: balance.withdrawals[index].status,
-                      withdrawalFrom: balance.withdrawals[index].bank == null ?balance.withdrawals[index].office!.name : balance.withdrawals[index].bank!.bankName,
-                      sheetPage: (context) => StatusWithdrawalBottomSheet(withdrawal: balance.withdrawals[index],),
-                    ) ,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      ),
-                ),
-              )
+              Consumer<WithdrawFreelancerProvider>(
+                  builder: (context, balance, child) => balance.isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: AppPadding.p18.w),
+                          decoration: BoxDecoration(
+                              color: ColorManager.whiteColor,
+                              borderRadius: BorderRadius.circular(AppSize.s7.r),
+                              border: Border.all(
+                                  color: ColorManager.mainBorderColor)),
+                          child: Consumer<WithdrawFreelancerProvider>(
+                            builder: (context, balance, child) => balance
+                                    .isLoading
+                                ? const Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : ListView.builder(
+                                    itemCount: balance.withdrawals.length,
+                                    itemBuilder: (context, index) =>
+                                        WithdrawalCard(
+                                      withdrawalBalance: balance
+                                          .withdrawals[index].amount
+                                          .toString(),
+                                      createdAt:
+                                          balance.withdrawals[index].createdAt,
+                                      status: balance.withdrawals[index].status,
+                                      withdrawalFrom:
+                                          balance.withdrawals[index].bank ==
+                                                  null
+                                              ? balance.withdrawals[index]
+                                                  .office!.name
+                                              : balance.withdrawals[index].bank!
+                                                  .bankName,
+                                      sheetPage: (context) =>
+                                          StatusWithdrawalBottomSheet(
+                                        withdrawal: balance.withdrawals[index],
+                                      ),
+                                    ),
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                  ),
+                          ),
+                        ))
             ],
           ),
         ),

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/add_balance_bank_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/add_recipient_page.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/editRecipientPage.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/edit_recipient_page.dart';
+import 'package:talants_valley/ui/pages/balance_freelancer/preview_bank_withdrawal_status_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/preview_withdrawal_cash_page.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/verificationEditRecipientPage.dart';
 import 'package:talants_valley/ui/pages/balance_freelancer/verification_add_bank_page.dart';
@@ -22,6 +23,7 @@ import '../ui/pages/balance_freelancer/choose_office_page.dart';
 import '../ui/pages/balance_freelancer/choose_bank_account_page.dart';
 import '../ui/pages/balance_freelancer/balance_freelancer_page.dart';
 import '../ui/pages/balance_freelancer/choose_recipient_page.dart';
+import '../ui/pages/balance_freelancer/preview_cash_withdrawal_status_page.dart';
 import '../ui/pages/balance_freelancer/verifcation_add_recipient.dart';
 import '../ui/pages/balance_freelancer/preview_withdrawal_bank_page.dart';
 import '../ui/pages/home_freelancer/home_freelancer_page.dart';
@@ -105,6 +107,10 @@ class RoutsGenerate{
         return MaterialPageRoute(builder: (_) => VerificationEditRecipientPage());
       case RouteGenerator.previewCashWithdrawalRecipient:
         return MaterialPageRoute(builder: (_) => PreviewWithdrawalCashPage());
+      case RouteGenerator.previewBankWithdrawalStatus:
+        return MaterialPageRoute(builder: (_) => PreviewBankWithdrawalStatusPage());
+      case RouteGenerator.previewCashWithdrawalStatus:
+        return MaterialPageRoute(builder: (_) => PreviewCashWithdrawalStatusPage());
         default:
         throw const FormatException("Route not found");
     }

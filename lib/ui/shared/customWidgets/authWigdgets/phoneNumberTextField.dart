@@ -10,7 +10,7 @@ import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.
 
 import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
-import '../mainTextFormField.dart';
+import '../main_text_form_field.dart';
 
 class PhoneNumberTextField extends StatelessWidget {
    PhoneNumberTextField({

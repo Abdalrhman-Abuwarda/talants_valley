@@ -27,11 +27,11 @@ class SuccessResetPassword extends StatelessWidget {
         ),
       ),
       body: CustomSuccessPage(
-        withTitel: true,
-        titel: 'Password Reset',
+        withTitle: true,
+        title: 'Password Reset',
         caption:
             "Your Password has been Successfully Reset Click below to Login",
-        textButtom: 'Login',
+        textButton: 'Login',
         onPressed: () {
           ServiceNavigation.serviceNavi
               .pushNamedWidget(RouteGenerator.signInPage);

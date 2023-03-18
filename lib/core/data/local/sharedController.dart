@@ -53,7 +53,7 @@ class SharedPrefController {
   //   return UserModel.fromJson(user);
   // }
 
-  UserModel getUser() {
+  getUser() {
     // debugPrint("_sharedPreferences.getString(user");
     // debugPrint("This is the user data in sharedpref ${_sharedPreferences.getString("user")}");
     final dynamic user = jsonDecode(_sharedPreferences.getString("user")!);

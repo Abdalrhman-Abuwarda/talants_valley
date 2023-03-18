@@ -3,14 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
 import 'package:talants_valley/core/provider/verificationProvider.dart';
+import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
 import '../../../core/data/local/sharedController.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
-import '../../shared/customWidgets/mainTextFormField.dart';
+import '../../shared/customWidgets/main_text_form_field.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   @override
@@ -43,7 +45,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
           leading: IconButton(
             onPressed: () {
               ServiceNavigation.serviceNavi
-                  .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
+                  .popFunction();
             },
             icon: Icon(Icons.arrow_back_ios),
           ),
@@ -76,15 +78,17 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       validator: (value) => Validate.validateEmail(value)),
                   addVerticalSpace(AppSize.s55.h),
                   Consumer2<AuthProvider, VerificationProvider>(
-                    builder: (context, auth, verification, child) => ElevatedButton(
-                        onPressed: () {
-                          if (formKye.currentState!.validate()) {
-                            SharedPrefController().saveForgetEmail(email: _emailController.text);
-                            auth.forgetPassword(email: _emailController.text);
-                            // verification.startTimer();
-                          }
-                        },
-                        child: const Text('Send code')),
+                    builder: (context, auth, verification, child) =>
+                        MainElevatedButton(textColor: ColorManager.whiteColor,
+                            onPressed: () {
+                              if (formKye.currentState!.validate()) {
+                                SharedPrefController().saveForgetEmail(email: _emailController.text);
+                                auth.forgetPassword(email: _emailController.text);
+                                // verification.startTimer();
+                              }
+                            },
+                            isLoading: auth.isLoading, text: "Send Code", isMain: true)
+
 
                   ),
                 ],

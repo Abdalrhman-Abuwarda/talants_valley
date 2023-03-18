@@ -62,6 +62,7 @@ class _VerificationMobilePageState extends State<VerificationMobilePage> {
         child: Consumer<VerificationProvider>(
           builder: (context, verification, child) =>
               CustomOptPage(
+                isLoading: false,
                 withImage: true,
                 pathImage: ImageAssets.mobileSuccessImage,
                 optController: _optMobileController,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 
@@ -58,7 +59,7 @@ class VerificationListTile extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(ImageAssets.successImage,
+                    SvgPicture.asset(IconAssets.checkMarkIcon,
                     height: AppSize.s35.h,
                     width: AppSize.s35.w,
                     ),

@@ -49,6 +49,7 @@ dependencies:
   file_picker: ^5.2.3
   flutter_svg: ^1.1.6
   dotted_border: ^2.0.0+3
+  timeline_tile: ^2.0.0
 
 dev_dependencies:
   flutter_test:

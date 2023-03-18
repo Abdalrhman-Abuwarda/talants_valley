@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
 
@@ -29,18 +32,20 @@ class PayoutBottomSheet extends StatelessWidget {
           addVerticalSpace(AppSize.s18.h),
           const Divider(),
           addVerticalSpace(AppSize.s18.h),
-          InkWell(
-            child: Row(
-              children: [
-                SvgPicture.asset(IconAssets.bankIcon , height: AppSize.s25.h,),
-                addHorizantelSpace(AppSize.s33.w),
-                Text( "Bank" , style: headLine3, ),
-              ],
+          Consumer<WithdrawFreelancerProvider>(
+            builder: (context, balance, child) => InkWell(
+              onTap: balance.withdrawals.isNotEmpty ? (){
+                ServiceNavigation.serviceNavi
+                    .pushNamedAndRemoveUtils(RouteGenerator.addBalanceBankWithdrawPage);
+              } : (){},
+              child:  Row(
+                children: [
+                  SvgPicture.asset(IconAssets.bankIcon , height: AppSize.s25.h, color: balance.withdrawals.isEmpty ? ColorManager.thirdFontColor : ColorManager.blackColor,),
+                  addHorizantelSpace(AppSize.s33.w),
+                  Text( "Bank" , style: balance.withdrawals.isNotEmpty ? headLine3 : headLine3!.copyWith(color: ColorManager.thirdFontColor), ),
+                ],
+              ),
             ),
-            onTap: (){
-              ServiceNavigation.serviceNavi
-                  .pushNamedAndRemoveUtils(RouteGenerator.addBalanceBankWithdrawPage);
-            },
           ),
           addVerticalSpace(AppSize.s30.h),
           InkWell(

@@ -9,7 +9,7 @@ import '../../../../core/model/userModel.dart';
 import '../../../../resources/valuesManager.dart';
 import '../../../shared/customWidgets/TeamUserMangement/userListTile.dart';
 import '../../../shared/customWidgets/TeamUserMangement/userOptionBottomSheet.dart';
-import '../../../shared/customWidgets/searchBar.dart';
+import '../../../shared/customWidgets/search_bar.dart';
 
 class MainUserManagementPage extends StatefulWidget {
   MainUserManagementPage({Key? key}) : super(key: key);
