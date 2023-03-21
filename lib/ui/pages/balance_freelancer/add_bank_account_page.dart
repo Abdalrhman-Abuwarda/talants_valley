@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
 import '../../../core/model/freelancer/withdrawal_model.dart';
@@ -110,7 +111,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
 
                     addVerticalSpace(AppSize.s16.h),
                     SecondCustomButton( isLoading: balance.isLoading,
-                      text: "Back", onPressed: () {Navigator.pop(context);},)
+                      text: "Back", onPressed: () {ServiceNavigation.serviceNavi.popFunction();},)
               ],
           ),
             ),

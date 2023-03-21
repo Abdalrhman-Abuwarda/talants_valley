@@ -10,6 +10,7 @@ import '../../shared/customWidgets/balance_freelancer_wigdgets/header_card_balan
 import '../../shared/customWidgets/balance_freelancer_wigdgets/status_withdrawal_bottom_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/withdraeal_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/payout_bottom_sheet.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/withdraw_skeleton_widget.dart';
 
 class BalanceFreelancerPage extends StatefulWidget {
   const BalanceFreelancerPage({Key? key}) : super(key: key);
@@ -53,52 +54,44 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
                       .copyWith(fontWeight: FontWeight.w600)),
               addVerticalSpace(AppSize.s10.h),
               Consumer<WithdrawFreelancerProvider>(
-                  builder: (context, balance, child) => balance.isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: AppPadding.p18.w),
-                          decoration: BoxDecoration(
-                              color: ColorManager.whiteColor,
-                              borderRadius: BorderRadius.circular(AppSize.s7.r),
-                              border: Border.all(
-                                  color: ColorManager.mainBorderColor)),
-                          child: Consumer<WithdrawFreelancerProvider>(
-                            builder: (context, balance, child) => balance
-                                    .isLoading
-                                ? const Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                : ListView.builder(
-                                    itemCount: balance.withdrawals.length,
-                                    itemBuilder: (context, index) =>
-                                        WithdrawalCard(
-                                      withdrawalBalance: balance
-                                          .withdrawals[index].amount
-                                          .toString(),
-                                      createdAt:
-                                          balance.withdrawals[index].createdAt,
-                                      status: balance.withdrawals[index].status,
-                                      withdrawalFrom:
-                                          balance.withdrawals[index].bank ==
-                                                  null
-                                              ? balance.withdrawals[index]
-                                                  .office!.name
-                                              : balance.withdrawals[index].bank!
-                                                  .bankName,
-                                      sheetPage: (context) =>
-                                          StatusWithdrawalBottomSheet(
-                                        withdrawal: balance.withdrawals[index],
-                                      ),
-                                    ),
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                  ),
+                builder: (context, balance, child) => balance.isLoading
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 5,
+                        itemBuilder: (context, index) =>
+                            const WithdrawSkeleton())
+                    : Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: AppPadding.p18.w),
+                        decoration: BoxDecoration(
+                            color: ColorManager.whiteColor,
+                            borderRadius: BorderRadius.circular(AppSize.s7.r),
+                            border: Border.all(
+                                color: ColorManager.mainBorderColor)),
+                        child: ListView.builder(
+                          itemCount: balance.withdrawals.length,
+                          itemBuilder: (context, index) => WithdrawalCard(
+                            withdrawalBalance:
+                                balance.withdrawals[index].amount.toString(),
+                            createdAt: balance.withdrawals[index].createdAt,
+                            status: balance.withdrawals[index].status,
+                            withdrawalFrom:
+                                balance.withdrawals[index].bank == null
+                                    ? balance.withdrawals[index].office!.name
+                                    : balance.withdrawals[index].bank!.bankName,
+                            name:  balance.withdrawals[index].bank == null
+                                ? balance.withdrawals[index].recipient!.name
+                                : balance.withdrawals[index].bank!.accountName,
+                            sheetPage: (context) => StatusWithdrawalBottomSheet(
+                              withdrawal: balance.withdrawals[index],
+                            ),
                           ),
-                        ))
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                        ),
+                      ),
+              )
             ],
           ),
         ),

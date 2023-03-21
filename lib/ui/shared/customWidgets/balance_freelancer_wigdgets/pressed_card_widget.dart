@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:talants_valley/resources/assets_manager.dart';
 
 import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
@@ -39,7 +41,7 @@ class PressedCardWidget extends StatelessWidget {
           children: [
             Text(title),
             const Spacer(),
-            const Icon(Icons.arrow_forward_ios, size: 15,
+             SvgPicture.asset(IconAssets.dawnIcon ,
               color: ColorManager.disableIconColor,)
           ],
         ),

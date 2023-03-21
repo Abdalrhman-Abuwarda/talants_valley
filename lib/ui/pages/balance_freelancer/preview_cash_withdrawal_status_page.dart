@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
@@ -17,9 +18,26 @@ import '../../shared/customWidgets/balance_freelancer_wigdgets/instruction_cash_
 import '../../shared/customWidgets/balance_freelancer_wigdgets/time_line_widget.dart';
 import '../../shared/customWidgets/main_elevated_button.dart';
 
-class PreviewCashWithdrawalStatusPage extends StatelessWidget {
+class PreviewCashWithdrawalStatusPage extends StatefulWidget {
   const PreviewCashWithdrawalStatusPage({Key? key}) : super(key: key);
 
+  @override
+  State<PreviewCashWithdrawalStatusPage> createState() => _PreviewCashWithdrawalStatusPageState();
+}
+
+class _PreviewCashWithdrawalStatusPageState extends State<PreviewCashWithdrawalStatusPage> {
+
+  String? firstTime;
+  @override
+  void initState() {
+    // TODO: implement initState
+    var provider = Provider.of<WithdrawFreelancerProvider>(context, listen: false);
+    DateTime dateTime = DateTime.parse(provider.withdrawForPreview!.history!.first.updatedAt);
+    firstTime = DateFormat.jm().format(dateTime);
+    debugPrint("This is formattedTime =>>> $firstTime");
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final TextTheme textStyle = Theme.of(context).textTheme;
@@ -45,12 +63,84 @@ class PreviewCashWithdrawalStatusPage extends StatelessWidget {
                   officeName: balance.withdrawForPreview!.office!.name,
                   status: balance.withdrawForPreview!.status,
                 ),
-                const TimeLineCardWidget(),
+                CustomContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Timeline",
+                          style: textStyle.headline4!
+                              .copyWith(color: ColorManager.blackColor),
+                        ),
+                        addVerticalSpace(AppSize.s12.h),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: AppSize.s50.w,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    firstTime!,
+                                    style: textStyle.headline6,
+                                  ),
+                                  Text(
+                                    "Today",
+                                    style: textStyle.bodyText1,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            addHorizantelSpace(AppSize.s14.w),
+                            SizedBox(
+                              width: AppSize.s10.w,
+                              child: Column(
+                                children: [
+                                  Transform.translate(
+                                    offset: Offset(0, AppSize.s5.h),
+                                    child: Column(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 4.r,
+                                          backgroundColor: ColorManager.blueColor,
+                                        ),
+                                        SizedBox(
+                                          height: AppSize.s40.h,
+                                          child: const VerticalDivider(
+                                            thickness: 1,
+                                            color: ColorManager.blueColor,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            addHorizantelSpace(AppSize.s25.w),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Requested",
+                                  style: textStyle.headline5,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        addVerticalSpace(AppSize.s25.h),
+                      ],
+                    )),
                 DetailsStatusCard(
                   accountName: balance.withdrawForPreview!.office!.name,
                   forBank: false,
                 ),
-                InstructionsCashWithdrawalWidget(address: balance.withdrawForPreview!.office!.address, officeFees: balance.withdrawForPreview!.office!.fees.toString(), ),
+                InstructionsCashWithdrawalWidget(
+                  endHour: "",
+                  startingHour: "",
+                  address: balance.withdrawForPreview!.office!.address, officeFees: balance.withdrawForPreview!.office!.fees.toString(), ),
                 addVerticalSpace(AppSize.s20.h),
                 MainElevatedButton(
                     textColor: ColorManager.blackColor,
@@ -74,7 +164,8 @@ class PreviewCashWithdrawalStatusPage extends StatelessWidget {
                         } ,
                         isLoading: balance.isLoading,
                         text: "Cancel Withdrawal",
-                        isMain: false))
+                        isMain: false)),
+                addVerticalSpace(AppSize.s40.h)
               ],
             ),
           ),

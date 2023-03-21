@@ -55,11 +55,11 @@ class UserModel {
       address: json['address'] == null ? null : Address.fromJson(json['address']),
       // address: Address.fromJson(json['address']),
       isBlocked: json['isBlocked'],
-      createdAt: json["createdAt"],
-      profit: json['profit'],
-    revenue: json['revenue'],
-    lastLogin: json['lastLogin'],
-    updateAt: json['updateAt'],
+      createdAt: json["createdAt"] ?? "",
+      profit: json['profit'] ?? 0,
+    revenue: json['revenue'] ?? 0,
+    lastLogin: json['lastLogin'] ?? "",
+    updateAt: json['updateAt'] ?? "",
   );
 
 

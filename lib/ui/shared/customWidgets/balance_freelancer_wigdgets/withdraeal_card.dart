@@ -6,6 +6,7 @@ import '../../../../resources/valuesManager.dart';
 
 class WithdrawalCard extends StatelessWidget {
   WithdrawalCard({
+    required this.name,
     required this.withdrawalBalance,
     required this.createdAt,
     required this.status,
@@ -18,10 +19,12 @@ class WithdrawalCard extends StatelessWidget {
   final String createdAt;
   final String status;
   final String withdrawalFrom;
+  final String name;
   Widget Function(BuildContext) sheetPage;
   @override
   Widget build(BuildContext context) {
     final TextStyle? bodyText = Theme.of(context).textTheme.bodyText2 ;
+    final TextTheme textStyle = Theme.of(context).textTheme;
     return InkWell(
       onTap: ()=> showModalBottomSheet(
       isScrollControlled: false,
@@ -35,26 +38,33 @@ class WithdrawalCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: AppPadding.p20.h),
         decoration: const BoxDecoration(
-
+          border: Border(bottom: BorderSide(width: 1, color: ColorManager.mainBorderColor))
         ),
         child: Row(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(withdrawalFrom , style: bodyText,),
+                Text(name , style: textStyle.labelMedium!.copyWith(color: ColorManager.blackColor),),
                 addVerticalSpace(AppSize.s10.h),
-                Text(createdAt , style: Theme.of(context).textTheme.bodyText1,),
+                Row(
+                  children: [
+                    Text(withdrawalFrom , style: textStyle.headline5,),
+                    addHorizantelSpace(AppSize.s16.w),
+                    Text(createdAt.substring(0, 10) , style: Theme.of(context).textTheme.bodyText1,),
+                  ],
+                ),
               ],
             ),
             const Spacer(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children:  [
-                Text("\$ $withdrawalBalance", style: Theme.of(context).textTheme.headline3,),
+                Text("\$ $withdrawalBalance", style: textStyle.headline3,),
+                status != "canceled" ?
                 Text(status , style: bodyText!.copyWith(
-                  color: status == "Pending" ? ColorManager.yellowColor : status == "Sent" ? ColorManager.blueColor : ColorManager.blackColor
-                ) ,),
+                  color: status == "pending" ? ColorManager.yellowColor : status == "sent" ? ColorManager.blueColor : ColorManager.blackColor
+                ) ,) : Text(status , style: TextStyle(decoration: TextDecoration.lineThrough, fontSize: 13.sp, color: ColorManager.thirdFontColor , fontWeight: FontWeight.normal, fontFamily: "Segoe UI") ,),
               ],
             )
           ],

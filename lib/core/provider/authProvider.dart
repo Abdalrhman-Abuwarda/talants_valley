@@ -59,9 +59,13 @@ Future<dynamic> loginUser(String email, String password) async{
   notifyListeners();
   final dataResponse = await AuthRepository().loginUserRepository(email: email, password: password);
   SharedPrefController().saveData(user: dataResponse);
-  Helpers.showSnackBar(message: "login successfully");
-  ServiceNavigation.serviceNavi
-      .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
+  notifyListeners();
+
+  Future.delayed(const Duration(milliseconds: 200) , (){
+    Helpers.showSnackBar(message: "login successfully");
+    ServiceNavigation.serviceNavi
+        .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
+  });
 }
 
 
@@ -135,7 +139,7 @@ Future<dynamic> createNewPassword({required String password}) async{
 //------------------------------------------------------------------------------
 
 Future<dynamic> logout() async {
-  Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context , listen: false).logoutBalance();
+  Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context , listen: false).logoutBalancea();
   SharedPrefController().logout();
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);

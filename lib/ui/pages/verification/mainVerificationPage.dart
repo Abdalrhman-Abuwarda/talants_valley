@@ -24,7 +24,6 @@ class _MainVerificationPageState extends State<MainVerificationPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   final dataUser = SharedPrefController().getUser();
 
-
   @override
   Widget build(BuildContext context) {
 

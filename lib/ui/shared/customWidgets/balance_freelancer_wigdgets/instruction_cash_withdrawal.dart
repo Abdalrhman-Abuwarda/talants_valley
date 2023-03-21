@@ -7,6 +7,8 @@ import '../custom_contaner_widget.dart';
 
 class InstructionsCashWithdrawalWidget extends StatelessWidget {
   const InstructionsCashWithdrawalWidget({
+    required this.startingHour,
+    required this.endHour,
     required this.address,
     required this.officeFees,
     Key? key,
@@ -14,6 +16,8 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
 
   final String address;
   final String officeFees;
+  final String startingHour;
+  final String endHour;
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +87,7 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
                 )
               ],
             ),
+            addVerticalSpace(AppSize.s15.h),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -100,6 +105,7 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
                 )
               ],
             ),
+            addVerticalSpace(AppSize.s15.h),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -112,7 +118,7 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
                 ),
                 addHorizantelSpace(AppSize.s8.w),
                 Text(
-                  "Office fees $officeFees",
+                  "Office fees $officeFees %",
                   style: Theme.of(context).textTheme.headline5,
                 )
               ],

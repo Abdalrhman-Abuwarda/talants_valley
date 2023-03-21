@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
 import '../../../core/data/local/sharedController.dart';
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
@@ -105,16 +106,21 @@ class PreviewWithdrawalCashPage extends StatelessWidget {
               const PolicyWithdrawalWidget(),
               addVerticalSpace(AppSize.s45.h),
               Center(
-                child: SizedBox(
-                  height: 44,
-                  width: 326,
-                  child: ElevatedButton(
-                    onPressed: () => balance.requestCashWithdraw(amount: SharedPrefController().getAmountToWithdraw(), officeId: balance.officeSelected!.id, recipientId: balance.recipientSelected!.id ?? ""),
-                    child: const Text(
-                      "Continue",
-                    ),
-                  ),
-                ),
+                child: MainElevatedButton(textColor: ColorManager.whiteColor, text: "Continue",
+                  onPressed: () { balance.requestCashWithdraw(amount: SharedPrefController().getAmountToWithdraw(), officeId: balance.officeSelected!.id, recipientId: balance.recipientSelected!.id ?? ""); },
+                isLoading: balance.isLoading,
+                isMain: true,),
+                // child: SizedBox(
+                //   height: 44,
+                //   width: 326,
+                //   child:
+                //   ElevatedButton(
+                //     onPressed: () => balance.requestCashWithdraw(amount: SharedPrefController().getAmountToWithdraw(), officeId: balance.officeSelected!.id, recipientId: balance.recipientSelected!.id ?? ""),
+                //     child: const Text(
+                //       "Continue",
+                //     ),
+                //   ),
+                // ),
               )
             ],
           ),

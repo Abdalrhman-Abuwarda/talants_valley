@@ -48,8 +48,7 @@ class _EditUserInformationState extends State<EditUserInformation> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var userManagementProvider =
-        Provider.of<UserManagementProvider>(context, listen: false);
+    var userManagementProvider = Provider.of<UserManagementProvider>(context, listen: false);
     var formProvider = Provider.of<FormProvider>(context, listen: false);
     _firstNameController.text = userManagementProvider.userDetails!.firstName;
     _lastNameController.text = userManagementProvider.userDetails!.lastName;

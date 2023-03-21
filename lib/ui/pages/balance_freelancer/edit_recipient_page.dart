@@ -4,8 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
+import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart';
 import 'package:talants_valley/utils/validate.dart';
+
+import '../../../resources/colors_manager.dart';
 
 class EditRecipientPage extends StatefulWidget {
   EditRecipientPage({Key? key}) : super(key: key);
@@ -19,6 +22,16 @@ class _EditRecipientPageState extends State<EditRecipientPage> {
   final TextEditingController _recipientsIdNumberController = TextEditingController();
   final TextEditingController _recipientsPhoneNumberController = TextEditingController();
   var formKye = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var withdrawProvider = Provider.of<WithdrawFreelancerProvider>(context, listen: false);
+    _recipientsFullNameController.text = withdrawProvider.recipientForEdit!.name;
+    _recipientsPhoneNumberController.text = withdrawProvider.recipientForEdit!.mobile;
+    _recipientsIdNumberController.text = withdrawProvider.recipientForEdit!.idNumber;
+  }
 
   @override
   void dispose() {
@@ -60,11 +73,15 @@ class _EditRecipientPageState extends State<EditRecipientPage> {
                 MainTextFormField(hintText: "Enter ID number", inputType: TextInputType.number, controller: _recipientsIdNumberController, validator: (value) => value!.validateIdNumber()),
                 addVerticalSpace(AppSize.s80.h),
                 Consumer<WithdrawFreelancerProvider>(
-                  builder: (context , balance , child) => ElevatedButton(
-                      onPressed: (){
-                        balance.saveUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);
-                      }
-                      , child: const Text("Save Changes")),
+                  builder: (context , balance , child) =>
+                      MainElevatedButton(textColor: ColorManager.whiteColor,
+                          onPressed: (){balance.saveUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);},
+                          isLoading: balance.isLoading, text: "Save Changes", isMain: true)
+                      // ElevatedButton(
+                      // onPressed: (){
+                      //   balance.saveUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);
+                      // }
+                      // , child: const Text("Save Changes")),
                 )
               ],
             ),

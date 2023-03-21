@@ -74,9 +74,9 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
             addVerticalSpace(AppSize.s10.h),
             Row(
               children: [
-                Text(SharedPrefController().getUser().firstName, style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
+                Text(withdrawal.bank == null ? withdrawal.recipient!.name : withdrawal.bank!.accountName ,style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
                 addHorizantelSpace(AppSize.s10.w),
-                Text(withdrawal.bank == null ? withdrawal.office!.name : withdrawal.bank!.bankName , style: Theme.of(context).textTheme.headline4),
+                Expanded(child: Text(withdrawal.bank == null ? withdrawal.office!.name : withdrawal.bank!.bankName, overflow: TextOverflow.ellipsis , style: Theme.of(context).textTheme.headline4)),
                 const Spacer(),
                 Text("\$ ${withdrawal.amount}" , style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: "Segoe UI", color: ColorManager.blackColor),),
               ],
@@ -84,40 +84,37 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
             addVerticalSpace(AppSize.s8.h),
             Row(
               children: [
-                Text(withdrawal.bank == null ? withdrawal.office!.id : withdrawal.bank!.accountNumber, style: Theme.of(context).textTheme.headline6, ),
+                Text(withdrawal.bank == null ? withdrawal.office!.address : withdrawal.bank!.accountNumber, style: Theme.of(context).textTheme.headline6, ),
                 const Spacer(),
                 Text(withdrawal.bank == null ? "3.3" : "no fees",  style: Theme.of(context).textTheme.headline6)
               ],
             ),
             addVerticalSpace(AppSize.s25.h),
-            InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                      width: 160.w,
-                      height: AppSize.s40.h,
-                      child: SecondCustomButton(
-                        isLoading: false,
-                        text: "Done",
-                        onPressed: () {
-                          ServiceNavigation.serviceNavi.popFunction();
-                        },
-                      )),
-                  SizedBox(
-              width: 160.w,
-                      height: AppSize.s40.h,
-                      child: SecondCustomButton(
-                        isLoading: balance.isLoading,
-                    text: "Show more",
-                    onPressed: () {
-                      balance.getWithdrawDetails(withdraw: withdrawal);
-                    },
-                  )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                    width: 160.w,
+                    height: AppSize.s40.h,
+                    child: SecondCustomButton(
+                      isLoading: false,
+                      text: "Done",
+                      onPressed: () {
+                        ServiceNavigation.serviceNavi.popFunction();
+                      },
+                    )),
+                SizedBox(
+            width: 160.w,
+                    height: AppSize.s40.h,
+                    child: SecondCustomButton(
+                      isLoading: balance.isLoading,
+                  text: "Show more",
+                  onPressed: () {
+                        balance.getWithdrawDetails(withdrawId: withdrawal.id);
+                  },
+                )),
 
-                ],
-              ),
-              onTap: () {},
+              ],
             )
           ],
         ),

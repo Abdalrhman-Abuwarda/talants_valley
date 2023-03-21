@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/data/repository/freelancer/withdraw_freelancer_repo.dart';
 import 'package:talants_valley/core/model/recipient_model.dart';
@@ -20,6 +21,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
    BankModel? bankAccountSelected ;
    OfficeModel? officeSelected;
    RecipientModel?  recipientSelected;
+   RecipientModel?  recipientForEdit;
   List<BankModel> bankAccounts = [];
   final List<String> branchesBank =["0446 - Naser" , "0454 - Rimal" , "0448 - Nussairat" , "0451 - Main Branch" , "0452 - Khan Younis" , "0453 - Jabalia" ,"0454 - Rafah" ];
   final List<String> ledgersBank = ["3000 - Current" , "3100 - Saving" , "3102 - Saving For Every Citizen"];
@@ -32,6 +34,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
    bool isLoadingResponse = false;
    WithdrawModel? withdrawForPreview;
    bool withdrawalsIsUpdated = false;
+   String? idWithdrawForPreview;
    bool isLoading = false;
 
 
@@ -107,7 +110,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
   }
 
 //----------------------------------sendCodeAddBankAccount----------------------
-  Future<dynamic> sendCodeAddBankAccount({ required String accountName, required String accountNumber, required String bankBranch, required String ledger}) async {
+    sendCodeAddBankAccount({ required String accountName, required String accountNumber, required String bankBranch, required String ledger}) async {
     if(branchSelected.isEmpty && ledgerSelected.isEmpty){
       isVisibleLedgerError = true;
       isVisibleBranchError = true;
@@ -132,7 +135,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
 //-----------------------------verifyAddBnkPage---------------------------------
 
-  Future<dynamic> verifyAddBnkPage({ required String code}) async{
+    verifyAddBnkPage({ required String code}) async{
     isLoading = true;
     final dataResponse = await WithdrawFreelancerRepo().verifyAddAccountRepo(accountName: SharedPrefController().getBankAccountName(), accountNumber: SharedPrefController().getBankAccountNumber(), bankBranch: SharedPrefController().getBankAccountBranch(), ledger: SharedPrefController().getBankAccountLeger(), code: code, bankName: "Palestine");
     disposeTimer();
@@ -142,7 +145,9 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
 //----------------------------getBankAccountList--------------------------------
 
-Future<dynamic> getBankAccountList() async {
+  getBankAccountList() async {
+    isLoading = true;
+    // notifyListeners();
     final response = await WithdrawFreelancerRepo().getBankAccountListRepo();
     bankAccounts = response;
     notifyListeners();
@@ -150,7 +155,7 @@ Future<dynamic> getBankAccountList() async {
 
 //---------------------------deleteBankAccount---------------------------------
 
-  Future<dynamic> deleteBankAccount({required String bankId}) async {
+    deleteBankAccount({required String bankId}) async {
     showDialog(
         context: contextKey,
         builder: (context) =>  BalanceAlertDialog(
@@ -160,10 +165,13 @@ Future<dynamic> getBankAccountList() async {
             isLoading = true;
             notifyListeners();
             final dataResponse = await WithdrawFreelancerRepo().deleteBankAccountRepo(idBank: bankId);
-            bankAccounts.removeWhere((item) => item.id == bankId);
-            notifyListeners();
-            Helpers.balanceShowSnackBar(message: "Bank account has been deleted.");
-            ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.balanceFreelancerPage);
+            if(dataResponse.statusCode == 200){
+              isLoading = false;
+              bankAccounts.removeWhere((item) => item.id == bankId);
+              notifyListeners();
+              Helpers.balanceShowSnackBar(message: "Bank account has been deleted.");
+              ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.balanceFreelancerPage);
+            }
           },
         ));
 
@@ -171,17 +179,17 @@ Future<dynamic> getBankAccountList() async {
 
 //------------------------------------------------------------------------------
 
-Future<dynamic> getWithdrawList() async {
+  getWithdrawList() async {
     isLoading = true;
     final dataResponse = await WithdrawFreelancerRepo().getWithdrawalRequestList();
     withdrawals = dataResponse;
+    debugPrint(" This is the length =>>> ${withdrawals.length.toString()}");
     notifyListeners();
-
 }
 
 //------------------------------------------------------------------------------
 
-Future<dynamic> checkWithdrawList() async {
+  checkWithdrawList() async {
     if(withdrawals.isEmpty || withdrawalsIsUpdated == true){
       getWithdrawList();
     }
@@ -189,22 +197,19 @@ Future<dynamic> checkWithdrawList() async {
 
 //-----------------------------getOfficeList------------------------------------
 
-  Future<dynamic> getOfficeList() async{
+    getOfficeList() async{
+    isLoading = true;
     final dataResponse = await WithdrawFreelancerRepo().getOfficeListRepo();
     officeList  = dataResponse;
     officeSelected = officeList.first;
     notifyListeners();
   }
 //------------------------------------------------------------------------------
-  Future<dynamic> checkOfficeList() async {
-    if(officeList.isEmpty){
-      getOfficeList();
-    }
-  }
+
 
 //------------------------------------------------------------------------------
 
-  Future<dynamic> sendCodeRecipient({required String mobile, required String idNumber, required String name}) async {
+   sendCodeRecipient({required String mobile, required String idNumber, required String name}) async {
     isLoading = true;
     notifyListeners();
     final dataResponse = await WithdrawFreelancerRepo().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
@@ -216,7 +221,7 @@ Future<dynamic> checkWithdrawList() async {
 
 //------------------------------------------------------------------------------
 
- Future<dynamic> verificationAddRecipient({required String code , required String mobile, required String idNumber, required String name}) async{
+   verificationAddRecipient({required String code , required String mobile, required String idNumber, required String name}) async{
     isLoading = true;
     notifyListeners();
     final dataResponse = await WithdrawFreelancerRepo().verificationAddRecipient(code: code, mobile: mobile, idNumber: idNumber, name: name);
@@ -224,7 +229,7 @@ Future<dynamic> checkWithdrawList() async {
  }
 
 //------------------------------------------------------------------------------
-  Future<dynamic> getRecipients() async {
+    getRecipients() async {
     isLoading = true;
     final dataResponse = await WithdrawFreelancerRepo().getRecipientsRepo();
     recipients = dataResponse;
@@ -233,7 +238,7 @@ Future<dynamic> checkWithdrawList() async {
 
  //-----------------------------------------------------------------------------
 
-  Future<dynamic> deleteRecipient({required String? id}) async {
+    deleteRecipient({required String? id}) async {
     showDialog(
         context: contextKey,
         builder: (context) =>  BalanceAlertDialog(
@@ -253,7 +258,7 @@ Future<dynamic> checkWithdrawList() async {
 
 //------------------------------------------------------------------------------
 
-Future<dynamic> saveUpdateRecipient({required String mobile, required String idNumber, required String name }) async{
+  saveUpdateRecipient({required String mobile, required String idNumber, required String name }) async{
     isLoading = true;
     notifyListeners();
   final dataResponse = await WithdrawFreelancerRepo().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
@@ -263,7 +268,7 @@ Future<dynamic> saveUpdateRecipient({required String mobile, required String idN
   ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.verificationEditRecipient);
 }
 
-Future<dynamic> updateRecipient({required String code, required String id, required String mobile , required String idNumber, required String name}) async{
+  updateRecipient({required String code, required String id, required String mobile , required String idNumber, required String name}) async{
     isLoading = true;
     notifyListeners();
     final dataResponse = WithdrawFreelancerRepo().updateRecipientRepo(id: id, code: code, mobile: mobile, idNumber: idNumber, name: name);
@@ -298,6 +303,7 @@ Future<dynamic> updateRecipient({required String code, required String id, requi
     recipients[index].isSelected = true;
     recipientSelected = recipients[index];
     notifyListeners();
+    ServiceNavigation.serviceNavi.popFunction();
   }
 
 //----------------------------checkSelectRecipients-----------------------------
@@ -310,8 +316,16 @@ Future<dynamic> updateRecipient({required String code, required String id, requi
 
   }
 
+  //-------------------------editRecipient--------------------------------------
+
+  editRecipient({required RecipientModel recipient}) {
+    recipientForEdit = recipient;
+    notifyListeners();
+    ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.editRecipientPage);
+  }
+
   //--------------------------requestBankWithdraw-------------------------------
-  Future<dynamic> requestBankWithdraw({required String bankId, required int amount}) async {
+    requestBankWithdraw({required String bankId, required int amount}) async {
     isLoading = true;
     notifyListeners();
     final dataResponse = await WithdrawFreelancerRepo().requestBankWithdrawRepo(bankId: bankId, amount: amount);
@@ -323,7 +337,7 @@ Future<dynamic> updateRecipient({required String code, required String id, requi
   }
 
   //------------------------requestCashWithdraw---------------------------------
-  Future<dynamic> requestCashWithdraw({required String amount, required String officeId, required String recipientId}) async{
+    requestCashWithdraw({required String amount, required String officeId, required String recipientId}) async{
 
     isLoading = true;
     notifyListeners();
@@ -337,41 +351,65 @@ Future<dynamic> updateRecipient({required String code, required String id, requi
   }
 
  //---------------------------------------------------------------------------
- Future<dynamic> getWithdrawDetails({required WithdrawModel withdraw}) async {
+
+  selectWithdrawId(id){
+    idWithdrawForPreview = id;
+    notifyListeners();
+  }
+  //-----------------------------------------------------------------------------
+   getWithdrawDetails({required withdrawId}) async {
     isLoading = true;
     notifyListeners();
-    final dataResponse = await WithdrawFreelancerRepo().getWithdrawDetailsRepo(id: withdraw.id);
-    withdrawForPreview = withdraw;
-    withdraw.office == null ?
-    ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.previewBankWithdrawalStatus) :
+    final dataResponse = await WithdrawFreelancerRepo().getWithdrawDetailsRepo(id: withdrawId!);
+    debugPrint("This is details inside provider =>>> $dataResponse");
+    withdrawForPreview = dataResponse;
+    withdrawForPreview!.office == null ?
+    ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.previewBankWithdrawalStatus)
+        :
     ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.previewCashWithdrawalStatus);
+    DateTime dateTime = DateTime.parse(withdrawForPreview!.history!.first.createdAt);
+    var formatterDate =  DateFormat('dd/MM');
+    var formatterTime =  DateFormat('dd/MM');
+    var formatted = formatterDate.format(dateTime);
+    var formattedTime = DateFormat.jm().format(dateTime);
+    debugPrint("This is dateTim =>>> $formatted");
+    debugPrint("This is formattedTime =>>> $formattedTime");
+    notifyListeners();
+
  }
 
  //----------------------------cancelWithdraw-----------------------------------
 
-  Future<dynamic> cancelWithdraw({required String withdrawId}) async {
+    cancelWithdraw({required String withdrawId}) async {
     showDialog(
         context: contextKey,
         builder: (context) =>  BalanceAlertDialog(
           isLoading: isLoading,
-          content: "Are you sure you want to delete your bank account?",
+          content: "Are you sure you want to delete your Withdraw?",
           onPressed: () async {
             isLoading = true;
             notifyListeners();
             final dataResponse = await WithdrawFreelancerRepo().cancelWithdrawRepo(id: withdrawId);
-            notifyListeners();
-            Helpers.balanceShowSnackBar(message: "Withdraw has been deleted.");
-            ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.balanceFreelancerPage);          },
+            ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.balanceFreelancerPage);
+            Helpers.balanceShowSnackBar(message: "Withdraw has been deleted.");},
         ));
-    withdrawForPreview = null;
+
   }
 
   //--------------------------confirmWithdraw-----------------------------------
 
-  Future<dynamic> confirmWithdraw({required String id}) async {
+    confirmWithdraw({required String id}) async {
     isLoading = true;
+    notifyListeners();
     final dataResponse = await WithdrawFreelancerRepo().confirmWithdrawRepo(id: id);
+    withdrawForPreview = null;
+    notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.balanceFreelancerPage);
+  }
+
+  clearWithdrawForPreview(){
+    withdrawForPreview = null;
+    notifyListeners();
   }
 
  //-----------------------------------------------------------------------------
@@ -380,11 +418,10 @@ Future<dynamic> updateRecipient({required String code, required String id, requi
     notifyListeners();
   }
 
-  showStatusWithdrawal({ required BankModel bankAccount}){
-  }
 
 
-  Future<dynamic> logoutBalance() async {
+
+    logoutBalancea() async {
      mountUserToWithdrawal  = null;branchSelected = "";
     ledgerSelected = "";
     bankAccountSelected  = null;

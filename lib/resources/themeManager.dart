@@ -40,13 +40,12 @@ class ThemeManager {
         headline4: TextStyle(fontSize: 16.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.w600, color: ColorManager.thirdFontColor),
         headline5: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.blackColor ),
         headline6: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.thirdFontColor),
-        subtitle1: TextStyle(fontSize: 16.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
-        subtitle2: TextStyle(fontSize: 20.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
+        subtitle1: TextStyle(fontSize: 16.sp,fontFamily:   'Segoe UI' , fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
+        subtitle2: TextStyle(fontSize: 20.sp,fontFamily:    'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor),
         bodyText2: TextStyle(fontSize: 13.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.secondaryFontColor ),
 
         bodyText1: TextStyle(fontSize: 10.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.anotherFontColor ),
         labelMedium: TextStyle(fontSize: 14.0.sp,fontFamily: 'Segoe UI', fontWeight: FontWeight.normal, color: ColorManager.labelFontColor ),
-        // labelLarge: TextStyle(fontSize: 15.sp, fontFamily: 'Segoe UI', fontWeight: FontWeight.w600, color: ColorManager.labelFontColor)
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

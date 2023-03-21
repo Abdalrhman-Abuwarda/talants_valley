@@ -29,53 +29,94 @@ class HeaderStatusBankWidget extends StatelessWidget {
 
     return CustomContainer(
         child: Column(
+      children: [
+        Row(
           children: [
-            Row(
-              children: [
-                Text("\$ $amount", style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor)),
-                const Spacer(),
-                Container(
-                  width: AppSize.s75.h,
-                  height: AppSize.s22.h,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFF9F0),
-                    borderRadius: BorderRadius.circular(AppSize.s30.r),
-                    border: Border.all(color: const Color(0xFFF3F3F3)),
-                  ),
-                  child: Center(
-                      child: Text(
-                        status,
-                        style: TextStyle(
-                            fontSize: 13.sp,
-                            fontFamily: "Segoe UI",
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xFFDAA545)),
-                      )),
-                )
-              ],
-            ),
-            addVerticalSpace(AppSize.s15.h),
-            const Divider(),
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(accountName, style: labelStyle!.copyWith(color: ColorManager.blackColor),),
-                        addHorizantelSpace(AppSize.s10.w),
-                        Text("[$bankName]" , style: labelStyle,)
-                      ],
+            Text("\$ $amount",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: ColorManager.blackColor)),
+            const Spacer(),
+            status != "canceled"
+                ? Container(
+                    width: AppSize.s80.w,
+                    height: AppSize.s25.h,
+                    decoration: BoxDecoration(
+                      color: status == "pending"
+                          ? const Color(0xFFFFF9F0)
+                          : status == "sent"
+                              ? const Color(0xFFF4F8FE)
+                              : const Color(0xFFEFEFEF),
+                      borderRadius: BorderRadius.circular(AppSize.s30.r),
+                      border: Border.all(color: const Color(0xFFF3F3F3)),
                     ),
-                    Text(accountNumber , style: Theme.of(context).textTheme.headline6,),
+                    child: Center(
+                        child: Text(
+                      status,
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          fontFamily: "Segoe UI",
+                          fontWeight: FontWeight.w600,
+                          color: status == "pending"
+                              ? const Color(0xFFDAA545)
+                              : status == "sent"
+                                  ? const Color(0xFF4375FF)
+                                  : ColorManager.blackColor),
+                    )),
+                  )
+                : Container(
+                    width: AppSize.s75.h,
+                    height: AppSize.s22.h,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF0F0F0),
+                      borderRadius: BorderRadius.circular(AppSize.s30.r),
+                      border: Border.all(color: const Color(0xFFF3F3F3)),
+                    ),
+                    child: Center(
+                        child: Text(
+                      status,
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          fontFamily: "Segoe UI",
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFBEC2C6)),
+                    )),
+                  )
+          ],
+        ),
+        addVerticalSpace(AppSize.s15.h),
+        const Divider(),
+        Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      accountName,
+                      style:
+                          labelStyle!.copyWith(color: ColorManager.blackColor),
+                    ),
+                    addHorizantelSpace(AppSize.s10.w),
+                    Text(
+                      "[$bankName]",
+                      style: labelStyle,
+                    )
                   ],
                 ),
-                const Spacer(),
-                SvgPicture.asset(IconAssets.bankIcon)
+                Text(
+                  accountNumber,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ],
             ),
+            const Spacer(),
+            SvgPicture.asset(IconAssets.bankIcon)
           ],
-        ));
+        ),
+      ],
+    ));
   }
 }

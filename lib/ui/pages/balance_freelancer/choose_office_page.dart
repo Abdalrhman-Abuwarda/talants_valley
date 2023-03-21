@@ -8,6 +8,7 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../shared/customWidgets/balance_freelancer_wigdgets/chooseOfficeCard.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_bank_skeleton.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_office_button_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_recipient_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_resipient_card.dart';
@@ -23,7 +24,7 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<WithdrawFreelancerProvider>(context, listen: false).checkOfficeList();
+    Provider.of<WithdrawFreelancerProvider>(context, listen: false).getOfficeList();
     Provider.of<WithdrawFreelancerProvider>(context, listen: false).getRecipients();
     super.initState();
   }
@@ -43,7 +44,14 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
         child: Consumer<WithdrawFreelancerProvider>(
           builder: (context, balance, child) => balance.officeList.isEmpty
-              ? const Center(child: CircularProgressIndicator())
+              ? ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(
+                height: AppSize.s16.h,
+              ),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 5,
+              itemBuilder: (context , index) => const ChooseBankCardSkeleton())
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

@@ -21,8 +21,8 @@ class DioInterceptor extends Interceptor {
 
     Provider.of<AuthProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
     Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
-    debugPrint("This is withdrawRequestCash response in repo \n $response");
-    debugPrint("This is withdrawRequestCash in repo \n ${response.data}");
+    debugPrint("This is response in Interceptor \n $response");
+    debugPrint("This is response in Interceptor \n ${response.data}");
     // TODO: implement onResponse
     super.onResponse(response, handler);
   }
@@ -35,6 +35,7 @@ class DioInterceptor extends Interceptor {
     switch(err.type){
       case DioErrorType.connectTimeout:
         {
+          Helpers.showSnackBar(message: "Check your internet connection");
           debugPrint('This is connectTimeout [The exception for a failed connection attempt.] $err');
           debugPrint(err.response!.statusCode.toString());
           throw Exception("Not Internet Connection");

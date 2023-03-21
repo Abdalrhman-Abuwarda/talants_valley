@@ -25,7 +25,7 @@ class Endpoints {
   static const String addBankAccount = 'bank/add';
   static const String getBankAccountList = 'bank/listing?offset=0&limit=10';
   static const String deleteBankAccount = 'bank/delete/';
-  static const String getWithdrawalRequestList = 'withdraw/list?offset=0&limit=10';
+  static const String getWithdrawalRequestList = 'withdraw/list?offset=0';
   static const String requestBankWithdraw = 'withdraw/request-bank';
   static const String getOfficeList = 'withdraw/office-list?office=0&limit=10';
   static const String sendCodeRecipient = 'recipient/send-code';

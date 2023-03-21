@@ -26,21 +26,19 @@ class SharedPrefController {
   }
 
   Future<bool> saveData({required UserModel user}) async {
-    debugPrint(user.toString());
+    debugPrint("This is inside sade data =>>> ${user.toString()}");
 
     String userJson = jsonEncode(user.toJson());
-    // debugPrint("This is Save data $userJson");
-    // debugPrint("This is in SharedPreferance");
     await _sharedPreferences.setBool("isLoggedIn", true);
     return await _sharedPreferences.setString("user", userJson);
   }
 
-  Future<bool> saveAccessToken({required String tocken}) async {
-    return await _sharedPreferences.setString("accessToken", tocken);
+  Future<bool> saveAccessToken({required String token}) async {
+    return await _sharedPreferences.setString("accessToken", token);
   }
 
-  Future<bool> saveRefreshToken({required String tocken}) async {
-    return await _sharedPreferences.setString("refToken", tocken);
+  Future<bool> saveRefreshToken({required String token}) async {
+    return await _sharedPreferences.setString("refToken", token);
   }
 
   // Future<bool> saveUser({required UserModel user}) async{
@@ -53,20 +51,12 @@ class SharedPrefController {
   //   return UserModel.fromJson(user);
   // }
 
-  getUser() {
-    // debugPrint("_sharedPreferences.getString(user");
-    // debugPrint("This is the user data in sharedpref ${_sharedPreferences.getString("user")}");
+
+  getUser()  {
     final dynamic user = jsonDecode(_sharedPreferences.getString("user")!);
     return UserModel.fromJson(user);
   }
 
-  // UserModel? getUser() {
-  //   final dynamic user = jsonDecode(_sharedPreferences.getString("user")!);
-  //   if (user == null) {
-  //     return null;
-  //   }
-  //   return UserModel.fromJson(user);
-  // }
 
   bool get verifiedMobile =>
       _sharedPreferences.getBool("verifiedMobile") ?? false;
@@ -76,15 +66,6 @@ class SharedPrefController {
 
   String get accessToken => _sharedPreferences.getString("accessToken") ?? '';
 
-  // String get verifiedMobile => _sharedPreferences.getString(getData().user.verifiedEmail.toString()) ?? '';
-  // String get verifiedEmail => _sharedPreferences.getString(getData().user.verifiedMobile.toString()) ?? '';
-  // Future<bool> updateVerifiedEmail() async{
-  //   return await _sharedPreferences.setBool("verifiedEmail", true);
-  // }
-
-  // Future<bool> updateVerifiedMobile() async{
-  //   return await _sharedPreferences.setBool("verifiedMobile", true);
-  // }
 
   Future<bool> saveForgetEmail({required String email}) async {
     return await _sharedPreferences.setString("forgetEmail", email);

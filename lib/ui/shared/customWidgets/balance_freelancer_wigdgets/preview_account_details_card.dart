@@ -28,7 +28,7 @@ class PreviewAccountDetailsCard extends StatelessWidget {
       // padding: EdgeInsetsDirectional.only(  start: AppPadding.p27.w, end: AppPadding.p12.w, top: AppPadding.p8.h),
       margin: EdgeInsetsDirectional.only(bottom: AppPadding.p12.h),
       height: AppSize.s110.h,
-      width: double.infinity,
+      // width: double.infinity,
       decoration: BoxDecoration(
           color: ColorManager.whiteColor,
           borderRadius: BorderRadius.circular(AppSize.s7.r),
@@ -52,11 +52,14 @@ class PreviewAccountDetailsCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(children: [
-                      Text(accountName.length > 10 ? accountName.substring(0 , 11) : accountName,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
+                         Text( accountName,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
+
                       addHorizantelSpace(AppSize.s8.w),
-                      Text("[$bankName]", overflow: TextOverflow.ellipsis , style: subTitle!.copyWith(color: ColorManager.grayColor, fontSize: 13),)
+                      SizedBox(
+                          width: 30.w,
+                          child: Text("[$bankName]", overflow: TextOverflow.ellipsis , style: subTitle!.copyWith(color: ColorManager.grayColor, fontSize: 13),))
                     ]),
                     addVerticalSpace(AppSize.s10.h),
                     Text(accountNumber , style: Theme.of(context).textTheme.labelMedium!.copyWith(color: ColorManager.grayColor),),

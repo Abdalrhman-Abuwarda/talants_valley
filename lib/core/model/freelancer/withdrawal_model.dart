@@ -1,3 +1,5 @@
+import 'package:talants_valley/core/model/recipient_model.dart';
+
 class WithdrawModel {
   final String id;
   final String amount;
@@ -6,6 +8,7 @@ class WithdrawModel {
   final String typeWithdraw;
   final String status;
   final String createdAt;
+  final RecipientModel? recipient;
   final String? updatedAt;
   final String? confirmDocument;
   final List<HistoryModel>? history;
@@ -19,6 +22,7 @@ class WithdrawModel {
       required this.status,
       required this.createdAt,
       required this.updatedAt,
+        required this.recipient,
       this.confirmDocument,
       required this.history});
 
@@ -28,14 +32,16 @@ class WithdrawModel {
       bank: json['bank'] == null ? null : BankModel.formJson(json["bank"]),
       office: json['office'] == null ? null : OfficeModel.fromJson(json["office"]),
       typeWithdraw: json['typeWithdraw'],
+      recipient: json["recipient"] == null ? null : RecipientModel.fromJson(json["recipient"]),
       status: json['status'],
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
-      history: json['history'],
+      history: json['history'] == null ? null : List<HistoryModel>.from(json['history'].map((element) => HistoryModel.formJson(element)).toList()),
       confirmDocument: json['confirmDocument']);
 }
 
 //------------------------------------------------------------------------------
+
 class BankModel {
   final String id;
   final String accountName;

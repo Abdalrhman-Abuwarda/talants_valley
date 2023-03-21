@@ -9,6 +9,7 @@ import 'package:talants_valley/routing/router.dart';
 
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 import '../../../resources/valuesManager.dart';
+import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_bank_skeleton.dart';
 import '../../shared/customWidgets/custom_contaner_widget.dart';
 import '../../shared/customWidgets/custom_elevated_button.dart';
 import '../../shared/second_custom_buttom.dart';
@@ -30,7 +31,34 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<WithdrawFreelancerProvider>(
+      builder: (context , balance , child) => Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: AppPadding.p22.w),
+            child: Row(
+
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: AppSize.s160.w,
+                  child: SecondCustomButton(isLoading: false,
+                    text: "Add", onPressed: (){ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.addRecipientPage);} ,),
+                ),
+                SizedBox(
+                  width: AppSize.s160.w,
+                  child: ElevatedButton(onPressed:balance.checkSelectRecipients ,
+                    child: const Text("Select"),),
+                )
+              ],
+            ),
+          ),
+          addVerticalSpace(AppSize.s80.h)
+        ],
+      ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text("Recipients"),
@@ -40,20 +68,27 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Consumer<WithdrawFreelancerProvider>(
-            builder: (context , balance , child) => balance.isLoading ? const Center(child: CircularProgressIndicator(),) : Column(
-              children: [
+          child:  balance.isLoading ? ListView.separated(
+                separatorBuilder: (context, index) => SizedBox(
+                  height: AppSize.s16.h,
+                ),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 5,
+                itemBuilder: (context , index) => const ChooseBankCardSkeleton()) : Column(
+                children: [
                 addVerticalSpace(AppSize.s15.h),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.65,
+                  // height: MediaQuery.of(context).size.height * 0.65,
                   child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: balance.recipients.length,
                       itemBuilder: ((context, index) =>
                           CustomInformationCard(
                             onPressedDelete: ()=> balance.deleteRecipient(id: balance.recipients[index].id),
                             onPressedEdit: (){
-                              ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.editRecipientPage);
+                              balance.editRecipient(recipient: balance.recipients[index]);
                             },
                             name: balance.recipients[index].name,
                             id: balance.recipients[index].idNumber,
@@ -68,23 +103,6 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
                       )
                   ),
                 ),
-                addVerticalSpace(AppSize.s16.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: AppSize.s160.w,
-                      child: SecondCustomButton(isLoading: false,
-                      text: "Add", onPressed: (){ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.addRecipientPage);} ,),
-                    ),
-                    SizedBox(
-                      width: AppSize.s160.w,
-                      child: ElevatedButton(onPressed:balance.checkSelectRecipients ,
-                        child: const Text("Select"),),
-                    )
-                  ],
-                ),
-                addVerticalSpace(AppSize.s50.h),
               ],
             ),
           ),

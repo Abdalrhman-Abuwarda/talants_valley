@@ -18,7 +18,7 @@ class WithdrawFreelancerRepo {
       "bankBranch": bankBranch,
       "ledger": ledger
     });
-    debugPrint("This is sentCodeAddBank response in repo \n $response");
+    return response;
   }
 
   Future<dynamic> verifyAddAccountRepo(
@@ -32,6 +32,7 @@ class WithdrawFreelancerRepo {
       "code": code,
       "bankName": "palestine"
     });
+    return response;
   }
 
 
@@ -43,9 +44,10 @@ class WithdrawFreelancerRepo {
     return bankAccounts;
   }
 
-  Future<dynamic> deleteBankAccountRepo({required String idBank}) async {
+  Future<Response> deleteBankAccountRepo({required String idBank}) async {
     final response = await DioClient(dio).delete(
         "${Endpoints.deleteBankAccount}$idBank");
+    return response;
   }
 
     Future<dynamic> getWithdrawalRequestList() async {
@@ -65,6 +67,7 @@ class WithdrawFreelancerRepo {
         "amount": amount,
         "bankId": bankId
       });
+      return response;
     }
 
     Future<dynamic> getOfficeListRepo() async {
@@ -83,6 +86,7 @@ class WithdrawFreelancerRepo {
         "mobile": mobile,
         "idNumber": idNumber
       });
+      return response;
     }
 
     Future<dynamic> verificationAddRecipient(
@@ -96,6 +100,7 @@ class WithdrawFreelancerRepo {
         "name": name
       }
       );
+      return response;
     }
 
     Future<dynamic> getRecipientsRepo() async {
@@ -109,6 +114,7 @@ class WithdrawFreelancerRepo {
     Future<dynamic> deleteRecipientRepo({required String id}) async {
       final response = await DioClient(dio).delete(
           "${Endpoints.deleteRecipient}$id");
+      return response;
     }
 
     Future<dynamic> updateRecipientRepo(
@@ -122,6 +128,7 @@ class WithdrawFreelancerRepo {
         "name": "عبدالرحمن ماجد أبووردة"
       }
       );
+      return response;
     }
 
     Future<dynamic> requestWithdrawCashRepo(
@@ -133,17 +140,21 @@ class WithdrawFreelancerRepo {
         "officeId": officeId,
         "recipientId": recipientId
       });
+      return response;
     }
 
     Future<dynamic> getWithdrawDetailsRepo({required String id}) async {
-      final response = DioClient(dio).get("${Endpoints.getWithdrawDetails}$id");
+    final response = await DioClient(dio).get("${Endpoints.getWithdrawDetails}$id");
+    final withdrawDetails = WithdrawModel.formJson(response.data["data"]["withdraw"]);
+    debugPrint("This is Details inside repo $withdrawDetails");
+     return withdrawDetails;
     }
 
     Future<dynamic> cancelWithdrawRepo({required String id}) async {
-    final response = DioClient(dio).put("${Endpoints.cancelWithdraw}$id");
+    return await DioClient(dio).put("${Endpoints.cancelWithdraw}$id");
     }
 
   Future<dynamic> confirmWithdrawRepo({required String id}) async {
-    final response = DioClient(dio).put("${Endpoints.confirmWithdraw}$id");
+    return await DioClient(dio).put("${Endpoints.confirmWithdraw}$id");
   }
   }

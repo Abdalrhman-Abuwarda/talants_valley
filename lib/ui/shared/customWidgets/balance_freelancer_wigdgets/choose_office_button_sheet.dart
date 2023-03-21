@@ -44,7 +44,7 @@ class ChooseOfficeButtonSheet extends StatelessWidget {
                 itemCount: balance.officeList.length,
                 itemBuilder: (context, index) =>  InkWell(
                   child: Container(
-                    height: AppSize.s70.h,
+                    height: AppSize.s75.h,
                     padding: EdgeInsets.symmetric(vertical: AppPadding.p16.h),
                     decoration: const BoxDecoration(
                       border: Border(

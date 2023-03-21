@@ -30,8 +30,6 @@ class MainPageFreelancer extends StatelessWidget {
           showUnselectedLabels: false,
           iconSize: 25,
           elevation: 0,
-          // unselectedItemColor: ColorManager.blackColor,
-          // selectedItemColor: ColorManager.blueColor,
           backgroundColor: ColorManager.whiteColor,
           currentIndex: general.selectedIndex,
           onTap: general.onItemTapped,

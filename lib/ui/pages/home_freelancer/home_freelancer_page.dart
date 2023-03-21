@@ -9,11 +9,18 @@ import '../../../resources/colors_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 
-class HomeFreelancerPage extends StatelessWidget {
+class HomeFreelancerPage extends StatefulWidget {
   HomeFreelancerPage({Key? key}) : super(key: key);
 
+  @override
+  State<HomeFreelancerPage> createState() => _HomeFreelancerPageState();
+}
+
+class _HomeFreelancerPageState extends State<HomeFreelancerPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   final dataUser = SharedPrefController().getUser();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
