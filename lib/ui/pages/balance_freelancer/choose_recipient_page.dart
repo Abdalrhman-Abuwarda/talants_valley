@@ -95,7 +95,7 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
                             select: balance.recipients[index].isSelected,
                             phone: balance.recipients[index].mobile,
                             onTap: () {
-                              balance.selectRecipient(idNumber: balance.recipients[index].idNumber);
+                              balance.selectRecipientFromRecipientsPage(idNumber: balance.recipients[index].idNumber);
                             },
                           )
 

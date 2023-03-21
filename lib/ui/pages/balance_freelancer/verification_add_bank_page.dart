@@ -67,7 +67,7 @@ class _VerificationAddBnkPageState extends State<VerificationAddBnkPage> {
                       balance.verifyAddBnkPage( code: _optMobileController.text);
                     }
                   },
-                  onPressedTextButton: () => balance.resendCode(),
+                  onPressedTextButton: () => balance.resendCodeAddBank(),
                   validator: (value) => Validate.validateCode(value), minutes: balance.minutes.toString(), seconds: balance.seconds.toString(),
                 ),
           ),

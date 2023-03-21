@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:talants_valley/routing/navigations.dart';
 
 import '../../../core/data/local/sharedController.dart';
 import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
@@ -36,6 +37,7 @@ class _VerificationAddRecipientPageState extends State<VerificationAddRecipientP
           leading: IconButton(
             onPressed: () {
               balance.disposeTimer();
+              ServiceNavigation.serviceNavi.popFunction();
             },
             icon: const Icon(Icons.arrow_back_ios),
           ),
@@ -60,7 +62,7 @@ class _VerificationAddRecipientPageState extends State<VerificationAddRecipientP
                 }
               },
               onPressedTextButton: () => (){
-                balance.resendCode();
+                balance.resendCodeAddBank();
                 balance.verificationAddRecipient( name: SharedPrefController().getNameRecipient(),code: _optMobileController.text, mobile: SharedPrefController().getMobileRecipient(), idNumber: SharedPrefController().getIdNumberRecipient());
               },
               validator: (value) => Validate.validateCode(value),

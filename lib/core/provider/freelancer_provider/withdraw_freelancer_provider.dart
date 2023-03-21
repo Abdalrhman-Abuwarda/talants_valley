@@ -64,11 +64,11 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     });
   }
 
-  resendCode(){
+  resendCodeAddBank(){
     seconds = 60;
     minutes = 1;
+    sendCodeAddBankAccount(accountName: sharedPref.getBankAccountName(), accountNumber: sharedPref.getBankAccountNumber(), bankBranch: sharedPref.getBankAccountBranch(), ledger: sharedPref.getBankAccountLeger());
     startTimer();
-
     notifyListeners();
   }
   continueWithdraw(){
@@ -128,6 +128,8 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
       final dataResponse = await WithdrawFreelancerRepo().sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger!);
       SharedPrefController().savaBankAccountToVerify(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger, bankName: "Palestine");
       isVisibleHomeError = false;
+      notifyListeners();
+      startTimer();
       notifyListeners();
       ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.verificationAddBnkPage);
     }
@@ -306,6 +308,16 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     ServiceNavigation.serviceNavi.popFunction();
   }
 
+  selectRecipientFromRecipientsPage({required String idNumber}) {
+    for (var element in recipients) {
+      element.isSelected = false;
+    }
+    final int index = recipients.indexWhere((element) => element.idNumber == idNumber);
+    recipients[index].isSelected = true;
+    recipientSelected = recipients[index];
+    notifyListeners();
+  }
+
 //----------------------------checkSelectRecipients-----------------------------
 
   checkSelectRecipients() {
@@ -421,7 +433,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
 
 
-    logoutBalancea() async {
+    logoutBalance() async {
      mountUserToWithdrawal  = null;branchSelected = "";
     ledgerSelected = "";
     bankAccountSelected  = null;

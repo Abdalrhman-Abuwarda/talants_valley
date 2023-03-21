@@ -139,7 +139,7 @@ Future<dynamic> createNewPassword({required String password}) async{
 //------------------------------------------------------------------------------
 
 Future<dynamic> logout() async {
-  Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context , listen: false).logoutBalancea();
+  Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context , listen: false).logoutBalance();
   SharedPrefController().logout();
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);

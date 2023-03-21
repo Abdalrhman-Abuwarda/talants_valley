@@ -59,7 +59,7 @@ class _VerificationEditRecipientPageState extends State<VerificationEditRecipien
                   balance.updateRecipient(code: _optMobileController.text, id: "", mobile: "SharedPrefController().getMobileRecipient()", idNumber: "SharedPrefController().getIdNumberRecipient()", name: "SharedPrefController().getNameRecipient()");
                 }
               },
-              onPressedTextButton: () => balance.resendCode(),
+              onPressedTextButton: () => balance.resendCodeAddBank(),
               validator: (value) => Validate.validateCode(value),
               minutes: balance.minutes.toString(),
               seconds: balance.seconds.toString(),
