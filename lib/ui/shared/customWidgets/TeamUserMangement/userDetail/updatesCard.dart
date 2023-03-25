@@ -59,7 +59,7 @@ class UpdatesCard extends StatelessWidget {
                   addVerticalSpace(AppSize.s10.h),
                 ],
               ),
-              addHorizantelSpace(AppSize.s40.w),
+              addHorizontalSpace(AppSize.s40.w),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +73,7 @@ class UpdatesCard extends StatelessWidget {
                   Row(
                     children: [
                       Text("Bank", style: valueCardStyle,),
-                      addHorizantelSpace(AppSize.s18.w),
+                      addHorizontalSpace(AppSize.s18.w),
                       Text("0452 1044664 001 3000 000", style: propertyCardStyle,),
                     ],
                   ),
@@ -81,7 +81,7 @@ class UpdatesCard extends StatelessWidget {
                   Row(
                     children: [
                       Text("Cash", style: valueCardStyle,),
-                      addHorizantelSpace(AppSize.s18.w),
+                      addHorizontalSpace(AppSize.s18.w),
                       Text("Aldana Office - Gaza", style: propertyCardStyle ,),
                     ],
                   ),

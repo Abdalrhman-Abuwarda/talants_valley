@@ -44,7 +44,7 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
                     backgroundColor: ColorManager.blackColor,
                   ),
                 ),
-                addHorizantelSpace(AppSize.s8.w),
+                addHorizontalSpace(AppSize.s8.w),
                 Text(
                   "Address: $address",
                   style: Theme.of(context).textTheme.headline5,
@@ -62,7 +62,7 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
                     backgroundColor: ColorManager.blackColor,
                   ),
                 ),
-                addHorizantelSpace(AppSize.s8.w),
+                addHorizontalSpace(AppSize.s8.w),
                 Text(
                   "Working hours from  to ",
                   style: Theme.of(context).textTheme.headline5,
@@ -80,7 +80,7 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
                     backgroundColor: ColorManager.blackColor,
                   ),
                 ),
-                addHorizantelSpace(AppSize.s8.w),
+                addHorizontalSpace(AppSize.s8.w),
                 Text(
                   "Bring your ID for identification",
                   style: Theme.of(context).textTheme.headline5,
@@ -98,7 +98,7 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
                     backgroundColor: ColorManager.blackColor,
                   ),
                 ),
-                addHorizantelSpace(AppSize.s8.w),
+                addHorizontalSpace(AppSize.s8.w),
                 Text(
                   "Confirm receiving your payment",
                   style: Theme.of(context).textTheme.headline5,
@@ -116,7 +116,7 @@ class InstructionsCashWithdrawalWidget extends StatelessWidget {
                     backgroundColor: ColorManager.blackColor,
                   ),
                 ),
-                addHorizantelSpace(AppSize.s8.w),
+                addHorizontalSpace(AppSize.s8.w),
                 Text(
                   "Office fees $officeFees %",
                   style: Theme.of(context).textTheme.headline5,

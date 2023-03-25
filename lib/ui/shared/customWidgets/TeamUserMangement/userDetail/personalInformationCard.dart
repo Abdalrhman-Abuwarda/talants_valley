@@ -101,7 +101,7 @@ class PersonalInformationCard extends StatelessWidget {
                   addVerticalSpace(AppSize.s10.h),
                 ],
               ),
-              addHorizantelSpace(AppSize.s40.w),
+              addHorizontalSpace(AppSize.s40.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

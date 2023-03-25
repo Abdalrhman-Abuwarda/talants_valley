@@ -17,7 +17,7 @@ class ChooseBankCardSkeleton extends StatelessWidget {
       child: Row(
         children: [
            Skeleton(height: AppSize.s80.h, width: AppSize.s80.h),
-          addHorizantelSpace(AppSize.s60.w),
+          addHorizontalSpace(AppSize.s60.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

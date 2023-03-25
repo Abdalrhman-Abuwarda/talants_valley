@@ -41,7 +41,7 @@ class PayoutBottomSheet extends StatelessWidget {
               child:  Row(
                 children: [
                   SvgPicture.asset(IconAssets.bankIcon , height: AppSize.s25.h, color: balance.withdrawals.isEmpty ? ColorManager.thirdFontColor : ColorManager.blackColor,),
-                  addHorizantelSpace(AppSize.s33.w),
+                  addHorizontalSpace(AppSize.s33.w),
                   Text( "Bank" , style: balance.withdrawals.isNotEmpty ? headLine3 : headLine3!.copyWith(color: ColorManager.thirdFontColor), ),
                 ],
               ),
@@ -52,7 +52,7 @@ class PayoutBottomSheet extends StatelessWidget {
             child: Row(
               children: [
                 SvgPicture.asset(IconAssets.cashIcon, height: AppSize.s25.h,),
-                addHorizantelSpace(AppSize.s33.w),
+                addHorizontalSpace(AppSize.s33.w),
                 Text("Cash" , style: headLine3,),
               ],
             ),

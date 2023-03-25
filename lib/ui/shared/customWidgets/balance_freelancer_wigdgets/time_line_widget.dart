@@ -57,7 +57,7 @@ class TimeLineCardWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                addHorizantelSpace(AppSize.s55.w),
+                addHorizontalSpace(AppSize.s55.w),
                 Text(
                   "Requested",
                   style: textStyle.headline5,
@@ -95,7 +95,7 @@ class TimeLineCardWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                addHorizantelSpace(AppSize.s55.w),
+                addHorizontalSpace(AppSize.s55.w),
                 Text(
                   "Requested",
                   style: textStyle.headline5,

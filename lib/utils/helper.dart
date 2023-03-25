@@ -33,7 +33,7 @@ class Helpers {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(IconAssets.doneIcon),
-          addHorizantelSpace(AppSize.s10.w),
+          addHorizontalSpace(AppSize.s10.w),
           Text(
             message,
             overflow: TextOverflow.ellipsis,

@@ -125,7 +125,7 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                           ],
                         ),
                       ),
-                      addHorizantelSpace(AppSize.s25.w),
+                      addHorizontalSpace(AppSize.s25.w),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

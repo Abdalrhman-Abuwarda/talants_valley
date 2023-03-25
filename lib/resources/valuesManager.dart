@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
  return SizedBox(height: height,);
 }
 
- addHorizantelSpace(double width){
+ addHorizontalSpace(double width){
  return SizedBox(width: width,);
 }
+
+const gSH5 = SizedBox(width: AppSize.s5,);
 
 class AppMargin {
   static const double m8 = 8.0;

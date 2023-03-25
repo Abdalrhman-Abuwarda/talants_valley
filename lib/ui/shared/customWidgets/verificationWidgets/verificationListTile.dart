@@ -30,7 +30,7 @@ class VerificationListTile extends StatelessWidget {
       ),
       child: ListTile(
         style: ListTileStyle.list,
-        title: Row(children: [Text(title), addHorizantelSpace(AppSize.s25.h), Text(rejectedHint ?? "", style: Theme.of(context).textTheme.bodyText2!.copyWith(
+        title: Row(children: [Text(title), addHorizontalSpace(AppSize.s25.h), Text(rejectedHint ?? "", style: Theme.of(context).textTheme.bodyText2!.copyWith(
           color: ColorManager.redColor
         ),)]),
         subtitle: Row(children: [

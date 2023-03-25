@@ -47,7 +47,7 @@ class BankAccountCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset(IconAssets.bankIcon , height: AppSize.s40.h,),
-                  addHorizantelSpace(AppSize.s20.w),
+                  addHorizontalSpace(AppSize.s20.w),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

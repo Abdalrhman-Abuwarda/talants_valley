@@ -83,7 +83,7 @@ class PreviewWithdrawalCashPage extends StatelessWidget {
                           IconAssets.officeIcon,
                           height: AppSize.s40.h,
                         ),
-                        addHorizantelSpace(AppSize.s20.w),
+                        addHorizontalSpace(AppSize.s20.w),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,

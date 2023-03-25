@@ -36,7 +36,7 @@ class AddBankWidgets extends StatelessWidget {
               child: Row(
                 children: [
                   SvgPicture.asset(IconAssets.bankIcon , height: AppSize.s40.h,),
-                  addHorizantelSpace(AppSize.s25.w),
+                  addHorizontalSpace(AppSize.s25.w),
                   Text("Add Bank Account" , style: Theme.of(context).textTheme.headline2!.copyWith(
                       color: ColorManager.blueColor,
                       fontWeight: FontWeight.normal

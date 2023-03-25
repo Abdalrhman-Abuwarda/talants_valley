@@ -85,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ],
                         ),
                       ),
-                      addHorizantelSpace(AppSize.s25.w),
+                      addHorizontalSpace(AppSize.s25.w),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

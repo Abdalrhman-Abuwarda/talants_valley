@@ -28,7 +28,7 @@ class InstructionsBankWithdrawal extends StatelessWidget {
                 backgroundColor: ColorManager.blackColor,
               ),
             ),
-            addHorizantelSpace(AppSize.s8.w),
+            addHorizontalSpace(AppSize.s8.w),
             Text("Open your bank account app to ensure \n payment delivery", style: Theme.of(context).textTheme.headline5,)
           ],
         ),
@@ -43,7 +43,7 @@ class InstructionsBankWithdrawal extends StatelessWidget {
                 backgroundColor: ColorManager.blackColor,
               ),
             ),
-            addHorizantelSpace(AppSize.s8.w),
+            addHorizontalSpace(AppSize.s8.w),
             Text("Open your bank account app to ensure \n payment delivery", style: Theme.of(context).textTheme.headline5,)
           ],
         ),
@@ -58,7 +58,7 @@ class InstructionsBankWithdrawal extends StatelessWidget {
                 backgroundColor: ColorManager.blackColor,
               ),
             ),
-            addHorizantelSpace(AppSize.s8.w),
+            addHorizontalSpace(AppSize.s8.w),
             Text("Open your bank account app to ensure \n payment delivery", style: Theme.of(context).textTheme.headline5,)
           ],
         ),

@@ -99,7 +99,7 @@ class HeaderStatusBankWidget extends StatelessWidget {
                       style:
                           labelStyle!.copyWith(color: ColorManager.blackColor),
                     ),
-                    addHorizantelSpace(AppSize.s10.w),
+                    addHorizontalSpace(AppSize.s10.w),
                     Text(
                       "[$bankName]",
                       style: labelStyle,

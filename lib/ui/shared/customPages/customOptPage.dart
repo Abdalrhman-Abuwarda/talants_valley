@@ -101,7 +101,7 @@ class _CustomOptPageState extends State<CustomOptPage> {
                   ],
                 )),
             separatorPositions: const [3],
-            separator: addHorizantelSpace(AppSize.s30.w),
+            separator: addHorizontalSpace(AppSize.s30.w),
             // obscuringCharacter: '*',
             defaultPinTheme: PinTheme(
                 margin: EdgeInsetsDirectional.only(end: AppMargin.m12.w),

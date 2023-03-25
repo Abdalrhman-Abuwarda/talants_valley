@@ -33,9 +33,9 @@ class CustomButtonWhenUploudFile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            addHorizantelSpace(AppSize.s12.w),
+            addHorizontalSpace(AppSize.s12.w),
             const Icon(Icons.upload_file),
-            addHorizantelSpace(AppSize.s12.w),
+            addHorizontalSpace(AppSize.s12.w),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

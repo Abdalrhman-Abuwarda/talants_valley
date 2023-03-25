@@ -50,7 +50,7 @@ class WithdrawalCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(withdrawalFrom , style: textStyle.headline5,),
-                    addHorizantelSpace(AppSize.s16.w),
+                    addHorizontalSpace(AppSize.s16.w),
                     Text(createdAt.substring(0, 10) , style: Theme.of(context).textTheme.bodyText1,),
                   ],
                 ),

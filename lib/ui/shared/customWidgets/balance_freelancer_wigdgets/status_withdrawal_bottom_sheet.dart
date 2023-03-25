@@ -52,7 +52,7 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
                   IconAssets.pendingIcon,
                   height: AppSize.s40.h,
                 ),
-                addHorizantelSpace(AppSize.s10.w),
+                addHorizontalSpace(AppSize.s10.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,7 +75,7 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
             Row(
               children: [
                 Text(withdrawal.bank == null ? withdrawal.recipient!.name : withdrawal.bank!.accountName ,style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
-                addHorizantelSpace(AppSize.s10.w),
+                addHorizontalSpace(AppSize.s10.w),
                 Expanded(child: Text(withdrawal.bank == null ? withdrawal.office!.name : withdrawal.bank!.bankName, overflow: TextOverflow.ellipsis , style: Theme.of(context).textTheme.headline4)),
                 const Spacer(),
                 Text("\$ ${withdrawal.amount}" , style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, fontFamily: "Segoe UI", color: ColorManager.blackColor),),

@@ -85,7 +85,7 @@ class CostumElevatedButton extends StatelessWidget {
               Icons.upload_file,
               color: Colors.black,
             ),
-            addHorizantelSpace(AppSize.s10.w),
+            addHorizontalSpace(AppSize.s10.w),
             Text(
               'Upload a File',
               style: Theme.of(context).textTheme.subtitle1,

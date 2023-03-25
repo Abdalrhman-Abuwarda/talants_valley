@@ -46,7 +46,7 @@ class PreviewAccountDetailsCard extends StatelessWidget {
                   assetIcon,
                   height: AppSize.s40.h,
                 ),
-                addHorizantelSpace(AppSize.s20.w),
+                addHorizontalSpace(AppSize.s20.w),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +56,7 @@ class PreviewAccountDetailsCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.headline4!.copyWith(color: ColorManager.blackColor),),
 
-                      addHorizantelSpace(AppSize.s8.w),
+                      addHorizontalSpace(AppSize.s8.w),
                       SizedBox(
                           width: 30.w,
                           child: Text("[$bankName]", overflow: TextOverflow.ellipsis , style: subTitle!.copyWith(color: ColorManager.grayColor, fontSize: 13),))

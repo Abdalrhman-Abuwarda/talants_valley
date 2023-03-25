@@ -47,7 +47,7 @@ class ListTileUser extends StatelessWidget {
                 radius: AppSize.s20.r,
                 child: Text(leadingLatter, style: const TextStyle(color: ColorManager.whiteColor),),
               ),
-              addHorizantelSpace(AppSize.s15.w),
+              addHorizontalSpace(AppSize.s15.w),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

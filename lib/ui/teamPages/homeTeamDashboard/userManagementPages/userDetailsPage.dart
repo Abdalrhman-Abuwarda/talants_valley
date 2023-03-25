@@ -29,7 +29,7 @@ class UserDetailsPage extends StatelessWidget {
         actions: [
           IconButton(onPressed: (){},
               icon: const Icon(Icons.add, color: ColorManager.blueColor,)),
-          addHorizantelSpace(AppSize.s10.h),
+          addHorizontalSpace(AppSize.s10.h),
         ],
       ),
       body: Padding(

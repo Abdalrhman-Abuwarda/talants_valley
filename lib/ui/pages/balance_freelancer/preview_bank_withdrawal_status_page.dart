@@ -108,7 +108,7 @@ class _PreviewBankWithdrawalStatusPageState
                               ],
                             ),
                           ),
-                          addHorizantelSpace(AppSize.s14.w),
+                          addHorizontalSpace(AppSize.s14.w),
                           SizedBox(
                             width: AppSize.s10.w,
                             child: Column(
@@ -134,7 +134,7 @@ class _PreviewBankWithdrawalStatusPageState
                               ],
                             ),
                           ),
-                          addHorizantelSpace(AppSize.s25.w),
+                          addHorizontalSpace(AppSize.s25.w),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -165,7 +165,7 @@ class _PreviewBankWithdrawalStatusPageState
                             Row(
                               children: [
                                 Text("Sent by", style: textStyle.headline6),
-                                addHorizantelSpace(AppSize.s12.w),
+                                addHorizontalSpace(AppSize.s12.w),
                                 const Text("Omar Ziara"),
                               ],
                             ),

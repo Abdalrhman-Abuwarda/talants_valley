@@ -141,7 +141,7 @@ class CustomInformationCard extends StatelessWidget {
                       InkWell(
                         onTap: onPressedDelete,
                           child: SvgPicture.asset(IconAssets.deleteIcon)),
-                      addHorizantelSpace(AppSize.s16.w),
+                      addHorizontalSpace(AppSize.s16.w),
                       InkWell(
                         onTap: onPressedEdit,
                           child: SvgPicture.asset(IconAssets.pencilIcon)),

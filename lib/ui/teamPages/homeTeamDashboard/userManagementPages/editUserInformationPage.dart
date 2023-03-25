@@ -130,7 +130,7 @@ class _EditUserInformationState extends State<EditUserInformation> {
                             ],
                           ),
                         ),
-                        addHorizantelSpace(AppSize.s25.w),
+                        addHorizontalSpace(AppSize.s25.w),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,7 +224,7 @@ class _EditUserInformationState extends State<EditUserInformation> {
                             ],
                           ),
                         ),
-                        addHorizantelSpace(AppSize.s25.w),
+                        addHorizontalSpace(AppSize.s25.w),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

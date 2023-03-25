@@ -57,7 +57,7 @@ class HeaderCardBalance extends StatelessWidget {
               child: Row(
                 children: [
                   SvgPicture.asset(IconAssets.withdrawIcon),
-                  addHorizantelSpace(AppSize.s8.w),
+                  addHorizontalSpace(AppSize.s8.w),
                   Text("Withdraw", style: labelMedium!.copyWith(color: ColorManager.blueColor),)
                 ],
               ),

@@ -108,7 +108,7 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
                     Text(verification.idFileSize > 2 ? "❗ Your file is too big." : "" , style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       color: ColorManager.redColor
                     ),),
-                    addHorizantelSpace(verification.idFileSize > 2 ? AppSize.s28.w : 0),
+                    addHorizontalSpace(verification.idFileSize > 2 ? AppSize.s28.w : 0),
                     Text("2 MP maximum" , style: Theme.of(context).textTheme.bodyText1,),
                   ],
                 ),
