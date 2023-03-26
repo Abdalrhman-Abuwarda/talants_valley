@@ -18,6 +18,7 @@ class _SplashPageState extends State<SplashPage> {
 
   final bool isLogedIn = SharedPrefController().isLoggedIn();
 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();

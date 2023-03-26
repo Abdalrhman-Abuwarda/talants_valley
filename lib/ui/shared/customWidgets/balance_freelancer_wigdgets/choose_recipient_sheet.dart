@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/routing/navigations.dart';
 
-import '../../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../../resources/assets_manager.dart';
 import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
@@ -15,7 +15,7 @@ class ChooseRecipientButtonSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textStyle = Theme.of(context).textTheme;
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context , balance , child) => Container(
         padding:  EdgeInsetsDirectional.only(
           top: AppPadding.p16.h,

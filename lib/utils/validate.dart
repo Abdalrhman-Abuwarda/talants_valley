@@ -1,10 +1,8 @@
 import 'dart:core';
 import 'dart:io';
 
-import 'package:provider/provider.dart';
-import 'package:talants_valley/utils/helper.dart';
+import 'package:intl/intl.dart';
 
-import '../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
 
 extension ExtendedString  on String {
   String? validateAccountNumber() {
@@ -64,6 +62,17 @@ extension ExtendedString  on String {
     }
     return null;
   }
+
+  String? convertToDate() {
+    DateTime dateFormat = DateTime.parse(this);
+    return DateFormat.jm().format(dateFormat);
+  }
+
+  // String? convertToDay() {
+  //   DateTime dateFormat = DateTime.parse(this);
+  //   final date =  DateFormat.yMd().format(dateFormat);
+  //   return Jiffy.parse(date).fromNow();
+  // }
 
 }
 

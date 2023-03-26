@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
@@ -24,8 +24,8 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<WithdrawFreelancerProvider>(context, listen: false).getOfficeList();
-    Provider.of<WithdrawFreelancerProvider>(context, listen: false).getRecipients();
+    Provider.of<PayoutFreelancerProvider>(context, listen: false).getOfficeList();
+    Provider.of<PayoutFreelancerProvider>(context, listen: false).getRecipients();
     super.initState();
   }
 
@@ -42,7 +42,7 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
-        child: Consumer<WithdrawFreelancerProvider>(
+        child: Consumer<PayoutFreelancerProvider>(
           builder: (context, balance, child) => balance.officeList.isEmpty
               ? ListView.separated(
               separatorBuilder: (context, index) => SizedBox(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
@@ -62,17 +62,13 @@ class _AddRecipientPageState extends State<AddRecipientPage> {
                 addVerticalSpace(AppSize.s5.h),
                 MainTextFormField(hintText: "Enter ID number", inputType: TextInputType.number, controller: _recipientsIdNumberController, validator: (value) => value!.validateIdNumber()),
                 addVerticalSpace(AppSize.s80.h),
-                Consumer<WithdrawFreelancerProvider>(
+                Consumer<PayoutFreelancerProvider>(
                   builder: (context , balance , child) =>
                       MainElevatedButton(textColor: ColorManager.whiteColor, onPressed: (){
                         balance.sendCodeRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);
                       },
                           isLoading: balance.isLoading, text: "Confirm", isMain: true)
-                      // ElevatedButton(
-                      // onPressed: (){
-                      //   balane.sendCodeRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);
-                      // }
-                      // , child: const Text("Confirm")),
+
                 )
               ],
             ),

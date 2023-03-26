@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
 
 import '../../../utils/helper.dart';
-import '../../provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../local/sharedController.dart';
 
 class DioInterceptor extends Interceptor {
@@ -20,9 +20,7 @@ class DioInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
 
     Provider.of<AuthProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
-    Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
-    debugPrint("This is response in Interceptor \n $response");
-    debugPrint("This is response in Interceptor \n ${response.data}");
+    Provider.of<PayoutFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
     // TODO: implement onResponse
     super.onResponse(response, handler);
   }
@@ -30,7 +28,7 @@ class DioInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     Provider.of<AuthProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
-    Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
+    Provider.of<PayoutFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
 
     switch(err.type){
       case DioErrorType.connectTimeout:
@@ -60,23 +58,12 @@ class DioInterceptor extends Interceptor {
         break;
       case DioErrorType.response:
 
-        debugPrint("This is the statusCode ${err.response!.statusCode}");
-        debugPrint("${err.response!.statusCode == 400}");
-          debugPrint('This is response error  $err');
-          debugPrint('This is response error message ${err.message}');
-          debugPrint('This is data ${err.response!.data}');
-          debugPrint('This is dataResponse ${err.response}');
-          debugPrint('This is message ${err.message}');
-          debugPrint('This is dataError ${err.error}');
-
-
           if(err.response!.statusCode == 400){
             Helpers.showSnackBar(message: err.response!.data["message"]);
             debugPrint("after Pro this is 400");
           }
           else if(err.response!.statusCode == 404){
             Helpers.showSnackBar(message: err.response!.data["message"]);
-            // Helpers.showSnackBar(message: "not verified address");
           }
           else if(err.response!.statusCode == 401){
             Helpers.showSnackBar(message: err.response!.data["message"]);

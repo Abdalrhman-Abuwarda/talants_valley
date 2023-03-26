@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 
-import '../../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../../resources/valuesManager.dart';
 class ChooseOfficeButtonSheet extends StatelessWidget {
   const ChooseOfficeButtonSheet({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class ChooseOfficeButtonSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle bodyTextStyle = Theme.of(context).textTheme.bodyText1!.copyWith(color: ColorManager.thirdFontColor);
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context , balance , child) => Container(
         padding:  EdgeInsetsDirectional.only(
           top: AppPadding.p16.h,

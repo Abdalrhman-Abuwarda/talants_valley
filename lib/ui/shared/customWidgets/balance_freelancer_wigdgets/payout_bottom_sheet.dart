@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
@@ -32,7 +32,7 @@ class PayoutBottomSheet extends StatelessWidget {
           addVerticalSpace(AppSize.s18.h),
           const Divider(),
           addVerticalSpace(AppSize.s18.h),
-          Consumer<WithdrawFreelancerProvider>(
+          Consumer<PayoutFreelancerProvider>(
             builder: (context, balance, child) => InkWell(
               onTap: balance.withdrawals.isNotEmpty ? (){
                 ServiceNavigation.serviceNavi

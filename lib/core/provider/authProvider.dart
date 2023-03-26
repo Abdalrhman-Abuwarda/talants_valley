@@ -8,7 +8,7 @@ import 'package:talants_valley/core/data/repository/auth_repository.dart';
 import '../../routing/navigations.dart';
 import '../../routing/router.dart';
 import '../../utils/helper.dart';
-import 'freelancer_provider/withdraw_freelancer_provider.dart';
+import 'freelancer_provider/payout_freelancer_provider.dart';
 
 class AuthProvider with ChangeNotifier{
 bool isPassword = true;
@@ -139,7 +139,7 @@ Future<dynamic> createNewPassword({required String password}) async{
 //------------------------------------------------------------------------------
 
 Future<dynamic> logout() async {
-  Provider.of<WithdrawFreelancerProvider>(Helpers.scaffoldKey.currentState!.context , listen: false).logoutBalance();
+  Provider.of<PayoutFreelancerProvider>(Helpers.scaffoldKey.currentState!.context , listen: false).logoutBalance();
   SharedPrefController().logout();
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);

@@ -52,6 +52,9 @@ dependencies:
   timeline_tile: ^2.0.0
   shimmer: ^2.0.0
   intl: ^0.18.0
+  get_it: ^7.2.0
+  dio_logger: ^4.0.8+8
+#  jiffy: ^6.1.0
 
 dev_dependencies:
   flutter_test:

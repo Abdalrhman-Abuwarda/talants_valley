@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/colors_manager.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_card_balance.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/status_withdrawal_bottom_sheet.dart';
@@ -24,7 +24,7 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
   void initState() {
     // TODO: implement initState
 
-    Provider.of<WithdrawFreelancerProvider>(context, listen: false)
+    Provider.of<PayoutFreelancerProvider>(context, listen: false)
         .getWithdrawList();
     super.initState();
   }
@@ -53,7 +53,7 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
                       .subtitle1!
                       .copyWith(fontWeight: FontWeight.w600)),
               addVerticalSpace(AppSize.s10.h),
-              Consumer<WithdrawFreelancerProvider>(
+              Consumer<PayoutFreelancerProvider>(
                 builder: (context, balance, child) => balance.isLoading
                     ? ListView.builder(
                         shrinkWrap: true,
@@ -80,7 +80,7 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
                                 balance.withdrawals[index].bank == null
                                     ? balance.withdrawals[index].office!.name
                                     : balance.withdrawals[index].bank!.bankName,
-                            name:  balance.withdrawals[index].bank == null
+                            name: balance.withdrawals[index].bank == null
                                 ? balance.withdrawals[index].recipient!.name
                                 : balance.withdrawals[index].bank!.accountName,
                             sheetPage: (context) => StatusWithdrawalBottomSheet(

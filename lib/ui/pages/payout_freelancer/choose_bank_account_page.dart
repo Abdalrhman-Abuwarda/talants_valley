@@ -6,7 +6,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/router.dart';
 
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/add_bank_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/bank_account_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_bank_skeleton.dart';
@@ -23,12 +23,12 @@ class _ChooseBankAccountPageState extends State<ChooseBankAccountPage> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<WithdrawFreelancerProvider>(context , listen: false).getBankAccountList();
+    Provider.of<PayoutFreelancerProvider>(context , listen: false).getBankAccountList();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context, balance, child) => Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton:

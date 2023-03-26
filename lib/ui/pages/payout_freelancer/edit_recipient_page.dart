@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
@@ -27,7 +27,7 @@ class _EditRecipientPageState extends State<EditRecipientPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var withdrawProvider = Provider.of<WithdrawFreelancerProvider>(context, listen: false);
+    var withdrawProvider = Provider.of<PayoutFreelancerProvider>(context, listen: false);
     _recipientsFullNameController.text = withdrawProvider.recipientForEdit!.name;
     _recipientsPhoneNumberController.text = withdrawProvider.recipientForEdit!.mobile;
     _recipientsIdNumberController.text = withdrawProvider.recipientForEdit!.idNumber;
@@ -72,16 +72,12 @@ class _EditRecipientPageState extends State<EditRecipientPage> {
                 addVerticalSpace(AppSize.s5.h),
                 MainTextFormField(hintText: "Enter ID number", inputType: TextInputType.number, controller: _recipientsIdNumberController, validator: (value) => value!.validateIdNumber()),
                 addVerticalSpace(AppSize.s80.h),
-                Consumer<WithdrawFreelancerProvider>(
+                Consumer<PayoutFreelancerProvider>(
                   builder: (context , balance , child) =>
                       MainElevatedButton(textColor: ColorManager.whiteColor,
-                          onPressed: (){balance.saveUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);},
+                          onPressed: (){balance.sendCodeUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text, id: '');},
                           isLoading: balance.isLoading, text: "Save Changes", isMain: true)
-                      // ElevatedButton(
-                      // onPressed: (){
-                      //   balance.saveUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text);
-                      // }
-                      // , child: const Text("Save Changes")),
+
                 )
               ],
             ),

@@ -3,18 +3,24 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
-import 'package:talants_valley/core/data/repository/freelancer/withdraw_freelancer_repo.dart';
+import 'package:talants_valley/core/data/repository/freelancer/payout_freelancer_repo.dart';
 import 'package:talants_valley/core/model/recipient_model.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../../routing/navigations.dart';
 import '../../../utils/helper.dart';
 import '../../model/freelancer/withdrawal_model.dart';
+import 'package:get_it/get_it.dart';
+import 'package:talants_valley/locator.dart';
 
-class WithdrawFreelancerProvider extends ChangeNotifier{
+class PayoutFreelancerProvider extends ChangeNotifier{
   SharedPrefController sharedPref = SharedPrefController();
+
+  final PayoutFreelancerRepo repo =  locator.get<PayoutFreelancerRepo>();
+
+
    bool isVisibleHomeError = false;
-   bool isVisablAmountCashError = false;
+   bool isVisibleAmountCashError = false;
    String? mountUserToWithdrawal;
    String branchSelected = "";
    String ledgerSelected = "";
@@ -36,16 +42,15 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
    bool withdrawalsIsUpdated = false;
    String? idWithdrawForPreview;
    bool isLoading = false;
-
-
    int seconds = 59;
    int minutes = 1;
    Timer? timer;
    int counterMinutes = 0;
    bool timerCansel = false;
+   bool secondLoading = false;
 
-   twoDigits(int n) => n.toString().padLeft(2, "0");
-// final minute = twoDigits(const Duration().inMinutes.remainder(60));
+
+
   void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if(seconds != 0 ) {
@@ -54,7 +59,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
       }else if(seconds == 0 && minutes != 0){
         if (minutes != 0 ){
           minutes--;
-          seconds += 60;
+          seconds += 59;
         }
       }
       else {
@@ -64,13 +69,29 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     });
   }
 
-  resendCodeAddBank(){
+
+//------------------------------resendCodeAddBank-------------------------------
+  resendCodeAddBank() async {
     seconds = 60;
     minutes = 1;
-    sendCodeAddBankAccount(accountName: sharedPref.getBankAccountName(), accountNumber: sharedPref.getBankAccountNumber(), bankBranch: sharedPref.getBankAccountBranch(), ledger: sharedPref.getBankAccountLeger());
+    notifyListeners();
+    await repo.sendCodeAddBankRepo(accountName: sharedPref.getBankAccountName(), accountNumber: sharedPref.getBankAccountNumber(), bankBranch: sharedPref.getBankAccountBranch(), ledger: sharedPref.getBankAccountLeger());
     startTimer();
     notifyListeners();
   }
+
+
+//------------------------------------------------------------------------------
+
+  resendCodeAddRecipient() async{
+    seconds = 60;
+    minutes = 1;
+    notifyListeners();
+    await repo.senCodeRecipientRepo(mobile: sharedPref.getMobileRecipient(), idNumber: sharedPref.getIdNumberRecipient());
+    startTimer();
+    notifyListeners();
+  }
+
   continueWithdraw(){
     if(bankAccountSelected == null){
       isVisibleHomeError = true;
@@ -79,12 +100,16 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
       ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.withdrawalPreviewPage);   }
   }
 
+//------------------------------disposeTimer------------------------------------
+
   disposeTimer(){
-    seconds = 0;
-    minutes = 0;
+    seconds = 60;
+    minutes = 1;
     timer?.cancel();
     notifyListeners();
   }
+
+//-----------------------------selectBranch-------------------------------------
 
   selectBranch({required String branch}){
     branchSelected = branch;
@@ -92,11 +117,15 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+//-----------------------------selectLedger-------------------------------------
+
   selectLedger({required String ledger}){
     ledgerSelected = ledger;
     ServiceNavigation.serviceNavi.popFunction();
     notifyListeners();
   }
+
+//------------------------------selectOffice------------------------------------
 
   selectOffice({required String officeId}) {
     for (var element in bankAccounts) {
@@ -110,6 +139,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
   }
 
 //----------------------------------sendCodeAddBankAccount----------------------
+
     sendCodeAddBankAccount({ required String accountName, required String accountNumber, required String bankBranch, required String ledger}) async {
     if(branchSelected.isEmpty && ledgerSelected.isEmpty){
       isVisibleLedgerError = true;
@@ -125,7 +155,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     } else {
       isLoading = true;
       notifyListeners();
-      final dataResponse = await WithdrawFreelancerRepo().sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger!);
+      final dataResponse = await repo.sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger!);
       SharedPrefController().savaBankAccountToVerify(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger, bankName: "Palestine");
       isVisibleHomeError = false;
       notifyListeners();
@@ -139,7 +169,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
     verifyAddBnkPage({ required String code}) async{
     isLoading = true;
-    final dataResponse = await WithdrawFreelancerRepo().verifyAddAccountRepo(accountName: SharedPrefController().getBankAccountName(), accountNumber: SharedPrefController().getBankAccountNumber(), bankBranch: SharedPrefController().getBankAccountBranch(), ledger: SharedPrefController().getBankAccountLeger(), code: code, bankName: "Palestine");
+    final dataResponse = await repo.verifyAddAccountRepo(accountName: SharedPrefController().getBankAccountName(), accountNumber: SharedPrefController().getBankAccountNumber(), bankBranch: SharedPrefController().getBankAccountBranch(), ledger: SharedPrefController().getBankAccountLeger(), code: code, bankName: "Palestine");
     disposeTimer();
     Helpers.balanceShowSnackBar(message: "Bank account has been added.");
     ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseBankAccountPage);
@@ -150,7 +180,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
   getBankAccountList() async {
     isLoading = true;
     // notifyListeners();
-    final response = await WithdrawFreelancerRepo().getBankAccountListRepo();
+    final response = await repo.getBankAccountListRepo();
     bankAccounts = response;
     notifyListeners();
 }
@@ -166,7 +196,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
           onPressed: () async {
             isLoading = true;
             notifyListeners();
-            final dataResponse = await WithdrawFreelancerRepo().deleteBankAccountRepo(idBank: bankId);
+            final dataResponse = await repo.deleteBankAccountRepo(idBank: bankId);
             if(dataResponse.statusCode == 200){
               isLoading = false;
               bankAccounts.removeWhere((item) => item.id == bankId);
@@ -183,30 +213,22 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
   getWithdrawList() async {
     isLoading = true;
-    final dataResponse = await WithdrawFreelancerRepo().getWithdrawalRequestList();
+    final dataResponse = await repo.getWithdrawalRequestList();
     withdrawals = dataResponse;
     debugPrint(" This is the length =>>> ${withdrawals.length.toString()}");
     notifyListeners();
 }
 
-//------------------------------------------------------------------------------
-
-  checkWithdrawList() async {
-    if(withdrawals.isEmpty || withdrawalsIsUpdated == true){
-      getWithdrawList();
-    }
-}
 
 //-----------------------------getOfficeList------------------------------------
 
     getOfficeList() async{
     isLoading = true;
-    final dataResponse = await WithdrawFreelancerRepo().getOfficeListRepo();
+    final dataResponse = await repo.getOfficeListRepo();
     officeList  = dataResponse;
     officeSelected = officeList.first;
     notifyListeners();
   }
-//------------------------------------------------------------------------------
 
 
 //------------------------------------------------------------------------------
@@ -214,11 +236,12 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
    sendCodeRecipient({required String mobile, required String idNumber, required String name}) async {
     isLoading = true;
     notifyListeners();
-    final dataResponse = await WithdrawFreelancerRepo().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
+    final dataResponse = await repo.senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
     sharedPref.saveRecipientData(mobile: mobile, idNumber: idNumber, name: name);
     debugPrint("This is data Recipient in Shared Pref ${sharedPref.getNameRecipient()} , ${sharedPref.getIdNumberRecipient()} , ${sharedPref.getMobileRecipient()}");
     notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.verificationAddRecipientPage);
+    startTimer();
   }
 
 //------------------------------------------------------------------------------
@@ -226,14 +249,14 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
    verificationAddRecipient({required String code , required String mobile, required String idNumber, required String name}) async{
     isLoading = true;
     notifyListeners();
-    final dataResponse = await WithdrawFreelancerRepo().verificationAddRecipient(code: code, mobile: mobile, idNumber: idNumber, name: name);
+    final dataResponse = await repo.verificationAddRecipient(code: code, mobile: mobile, idNumber: idNumber, name: name);
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);
  }
 
 //------------------------------------------------------------------------------
     getRecipients() async {
     isLoading = true;
-    final dataResponse = await WithdrawFreelancerRepo().getRecipientsRepo();
+    final dataResponse = await repo.getRecipientsRepo();
     recipients = dataResponse;
     notifyListeners();
   }
@@ -244,12 +267,12 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     showDialog(
         context: contextKey,
         builder: (context) =>  BalanceAlertDialog(
-          isLoading: isLoading,
+          isLoading: secondLoading,
           content: "Are you sure you want to delete this recipient?",
           onPressed: () async {
-            isLoading = true;
+            secondLoading = true;
             notifyListeners();
-            final dataResponse = await WithdrawFreelancerRepo().deleteRecipientRepo(id: id!);
+            final dataResponse = await repo.deleteRecipientRepo(id: id!);
             recipients.removeWhere((item) => item.id == id);
             notifyListeners();
             ServiceNavigation.serviceNavi.popFunction();
@@ -260,24 +283,30 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
 //------------------------------------------------------------------------------
 
-  saveUpdateRecipient({required String mobile, required String idNumber, required String name }) async{
+  sendCodeUpdateRecipient({ required String id ,required String mobile, required String idNumber, required String name }) async{
     isLoading = true;
     notifyListeners();
-  final dataResponse = await WithdrawFreelancerRepo().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
+  final dataResponse = await repo.senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
   sharedPref.saveRecipientData(name: name, mobile: mobile, idNumber: idNumber);
-
+  sharedPref.saveIdRecipient(id: id);
   notifyListeners();
-  ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.verificationEditRecipient);
+  ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.verificationEditRecipient);
+  startTimer();
+  notifyListeners();
 }
+
+//------------------------updateRecipient---------------------------------------
 
   updateRecipient({required String code, required String id, required String mobile , required String idNumber, required String name}) async{
     isLoading = true;
     notifyListeners();
-    final dataResponse = WithdrawFreelancerRepo().updateRecipientRepo(id: id, code: code, mobile: mobile, idNumber: idNumber, name: name);
+    final dataResponse = await repo.updateRecipientRepo(id: id, code: code, mobile: mobile, idNumber: idNumber, name: name);
     Helpers.balanceShowSnackBar(message: "Recipient has been Edited.");
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);
 }
 
+
+//-----------------------addAmountBankToWithdraw--------------------------------
   addAmountBankToWithdraw({required String amount}) {
     SharedPrefController().saveAmountToWithdraw(amountToWithdraw: amount);
     notifyListeners();
@@ -308,6 +337,8 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     ServiceNavigation.serviceNavi.popFunction();
   }
 
+//-----------------------------------------------------------------------------
+
   selectRecipientFromRecipientsPage({required String idNumber}) {
     for (var element in recipients) {
       element.isSelected = false;
@@ -332,6 +363,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
   editRecipient({required RecipientModel recipient}) {
     recipientForEdit = recipient;
+    sharedPref.saveIdRecipient(id: recipient.id!);
     notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.editRecipientPage);
   }
@@ -340,7 +372,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     requestBankWithdraw({required String bankId, required int amount}) async {
     isLoading = true;
     notifyListeners();
-    final dataResponse = await WithdrawFreelancerRepo().requestBankWithdrawRepo(bankId: bankId, amount: amount);
+    final dataResponse = await repo.requestBankWithdrawRepo(bankId: bankId, amount: amount);
     withdrawalsIsUpdated == true;
     notifyListeners();
     Helpers.balanceShowSnackBar(message: "Wait for the payment to be ready within \n 24 hours.");
@@ -350,11 +382,9 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
   //------------------------requestCashWithdraw---------------------------------
     requestCashWithdraw({required String amount, required String officeId, required String recipientId}) async{
-
     isLoading = true;
     notifyListeners();
-    final dataResponse = await WithdrawFreelancerRepo().requestWithdrawCashRepo(amount: int.parse(amount), officeId: officeId, recipientId: recipientId);
-
+    final dataResponse = await repo.requestWithdrawCashRepo(amount: int.parse(amount), officeId: officeId, recipientId: recipientId);
     withdrawalsIsUpdated == true;
     startTimer();
     notifyListeners();
@@ -368,24 +398,19 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     idWithdrawForPreview = id;
     notifyListeners();
   }
-  //-----------------------------------------------------------------------------
+
+//---------------------------getWithdrawDetails---------------------------------
+
    getWithdrawDetails({required withdrawId}) async {
-    isLoading = true;
+    secondLoading = true;
     notifyListeners();
-    final dataResponse = await WithdrawFreelancerRepo().getWithdrawDetailsRepo(id: withdrawId!);
+    final dataResponse = await repo.getWithdrawDetailsRepo(id: withdrawId!);
     debugPrint("This is details inside provider =>>> $dataResponse");
     withdrawForPreview = dataResponse;
     withdrawForPreview!.office == null ?
     ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.previewBankWithdrawalStatus)
         :
     ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.previewCashWithdrawalStatus);
-    DateTime dateTime = DateTime.parse(withdrawForPreview!.history!.first.createdAt);
-    var formatterDate =  DateFormat('dd/MM');
-    var formatterTime =  DateFormat('dd/MM');
-    var formatted = formatterDate.format(dateTime);
-    var formattedTime = DateFormat.jm().format(dateTime);
-    debugPrint("This is dateTim =>>> $formatted");
-    debugPrint("This is formattedTime =>>> $formattedTime");
     notifyListeners();
 
  }
@@ -396,16 +421,16 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     showDialog(
         context: contextKey,
         builder: (context) =>  BalanceAlertDialog(
-          isLoading: isLoading,
+          isLoading: secondLoading,
           content: "Are you sure you want to delete your Withdraw?",
           onPressed: () async {
-            isLoading = true;
+            secondLoading = true;
             notifyListeners();
-            final dataResponse = await WithdrawFreelancerRepo().cancelWithdrawRepo(id: withdrawId);
-            ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.balanceFreelancerPage);
-            Helpers.balanceShowSnackBar(message: "Withdraw has been deleted.");},
+            final dataResponse = await repo.cancelWithdrawRepo(id: withdrawId);
+            Helpers.balanceShowSnackBar(message: "Withdraw has been deleted.");
+            ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.balanceFreelancerPage);
+          },
         ));
-
   }
 
   //--------------------------confirmWithdraw-----------------------------------
@@ -413,12 +438,13 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
     confirmWithdraw({required String id}) async {
     isLoading = true;
     notifyListeners();
-    final dataResponse = await WithdrawFreelancerRepo().confirmWithdrawRepo(id: id);
+    final dataResponse = await repo.confirmWithdrawRepo(id: id);
     withdrawForPreview = null;
     notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.balanceFreelancerPage);
   }
 
+  //----------------------------------------------------------------------------
   clearWithdrawForPreview(){
     withdrawForPreview = null;
     notifyListeners();
@@ -431,7 +457,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
   }
 
 
-
+//----------------------------logoutBalance-------------------------------------
 
     logoutBalance() async {
      mountUserToWithdrawal  = null;branchSelected = "";
@@ -450,6 +476,7 @@ class WithdrawFreelancerProvider extends ChangeNotifier{
 
   disposeIsLoading() {
     isLoading = false;
+    secondLoading = false;
     notifyListeners();
   }
   }

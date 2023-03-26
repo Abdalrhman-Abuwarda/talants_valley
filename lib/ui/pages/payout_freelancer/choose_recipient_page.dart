@@ -7,7 +7,7 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/router.dart';
 
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/valuesManager.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_bank_skeleton.dart';
 import '../../shared/customWidgets/custom_contaner_widget.dart';
@@ -26,12 +26,12 @@ class _ChooseRecipientPageState extends State<ChooseRecipientPage> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<WithdrawFreelancerProvider>(context , listen: false).getRecipients();
+    Provider.of<PayoutFreelancerProvider>(context , listen: false).getRecipients();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context , balance , child) => Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Column(

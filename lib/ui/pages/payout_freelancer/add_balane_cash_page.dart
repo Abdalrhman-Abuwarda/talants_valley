@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
-import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/utils/validate.dart';
 
@@ -60,7 +60,7 @@ class _AddBalanceCashPageState extends State<AddBalanceCashPage> {
       body: Padding(
         padding:  EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
         child: SingleChildScrollView(
-          child: Consumer<WithdrawFreelancerProvider>(
+          child: Consumer<PayoutFreelancerProvider>(
             builder: (context, balance, child) => Column(
               children: [
                 addVerticalSpace(AppSize.s120.h),

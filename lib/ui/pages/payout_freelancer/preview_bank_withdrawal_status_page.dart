@@ -4,13 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/model/freelancer/withdrawal_model.dart';
-import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/custom_contaner_widget.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
+import 'package:talants_valley/utils/validate.dart';
 
 import '../../shared/customWidgets/balance_freelancer_wigdgets/details_status_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_status_bank_widget.dart';
@@ -29,24 +30,11 @@ class PreviewBankWithdrawalStatusPage extends StatefulWidget {
 class _PreviewBankWithdrawalStatusPageState
     extends State<PreviewBankWithdrawalStatusPage> {
 
-  String? firstTime;
-  @override
-  void initState() {
-    // TODO: implement initState
-    var provider = Provider.of<WithdrawFreelancerProvider>(context, listen: false);
-    DateTime dateTime = DateTime.parse(provider.withdrawForPreview!.history!.first.updatedAt);
-    firstTime = DateFormat.jm().format(dateTime);
-    debugPrint("This is formattedTime =>>> $firstTime");
-
-    super.initState();
-  }
-
-
 
   @override
   Widget build(BuildContext context) {
     final TextTheme textStyle = Theme.of(context).textTheme;
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context, balance, child) => Scaffold(
         appBar: AppBar(
           title: const Text("Withdrawal"),
@@ -93,12 +81,12 @@ class _PreviewBankWithdrawalStatusPageState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: AppSize.s50.w,
+                            width: AppSize.s70.w,
                             child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  firstTime!,
+                                  balance.withdrawForPreview!.history!.first.createdAt.convertToDate()!,
                                   style: textStyle.headline6,
                                 ),
                                 Text(

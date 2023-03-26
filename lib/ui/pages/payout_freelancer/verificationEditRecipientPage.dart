@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:talants_valley/routing/navigations.dart';
 
 import '../../../core/data/local/sharedController.dart';
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customPages/customOptPage.dart';
 
 class VerificationEditRecipientPage extends StatefulWidget {
-  VerificationEditRecipientPage({Key? key}) : super(key: key);
+  const VerificationEditRecipientPage({Key? key}) : super(key: key);
 
   @override
   State<VerificationEditRecipientPage> createState() => _VerificationEditRecipientPageState();
@@ -19,10 +20,11 @@ class _VerificationEditRecipientPageState extends State<VerificationEditRecipien
   final TextEditingController _optMobileController = TextEditingController();
 
   var formKye = GlobalKey<FormState>();
+  SharedPrefController sharedPref = SharedPrefController();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context, balance, child) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -35,6 +37,7 @@ class _VerificationEditRecipientPageState extends State<VerificationEditRecipien
           // leadingWidth: 30.w,
           leading: IconButton(
             onPressed: () {
+              ServiceNavigation.serviceNavi.popFunction();
               balance.disposeTimer();
             },
             icon: const Icon(Icons.arrow_back_ios),
@@ -45,7 +48,7 @@ class _VerificationEditRecipientPageState extends State<VerificationEditRecipien
             key: formKye,
             child:
             CustomOptPage(
-              isLoading: false,
+              isLoading: balance.isLoading,
               withImage: true,
               pathImage: ImageAssets.mobileSuccessImage,
               optController: _optMobileController,
@@ -56,10 +59,10 @@ class _VerificationEditRecipientPageState extends State<VerificationEditRecipien
               futtarButtonText: 'Resend',
               onPressedButton: () {
                 if (formKye.currentState!.validate()) {
-                  balance.updateRecipient(code: _optMobileController.text, id: "", mobile: "SharedPrefController().getMobileRecipient()", idNumber: "SharedPrefController().getIdNumberRecipient()", name: "SharedPrefController().getNameRecipient()");
+                  balance.updateRecipient(code: _optMobileController.text,  mobile: sharedPref.getMobileRecipient(), idNumber: sharedPref.getIdNumberRecipient(), name: sharedPref.getNameRecipient(), id: sharedPref.getIdRecipient());
                 }
               },
-              onPressedTextButton: () => balance.resendCodeAddBank(),
+              onPressedTextButton: () => balance.resendCodeAddRecipient(),
               validator: (value) => Validate.validateCode(value),
               minutes: balance.minutes.toString(),
               seconds: balance.seconds.toString(),

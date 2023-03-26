@@ -7,7 +7,7 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
 import '../../../core/model/freelancer/withdrawal_model.dart';
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/branch_bottom_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/disable_card_widget.dart';
@@ -52,7 +52,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
           key: formKey,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
-            child: Consumer<WithdrawFreelancerProvider>(
+            child: Consumer<PayoutFreelancerProvider>(
               builder: (context , balance , child) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

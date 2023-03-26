@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../../resources/assets_manager.dart';
 import '../../../../resources/valuesManager.dart';
 
@@ -13,7 +13,7 @@ class BranchBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle? subtitleStyle = Theme.of(context).textTheme.subtitle1;
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context , balance , child) => Container(
         padding:  EdgeInsetsDirectional.only(
           top: AppPadding.p20.h,

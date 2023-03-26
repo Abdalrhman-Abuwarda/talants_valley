@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/data/local/sharedController.dart';
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
@@ -24,12 +24,12 @@ class _VerificationAddBnkPageState extends State<VerificationAddBnkPage> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<WithdrawFreelancerProvider>(context,listen: false).startTimer();
+    Provider.of<PayoutFreelancerProvider>(context,listen: false).startTimer();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context, balance, child) => Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:talants_valley/core/data/network/dioInterceptor.dart';
 
 import 'api/end_points.dart';
+import 'package:dio_logger/dio_logger.dart';
 
 class DioClient {
 // dio instance
@@ -14,8 +15,10 @@ class DioClient {
       ..options.receiveTimeout = 30000
       ..options.responseType = ResponseType.json
       ..options.contentType = Headers.formUrlEncodedContentType
-      // ..interceptors.addAll(iterable)
-      ..interceptors.add(DioInterceptor());
+      ..interceptors.add(DioInterceptor())
+      ..interceptors.add(dioLoggerInterceptor);
+    
+
   }
 
   // static DioClient dioClient = DioClient(_dio);
@@ -84,7 +87,7 @@ class DioClient {
       queryParameters: queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
-      onReceiveProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
     );
     return response;
   }

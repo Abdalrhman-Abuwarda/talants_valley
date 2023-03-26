@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
-import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 
 import '../../../../core/model/freelancer/withdrawal_model.dart';
@@ -24,7 +24,7 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle? headLine3 = Theme.of(context).textTheme.headline3;
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context , balance , child) => Container(
         padding: EdgeInsetsDirectional.only(
           top: AppPadding.p5.h,
@@ -107,7 +107,7 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
             width: 160.w,
                     height: AppSize.s40.h,
                     child: SecondCustomButton(
-                      isLoading: balance.isLoading,
+                      isLoading: balance.secondLoading,
                   text: "Show more",
                   onPressed: () {
                         balance.getWithdrawDetails(withdrawId: withdrawal.id);

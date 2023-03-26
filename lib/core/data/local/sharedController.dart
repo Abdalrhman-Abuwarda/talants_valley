@@ -53,7 +53,7 @@ class SharedPrefController {
 
 
   getUser()  {
-    final dynamic user = jsonDecode(_sharedPreferences.getString("user")!);
+    final dynamic user = jsonDecode(_sharedPreferences.getString("user") ?? jsonEncode(UserModel.fakeData()));
     return UserModel.fromJson(user);
   }
 

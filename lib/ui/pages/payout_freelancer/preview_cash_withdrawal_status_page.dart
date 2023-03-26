@@ -3,12 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/custom_contaner_widget.dart';
+import 'package:talants_valley/utils/validate.dart';
 
 import '../../shared/customWidgets/balance_freelancer_wigdgets/details_status_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_cash_status_widget.dart';
@@ -27,17 +28,6 @@ class PreviewCashWithdrawalStatusPage extends StatefulWidget {
 
 class _PreviewCashWithdrawalStatusPageState extends State<PreviewCashWithdrawalStatusPage> {
 
-  String? firstTime;
-  @override
-  void initState() {
-    // TODO: implement initState
-    var provider = Provider.of<WithdrawFreelancerProvider>(context, listen: false);
-    DateTime dateTime = DateTime.parse(provider.withdrawForPreview!.history!.first.updatedAt);
-    firstTime = DateFormat.jm().format(dateTime);
-    debugPrint("This is formattedTime =>>> $firstTime");
-
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     final TextTheme textStyle = Theme.of(context).textTheme;
@@ -55,7 +45,7 @@ class _PreviewCashWithdrawalStatusPageState extends State<PreviewCashWithdrawalS
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
-          child: Consumer<WithdrawFreelancerProvider>(
+          child: Consumer<PayoutFreelancerProvider>(
             builder: (context, balance, child) => Column(
               children: [
                 HeaderCashStatusWidget(
@@ -82,7 +72,7 @@ class _PreviewCashWithdrawalStatusPageState extends State<PreviewCashWithdrawalS
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    firstTime!,
+                                    balance.withdrawForPreview!.history!.first.createdAt.convertToDate()!,
                                     style: textStyle.headline6,
                                   ),
                                   Text(
@@ -144,18 +134,18 @@ class _PreviewCashWithdrawalStatusPageState extends State<PreviewCashWithdrawalS
                 addVerticalSpace(AppSize.s20.h),
                 MainElevatedButton(
                     textColor: ColorManager.blackColor,
-                    onPressed: balance.withdrawForPreview!.status == "Requested" ? () {
+                    onPressed: balance.withdrawForPreview!.status == "pending" ? () {
                       balance.cancelWithdraw(
                           withdrawId: balance.withdrawForPreview!.id) ;
                     } : (){
                       balance.confirmWithdraw(id:  balance.withdrawForPreview!.id);
                     },
                     isLoading: balance.isLoading,
-                    text: balance.withdrawForPreview!.status == "Requested" ?
+                    text: balance.withdrawForPreview!.status == "pending" ?
                     "Cancel Withdrawal" : "Confirm Recipient",
                     isMain: false),
                 Visibility(
-                  visible: balance.withdrawForPreview!.status == "Ready",
+                  visible: balance.withdrawForPreview!.status == "ready",
                     child: MainElevatedButton(
                         textColor: ColorManager.blackColor,
                         onPressed:  () {

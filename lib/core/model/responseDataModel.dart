@@ -41,6 +41,8 @@ class VerifiedAddress {
       this.addressFile,
       this.otherDocumentType});
 
+  factory VerifiedAddress.fakeVerifiedAddress() => VerifiedAddress._(disapproveReason: null, status: "");
+
   factory VerifiedAddress.fromJson(Map<String, dynamic> json) =>
       VerifiedAddress._(
         disapproveReason: json['disapproveReason'] == null
@@ -131,6 +133,9 @@ class VerifiedId {
       this.idDocumentType,
       this.idNumber,
       this.idFile});
+
+  factory VerifiedId.fakeVerifiedId() =>
+  VerifiedId._(disapproveReason: null, status: "");
 
   factory VerifiedId.fromJson(Map<String, dynamic> json) => VerifiedId._(
         disapproveReason: json['disapproveReason'] == null

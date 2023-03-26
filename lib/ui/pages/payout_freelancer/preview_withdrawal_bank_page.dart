@@ -8,7 +8,7 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/router.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/colors_manager.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/policy_withdrawal_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/preview_account_details_card.dart';
@@ -37,7 +37,7 @@ class PreviewWithdrawalBankPage extends StatelessWidget {
               color: Colors.black,
             )),
       ),
-      body: Consumer<WithdrawFreelancerProvider>(
+      body: Consumer<PayoutFreelancerProvider>(
         builder: (context, balance, child) => Padding(
           padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
           child: Column(

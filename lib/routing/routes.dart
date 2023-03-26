@@ -1,13 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/add_balance_bank_page.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/add_recipient_page.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/edit_recipient_page.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/preview_bank_withdrawal_status_page.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/preview_withdrawal_cash_page.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/verificationEditRecipientPage.dart';
-import 'package:talants_valley/ui/pages/balance_freelancer/verification_add_bank_page.dart';
 import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
 import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
 
@@ -17,17 +10,24 @@ import '../ui/pages/auth/forgetPasswordPage.dart';
 import '../ui/pages/auth/signInPage.dart';
 import '../ui/pages/auth/signUpPage.dart';
 import '../ui/pages/auth/successResetPassword.dart';
-import '../ui/pages/balance_freelancer/add_balane_cash_page.dart';
-import '../ui/pages/balance_freelancer/add_bank_account_page.dart';
-import '../ui/pages/balance_freelancer/choose_office_page.dart';
-import '../ui/pages/balance_freelancer/choose_bank_account_page.dart';
-import '../ui/pages/balance_freelancer/balance_freelancer_page.dart';
-import '../ui/pages/balance_freelancer/choose_recipient_page.dart';
-import '../ui/pages/balance_freelancer/preview_cash_withdrawal_status_page.dart';
-import '../ui/pages/balance_freelancer/verifcation_add_recipient.dart';
-import '../ui/pages/balance_freelancer/preview_withdrawal_bank_page.dart';
 import '../ui/pages/home_freelancer/home_freelancer_page.dart';
 import '../ui/pages/main_page_freelancer.dart';
+import '../ui/pages/payout_freelancer/add_balance_bank_page.dart';
+import '../ui/pages/payout_freelancer/add_balane_cash_page.dart';
+import '../ui/pages/payout_freelancer/add_bank_account_page.dart';
+import '../ui/pages/payout_freelancer/add_recipient_page.dart';
+import '../ui/pages/payout_freelancer/choose_bank_account_page.dart';
+import '../ui/pages/payout_freelancer/choose_office_page.dart';
+import '../ui/pages/payout_freelancer/choose_recipient_page.dart';
+import '../ui/pages/payout_freelancer/edit_recipient_page.dart';
+import '../ui/pages/payout_freelancer/payout_freelancer_page.dart';
+import '../ui/pages/payout_freelancer/preview_bank_withdrawal_status_page.dart';
+import '../ui/pages/payout_freelancer/preview_cash_withdrawal_status_page.dart';
+import '../ui/pages/payout_freelancer/preview_withdrawal_bank_page.dart';
+import '../ui/pages/payout_freelancer/preview_withdrawal_cash_page.dart';
+import '../ui/pages/payout_freelancer/verifcation_add_recipient.dart';
+import '../ui/pages/payout_freelancer/verificationEditRecipientPage.dart';
+import '../ui/pages/payout_freelancer/verification_add_bank_page.dart';
 import '../ui/pages/verification/mainVerificationPage.dart';
 import '../ui/pages/verification/successVerifiedMopile.dart';
 import '../ui/pages/verification/verificationAdressPage.dart';
@@ -58,7 +58,7 @@ class RoutsGenerate{
       case RouteGenerator.mainVerificationPage:
         return MaterialPageRoute(builder: (_) =>  const MainVerificationPage());
       case RouteGenerator.checkEmailPage:
-        return MaterialPageRoute(builder: (_) =>  CheckEmailPage());
+        return MaterialPageRoute(builder: (_) =>  const CheckEmailPage());
       case RouteGenerator.verificationEmailPage:
         return MaterialPageRoute(builder: (_) =>  VerificationEmailPage());
       case RouteGenerator.successVerificationEmail:
@@ -108,9 +108,9 @@ class RoutsGenerate{
       case RouteGenerator.previewCashWithdrawalRecipient:
         return MaterialPageRoute(builder: (_) => PreviewWithdrawalCashPage());
       case RouteGenerator.previewBankWithdrawalStatus:
-        return MaterialPageRoute(builder: (_) => PreviewBankWithdrawalStatusPage());
+        return MaterialPageRoute(builder: (_) => const PreviewBankWithdrawalStatusPage());
       case RouteGenerator.previewCashWithdrawalStatus:
-        return MaterialPageRoute(builder: (_) => PreviewCashWithdrawalStatusPage());
+        return MaterialPageRoute(builder: (_) => const PreviewCashWithdrawalStatusPage());
         default:
         throw const FormatException("Route not found");
     }

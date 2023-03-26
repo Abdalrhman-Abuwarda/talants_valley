@@ -8,7 +8,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/utils/validate.dart';
 
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../routing/router.dart';
 
 class AddBalanceBankPage extends StatefulWidget {
@@ -113,7 +113,7 @@ class _AddBalanceBankPageState extends State<AddBalanceBankPage> {
                 ],
               ),
               addVerticalSpace(AppSize.s20.h),
-              Consumer<WithdrawFreelancerProvider>(
+              Consumer<PayoutFreelancerProvider>(
                 builder: (context, balance, child) => SizedBox(
                   height: 44,
                   width: 326,

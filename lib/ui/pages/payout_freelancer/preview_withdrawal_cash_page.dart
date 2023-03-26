@@ -6,7 +6,7 @@ import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
 import '../../../core/data/local/sharedController.dart';
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/valuesManager.dart';
 import '../../../routing/navigations.dart';
@@ -38,7 +38,7 @@ class PreviewWithdrawalCashPage extends StatelessWidget {
             )),
       ),
 
-      body: Consumer<WithdrawFreelancerProvider>(
+      body: Consumer<PayoutFreelancerProvider>(
         builder: (context ,balance, child) => Padding(
           padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
           child: Column(

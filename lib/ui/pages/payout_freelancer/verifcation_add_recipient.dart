@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/routing/navigations.dart';
 
 import '../../../core/data/local/sharedController.dart';
-import '../../../core/provider/freelancer_provider/withdraw_freelancer_provider.dart';
+import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customPages/customOptPage.dart';
@@ -23,7 +23,7 @@ class _VerificationAddRecipientPageState extends State<VerificationAddRecipientP
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WithdrawFreelancerProvider>(
+    return Consumer<PayoutFreelancerProvider>(
       builder: (context, balance, child) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -61,10 +61,9 @@ class _VerificationAddRecipientPageState extends State<VerificationAddRecipientP
                   balance.verificationAddRecipient( name: SharedPrefController().getNameRecipient(),code: _optMobileController.text, mobile: SharedPrefController().getMobileRecipient(), idNumber: SharedPrefController().getIdNumberRecipient());
                 }
               },
-              onPressedTextButton: () => (){
-                balance.resendCodeAddBank();
-                balance.verificationAddRecipient( name: SharedPrefController().getNameRecipient(),code: _optMobileController.text, mobile: SharedPrefController().getMobileRecipient(), idNumber: SharedPrefController().getIdNumberRecipient());
-              },
+              onPressedTextButton: () =>
+                balance.resendCodeAddRecipient()
+              ,
               validator: (value) => Validate.validateCode(value),
               minutes: balance.minutes.toString(),
               seconds: balance.seconds.toString(),

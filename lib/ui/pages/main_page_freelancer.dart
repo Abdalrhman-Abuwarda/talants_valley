@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/general_freelancer_provider.dart';
+import 'package:talants_valley/ui/pages/payout_freelancer/payout_freelancer_page.dart';
 
 import '../../resources/assets_manager.dart';
 import '../../resources/colors_manager.dart';
-import 'balance_freelancer/balance_freelancer_page.dart';
 import 'help_freelancer/main_help_freelancer_page.dart';
 import 'home_freelancer/home_freelancer_page.dart';
 import 'invoice_freelancer/main_invoice_freelancer_page.dart';
