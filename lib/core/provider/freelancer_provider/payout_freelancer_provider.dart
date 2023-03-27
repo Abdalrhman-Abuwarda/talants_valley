@@ -16,7 +16,7 @@ import 'package:talants_valley/locator.dart';
 class PayoutFreelancerProvider extends ChangeNotifier{
   SharedPrefController sharedPref = SharedPrefController();
 
-  final PayoutFreelancerRepo repo =  locator.get<PayoutFreelancerRepo>();
+  PayoutFreelancerRepo get repo =>  locator<PayoutFreelancerRepo>();
 
 
    bool isVisibleHomeError = false;

@@ -57,8 +57,10 @@ class PayoutFreelancerRepo {
   }
 
   Future<dynamic> getWithdrawalRequestList() async {
+    debugPrint("This inside Repo Layer before response ,,,,, ");
     final response =
         await DioClient(dio).get(Endpoints.getWithdrawalRequestList);
+    debugPrint("This inside Repo Layer after response ===>>> $response");
     final List dataList = response.data["data"]["withdraws"];
     final List<WithdrawModel> withdrawsList =
         dataList.map((element) => WithdrawModel.formJson(element)).toList();

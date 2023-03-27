@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:talants_valley/core/data/network/dioInterceptor.dart';
 
 import 'api/end_points.dart';
@@ -30,6 +31,7 @@ class DioClient {
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) async {
+    debugPrint("This is inside Dio Clint in get function ===>>>> ");
     final Response response = await dio.get(
       url,
       queryParameters: queryParameters,
