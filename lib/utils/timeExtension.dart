@@ -26,6 +26,6 @@ extension TimeExtension  on String{
     if(date == "1"){
       return "Yesterday";
     }
-    return "$date day";
+    return "$date Days ago";
   }
 }

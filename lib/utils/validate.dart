@@ -81,7 +81,6 @@ class Validate {
     // Return null if the entered email is valid
     return null;
   }
-// اعمل extention
   static String? validatePassword(value) {
     RegExp hasUpper = RegExp(r'[A-Z]');
     RegExp hasLower = RegExp(r'[a-z]');

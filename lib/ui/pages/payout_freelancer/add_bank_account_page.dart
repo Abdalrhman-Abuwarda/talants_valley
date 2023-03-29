@@ -110,7 +110,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                         text: "Confirm", isMain: true),
 
                     addVerticalSpace(AppSize.s16.h),
-                    SecondCustomButton( isLoading: balance.isLoading,
+                    SecondCustomButton( isLoading: balance.secondLoading,
                       text: "Back", onPressed: () {ServiceNavigation.serviceNavi.popFunction();},)
               ],
           ),

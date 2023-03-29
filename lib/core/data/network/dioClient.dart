@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:talants_valley/core/data/network/dioInterceptor.dart';
 
+import '../../../locator.dart';
 import 'api/end_points.dart';
 import 'package:dio_logger/dio_logger.dart';
 
 class DioClient {
 // dio instance
   final Dio dio;
+  // DioInterceptor get interceptor =>  locator<DioInterceptor>();
 
   DioClient(this.dio) {
     dio

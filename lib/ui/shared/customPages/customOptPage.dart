@@ -75,6 +75,7 @@ class _CustomOptPageState extends State<CustomOptPage> {
           Text(widget.caption, style: Theme.of(context).textTheme.subtitle1),
           addVerticalSpace(AppSize.s30),
           Pinput(
+            androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
             validator: widget.validator,
             controller: widget.optController,
             obscureText: false,

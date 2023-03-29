@@ -75,7 +75,7 @@ class _EditRecipientPageState extends State<EditRecipientPage> {
                 Consumer<PayoutFreelancerProvider>(
                   builder: (context , balance , child) =>
                       MainElevatedButton(textColor: ColorManager.whiteColor,
-                          onPressed: (){balance.sendCodeUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text, id: '');},
+                          onPressed: (){balance.sendCodeUpdateRecipient(mobile: _recipientsPhoneNumberController.text, idNumber: _recipientsIdNumberController.text, name: _recipientsFullNameController.text, id: balance.recipientForEdit!.id!);},
                           isLoading: balance.isLoading, text: "Save Changes", isMain: true)
 
                 )

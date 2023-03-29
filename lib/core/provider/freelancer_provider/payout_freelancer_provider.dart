@@ -155,7 +155,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
     } else {
       isLoading = true;
       notifyListeners();
-      final dataResponse = await repo.sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger!);
+      final dataResponse = await PayoutFreelancerRepo().sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger!);
       SharedPrefController().savaBankAccountToVerify(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger, bankName: "Palestine");
       isVisibleHomeError = false;
       notifyListeners();
@@ -169,7 +169,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
     verifyAddBnkPage({ required String code}) async{
     isLoading = true;
-    final dataResponse = await repo.verifyAddAccountRepo(accountName: SharedPrefController().getBankAccountName(), accountNumber: SharedPrefController().getBankAccountNumber(), bankBranch: SharedPrefController().getBankAccountBranch(), ledger: SharedPrefController().getBankAccountLeger(), code: code, bankName: "Palestine");
+    final dataResponse = await PayoutFreelancerRepo().verifyAddAccountRepo(accountName: SharedPrefController().getBankAccountName(), accountNumber: SharedPrefController().getBankAccountNumber(), bankBranch: SharedPrefController().getBankAccountBranch(), ledger: SharedPrefController().getBankAccountLeger(), code: code, bankName: "Palestine");
     disposeTimer();
     Helpers.balanceShowSnackBar(message: "Bank account has been added.");
     ServiceNavigation.serviceNavi.pushNamedAndRemoveUtils(RouteGenerator.chooseBankAccountPage);
@@ -180,7 +180,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
   getBankAccountList() async {
     isLoading = true;
     // notifyListeners();
-    final response = await repo.getBankAccountListRepo();
+    final response = await PayoutFreelancerRepo().getBankAccountListRepo();
     bankAccounts = response;
     notifyListeners();
 }
@@ -196,7 +196,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
           onPressed: () async {
             isLoading = true;
             notifyListeners();
-            final dataResponse = await repo.deleteBankAccountRepo(idBank: bankId);
+            final dataResponse = await PayoutFreelancerRepo().deleteBankAccountRepo(idBank: bankId);
             if(dataResponse.statusCode == 200){
               isLoading = false;
               bankAccounts.removeWhere((item) => item.id == bankId);
@@ -213,7 +213,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
   getWithdrawList() async {
     isLoading = true;
-    final dataResponse = await repo.getWithdrawalRequestList();
+    final dataResponse = await PayoutFreelancerRepo().getWithdrawalRequestList();
     withdrawals = dataResponse;
     debugPrint(" This is the length =>>> ${withdrawals.length.toString()}");
     notifyListeners();
@@ -224,7 +224,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
     getOfficeList() async{
     isLoading = true;
-    final dataResponse = await repo.getOfficeListRepo();
+    final dataResponse = await PayoutFreelancerRepo().getOfficeListRepo();
     officeList  = dataResponse;
     officeSelected = officeList.first;
     notifyListeners();
@@ -236,12 +236,13 @@ class PayoutFreelancerProvider extends ChangeNotifier{
    sendCodeRecipient({required String mobile, required String idNumber, required String name}) async {
     isLoading = true;
     notifyListeners();
-    final dataResponse = await repo.senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
+    final dataResponse = await PayoutFreelancerRepo().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
     sharedPref.saveRecipientData(mobile: mobile, idNumber: idNumber, name: name);
     debugPrint("This is data Recipient in Shared Pref ${sharedPref.getNameRecipient()} , ${sharedPref.getIdNumberRecipient()} , ${sharedPref.getMobileRecipient()}");
     notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.verificationAddRecipientPage);
     startTimer();
+    notifyListeners();
   }
 
 //------------------------------------------------------------------------------
@@ -249,14 +250,14 @@ class PayoutFreelancerProvider extends ChangeNotifier{
    verificationAddRecipient({required String code , required String mobile, required String idNumber, required String name}) async{
     isLoading = true;
     notifyListeners();
-    final dataResponse = await repo.verificationAddRecipient(code: code, mobile: mobile, idNumber: idNumber, name: name);
+    final dataResponse = await PayoutFreelancerRepo().verificationAddRecipient(code: code, mobile: mobile, idNumber: idNumber, name: name);
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);
  }
 
 //------------------------------------------------------------------------------
     getRecipients() async {
     isLoading = true;
-    final dataResponse = await repo.getRecipientsRepo();
+    final dataResponse = await PayoutFreelancerRepo().getRecipientsRepo();
     recipients = dataResponse;
     notifyListeners();
   }
@@ -272,7 +273,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
           onPressed: () async {
             secondLoading = true;
             notifyListeners();
-            final dataResponse = await repo.deleteRecipientRepo(id: id!);
+            final dataResponse = await PayoutFreelancerRepo().deleteRecipientRepo(id: id!);
             recipients.removeWhere((item) => item.id == id);
             notifyListeners();
             ServiceNavigation.serviceNavi.popFunction();
@@ -286,7 +287,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
   sendCodeUpdateRecipient({ required String id ,required String mobile, required String idNumber, required String name }) async{
     isLoading = true;
     notifyListeners();
-  final dataResponse = await repo.senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
+  final dataResponse = await PayoutFreelancerRepo().senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
   sharedPref.saveRecipientData(name: name, mobile: mobile, idNumber: idNumber);
   sharedPref.saveIdRecipient(id: id);
   notifyListeners();
@@ -300,7 +301,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
   updateRecipient({required String code, required String id, required String mobile , required String idNumber, required String name}) async{
     isLoading = true;
     notifyListeners();
-    final dataResponse = await repo.updateRecipientRepo(id: id, code: code, mobile: mobile, idNumber: idNumber, name: name);
+    final dataResponse = await PayoutFreelancerRepo().updateRecipientRepo(id: id, code: code, mobile: mobile, idNumber: idNumber, name: name);
     Helpers.balanceShowSnackBar(message: "Recipient has been Edited.");
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.chooseRecipientFreelancerPage);
 }
@@ -372,7 +373,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
     requestBankWithdraw({required String bankId, required int amount}) async {
     isLoading = true;
     notifyListeners();
-    final dataResponse = await repo.requestBankWithdrawRepo(bankId: bankId, amount: amount);
+    final dataResponse = await PayoutFreelancerRepo().requestBankWithdrawRepo(bankId: bankId, amount: amount);
     withdrawalsIsUpdated == true;
     notifyListeners();
     Helpers.balanceShowSnackBar(message: "Wait for the payment to be ready within \n 24 hours.");
@@ -384,7 +385,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
     requestCashWithdraw({required String amount, required String officeId, required String recipientId}) async{
     isLoading = true;
     notifyListeners();
-    final dataResponse = await repo.requestWithdrawCashRepo(amount: int.parse(amount), officeId: officeId, recipientId: recipientId);
+    final dataResponse = await PayoutFreelancerRepo().requestWithdrawCashRepo(amount: int.parse(amount), officeId: officeId, recipientId: recipientId);
     withdrawalsIsUpdated == true;
     startTimer();
     notifyListeners();
@@ -404,7 +405,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
    getWithdrawDetails({required withdrawId}) async {
     secondLoading = true;
     notifyListeners();
-    final dataResponse = await repo.getWithdrawDetailsRepo(id: withdrawId!);
+    final dataResponse = await PayoutFreelancerRepo().getWithdrawDetailsRepo(id: withdrawId!);
     debugPrint("This is details inside provider =>>> $dataResponse");
     withdrawForPreview = dataResponse;
     withdrawForPreview!.office == null ?
@@ -426,7 +427,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
           onPressed: () async {
             secondLoading = true;
             notifyListeners();
-            final dataResponse = await repo.cancelWithdrawRepo(id: withdrawId);
+            final dataResponse = await PayoutFreelancerRepo().cancelWithdrawRepo(id: withdrawId);
             Helpers.balanceShowSnackBar(message: "Withdraw has been deleted.");
             ServiceNavigation.serviceNavi.pushNamedWidget(RouteGenerator.balanceFreelancerPage);
           },
@@ -438,7 +439,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
     confirmWithdraw({required String id}) async {
     isLoading = true;
     notifyListeners();
-    final dataResponse = await repo.confirmWithdrawRepo(id: id);
+    final dataResponse = await PayoutFreelancerRepo().confirmWithdrawRepo(id: id);
     withdrawForPreview = null;
     notifyListeners();
     ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.balanceFreelancerPage);

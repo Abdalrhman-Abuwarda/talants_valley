@@ -126,10 +126,10 @@ class PayoutFreelancerRepo {
       required String name}) async {
     final response = await DioClient(dio).put("${Endpoints.updateRecipient}$id",
         data: {
-          "code": code,
-          "mobile": mobile,
-          "idNumber": idNumber,
-          "name": name
+          "code" : code,
+          "mobile" : mobile,
+          "idNumber" : idNumber,
+          "name" : name
         });
     return response;
   }
