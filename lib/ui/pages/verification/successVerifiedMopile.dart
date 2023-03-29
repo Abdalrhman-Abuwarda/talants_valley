@@ -38,6 +38,7 @@ class SuccessVerifiedMobilePage extends StatelessWidget {
               textButton: 'Continue',
               onPressed: () {
                 verification.getUser();
+                ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.mainVerificationPage);
               },
             ),
       ),

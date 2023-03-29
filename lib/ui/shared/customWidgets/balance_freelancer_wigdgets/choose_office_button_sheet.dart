@@ -42,40 +42,60 @@ class ChooseOfficeButtonSheet extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: balance.officeList.length,
-                itemBuilder: (context, index) =>  InkWell(
-                  child: Container(
-                    height: AppSize.s75.h,
-                    padding: EdgeInsets.symmetric(vertical: AppPadding.p16.h),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: ColorManager.mainBorderColor,
-                          width: 1,
-                        )
+                itemBuilder: (context, index) {
+                  final office = balance.officeList[index];
+                  return
+                      InkWell(
+                        child: Container(
+                          height: AppSize.s75.h,
+                          padding: EdgeInsets.symmetric(
+                              vertical: AppPadding.p16.h),
+                          decoration: const BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                    color: ColorManager.mainBorderColor,
+                                    width: 1,
+                                  )
+                              )
+                          ),
+                          child:
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(" صباحاً -${office.endingHour} مساءاً${office.startingHour} ساعات العمل: ",
+                                      style: bodyTextStyle),
+                                  const Spacer(),
+                                  Text(
+                                    balance.officeList[index].name, style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(
+                                      color: ColorManager.blackColor),)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("\$ ${balance.officeList[index].fees!
+                                      .toString()}", style: bodyTextStyle),
+                                  const Spacer(),
+                                  Text(balance.officeList[index].address,
+                                      style: Theme
+                                          .of(context)
+                                          .textTheme
+                                          .headline6)
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () =>
+                            balance.selectOffice(
+                                officeId: balance.officeList[index].id),
                       )
-                    ),
-                    child:
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(" صباحاً -${balance.officeList[index].endingHour} مساءاً${balance.officeList[index].startingHour} ساعات العمل: " , style: bodyTextStyle ),
-                            const Spacer(),
-                            Text(balance.officeList[index].name , style: Theme.of(context).textTheme.labelMedium!.copyWith(color: ColorManager.blackColor),)
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text("\$ ${balance.officeList[index].fees!.toString()}", style: bodyTextStyle ),
-                            const Spacer(),
-                            Text(balance.officeList[index].address , style: Theme.of(context).textTheme.headline6)
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () => balance.selectOffice(officeId: balance.officeList[index].id),
-                ),)
+                  ;
+                })
 
 
             ],

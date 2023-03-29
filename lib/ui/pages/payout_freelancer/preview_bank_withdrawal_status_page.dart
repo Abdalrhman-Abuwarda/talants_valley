@@ -124,14 +124,9 @@ class _PreviewBankWithdrawalStatusPageState
                             ),
                           ),
                           addHorizontalSpace(AppSize.s25.w),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Requested",
-                                style: textStyle.headline5,
-                              ),
-                            ],
+                          Text(
+                            "Requested",
+                            style: textStyle.headline5,
                           ),
                         ],
                       ),
