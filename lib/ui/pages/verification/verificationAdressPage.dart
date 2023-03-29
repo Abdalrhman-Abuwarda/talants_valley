@@ -167,7 +167,7 @@ class _VerificationAdressPageState extends State<VerificationAdressPage> {
                   ElevatedButton(
                       onPressed: (verification.acceptedAddressFile == false || _adress_1_Controller.text.isEmpty || _adress_2_Controller.text.isEmpty || _cityController.text.isEmpty) ? null :
                           () {
-                        verification.verificationAdress(
+                        verification.verificationAddress(
                             address1: _adress_1_Controller.text,
                             address2: _adress_2_Controller.text,
                             city: _cityController.text,

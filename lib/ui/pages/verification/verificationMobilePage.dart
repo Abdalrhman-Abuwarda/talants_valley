@@ -29,13 +29,6 @@ class _VerificationMobilePageState extends State<VerificationMobilePage> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    Provider.of<VerificationProvider>(context,listen: false).disposeTimer();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

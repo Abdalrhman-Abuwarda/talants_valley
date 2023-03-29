@@ -11,36 +11,33 @@ class VerificationRepository{
   Dio dio = Dio();
 
 
-  //---------------------sendCodeEmailRepositoryepository-----------------------
+  //---------------------sendCodeEmailRepository-----------------------
 
-Future<dynamic> sendCodeEmailRepository() async{
-  final response= await DioClient(dio).post(Endpoints.sendCodeEmail);
-  debugPrint(response.data);
+sendCodeEmailRepository() async{
+  final Response response= await DioClient(dio).post(Endpoints.sendCodeEmail);
   return response.data;
 }
 
 
 //------------------------verificationEmailRepository---------------------------
-Future<dynamic> verificationEmailRepository(String code) async {
-  final response = await DioClient(dio).post(Endpoints.verificationEmail, data: {
+verificationEmailRepository(String code) async {
+  final Response response = await DioClient(dio).post(Endpoints.verificationEmail, data: {
     "verificationCode": code,
   });
 
-  debugPrint(response.data);
   return response.data;
 }
 
 //-----------------------sendCodeMobileRepository-------------------------------
 
-Future<dynamic> sendCodeMobileRepository() async{
-  final response = await DioClient(dio).post(Endpoints.sendCodeMobile);
-  debugPrint(response.data);
+sendCodeMobileRepository() async{
+  final Response response = await DioClient(dio).post(Endpoints.sendCodeMobile);
   return response.data;
 }
 
 
 //---------------------verificationMobileRepository-----------------------------
-Future<dynamic> verificationMobileRepository(String code) async {
+verificationMobileRepository(String code) async {
   final response = await DioClient(dio).post(Endpoints.verificationMobile, data: {
     "verificationCode": code,
   });
@@ -51,9 +48,9 @@ Future<dynamic> verificationMobileRepository(String code) async {
 
 //-----------------------------getUserRepository--------------------------------
 
-Future<UserModel> getUserRepository() async{
+getUserRepository() async{
   final response = await DioClient(dio).get(Endpoints.getUserData);
-  debugPrint(response.data["data"]);
+  // debugPrint(response.data["data"]);
   final user = UserModel.fromJson(response.data["data"]);
   return user;
 }
