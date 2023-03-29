@@ -91,18 +91,25 @@ class _ChooseBankAccountPageState extends State<ChooseBankAccountPage> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: balance.bankAccounts.length,
-                itemBuilder: (context, index) => BankAccountCardWidget(
-                  accountName: balance.bankAccounts[index].accountName,
-                  accountNumber: balance.bankAccounts[index].accountNumber,
-                  onPressedIcon: () => balance.deleteBankAccount(
-                      bankId: balance.bankAccounts[index].id,),
-                  onTap: () {
-                    balance.selectBankAccount(
-                        accountNumber:
-                            balance.bankAccounts[index].accountNumber);
-                  },
-                  isSelected: balance.bankAccounts[index].isSelected,
-                ),
+                itemBuilder: (context, index) {
+                  final bankAccount = balance.bankAccounts[index];
+                  return
+                      BankAccountCardWidget(
+                        accountName: bankAccount.accountName,
+                        accountNumber: bankAccount
+                            .accountNumber,
+                        onPressedIcon: () =>
+                            balance.deleteBankAccount(
+                              bankId: bankAccount.id,),
+                        onTap: () {
+                          balance.selectBankAccount(
+                              accountNumber:
+                              bankAccount.accountNumber);
+                        },
+                        isSelected: bankAccount.isSelected,
+                      )
+                  ;
+                }
               ),
               addVerticalSpace(AppSize.s14.h),
               Visibility(

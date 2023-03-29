@@ -2,6 +2,7 @@ import 'dart:core';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 
 
 extension ExtendedString  on String {
@@ -63,16 +64,7 @@ extension ExtendedString  on String {
     return null;
   }
 
-  String? convertToDate() {
-    DateTime dateFormat = DateTime.parse(this);
-    return DateFormat.jm().format(dateFormat);
-  }
 
-  // String? convertToDay() {
-  //   DateTime dateFormat = DateTime.parse(this);
-  //   final date =  DateFormat.yMd().format(dateFormat);
-  //   return Jiffy.parse(date).fromNow();
-  // }
 
 }
 

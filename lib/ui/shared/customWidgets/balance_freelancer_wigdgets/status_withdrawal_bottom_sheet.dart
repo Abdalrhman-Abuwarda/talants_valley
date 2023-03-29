@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
+import 'package:talants_valley/utils/timeExtension.dart';
+import 'package:talants_valley/utils/validate.dart';
 
 import '../../../../core/model/freelancer/withdrawal_model.dart';
 import '../../../../resources/assets_manager.dart';
@@ -67,7 +68,7 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                Text(withdrawal.createdAt.substring(0, 10), ),
+                Text(withdrawal.createdAt.convertToFullDate()!, ),
               ],
             ),
             addVerticalSpace(AppSize.s20.h),

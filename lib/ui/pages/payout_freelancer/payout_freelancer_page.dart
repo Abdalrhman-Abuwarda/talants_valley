@@ -71,22 +71,31 @@ class _BalanceFreelancerPageState extends State<BalanceFreelancerPage> {
                                 color: ColorManager.mainBorderColor)),
                         child: ListView.builder(
                           itemCount: balance.withdrawals.length,
-                          itemBuilder: (context, index) => WithdrawalCard(
-                            withdrawalBalance:
-                                balance.withdrawals[index].amount.toString(),
-                            createdAt: balance.withdrawals[index].createdAt,
-                            status: balance.withdrawals[index].status,
-                            withdrawalFrom:
-                                balance.withdrawals[index].bank == null
-                                    ? balance.withdrawals[index].office!.name
-                                    : balance.withdrawals[index].bank!.bankName,
-                            name: balance.withdrawals[index].bank == null
-                                ? balance.withdrawals[index].recipient!.name
-                                : balance.withdrawals[index].bank!.accountName,
-                            sheetPage: (context) => StatusWithdrawalBottomSheet(
-                              withdrawal: balance.withdrawals[index],
-                            ),
-                          ),
+                          itemBuilder: (context, index) {
+                            final withdraw = balance.withdrawals[index];
+                            return
+                                WithdrawalCard(
+                                  withdrawalBalance:
+                                  withdraw.amount.toString(),
+                                  createdAt: withdraw.createdAt,
+                                  status: withdraw.status,
+                                  withdrawalFrom:
+                                  withdraw.bank == null
+                                      ? withdraw.office!.name
+                                      : withdraw.bank!
+                                      .bankName,
+                                  name: withdraw.bank == null
+                                      ? withdraw.recipient!
+                                      .name
+                                      : withdraw.bank!
+                                      .accountName,
+                                  sheetPage: (context) =>
+                                      StatusWithdrawalBottomSheet(
+                                        withdrawal: balance.withdrawals[index],
+                                      ),
+                                )
+                            ;
+                          },
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                         ),

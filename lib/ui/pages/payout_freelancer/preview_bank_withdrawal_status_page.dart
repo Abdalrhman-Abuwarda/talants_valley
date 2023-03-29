@@ -11,6 +11,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/custom_contaner_widget.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
+import 'package:talants_valley/utils/timeExtension.dart';
 import 'package:talants_valley/utils/validate.dart';
 
 import '../../shared/customWidgets/balance_freelancer_wigdgets/details_status_card.dart';
@@ -86,11 +87,11 @@ class _PreviewBankWithdrawalStatusPageState
                             crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  balance.withdrawForPreview!.history!.first.createdAt.convertToDate()!,
+                                  balance.withdrawForPreview!.history!.first.createdAt.convertToTime()!,
                                   style: textStyle.headline6,
                                 ),
                                 Text(
-                                  "Today",
+                                  balance.withdrawForPreview!.history!.first.createdAt.differenceDay()!,
                                   style: textStyle.bodyText1,
                                 ),
                               ],

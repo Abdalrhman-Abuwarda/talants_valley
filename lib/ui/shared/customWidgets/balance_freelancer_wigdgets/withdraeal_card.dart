@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talants_valley/utils/timeExtension.dart';
+import 'package:talants_valley/utils/validate.dart';
 
 import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';
@@ -51,7 +53,7 @@ class WithdrawalCard extends StatelessWidget {
                   children: [
                     Text(withdrawalFrom , style: textStyle.headline5,),
                     addHorizontalSpace(AppSize.s16.w),
-                    Text(createdAt.substring(0, 10) , style: Theme.of(context).textTheme.bodyText1,),
+                    Text("${createdAt.convertToDate()}, ${createdAt.convertToTime()}" , style: Theme.of(context).textTheme.bodyText1,),
                   ],
                 ),
               ],
