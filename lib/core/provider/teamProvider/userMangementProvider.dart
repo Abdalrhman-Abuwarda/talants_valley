@@ -21,13 +21,11 @@ class UserManagementProvider extends ChangeNotifier {
 
 //-------------------------------getUsersProvider-------------------------------
 
-  List<UserModel> listUsers = [];
+  List<UserModel> users = [];
 
   Future<dynamic> getUsers() async {
     final dataResponse = await UserManagementRepository().getUsersRepository();
-    debugPrint("This is dataResponse in provider $dataResponse");
-    listUsers = dataResponse;
-    debugPrint("This is length listUsers ${listUsers.length}");
+    users = dataResponse;
     notifyListeners();
   }
 
@@ -37,7 +35,6 @@ class UserManagementProvider extends ChangeNotifier {
   Future<dynamic> getUserDetails(String userId) async {
     final dataResponse =
         await UserManagementRepository().userDetailsRepository(userId);
-    debugPrint("This is user Details in provider \n $dataResponse");
     userDetails = dataResponse;
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.getUserDetails);
@@ -49,8 +46,7 @@ class UserManagementProvider extends ChangeNotifier {
   Future<dynamic> deleteUser(String userId) async {
     final dataResponse =
         await UserManagementRepository().deleteUserRepository(userId);
-    debugPrint("This is response of delete User in provider \n $dataResponse");
-    listUsers.removeWhere((element) => element.id == userId);
+    users.removeWhere((element) => element.id == userId);
     Helpers.showSnackBar(message: "Delete User successfully");
     notifyListeners();
   }
@@ -60,12 +56,8 @@ class UserManagementProvider extends ChangeNotifier {
   Future<dynamic> blockUser(String userId) async {
     final dataResponse =
         await UserManagementRepository().blockUserRepository(userId);
-    debugPrint("This is response of delete User in provider \n $dataResponse");
-    debugPrint("This is dataResponse in provider $dataResponse");
-    int index = listUsers.indexWhere((item) => item.id == userId);
-    listUsers[index].isBlocked = dataResponse;
-    debugPrint(
-        "This is value of user block ${listUsers[index].isBlocked.toString()}");
+    int index = users.indexWhere((item) => item.id == userId);
+    users[index].isBlocked = dataResponse;
     Helpers.showSnackBar(message: "Block User successfully");
     notifyListeners();
   }
@@ -75,8 +67,8 @@ class UserManagementProvider extends ChangeNotifier {
   UserModel? selectedUser;
 
   void Function()? onTapEditUser(String userId) {
-    int index = listUsers.indexWhere((item) => item.id == userId);
-    selectedUser = listUsers[index];
+    int index = users.indexWhere((item) => item.id == userId);
+    selectedUser = users[index];
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.editUserInformationPage);
     notifyListeners();
@@ -115,8 +107,8 @@ class UserManagementProvider extends ChangeNotifier {
 
 Future<dynamic> changeRole(String userId) async {
     final dataResponse = await UserManagementRepository().changeRoleRepository(userId);
-    int index = listUsers.indexWhere((item) => item.id == userId);
-    listUsers[index].role = dataResponse;
+    int index = users.indexWhere((item) => item.id == userId);
+    users[index].role = dataResponse;
     userDetails!.role = dataResponse;
     notifyListeners();
 }

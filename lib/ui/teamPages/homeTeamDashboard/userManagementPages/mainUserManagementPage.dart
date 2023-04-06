@@ -21,6 +21,7 @@ class MainUserManagementPage extends StatefulWidget {
 class _MainUserManagementPageState extends State<MainUserManagementPage> {
   final dataUser = SharedPrefController().getUser();
   List<UserModel> userList = [];
+  final controllerScrolling = ScrollController();
 
   @override
   void initState() {
@@ -44,32 +45,30 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
             children: [
               const SearchBar(),
               addVerticalSpace(AppSize.s10.h),
-
               Expanded(
                 // height: 300.h,
                 child: RefreshIndicator(
                   // triggerMode: RefreshIndicatorTriggerMode.onEdge,
                   onRefresh: () async {},
-                  child: userMangement.listUsers.isEmpty
+                  child: userMangement.users.isEmpty
                       ? const Center(child: CircularProgressIndicator())
                       : ListView.builder(
+                    controller: controllerScrolling,
                           shrinkWrap: true,
                           physics: const ScrollPhysics().parent,
                           scrollDirection: Axis.vertical,
-                          itemCount: userMangement.listUsers.length,
-                          itemBuilder: (context, index) => ListTileUser(
-                            isBlocked: userMangement.listUsers[index].isBlocked,
-                                fullName:
-                                    "${userMangement.listUsers[index].firstName} ${userMangement.listUsers[index].lastName}",
-                                email: userMangement.listUsers[index].email,
-                                balance: userMangement.listUsers[index].balance
-                                    .toString(),
-                                leadingLatter: userMangement
-                                    .listUsers[index].firstName[0]
-                                    .toUpperCase(),
+                          itemCount: userMangement.users.length + 1,
+                          itemBuilder: (context, index) {
+                            final user = userMangement.users[index];
+                            if (index < userMangement.users.length) {
+                              return ListTileUser(
+                                isBlocked: user.isBlocked,
+                                fullName: "${user.firstName} ${user.lastName}",
+                                email: user.email,
+                                balance: user.balance.toString(),
+                                leadingLatter: user.firstName[0].toUpperCase(),
                                 onTap: () {
-                                  userMangement.getUserDetails(
-                                      userMangement.listUsers[index].id);
+                                  userMangement.getUserDetails(user.id);
                                 },
                                 onPressedIcon: () => showModalBottomSheet(
                                     isScrollControlled: true,
@@ -80,22 +79,25 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
                                     ),
                                     context: context,
                                     builder: (context) => UserOptionBottomSheet(
-                                      isBlocked: userMangement
-                                          .listUsers[index].isBlocked,
+                                          isBlocked: user.isBlocked,
                                           blockFunction: () {
-                                            userMangement.blockUser(
-                                                userMangement
-                                                    .listUsers[index].id);
+                                            userMangement.blockUser(user.id);
                                             Navigator.pop(context);
                                           },
                                           deleteFunction: () {
-                                            userMangement.deleteUser(
-                                                userMangement
-                                                    .listUsers[index].id);
+                                            userMangement.deleteUser(user.id);
                                             Navigator.pop(context);
                                           },
                                         )),
-                              )),
+                              );
+                            } else {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: AppSize.s30.h),
+                                child: const Center(child: CircularProgressIndicator()),
+                              );
+                            }
+                          }),
                 ),
               ),
             ],
@@ -105,42 +107,3 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
     );
   }
 }
-
-// ListView(
-//   shrinkWrap: true,
-//   children: [
-//     Container(
-//       height: AppSize.s57.h,
-//       decoration: BoxDecoration(
-//         color: ColorManager.whiteColor,
-//         border: Border.all(
-//           color: ColorManager.mainBorderColor
-//         ),
-//         borderRadius: BorderRadius.all(Radius.circular(7.r))
-//       ),
-//       child: ListTile(
-//         leading: CircleAvatar(
-//           backgroundColor: ColorManager.grayColor,
-//           radius: AppSize.s15.r,
-//           child: const Text("A", style: TextStyle(color: ColorManager.whiteColor),),
-//         ),
-//         visualDensity:  VisualDensity(horizontal: 0, vertical: -4.h),
-//         title: Row(
-//           children: [
-//             Text("Abdalrhman Abuwarda", style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold)),
-//              Spacer(),
-//             Text(r"$200", style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold)),
-//           ],
-//         ),
-//         subtitle: Row(
-//           children: [
-//             Text("eng.abdalrhman@gmail.com", style: Theme.of(context).textTheme.bodyText1,),
-//             Spacer(),
-//             Text("Not Verified", style: Theme.of(context).textTheme.bodyText1,),
-//           ],
-//         ),
-//         trailing: IconButton(onPressed: (){}, icon: Icon(Icons.more_vert, size: 20,),),
-//       ),
-//     )
-//   ],
-// ),
