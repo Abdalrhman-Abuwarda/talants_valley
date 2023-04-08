@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/formProvider.dart';
-import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.dart';
+import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
 
 import '../../../../core/model/dropdownModel.dart';
 import '../../../../resources/colors_manager.dart';

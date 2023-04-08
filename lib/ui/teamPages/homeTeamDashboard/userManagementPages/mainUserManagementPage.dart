@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.dart';
-import 'package:talants_valley/resources/colors_manager.dart';
+import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
 
 import '../../../../core/data/local/sharedController.dart';
 import '../../../../core/model/userModel.dart';
@@ -12,7 +11,7 @@ import '../../../shared/customWidgets/TeamUserMangement/userOptionBottomSheet.da
 import '../../../shared/customWidgets/search_bar.dart';
 
 class MainUserManagementPage extends StatefulWidget {
-  MainUserManagementPage({Key? key}) : super(key: key);
+  const MainUserManagementPage({Key? key}) : super(key: key);
 
   @override
   State<MainUserManagementPage> createState() => _MainUserManagementPageState();
@@ -21,13 +20,31 @@ class MainUserManagementPage extends StatefulWidget {
 class _MainUserManagementPageState extends State<MainUserManagementPage> {
   final dataUser = SharedPrefController().getUser();
   List<UserModel> userList = [];
-  final controllerScrolling = ScrollController();
+  final scrollController = ScrollController();
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Provider.of<UserManagementProvider>(context, listen: false).getUsers();
+    handleNext();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void handleNext() {
+    scrollController.addListener(() async {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        Provider.of<UserManagementProvider>(context, listen: false).getOtherUsers();
+      }
+    });
   }
 
   @override
@@ -38,7 +55,7 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
         backgroundColor: Colors.transparent,
       ),
       body: Consumer<UserManagementProvider>(
-        builder: (context, userMangement, child) => Padding(
+        builder: (context, userManagement, child) => Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSize.s20.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -50,17 +67,17 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
                 child: RefreshIndicator(
                   // triggerMode: RefreshIndicatorTriggerMode.onEdge,
                   onRefresh: () async {},
-                  child: userMangement.users.isEmpty
+                  child: userManagement.users.isEmpty
                       ? const Center(child: CircularProgressIndicator())
                       : ListView.builder(
-                    controller: controllerScrolling,
+                    controller: scrollController,
                           shrinkWrap: true,
                           physics: const ScrollPhysics().parent,
                           scrollDirection: Axis.vertical,
-                          itemCount: userMangement.users.length + 1,
+                          itemCount: userManagement.users.length ,
                           itemBuilder: (context, index) {
-                            final user = userMangement.users[index];
-                            if (index < userMangement.users.length) {
+                            final user = userManagement.users[index];
+                            if (index < userManagement.users.length) {
                               return ListTileUser(
                                 isBlocked: user.isBlocked,
                                 fullName: "${user.firstName} ${user.lastName}",
@@ -68,7 +85,7 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
                                 balance: user.balance.toString(),
                                 leadingLatter: user.firstName[0].toUpperCase(),
                                 onTap: () {
-                                  userMangement.getUserDetails(user.id);
+                                  userManagement.getUserDetails(user.id);
                                 },
                                 onPressedIcon: () => showModalBottomSheet(
                                     isScrollControlled: true,
@@ -81,11 +98,11 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
                                     builder: (context) => UserOptionBottomSheet(
                                           isBlocked: user.isBlocked,
                                           blockFunction: () {
-                                            userMangement.blockUser(user.id);
+                                            userManagement.blockUser(user.id);
                                             Navigator.pop(context);
                                           },
                                           deleteFunction: () {
-                                            userMangement.deleteUser(user.id);
+                                            userManagement.deleteUser(user.id);
                                             Navigator.pop(context);
                                           },
                                         )),

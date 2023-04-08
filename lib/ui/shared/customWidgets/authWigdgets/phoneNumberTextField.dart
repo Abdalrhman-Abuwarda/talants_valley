@@ -6,7 +6,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/authProvider.dart';
-import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.dart';
+import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
 
 import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';

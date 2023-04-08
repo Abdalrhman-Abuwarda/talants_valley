@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.dart';
+import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 

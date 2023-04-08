@@ -10,8 +10,8 @@ class UserManagementRepository {
   Dio dio = Dio();
 
 //--------------------------------getUsers--------------------------------------
-  Future<dynamic> getUsersRepository() async {
-    final response = await DioClient(dio).get(Endpoints.getUsers);
+  Future<dynamic> getUsersRepository({required int offset}) async {
+    final response = await DioClient(dio).get("${Endpoints.getUsers}$offset");
     debugPrint("This is response data ${response.data}");
     debugPrint("This is Lists of users ${response.data["data"]["users"]}");
     final List usersList = response.data["data"]["users"];

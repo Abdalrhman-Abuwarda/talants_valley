@@ -8,9 +8,9 @@ import '../resources/assets_manager.dart';
 import '../resources/colors_manager.dart';
 
 class Helpers {
-  static final GlobalKey<ScaffoldMessengerState> scaffoldKey =
-      GlobalKey<ScaffoldMessengerState>();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    static final GlobalKey<ScaffoldMessengerState> scaffoldKey =
+        GlobalKey<ScaffoldMessengerState>();
+  // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   static showSnackBar({required String message}) {
     debugPrint("ssss");

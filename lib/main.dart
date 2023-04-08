@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/general_freelancer_provider.dart';
 import 'package:talants_valley/core/provider/teamProvider/mainTeamProvider.dart';
-import 'package:talants_valley/core/provider/teamProvider/userMangementProvider.dart';
+import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
 import 'package:talants_valley/locator.dart';
 import 'package:talants_valley/resources/themeManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
