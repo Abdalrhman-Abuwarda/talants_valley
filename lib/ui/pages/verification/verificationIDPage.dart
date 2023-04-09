@@ -1,16 +1,15 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/formProvider.dart';
-import 'package:talants_valley/core/provider/verificationProvider.dart';
+import 'package:talants_valley/core/provider/auth_and_verification_provider/verificationProvider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/custom_dropdown_widget.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart';
 
-import '../../../core/model/dropdownModel.dart';
+import '../../../core/model/general_model/dropdownModel.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
@@ -18,7 +17,7 @@ import '../../shared/customWidgets/custom_elevated_button.dart';
 import '../../shared/customWidgets/verificationWidgets/customButtonWhenUploudFile.dart';
 
 class VerificationIDPage extends StatefulWidget {
-  VerificationIDPage({Key? key}) : super(key: key);
+  const VerificationIDPage({Key? key}) : super(key: key);
 
   @override
   State<VerificationIDPage> createState() => _VerificationIDPageState();
@@ -28,9 +27,9 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
   var formKye = GlobalKey<FormState>();
 
   final TextEditingController _idController = TextEditingController();
-  String? selectedValue = null;
+  String? selectedValue;
 
-  final List<String> items = DrppdownModel().idDocumentType;
+  final List<String> items = DropdownModel().idDocumentType;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,9 @@ class _VerificationIDPageState extends State<VerificationIDPage> {
                 CustomDropdownWidget(
                   items: items,
                   hintText: 'Choose your document type',
-                  validator: (value) {},
+                  validator: (value) {
+                    return null;
+                  },
                   onChange: (Object? value) {
                     form.onChangeIdType(value);
                   },

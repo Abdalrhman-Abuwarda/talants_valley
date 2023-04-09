@@ -1,18 +1,10 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
-import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/authProvider.dart';
-import 'package:talants_valley/core/provider/verificationProvider.dart';
-import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
-
 import '../../../resources/colors_manager.dart';
 import '../../../resources/valuesManager.dart';
-import '../../../utils/validate.dart';
-import '../customWidgets/authWigdgets/authFooterPage.dart';
 
 class CustomOptPage extends StatefulWidget {
   const CustomOptPage({

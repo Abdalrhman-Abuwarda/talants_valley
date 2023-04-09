@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/formProvider.dart';
 import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
-
-import '../../../../core/model/dropdownModel.dart';
-import '../../../../resources/colors_manager.dart';
+import '../../../../core/model/general_model/dropdownModel.dart';
 import '../../../../resources/valuesManager.dart';
 import '../../../../routing/navigations.dart';
 import '../../../../routing/router.dart';
@@ -40,7 +36,7 @@ class _EditUserInformationState extends State<EditUserInformation> {
   final TextEditingController _cityController = TextEditingController();
 
   final TextEditingController _countryController = TextEditingController();
-  final List<String> country = DrppdownModel().countriesName;
+  final List<String> country = DropdownModel().countriesName;
 
   var formKye = GlobalKey<FormState>();
 
@@ -49,7 +45,6 @@ class _EditUserInformationState extends State<EditUserInformation> {
     // TODO: implement initState
     super.initState();
     var userManagementProvider = Provider.of<UserManagementProvider>(context, listen: false);
-    var formProvider = Provider.of<FormProvider>(context, listen: false);
     _firstNameController.text = userManagementProvider.userDetails!.firstName;
     _lastNameController.text = userManagementProvider.userDetails!.lastName;
     _emailController.text = userManagementProvider.userDetails!.email;

@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/core/data/network/api/end_points.dart';
 import 'package:talants_valley/core/data/network/dioClient.dart';
-import 'package:talants_valley/core/model/freelancer/withdrawal_model.dart';
-import 'package:talants_valley/core/model/recipient_model.dart';
+import 'package:talants_valley/core/model/freelancer/payout/withdrawal_model.dart';
+import 'package:talants_valley/core/model/freelancer/payout/recipient_model.dart';
 
 class PayoutFreelancerRepo {
   Dio dio = Dio();

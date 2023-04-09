@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-import '../../model/responseDataModel.dart';
-import '../../model/userModel.dart';
+import '../../model/general_model/user_model.dart';
 
-// enum PrefKeys {id, full_name, email, gender, token, refresh_token ,isLoggedIn}
+
+
+
+
 class SharedPrefController {
-  // final String user = "USER";
+
   SharedPrefController._();
 
   static final SharedPrefController _instance = SharedPrefController._();

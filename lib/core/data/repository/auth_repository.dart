@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/data/network/api/end_points.dart';
 import 'package:talants_valley/core/data/network/dioClient.dart';
 
-import '../../model/responseDataModel.dart';
-import '../../model/userModel.dart';
+
+import '../../model/general_model/user-data_model.dart';
+import '../../model/general_model/user_model.dart';
 
 class AuthRepository {
   Dio dio = Dio();

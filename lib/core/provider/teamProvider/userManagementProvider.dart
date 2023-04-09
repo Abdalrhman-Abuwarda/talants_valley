@@ -1,7 +1,7 @@
 import 'package:country_phone_code_picker/constants/country_codes.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/core/data/repository/team/user_mangement_repoaitory.dart';
-import 'package:talants_valley/core/model/userModel.dart';
+import 'package:talants_valley/core/model/general_model/user_model.dart';
 
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';

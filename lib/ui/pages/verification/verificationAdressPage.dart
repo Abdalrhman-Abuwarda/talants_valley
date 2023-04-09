@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/formProvider.dart';
-import 'package:talants_valley/core/provider/verificationProvider.dart';
+import 'package:talants_valley/core/provider/auth_and_verification_provider/verificationProvider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
-import '../../../core/model/dropdownModel.dart';
-import '../../../resources/colors_manager.dart';
+import '../../../core/model/general_model/dropdownModel.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/validate.dart';
@@ -25,13 +24,12 @@ class VerificationAdressPage extends StatefulWidget {
 
 class _VerificationAdressPageState extends State<VerificationAdressPage> {
   var formKye = GlobalKey<FormState>();
-  final List<String> items = DrppdownModel().addressDocumentType;
-  final List<String> country = DrppdownModel().countriesName;
+  final List<String> items = DropdownModel().addressDocumentType;
+  final List<String> country = DropdownModel().countriesName;
   String? selectedValue = null;
   final TextEditingController _adress_1_Controller = TextEditingController();
   final TextEditingController _adress_2_Controller = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _CountryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

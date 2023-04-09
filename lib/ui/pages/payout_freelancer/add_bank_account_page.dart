@@ -5,8 +5,6 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
-
-import '../../../core/model/freelancer/withdrawal_model.dart';
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../utils/validate.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/branch_bottom_sheet.dart';

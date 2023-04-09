@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/model/freelancer/withdrawal_model.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
-import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/custom_contaner_widget.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 import 'package:talants_valley/utils/timeExtension.dart';
-import 'package:talants_valley/utils/validate.dart';
 
 import '../../shared/customWidgets/balance_freelancer_wigdgets/details_status_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_status_bank_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/instruction_bank_withdrawal.dart';
-import '../../shared/customWidgets/balance_freelancer_wigdgets/time_line_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/withdraw_skeleton_widget.dart';
 
 class PreviewBankWithdrawalStatusPage extends StatefulWidget {
@@ -60,7 +54,7 @@ class _PreviewBankWithdrawalStatusPageState
                 : Column(
                     children: [
                       HeaderStatusBankWidget(
-                        amount: balance.withdrawForPreview!.amount ?? "",
+                        amount: balance.withdrawForPreview!.amount,
                         accountNumber:
                             balance.withdrawForPreview!.bank!.accountNumber,
                         bankName: balance.withdrawForPreview!.bank!.bankName,

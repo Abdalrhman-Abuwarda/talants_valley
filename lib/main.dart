@@ -13,10 +13,10 @@ import 'package:talants_valley/ui/splashPage.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/sharedController.dart';
-import 'core/provider/authProvider.dart';
+import 'core/provider/auth_and_verification_provider/authProvider.dart';
 import 'core/provider/formProvider.dart';
 import 'core/provider/freelancer_provider/payout_freelancer_provider.dart';
-import 'core/provider/verificationProvider.dart';
+import 'core/provider/auth_and_verification_provider/verificationProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -6,10 +6,8 @@ import 'package:talants_valley/ui/shared/customWidgets/authWigdgets/authHeaderPa
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart';
 import 'package:talants_valley/utils/validate.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
-import '../../../core/model/dropdownModel.dart';
-import '../../../core/provider/authProvider.dart';
+import '../../../core/model/general_model/dropdownModel.dart';
+import '../../../core/provider/auth_and_verification_provider/authProvider.dart';
 import '../../../core/provider/formProvider.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../routing/navigations.dart';
@@ -26,7 +24,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final List<String> country = DrppdownModel().countriesName;
+  final List<String> country = DropdownModel().countriesName;
 
   final TextEditingController _firstNameController = TextEditingController();
 

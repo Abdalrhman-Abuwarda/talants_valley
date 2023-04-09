@@ -5,13 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/utils/timeExtension.dart';
-import 'package:talants_valley/utils/validate.dart';
-
-import '../../../../core/model/freelancer/withdrawal_model.dart';
+import '../../../../core/model/freelancer/payout/withdrawal_model.dart';
 import '../../../../resources/assets_manager.dart';
 import '../../../../resources/valuesManager.dart';
 import '../../../../routing/navigations.dart';
-import '../../../../routing/router.dart';
 import '../../second_custom_buttom.dart';
 
 class StatusWithdrawalBottomSheet extends StatelessWidget {
@@ -24,7 +21,6 @@ class StatusWithdrawalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? headLine3 = Theme.of(context).textTheme.headline3;
     return Consumer<PayoutFreelancerProvider>(
       builder: (context , balance , child) => Container(
         padding: EdgeInsetsDirectional.only(

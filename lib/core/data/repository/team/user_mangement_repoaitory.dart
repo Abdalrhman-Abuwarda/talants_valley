@@ -2,7 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/core/data/network/dioClient.dart';
-import 'package:talants_valley/core/model/userModel.dart';
+import 'package:talants_valley/core/model/general_model/user_model.dart';
 
 import '../../network/api/end_points.dart';
 

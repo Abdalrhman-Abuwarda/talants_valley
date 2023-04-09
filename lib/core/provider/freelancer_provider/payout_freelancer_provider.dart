@@ -1,16 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:talants_valley/core/data/local/sharedController.dart';
 import 'package:talants_valley/core/data/repository/freelancer/payout_freelancer_repo.dart';
-import 'package:talants_valley/core/model/recipient_model.dart';
+import 'package:talants_valley/core/model/freelancer/payout/recipient_model.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../../routing/navigations.dart';
 import '../../../utils/helper.dart';
-import '../../model/freelancer/withdrawal_model.dart';
-import 'package:get_it/get_it.dart';
+import '../../model/freelancer/payout/withdrawal_model.dart';
 import 'package:talants_valley/locator.dart';
 
 class PayoutFreelancerProvider extends ChangeNotifier{
@@ -155,7 +153,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
     } else {
       isLoading = true;
       notifyListeners();
-      final dataResponse = await PayoutFreelancerRepo().sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger!);
+      final dataResponse = await PayoutFreelancerRepo().sendCodeAddBankRepo(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger);
       SharedPrefController().savaBankAccountToVerify(accountName: accountName, accountNumber: accountNumber, bankBranch: bankBranch, ledger: ledger, bankName: "Palestine");
       isVisibleHomeError = false;
       notifyListeners();

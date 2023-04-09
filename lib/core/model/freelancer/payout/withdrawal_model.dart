@@ -1,4 +1,4 @@
-import 'package:talants_valley/core/model/recipient_model.dart';
+import 'package:talants_valley/core/model/freelancer/payout/recipient_model.dart';
 
 class WithdrawModel {
   final String id;

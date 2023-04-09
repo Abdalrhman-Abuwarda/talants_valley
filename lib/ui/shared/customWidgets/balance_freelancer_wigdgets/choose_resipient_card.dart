@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:talants_valley/core/model/recipient_model.dart';
+import 'package:talants_valley/core/model/freelancer/payout/recipient_model.dart';
 
 import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';

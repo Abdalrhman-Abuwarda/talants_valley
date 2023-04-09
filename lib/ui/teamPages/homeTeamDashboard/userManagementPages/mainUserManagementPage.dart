@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
 
 import '../../../../core/data/local/sharedController.dart';
-import '../../../../core/model/userModel.dart';
+import '../../../../core/model/general_model/user_model.dart';
 import '../../../../resources/valuesManager.dart';
 import '../../../shared/customWidgets/TeamUserMangement/userListTile.dart';
 import '../../../shared/customWidgets/TeamUserMangement/userOptionBottomSheet.dart';

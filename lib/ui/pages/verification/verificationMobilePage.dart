@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/verificationProvider.dart';
+import 'package:talants_valley/core/provider/auth_and_verification_provider/verificationProvider.dart';
 import 'package:talants_valley/ui/shared/customPages/customOptPage.dart';
 
 import '../../../core/data/local/sharedController.dart';

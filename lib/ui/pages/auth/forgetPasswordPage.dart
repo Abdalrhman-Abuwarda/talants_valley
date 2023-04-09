@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/authProvider.dart';
-import 'package:talants_valley/core/provider/verificationProvider.dart';
+import 'package:talants_valley/core/provider/auth_and_verification_provider/authProvider.dart';
+import 'package:talants_valley/core/provider/auth_and_verification_provider/verificationProvider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
@@ -15,6 +15,8 @@ import '../../../utils/validate.dart';
 import '../../shared/customWidgets/main_text_form_field.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
+  const ForgetPasswordPage({super.key});
+
   @override
   State<ForgetPasswordPage> createState() => _ForgetPasswordPageState();
 }
