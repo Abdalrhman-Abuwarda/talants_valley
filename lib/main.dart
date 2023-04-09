@@ -3,20 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/general_freelancer_provider.dart';
-import 'package:talants_valley/core/provider/teamProvider/mainTeamProvider.dart';
-import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
 import 'package:talants_valley/locator.dart';
 import 'package:talants_valley/resources/themeManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
-import 'package:talants_valley/ui/splashPage.dart';
+import 'package:talants_valley/ui/splash_page.dart';
 import 'package:talants_valley/utils/helper.dart';
 
-import 'core/data/local/sharedController.dart';
+import 'core/data/local/shared_controller.dart';
 import 'core/provider/auth_and_verification_provider/authProvider.dart';
 import 'core/provider/formProvider.dart';
 import 'core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'core/provider/auth_and_verification_provider/verificationProvider.dart';
+import 'core/provider/team_provider/mainTeamProvider.dart';
+import 'core/provider/team_provider/userManagementProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

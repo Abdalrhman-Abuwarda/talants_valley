@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/local/sharedController.dart';
+import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
-import 'package:talants_valley/utils/timeExtension.dart';
+import 'package:talants_valley/utils/time_extension.dart';
 import '../../../../core/model/freelancer/payout/withdrawal_model.dart';
 import '../../../../resources/assets_manager.dart';
 import '../../../../resources/valuesManager.dart';

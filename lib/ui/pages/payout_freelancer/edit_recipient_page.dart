@@ -6,7 +6,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart';
-import 'package:talants_valley/utils/validate.dart';
+import 'package:talants_valley/utils/validate_extension.dart';
 
 import '../../../resources/colors_manager.dart';
 

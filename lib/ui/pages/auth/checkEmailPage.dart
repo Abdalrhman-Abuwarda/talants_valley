@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/local/sharedController.dart';
+import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/core/provider/auth_and_verification_provider/authProvider.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
-import '../../../utils/validate.dart';
+import '../../../utils/validate_extension.dart';
 import '../../shared/customPages/customOptPage.dart';
 
 class CheckEmailPage extends StatefulWidget {

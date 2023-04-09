@@ -7,7 +7,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/custom_contaner_widget.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
-import 'package:talants_valley/utils/timeExtension.dart';
+import 'package:talants_valley/utils/time_extension.dart';
 
 import '../../shared/customWidgets/balance_freelancer_wigdgets/details_status_card.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/header_status_bank_widget.dart';

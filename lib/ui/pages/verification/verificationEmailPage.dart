@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/local/sharedController.dart';
+import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/core/provider/auth_and_verification_provider/verificationProvider.dart';
 import 'package:talants_valley/ui/shared/customPages/customOptPage.dart';
 
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
-import '../../../utils/validate.dart';
+import '../../../utils/validate_extension.dart';
 
 class VerificationEmailPage extends StatefulWidget {
    VerificationEmailPage({Key? key}) : super(key: key);

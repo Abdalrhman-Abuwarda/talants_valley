@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/local/sharedController.dart';
+import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'package:talants_valley/routing/navigations.dart';
-import 'package:talants_valley/utils/validate.dart';
+import 'package:talants_valley/utils/validate_extension.dart';
 
 import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';

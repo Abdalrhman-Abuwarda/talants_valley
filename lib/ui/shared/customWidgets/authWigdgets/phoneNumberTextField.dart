@@ -3,13 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/auth_and_verification_provider/authProvider.dart';
-import 'package:talants_valley/core/provider/teamProvider/userManagementProvider.dart';
-
+import '../../../../core/provider/team_provider/userManagementProvider.dart';
 import '../../../../resources/valuesManager.dart';
 
 class PhoneNumberTextField extends StatelessWidget {
-   PhoneNumberTextField({
-    Key? key,
+   const PhoneNumberTextField({super.key,
     required this.phoneNumberController,
   }) ;
 
@@ -26,16 +24,15 @@ class PhoneNumberTextField extends StatelessWidget {
           dropdownIconPosition: IconPosition.trailing,
           disableLengthCheck: true,
           flagsButtonMargin: EdgeInsets.only(left: AppPadding.p16.w),
-          dropdownIcon: Icon(Icons.arrow_drop_down),
+          dropdownIcon: const Icon(Icons.arrow_drop_down),
           decoration:  InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(7.r)),
-              borderSide: BorderSide(),
+              borderSide: const BorderSide(),
             ),
           ),
           onChanged: (phone) {
             // print("This is phone ${phone.countryCode}");
-            // print("This is with Complite ${phone.completeNumber}");
             auth.postCode = phone.countryCode.toString();
             userManagement.postCode = phone.countryCode.toString();
           },

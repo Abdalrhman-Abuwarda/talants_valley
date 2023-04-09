@@ -12,7 +12,7 @@ import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart
 import '../../../core/model/general_model/dropdownModel.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
-import '../../../utils/validate.dart';
+import '../../../utils/validate_extension.dart';
 import '../../shared/customWidgets/custom_elevated_button.dart';
 import '../../shared/customWidgets/verificationWidgets/customButtonWhenUploudFile.dart';
 

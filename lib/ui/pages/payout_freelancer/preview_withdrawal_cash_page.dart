@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 
-import '../../../core/data/local/sharedController.dart';
+import '../../../core/data/local/shared_controller.dart';
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/valuesManager.dart';

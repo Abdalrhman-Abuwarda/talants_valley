@@ -10,7 +10,6 @@ import '../ui/pages/auth/forgetPasswordPage.dart';
 import '../ui/pages/auth/signInPage.dart';
 import '../ui/pages/auth/signUpPage.dart';
 import '../ui/pages/auth/successResetPassword.dart';
-import '../ui/pages/home_freelancer/home_freelancer_page.dart';
 import '../ui/pages/main_page_freelancer.dart';
 import '../ui/pages/payout_freelancer/add_balance_bank_page.dart';
 import '../ui/pages/payout_freelancer/add_balane_cash_page.dart';
@@ -33,10 +32,10 @@ import '../ui/pages/verification/successVerifiedMopile.dart';
 import '../ui/pages/verification/verificationAdressPage.dart';
 import '../ui/pages/verification/verificationIDPage.dart';
 import '../ui/pages/verification/verificationMobilePage.dart';
-import '../ui/teamPages/homeTeamDashboard/mainTeamPage.dart';
-import '../ui/teamPages/homeTeamDashboard/userManagementPages/editUserInformationPage.dart';
-import '../ui/teamPages/homeTeamDashboard/userManagementPages/mainUserManagementPage.dart';
-import '../ui/teamPages/homeTeamDashboard/userManagementPages/userDetailsPage.dart';
+import '../ui/teamPages/home_team_dashboard/main_team_page.dart';
+import '../ui/teamPages/home_team_dashboard/user_management_pages/edit_user_information_page.dart';
+import '../ui/teamPages/home_team_dashboard/user_management_pages/main_user_management_page.dart';
+import '../ui/teamPages/home_team_dashboard/user_management_pages/user_details_page.dart';
 
 
 class RoutsGenerate{
@@ -50,9 +49,9 @@ class RoutsGenerate{
       case RouteGenerator.mainFreelancerPage:
         return MaterialPageRoute(builder: (_) =>  const MainPageFreelancer());
       case RouteGenerator.forgetPassword:
-        return MaterialPageRoute(builder: (_) => ForgetPasswordPage());
+        return MaterialPageRoute(builder: (_) => const ForgetPasswordPage());
       case RouteGenerator.createNewPassword:
-        return MaterialPageRoute(builder: (_) =>  CreateNewPasswordPage());
+        return MaterialPageRoute(builder: (_) =>  const CreateNewPasswordPage());
       case RouteGenerator.successResetPage:
         return MaterialPageRoute(builder: (_) =>  const SuccessResetPassword());
       case RouteGenerator.mainVerificationPage:
@@ -68,7 +67,7 @@ class RoutsGenerate{
       case RouteGenerator.verificationMobilePage:
         return MaterialPageRoute(builder: (_) => VerificationMobilePage());
       case RouteGenerator.verificationIDPage:
-        return MaterialPageRoute(builder: (_) => VerificationIDPage());
+        return MaterialPageRoute(builder: (_) => const VerificationIDPage());
       case RouteGenerator.verificationAddressPage:
         return MaterialPageRoute(builder: (_) => VerificationAdressPage());
       case RouteGenerator.getUserDetails:
@@ -76,7 +75,7 @@ class RoutsGenerate{
       case RouteGenerator.mainTeamPage:
         return MaterialPageRoute(builder: (_) => const MainTeamPage());
       case RouteGenerator.mainUserManagementPage:
-        return MaterialPageRoute(builder: (_) => MainUserManagementPage());
+        return MaterialPageRoute(builder: (_) => const MainUserManagementPage());
       case RouteGenerator.editUserInformationPage:
         return MaterialPageRoute(builder: (_) => EditUserInformation());
       case RouteGenerator.addBankAccountPage:
@@ -104,7 +103,7 @@ class RoutsGenerate{
       case RouteGenerator.verificationAddRecipientPage:
         return MaterialPageRoute(builder: (_) => VerificationAddRecipientPage());
       case RouteGenerator.verificationEditRecipient:
-        return MaterialPageRoute(builder: (_) => VerificationEditRecipientPage());
+        return MaterialPageRoute(builder: (_) => const VerificationEditRecipientPage());
       case RouteGenerator.previewCashWithdrawalRecipient:
         return MaterialPageRoute(builder: (_) => PreviewWithdrawalCashPage());
       case RouteGenerator.previewBankWithdrawalStatus:

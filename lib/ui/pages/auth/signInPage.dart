@@ -7,7 +7,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
-import '../../../utils/validate.dart';
+import '../../../utils/validate_extension.dart';
 import '../../shared/customWidgets/authWigdgets/authFooterPage.dart';
 import '../../shared/customWidgets/authWigdgets/authHeaderPage.dart';
 import '../../shared/customWidgets/main_text_form_field.dart';

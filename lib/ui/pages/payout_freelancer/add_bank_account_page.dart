@@ -6,7 +6,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
-import '../../../utils/validate.dart';
+import '../../../utils/validate_extension.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/branch_bottom_sheet.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/disable_card_widget.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/ledger_botton_sheet.dart';

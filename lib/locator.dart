@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 
-import 'core/data/network/dioInterceptor.dart';
-import 'core/data/repository/freelancer/payout_freelancer_repo.dart';
+import 'core/data/network/api/dio_interceptor.dart';
+import 'core/data/repository/freelancer_repo/payout_freelancer_repo.dart';
 
 final locator = GetIt.instance;
 

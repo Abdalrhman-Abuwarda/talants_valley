@@ -5,7 +5,7 @@ import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/authWigdgets/authHeaderPage.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart';
 import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart';
-import 'package:talants_valley/utils/validate.dart';
+import 'package:talants_valley/utils/validate_extension.dart';
 import '../../../core/model/general_model/dropdownModel.dart';
 import '../../../core/provider/auth_and_verification_provider/authProvider.dart';
 import '../../../core/provider/formProvider.dart';

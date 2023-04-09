@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/auth_and_verification_provider/verificationProvider.dart';
 import 'package:talants_valley/ui/shared/customPages/customOptPage.dart';
 
-import '../../../core/data/local/sharedController.dart';
+import '../../../core/data/local/shared_controller.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
-import '../../../utils/validate.dart';
+import '../../../utils/validate_extension.dart';
 
 class VerificationMobilePage extends StatefulWidget {
   VerificationMobilePage({Key? key}) : super(key: key);

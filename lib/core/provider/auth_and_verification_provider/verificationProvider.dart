@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/repository/verification_repository.dart';
+import 'package:talants_valley/core/data/repository/auth_and_verification_repo/verification_repo.dart';
 
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/helper.dart';
-import '../../../utils/validate.dart';
-import '../../data/local/sharedController.dart';
+import '../../../utils/validate_extension.dart';
+import '../../data/local/shared_controller.dart';
 import 'authProvider.dart';
 
 class VerificationProvider with ChangeNotifier {
@@ -80,7 +80,7 @@ class VerificationProvider with ChangeNotifier {
 //------------------------------sendCodeEmail-----------------------------------
 
   sendCodeEmail() async {
-    final dateResponse = VerificationRepository().sendCodeEmailRepository();
+    final dateResponse = VerificationRepo().sendCodeEmailRepository();
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.verificationEmailPage);
     notifyListeners();
@@ -89,7 +89,7 @@ class VerificationProvider with ChangeNotifier {
 //---------------------------resendCodeEmail------------------------------------
 
   resendCodeEmail() async {
-    final dateResponse = VerificationRepository().sendCodeEmailRepository();
+    final dateResponse = VerificationRepo().sendCodeEmailRepository();
     final context = ServiceNavigation.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
     Provider.of<AuthProvider>(context, listen: false).minutes = 1;
@@ -102,7 +102,7 @@ class VerificationProvider with ChangeNotifier {
 
   verificationEmail({required String code}) async {
     final dataResponse =
-        VerificationRepository().verificationEmailRepository(code);
+        VerificationRepo().verificationEmailRepository(code);
     debugPrint(dataResponse.toString());
     Helpers.showSnackBar(message: "The process done successfully");
     ServiceNavigation.serviceNavi
@@ -114,7 +114,7 @@ class VerificationProvider with ChangeNotifier {
 //---------------------------sendMobileCode-------------------------------------
 
   sendCodeMobile() async {
-    final dateResponse = VerificationRepository().sendCodeMobileRepository();
+    final dateResponse = VerificationRepo().sendCodeMobileRepository();
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.verificationMobilePage);
     notifyListeners();
@@ -123,7 +123,7 @@ class VerificationProvider with ChangeNotifier {
 //--------------------------resendMobileCode------------------------------------
 
   resendCodeMobile() async {
-    final dateResponse = VerificationRepository().sendCodeMobileRepository();
+    final dateResponse = VerificationRepo().sendCodeMobileRepository();
     debugPrint(dateResponse.toString());
     final context = ServiceNavigation.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
@@ -138,7 +138,7 @@ class VerificationProvider with ChangeNotifier {
 
   verificationMobile({required String code}) async {
     final dataResponse =
-        VerificationRepository().verificationMobileRepository(code);
+        VerificationRepo().verificationMobileRepository(code);
     debugPrint(dataResponse.toString());
     Helpers.showSnackBar(message: "The process done successfully");
     ServiceNavigation.serviceNavi
@@ -150,7 +150,7 @@ class VerificationProvider with ChangeNotifier {
 //------------------------------------------------------------------------------
 
   getUser() async {
-    final dataResponse = await VerificationRepository().getUserRepository();
+    final dataResponse = await VerificationRepo().getUserRepository();
     debugPrint("This is the data of user\n $dataResponse");
     SharedPrefController().saveData(user: dataResponse);
     ServiceNavigation.serviceNavi
@@ -252,7 +252,7 @@ class VerificationProvider with ChangeNotifier {
 
   verificationID(
       {required String idNumber, required String idDocumentType}) async {
-    final dataResponse = await VerificationRepository()
+    final dataResponse = await VerificationRepo()
         .verificationIDRepository(mainIDFile!, idNumber, idDocumentType);
     debugPrint(dataResponse.toString());
     getUser();
@@ -269,7 +269,7 @@ class VerificationProvider with ChangeNotifier {
     required String addressDocumentType,
     required String country,
   }) async {
-    final dataResponse = await VerificationRepository()
+    final dataResponse = await VerificationRepo()
         .verificationAddressRepository(mainAddressFile!, address1, address2,
             city, addressDocumentType, country, otherDocumentType);
     debugPrint(dataResponse.toString());

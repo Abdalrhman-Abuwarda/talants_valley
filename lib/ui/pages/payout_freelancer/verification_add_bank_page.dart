@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/data/local/sharedController.dart';
+import '../../../core/data/local/shared_controller.dart';
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
-import '../../../utils/validate.dart';
+import '../../../utils/validate_extension.dart';
 import '../../shared/customPages/customOptPage.dart';
 
 class VerificationAddBnkPage extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:talants_valley/utils/timeExtension.dart';
-import 'package:talants_valley/utils/validate.dart';
+import 'package:talants_valley/utils/time_extension.dart';
+import 'package:talants_valley/utils/validate_extension.dart';
 
 import '../../../../resources/colors_manager.dart';
 import '../../../../resources/valuesManager.dart';

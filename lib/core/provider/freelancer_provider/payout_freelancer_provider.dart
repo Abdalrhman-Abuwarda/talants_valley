@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:talants_valley/core/data/local/sharedController.dart';
-import 'package:talants_valley/core/data/repository/freelancer/payout_freelancer_repo.dart';
+import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/core/model/freelancer/payout/recipient_model.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../../routing/navigations.dart';
 import '../../../utils/helper.dart';
+import '../../data/repository/freelancer_repo/payout_freelancer_repo.dart';
 import '../../model/freelancer/payout/withdrawal_model.dart';
 import 'package:talants_valley/locator.dart';
 

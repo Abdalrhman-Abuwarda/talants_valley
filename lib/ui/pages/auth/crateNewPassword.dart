@@ -10,7 +10,7 @@ import 'package:talants_valley/ui/shared/customWidgets/main_text_form_field.dart
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
-import '../../../utils/validate.dart';
+import '../../../utils/validate_extension.dart';
 
 class CreateNewPasswordPage extends StatefulWidget {
   const CreateNewPasswordPage({Key? key}) : super(key: key);

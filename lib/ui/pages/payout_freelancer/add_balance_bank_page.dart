@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/data/local/sharedController.dart';
+import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 import 'package:talants_valley/routing/navigations.dart';
-import 'package:talants_valley/utils/validate.dart';
+import 'package:talants_valley/utils/validate_extension.dart';
 
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../routing/router.dart';

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/auth_and_verification_provider/authProvider.dart';
 import 'package:talants_valley/resources/valuesManager.dart';
 
-import '../../../core/data/local/sharedController.dart';
+import '../../../core/data/local/shared_controller.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
