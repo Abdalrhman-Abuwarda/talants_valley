@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/model/general_model/dropdownModel.dart';
-import '../../../../core/provider/team_provider/userManagementProvider.dart';
-import '../../../../resources/valuesManager.dart';
+import '../../../../core/model/general_model/dropdown_model.dart';
+import '../../../../core/provider/team_provider/user_management_provider.dart';
+import '../../../../resources/values_manager.dart';
 import '../../../../routing/navigations.dart';
 import '../../../../routing/router.dart';
 import '../../../../utils/validate_extension.dart';
-import '../../../shared/customWidgets/authWigdgets/phoneNumberTextField.dart';
+import '../../../shared/customWidgets/auth_wigdgets/phone_number_text_field.dart';
 import '../../../shared/customWidgets/custom_dropdown_widget.dart';
 import '../../../shared/customWidgets/main_text_form_field.dart';
 
 class EditUserInformation extends StatefulWidget {
-  EditUserInformation({Key? key}) : super(key: key);
+  const EditUserInformation({Key? key}) : super(key: key);
 
   @override
   State<EditUserInformation> createState() => _EditUserInformationState();
@@ -232,7 +232,9 @@ class _EditUserInformationState extends State<EditUserInformation> {
                               CustomDropdownWidget(
                                 items: country,
                                 hintText: '',
-                                validator: (value) {},
+                                validator: (value) {
+                                  return null;
+                                },
                                 onChange: (Object? value) {
                                   userManagement.onChangeCountryAddress(value);
                                 },
@@ -261,7 +263,7 @@ class _EditUserInformationState extends State<EditUserInformation> {
                             userId: userManagement.userDetails!.id,
                           );
                         },
-                        child: Text("Save")),
+                        child: const Text("Save")),
                     addVerticalSpace(AppSize.s45.h),
                   ],
                 )),

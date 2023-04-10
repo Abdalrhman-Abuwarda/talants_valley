@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../resources/colors_manager.dart';
-import '../../../resources/valuesManager.dart';
+import '../../../resources/values_manager.dart';
 
 class CustomDropdownWidget extends StatelessWidget {
   CustomDropdownWidget({required this.items, required this.hintText, required this.validator, required this.onChange, required this.selectedValue});

@@ -7,10 +7,10 @@ import '../../../core/data/local/shared_controller.dart';
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../utils/validate_extension.dart';
-import '../../shared/customPages/customOptPage.dart';
+import '../../shared/custom_pages/custom_otp_page.dart';
 
 class VerificationAddRecipientPage extends StatefulWidget {
-   VerificationAddRecipientPage({Key? key}) : super(key: key);
+   const VerificationAddRecipientPage({Key? key}) : super(key: key);
 
   @override
   State<VerificationAddRecipientPage> createState() => _VerificationAddRecipientPageState();

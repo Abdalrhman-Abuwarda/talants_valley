@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/core/data/local/shared_controller.dart';
+import 'package:talants_valley/core/provider/auth_and_verification_provider/verification_provider.dart';
+
+
+import '../../../resources/assets_manager.dart';
+import '../../../routing/navigations.dart';
+import '../../../routing/router.dart';
+import '../../../utils/validate_extension.dart';
+import '../../shared/custom_pages/custom_otp_page.dart';
+
+class VerificationEmailPage extends StatefulWidget {
+   const VerificationEmailPage({Key? key}) : super(key: key);
+
+  @override
+  State<VerificationEmailPage> createState() => _VerificationEmailPageState();
+}
+
+class _VerificationEmailPageState extends State<VerificationEmailPage> {
+   var formKye = GlobalKey<FormState>();
+
+   final TextEditingController _optController = TextEditingController();
+
+   @override
+  void initState() {
+    // TODO: implement initState
+     Provider.of<VerificationProvider>(context,listen: false).startTimer();
+     super.initState();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Image.asset(
+          ImageAssets.mainImage,
+          height: 28.h,
+          width: 85.w,
+        ),
+        backgroundColor: Colors.transparent,
+        // leadingWidth: 30.w,
+        leading: IconButton(
+          onPressed: () {
+            ServiceNavigation.serviceNavi
+              .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
+           },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
+      body: Form(
+        key: formKye,
+        child: Consumer<VerificationProvider>(
+          builder: (context, verification, child) =>
+              CustomOptPage(
+                isLoading: false,
+                optController: _optController,
+                caption: "We have sent you a verification code to your email ${SharedPrefController().getUser().email.replaceRange(0, 3, "****")}",
+                withImage: true,
+                pathImage: ImageAssets.emailImage,
+                onPressedButton: () {
+                  if (formKye.currentState!.validate()) {
+                    verification.verificationEmail(code: _optController.text);
+                  }
+                },
+                buttonText: 'Verify',
+                fotterText: "Didn't get the code?",
+                futtarButtonText: 'Resend',
+                onPressedTextButton: () => verification.resendCodeEmail(),
+                validator: (value) => Validate.validateCode(value), minutes: verification.minutes.toString(),
+                seconds: verification.seconds.toString(),
+              ),
+        ),
+      ),
+    );
+  }
+}

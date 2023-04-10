@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/auth_and_verification_provider/authProvider.dart';
-import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/core/provider/auth_and_verification_provider/auth_provider.dart';
+import 'package:talants_valley/resources/values_manager.dart';
 
 import '../../../core/data/local/shared_controller.dart';
 import '../../../resources/colors_manager.dart';

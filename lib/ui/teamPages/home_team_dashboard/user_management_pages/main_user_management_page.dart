@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/data/local/shared_controller.dart';
 import '../../../../core/model/general_model/user_model.dart';
-import '../../../../core/provider/team_provider/userManagementProvider.dart';
-import '../../../../resources/valuesManager.dart';
-import '../../../shared/customWidgets/TeamUserMangement/userListTile.dart';
-import '../../../shared/customWidgets/TeamUserMangement/userOptionBottomSheet.dart';
+import '../../../../core/provider/team_provider/user_management_provider.dart';
+import '../../../../resources/values_manager.dart';
+import '../../../shared/customWidgets/Team_user_mangement/userListTile.dart';
+import '../../../shared/customWidgets/Team_user_mangement/userOptionBottomSheet.dart';
 import '../../../shared/customWidgets/search_bar.dart';
 
 class MainUserManagementPage extends StatefulWidget {

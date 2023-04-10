@@ -20,11 +20,9 @@ class DioClient {
       ..options.contentType = Headers.formUrlEncodedContentType
       ..interceptors.add(DioInterceptor())
       ..interceptors.add(dioLoggerInterceptor);
-    
 
   }
 
-  // static DioClient dioClient = DioClient(_dio);
 
   // Get:-----------------------------------------------------------------------
   Future<Response> get(

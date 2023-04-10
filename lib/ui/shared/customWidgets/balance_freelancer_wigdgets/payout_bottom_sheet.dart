@@ -8,7 +8,7 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
 
 import '../../../../resources/assets_manager.dart';
-import '../../../../resources/valuesManager.dart';
+import '../../../../resources/values_manager.dart';
 import '../../../../routing/router.dart';
 
 class PayoutBottomSheet extends StatelessWidget {

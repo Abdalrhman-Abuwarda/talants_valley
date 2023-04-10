@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 
-import '../../../resources/valuesManager.dart';
+import '../../../resources/values_manager.dart';
 
 class MainElevatedButton extends StatelessWidget {
   const MainElevatedButton({

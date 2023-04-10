@@ -8,7 +8,7 @@ import 'package:talants_valley/ui/shared/customWidgets/main_elevated_button.dart
 import '../../../core/data/local/shared_controller.dart';
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/colors_manager.dart';
-import '../../../resources/valuesManager.dart';
+import '../../../resources/values_manager.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/policy_withdrawal_widget.dart';

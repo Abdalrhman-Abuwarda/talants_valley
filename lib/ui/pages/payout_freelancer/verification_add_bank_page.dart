@@ -6,12 +6,11 @@ import '../../../core/data/local/shared_controller.dart';
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../routing/navigations.dart';
-import '../../../routing/router.dart';
 import '../../../utils/validate_extension.dart';
-import '../../shared/customPages/customOptPage.dart';
+import '../../shared/custom_pages/custom_otp_page.dart';
 
 class VerificationAddBnkPage extends StatefulWidget {
-  VerificationAddBnkPage({Key? key}) : super(key: key);
+  const VerificationAddBnkPage({Key? key}) : super(key: key);
 
   @override
   State<VerificationAddBnkPage> createState() => _VerificationAddBnkPageState();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/resources/values_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 
 import '../resources/assets_manager.dart';

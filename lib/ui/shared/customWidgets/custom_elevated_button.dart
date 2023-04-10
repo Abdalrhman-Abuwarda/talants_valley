@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../resources/colors_manager.dart';
-import '../../../resources/valuesManager.dart';
+import '../../../resources/values_manager.dart';
 
 class CostumElevatedButton extends StatelessWidget {
   CostumElevatedButton({

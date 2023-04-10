@@ -4,19 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/general_freelancer_provider.dart';
 import 'package:talants_valley/locator.dart';
-import 'package:talants_valley/resources/themeManager.dart';
+import 'package:talants_valley/resources/theme_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
 import 'package:talants_valley/ui/splash_page.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/shared_controller.dart';
-import 'core/provider/auth_and_verification_provider/authProvider.dart';
+import 'core/provider/auth_and_verification_provider/auth_provider.dart';
 import 'core/provider/formProvider.dart';
 import 'core/provider/freelancer_provider/payout_freelancer_provider.dart';
-import 'core/provider/auth_and_verification_provider/verificationProvider.dart';
-import 'core/provider/team_provider/mainTeamProvider.dart';
-import 'core/provider/team_provider/userManagementProvider.dart';
+import 'core/provider/auth_and_verification_provider/verification_provider.dart';
+import 'core/provider/team_provider/main_team_provider.dart';
+import 'core/provider/team_provider/user_management_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

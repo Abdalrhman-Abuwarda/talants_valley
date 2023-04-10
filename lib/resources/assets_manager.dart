@@ -1,7 +1,6 @@
 const String imagePaht = "assets/images";
 
 class ImageAssets {
-  // static const String splashLogo = "$Image_Paht/splash.png";
   static const String mainImage = "$imagePaht/mainimage.png";
   static const String successImage = "$imagePaht/success.png";
   static const String emailImage = "$imagePaht/email.png";

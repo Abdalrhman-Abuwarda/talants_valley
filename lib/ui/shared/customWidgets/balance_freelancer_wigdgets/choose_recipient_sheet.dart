@@ -7,7 +7,7 @@ import 'package:talants_valley/routing/navigations.dart';
 import '../../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import '../../../../resources/assets_manager.dart';
 import '../../../../resources/colors_manager.dart';
-import '../../../../resources/valuesManager.dart';
+import '../../../../resources/values_manager.dart';
 
 class ChooseRecipientButtonSheet extends StatelessWidget {
   const ChooseRecipientButtonSheet({Key? key}) : super(key: key);

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
-import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/resources/values_manager.dart';
 
-import '../../../../core/provider/team_provider/userManagementProvider.dart';
+import '../../../../core/provider/team_provider/user_management_provider.dart';
 import '../../../../routing/navigations.dart';
 import '../../../../routing/router.dart';
-import '../../../shared/customWidgets/TeamUserMangement/userDetail/financialInformationCard.dart';
-import '../../../shared/customWidgets/TeamUserMangement/userDetail/personalInformationCard.dart';
-import '../../../shared/customWidgets/TeamUserMangement/userDetail/updatesCard.dart';
+import '../../../shared/customWidgets/Team_user_mangement/userDetail/financialInformationCard.dart';
+import '../../../shared/customWidgets/Team_user_mangement/userDetail/personalInformationCard.dart';
+import '../../../shared/customWidgets/Team_user_mangement/userDetail/updatesCard.dart';
 
 class UserDetailsPage extends StatelessWidget {
-   UserDetailsPage({Key? key}) : super(key: key);
+   const UserDetailsPage({Key? key}) : super(key: key);
 
 
   @override
@@ -53,8 +53,8 @@ class UserDetailsPage extends StatelessWidget {
                              title: const Text("Example"),
                              content: const Text("Do you like this book?"),
                              actions: [
-                               TextButton(onPressed: (){}, child: Text("Team")),
-                               TextButton(onPressed: (){}, child: Text("Block")),
+                               TextButton(onPressed: (){}, child: const Text("Team")),
+                               TextButton(onPressed: (){}, child: const Text("Block")),
                              ],
                              shape: RoundedRectangleBorder(
                                borderRadius: BorderRadius.circular(30),

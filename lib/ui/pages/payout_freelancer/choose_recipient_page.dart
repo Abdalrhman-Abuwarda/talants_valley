@@ -8,7 +8,7 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
-import '../../../resources/valuesManager.dart';
+import '../../../resources/values_manager.dart';
 import '../../shared/customWidgets/balance_freelancer_wigdgets/choose_bank_skeleton.dart';
 import '../../shared/customWidgets/custom_contaner_widget.dart';
 import '../../shared/customWidgets/custom_elevated_button.dart';

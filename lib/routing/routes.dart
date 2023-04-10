@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
-import 'package:talants_valley/ui/pages/verification/successVerifiedEmail.dart';
-import 'package:talants_valley/ui/pages/verification/verificationEmailPage.dart';
+import 'package:talants_valley/ui/pages/verification/success_verified_email.dart';
+import 'package:talants_valley/ui/pages/verification/verification_email_page.dart';
 
-import '../ui/pages/auth/checkEmailPage.dart';
-import '../ui/pages/auth/crateNewPassword.dart';
-import '../ui/pages/auth/forgetPasswordPage.dart';
-import '../ui/pages/auth/signInPage.dart';
-import '../ui/pages/auth/signUpPage.dart';
-import '../ui/pages/auth/successResetPassword.dart';
+import '../ui/pages/auth/check_email_page.dart';
+import '../ui/pages/auth/crate_new_password.dart';
+import '../ui/pages/auth/forget_password_page.dart';
+import '../ui/pages/auth/signIn_page.dart';
+import '../ui/pages/auth/sign_up_page.dart';
+import '../ui/pages/auth/success_reset_password.dart';
 import '../ui/pages/main_page_freelancer.dart';
 import '../ui/pages/payout_freelancer/add_balance_bank_page.dart';
 import '../ui/pages/payout_freelancer/add_balane_cash_page.dart';
@@ -25,13 +25,13 @@ import '../ui/pages/payout_freelancer/preview_cash_withdrawal_status_page.dart';
 import '../ui/pages/payout_freelancer/preview_withdrawal_bank_page.dart';
 import '../ui/pages/payout_freelancer/preview_withdrawal_cash_page.dart';
 import '../ui/pages/payout_freelancer/verifcation_add_recipient.dart';
-import '../ui/pages/payout_freelancer/verificationEditRecipientPage.dart';
+import '../ui/pages/payout_freelancer/verification_edit_recipient_page.dart';
 import '../ui/pages/payout_freelancer/verification_add_bank_page.dart';
-import '../ui/pages/verification/mainVerificationPage.dart';
-import '../ui/pages/verification/successVerifiedMopile.dart';
-import '../ui/pages/verification/verificationAdressPage.dart';
-import '../ui/pages/verification/verificationIDPage.dart';
-import '../ui/pages/verification/verificationMobilePage.dart';
+import '../ui/pages/verification/main_verification_page.dart';
+import '../ui/pages/verification/success_verified_mopile.dart';
+import '../ui/pages/verification/verification_adress_page.dart';
+import '../ui/pages/verification/verification_id_page.dart';
+import '../ui/pages/verification/verification_mobile_page.dart';
 import '../ui/teamPages/home_team_dashboard/main_team_page.dart';
 import '../ui/teamPages/home_team_dashboard/user_management_pages/edit_user_information_page.dart';
 import '../ui/teamPages/home_team_dashboard/user_management_pages/main_user_management_page.dart';
@@ -69,7 +69,7 @@ class RoutsGenerate{
       case RouteGenerator.verificationIDPage:
         return MaterialPageRoute(builder: (_) => const VerificationIDPage());
       case RouteGenerator.verificationAddressPage:
-        return MaterialPageRoute(builder: (_) => VerificationAdressPage());
+        return MaterialPageRoute(builder: (_) => VerificationAddressPage());
       case RouteGenerator.getUserDetails:
         return MaterialPageRoute(builder: (_) => UserDetailsPage());
       case RouteGenerator.mainTeamPage:

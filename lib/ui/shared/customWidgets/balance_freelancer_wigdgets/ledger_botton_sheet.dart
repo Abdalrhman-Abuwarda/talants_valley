@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/provider/freelancer_provider/payout_freelancer_provider.dart';
-import '../../../../resources/valuesManager.dart';
+import '../../../../resources/values_manager.dart';
 
 class LedgerBottomSheet extends StatelessWidget {
   const LedgerBottomSheet({Key? key}) : super(key: key);

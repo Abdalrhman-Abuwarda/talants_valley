@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 
 import '../../../../resources/colors_manager.dart';
-import '../../../../resources/valuesManager.dart';
+import '../../../../resources/values_manager.dart';
 
 class PressedCardWidget extends StatelessWidget {
    PressedCardWidget({

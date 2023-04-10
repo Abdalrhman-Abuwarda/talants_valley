@@ -7,7 +7,7 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/utils/time_extension.dart';
 import '../../../../core/model/freelancer/payout/withdrawal_model.dart';
 import '../../../../resources/assets_manager.dart';
-import '../../../../resources/valuesManager.dart';
+import '../../../../resources/values_manager.dart';
 import '../../../../routing/navigations.dart';
 import '../../second_custom_buttom.dart';
 

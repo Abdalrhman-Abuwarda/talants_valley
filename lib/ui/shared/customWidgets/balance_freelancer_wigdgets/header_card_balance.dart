@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../resources/assets_manager.dart';
 import '../../../../resources/colors_manager.dart';
-import '../../../../resources/valuesManager.dart';
+import '../../../../resources/values_manager.dart';
 
 class HeaderCardBalance extends StatelessWidget {
   HeaderCardBalance({

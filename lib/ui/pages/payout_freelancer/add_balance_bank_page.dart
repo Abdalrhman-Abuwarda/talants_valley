@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
-import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/resources/values_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/utils/validate_extension.dart';
 

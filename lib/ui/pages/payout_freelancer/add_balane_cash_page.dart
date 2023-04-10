@@ -11,7 +11,7 @@ import 'package:talants_valley/utils/validate_extension.dart';
 
 import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';
-import '../../../resources/valuesManager.dart';
+import '../../../resources/values_manager.dart';
 import '../../../routing/router.dart';
 
 class AddBalanceCashPage extends StatefulWidget {

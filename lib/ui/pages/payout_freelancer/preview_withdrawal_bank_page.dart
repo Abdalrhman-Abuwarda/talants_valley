@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
-import 'package:talants_valley/resources/valuesManager.dart';
+import 'package:talants_valley/resources/values_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/router.dart';

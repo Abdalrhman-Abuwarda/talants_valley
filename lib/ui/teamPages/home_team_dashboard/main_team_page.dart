@@ -6,7 +6,7 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/ui/teamPages/home_team_dashboard/payoutsPages/main_payount_page.dart';
 import 'package:talants_valley/ui/teamPages/home_team_dashboard/user_management_pages/main_user_management_page.dart';
 
-import '../../../core/provider/team_provider/mainTeamProvider.dart';
+import '../../../core/provider/team_provider/main_team_provider.dart';
 import 'analytics_pages/main_analytics_page.dart';
 import 'home_dashboard_pages/home_team_dshboard_page.dart';
 import 'invoices_pages/main_invoice_page.dart';

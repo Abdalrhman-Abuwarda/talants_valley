@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:talants_valley/core/provider/auth_and_verification_provider/authProvider.dart';
+import 'package:talants_valley/core/provider/auth_and_verification_provider/auth_provider.dart';
 
 import '../../../../utils/helper.dart';
 import '../../../provider/freelancer_provider/payout_freelancer_provider.dart';
