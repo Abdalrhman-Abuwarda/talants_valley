@@ -14,7 +14,7 @@ import 'package:talants_valley/locator.dart';
 class PayoutFreelancerProvider extends ChangeNotifier{
   SharedPrefController sharedPref = SharedPrefController();
 
-  PayoutFreelancerRepo get repo =>  locator<PayoutFreelancerRepo>();
+  PayoutFreelancerRepo  repo =  locator<PayoutFreelancerRepo>();
 
 
    bool isVisibleHomeError = false;
@@ -178,7 +178,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
   getBankAccountList() async {
     isLoading = true;
     // notifyListeners();
-    final response = await PayoutFreelancerRepo().getBankAccountListRepo();
+    final response = await repo.getBankAccountListRepo();
     bankAccounts = response;
     notifyListeners();
 }
@@ -211,7 +211,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
   getWithdrawList() async {
     isLoading = true;
-    final dataResponse = await PayoutFreelancerRepo().getWithdrawalRequestList();
+    final dataResponse = await repo.getWithdrawalRequestList();
     withdrawals = dataResponse;
     debugPrint(" This is the length =>>> ${withdrawals.length.toString()}");
     notifyListeners();
@@ -403,7 +403,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
    getWithdrawDetails({required withdrawId}) async {
     secondLoading = true;
     notifyListeners();
-    final dataResponse = await PayoutFreelancerRepo().getWithdrawDetailsRepo(id: withdrawId!);
+    final dataResponse = await repo.getWithdrawDetailsRepo(id: withdrawId!);
     debugPrint("This is details inside provider =>>> $dataResponse");
     withdrawForPreview = dataResponse;
     withdrawForPreview!.office == null ?

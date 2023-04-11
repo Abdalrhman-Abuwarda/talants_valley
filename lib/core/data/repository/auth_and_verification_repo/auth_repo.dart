@@ -11,12 +11,12 @@ import '../../../model/general_model/user_model.dart';
 class AuthRepo {
   Dio dio = Dio();
 
-  
+
   //----------------------------------------loginUserRepository-------------------------------
 
   Future loginUserRepository(
       {required String email, required String password}) async {
-    final response = await DioClient(dio).post(Endpoints.userLogin, data: {
+    final response = await DioClient().post(Endpoints.userLogin, data: {
       "email": email,
       "password": password,
     });
@@ -26,7 +26,7 @@ class AuthRepo {
     return user;
   }
 
-  
+
   //---------------------------------------signupUserRepository-------------------------------
   Future<DataModel> signupUserRepository(
       {required String firstName,
@@ -35,7 +35,7 @@ class AuthRepo {
       required String country,
       required String email,
       required String password}) async {
-    final response = await DioClient(dio).post(Endpoints.userSignup, data: {
+    final response = await DioClient().post(Endpoints.userSignup, data: {
       "firstName": firstName,
       "lastName": lastName,
       "email": email,
@@ -46,11 +46,11 @@ class AuthRepo {
     final data = DataModel.fromJson(response.data["data"]);
     return data;
   }
-  
+
   //-----------------------------forgetPasswordRepository-----------------------
 
 Future<dynamic> forgetPasswordRepository({required String email}) async{
-    final response = await DioClient(dio).post(Endpoints.userForgetPassword, data: {
+    final response = await DioClient( ).post(Endpoints.userForgetPassword, data: {
       "email": email,
     });
     final userId = response.data["data"]["_id"];
@@ -60,7 +60,7 @@ Future<dynamic> forgetPasswordRepository({required String email}) async{
 //-------------------------------checkEmailRrpository---------------------------
 
 Future<dynamic> checkEmailRrpository({required String id, required String verificationCode}) async {
-  final response = await DioClient(dio).post(Endpoints.userVerifyPassword, data: {
+  final response = await DioClient( ).post(Endpoints.userVerifyPassword, data: {
     "_id": id,
     "verificationCode": verificationCode,
   });
@@ -71,7 +71,7 @@ Future<dynamic> checkEmailRrpository({required String id, required String verifi
 //------------------------------------------------------------------------------
 
 Future<dynamic> createNewPasswordRepository({required String password, required String recoverToken}) async {
-    final response = await DioClient(dio).post(Endpoints.crateNewPassword, data: {
+    final response = await DioClient( ).post(Endpoints.crateNewPassword, data: {
       "password": password,
       "recoverToken": recoverToken,
     });

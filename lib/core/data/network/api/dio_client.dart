@@ -8,20 +8,28 @@ import 'package:dio_logger/dio_logger.dart';
 
 class DioClient {
 // dio instance
-  final Dio dio;
+//   final Dio dio;di
   // DioInterceptor get interceptor =>  locator<DioInterceptor>();
-
-  DioClient(this.dio) {
-    dio
-      ..options.baseUrl = Endpoints.baseUrl
-      ..options.connectTimeout = 15000
-      ..options.receiveTimeout = 30000
-      ..options.responseType = ResponseType.json
-      ..options.contentType = Headers.formUrlEncodedContentType
-      ..interceptors.add(DioInterceptor())
-      ..interceptors.add(dioLoggerInterceptor);
-
-  }
+final _dio =Dio()  ..options.baseUrl = Endpoints.baseUrl
+  ..options.connectTimeout = 15000
+  ..options.receiveTimeout = 30000
+  ..options.responseType = ResponseType.json
+  ..options.contentType = Headers.formUrlEncodedContentType
+  ..interceptors.addAll([DioInterceptor() , dioLoggerInterceptor]);
+// ..options.validateStatus
+//   ..interceptors.add(dioLoggerInterceptor);
+  // DioClient(this.dio) {
+  //   dio
+  //     ..options.baseUrl = Endpoints.baseUrl
+  //     ..options.connectTimeout = 15000
+  //     ..options.receiveTimeout = 30000
+  //     ..options.responseType = ResponseType.json
+  //     ..options.contentType = Headers.formUrlEncodedContentType
+  //     ..interceptors.add(DioInterceptor())
+  //     // ..options.validateStatus
+  //     ..interceptors.add(dioLoggerInterceptor);
+  //
+  // }
 
 
   // Get:-----------------------------------------------------------------------
@@ -32,7 +40,8 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     debugPrint("This is inside Dio Clint in get function ===>>>> ");
-    final Response response = await dio.get(
+    debugPrint("This is inside Dio Clint in get function ===>>>> ${_dio.interceptors.length}");
+    final Response response = await _dio.get(
       url,
       queryParameters: queryParameters,
       cancelToken: cancelToken,
@@ -50,7 +59,7 @@ class DioClient {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final Response response = await dio.post(
+    final Response response = await _dio.post(
       url,
       data: data,
       queryParameters: queryParameters,
@@ -68,7 +77,7 @@ class DioClient {
     Map<String, dynamic>? queryParameters,
     CancelToken? cancelToken,
   }) async {
-    final Response response = await dio.delete(url,
+    final Response response = await _dio.delete(url,
         data: data, queryParameters: queryParameters, cancelToken: cancelToken);
     return response;
   }
@@ -83,7 +92,7 @@ class DioClient {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final Response response = await dio.put(
+    final Response response = await _dio.put(
       url,
       data: data,
       queryParameters: queryParameters,

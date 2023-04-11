@@ -11,7 +11,7 @@ class UserManagementRepo {
 
 //--------------------------------getUsers--------------------------------------
   Future<dynamic> getUsersRepository({required int offset}) async {
-    final response = await DioClient(dio).get("${Endpoints.getUsers}$offset");
+    final response = await DioClient(  ).get("${Endpoints.getUsers}$offset");
     debugPrint("This is response data ${response.data}");
     debugPrint("This is Lists of users ${response.data["data"]["users"]}");
     final List usersList = response.data["data"]["users"];
@@ -25,7 +25,7 @@ class UserManagementRepo {
 
   Future<dynamic> userDetailsRepository(String userId) async {
     final response =
-        await DioClient(dio).get('${Endpoints.getUserDetails}$userId');
+        await DioClient(  ).get('${Endpoints.getUserDetails}$userId');
     debugPrint("This is response data ${response.data}");
     debugPrint(
         "This is user Details of users in Repository \n ${response.data["data"]["user"]}");
@@ -37,7 +37,7 @@ class UserManagementRepo {
 
 //--------------------------------deleteUser------------------------------------
   Future<dynamic> deleteUserRepository(String id) async {
-    final response = await DioClient(dio).delete('${Endpoints.deleteUser}$id');
+    final response = await DioClient(  ).delete('${Endpoints.deleteUser}$id');
     debugPrint("This is response data ${response.data}");
     debugPrint(
         "This is message of user dalete in Repository \n ${response.data["message"]}");
@@ -46,7 +46,7 @@ class UserManagementRepo {
 //--------------------------------blockUser-------------------------------------
 
   Future<dynamic> blockUserRepository(String id) async {
-    final response = await DioClient(dio).put('${Endpoints.blockUser}$id');
+    final response = await DioClient(  ).put('${Endpoints.blockUser}$id');
     debugPrint("This is response data \n ${response.data}");
     debugPrint(
         "This is message of user Block in Repository \n ${response.data["message"]}");
@@ -70,7 +70,7 @@ class UserManagementRepo {
     // print("this is request ${Endpoints.editInformationUser}$id");
 
     final response =
-        await DioClient(dio).put("${Endpoints.editInformationUser}$id", data:
+        await DioClient(  ).put("${Endpoints.editInformationUser}$id", data:
         // {
         //   "firstName": "Asseel11111",
         //   "lastName": "Aseel",
@@ -105,7 +105,7 @@ class UserManagementRepo {
 //--------------------------------changeRoleRepository--------------------------
 
 Future<dynamic> changeRoleRepository(String id) async {
-    final response = await DioClient(dio).put(Endpoints.changeRole);
+    final response = await DioClient(  ).put(Endpoints.changeRole);
     debugPrint(
         "This is response of change user in Repository \n $response");
     debugPrint(

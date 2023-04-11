@@ -7,5 +7,5 @@ final locator = GetIt.instance;
 
 void setup(){
   locator.registerLazySingleton<PayoutFreelancerRepo>(() => PayoutFreelancerRepo());
-  locator.registerLazySingleton<DioInterceptor>(() => DioInterceptor());
+  // locator.registerLazySingleton<DioInterceptor>(() => DioInterceptor());
 }
