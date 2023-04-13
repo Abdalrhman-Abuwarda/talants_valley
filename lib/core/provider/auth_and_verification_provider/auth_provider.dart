@@ -57,7 +57,7 @@ void suffixPressed(){
 Future<dynamic> loginUser(String email, String password) async{
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().loginUserRepository(email: email, password: password);
+  final dataResponse = await AuthRepo().loginUserRepo(email: email, password: password);
   SharedPrefController().saveData(user: dataResponse);
   notifyListeners();
 
@@ -79,7 +79,7 @@ Future<dynamic> signupUser(
       required String password}) async{
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().signupUserRepository(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
+  final dataResponse = await AuthRepo().signupUserRepo(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
   Helpers.showSnackBar(message: "Signup successfully");
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
@@ -92,7 +92,7 @@ Future<dynamic> signupUser(
 Future<dynamic> forgetPassword({required String email}) async{
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().forgetPasswordRepository(email: email);
+  final dataResponse = await AuthRepo().forgetPasswordRepo(email: email);
   SharedPrefController().saveId(id: dataResponse.toString());
   Helpers.showSnackBar(message: "Send code successfully");
   ServiceNavigation.serviceNavi
@@ -103,7 +103,7 @@ Future<dynamic> forgetPassword({required String email}) async{
 //---------------------------resendCode-----------------------------------------
 
   Future<dynamic> resendCode({required String email}) async{
-    final dataResponse = await AuthRepo().forgetPasswordRepository(email: email);
+    final dataResponse = await AuthRepo().forgetPasswordRepo(email: email);
     SharedPrefController().saveId(id: dataResponse.toString());
     seconds = 60;
     minutes = 1;
@@ -116,7 +116,7 @@ Future<dynamic> forgetPassword({required String email}) async{
 Future<dynamic> checkEmailPassword({ required String verificationCode}) async {
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().checkEmailRrpository(id: SharedPrefController().getId(), verificationCode: verificationCode);
+  final dataResponse = await AuthRepo().checkEmailRepo(id: SharedPrefController().getId(), verificationCode: verificationCode);
   SharedPrefController().saveRecoverToken(recoverToken: dataResponse);
   Helpers.showSnackBar(message: "The process done successfully");
   ServiceNavigation.serviceNavi
@@ -129,7 +129,7 @@ Future<dynamic> checkEmailPassword({ required String verificationCode}) async {
 Future<dynamic> createNewPassword({required String password}) async{
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().createNewPasswordRepository(password: password, recoverToken: SharedPrefController().getRecoverToken());
+  final dataResponse = await AuthRepo().createNewPasswordRepo(password: password, recoverToken: SharedPrefController().getRecoverToken());
   Helpers.showSnackBar(message: dataResponse["message"]);
   ServiceNavigation.serviceNavi
       .pushNamedWidget(RouteGenerator.successResetPage);

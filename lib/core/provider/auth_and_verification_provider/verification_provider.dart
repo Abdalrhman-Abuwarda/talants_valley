@@ -80,7 +80,7 @@ class VerificationProvider with ChangeNotifier {
 //------------------------------sendCodeEmail-----------------------------------
 
   sendCodeEmail() async {
-    final dateResponse = VerificationRepo().sendCodeEmailRepository();
+    await VerificationRepo().sendCodeEmailRepository();
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.verificationEmailPage);
     notifyListeners();
@@ -89,7 +89,7 @@ class VerificationProvider with ChangeNotifier {
 //---------------------------resendCodeEmail------------------------------------
 
   resendCodeEmail() async {
-    final dateResponse = VerificationRepo().sendCodeEmailRepository();
+    await VerificationRepo().sendCodeEmailRepository();
     final context = ServiceNavigation.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
     Provider.of<AuthProvider>(context, listen: false).minutes = 1;
@@ -102,7 +102,7 @@ class VerificationProvider with ChangeNotifier {
 
   verificationEmail({required String code}) async {
     final dataResponse =
-        VerificationRepo().verificationEmailRepository(code);
+       await VerificationRepo().verificationEmailRepository(code);
     debugPrint(dataResponse.toString());
     Helpers.showSnackBar(message: "The process done successfully");
     ServiceNavigation.serviceNavi
@@ -114,7 +114,7 @@ class VerificationProvider with ChangeNotifier {
 //---------------------------sendMobileCode-------------------------------------
 
   sendCodeMobile() async {
-    final dateResponse = VerificationRepo().sendCodeMobileRepository();
+    await VerificationRepo().sendCodeMobileRepository();
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.verificationMobilePage);
     notifyListeners();
@@ -150,7 +150,7 @@ class VerificationProvider with ChangeNotifier {
 //------------------------------------------------------------------------------
 
   getUser() async {
-    final dataResponse = await VerificationRepo().getUserRepository();
+    final dataResponse = await VerificationRepo().getUserRepo();
     debugPrint("This is the data of user\n $dataResponse");
     SharedPrefController().saveData(user: dataResponse);
     ServiceNavigation.serviceNavi
@@ -176,11 +176,9 @@ class VerificationProvider with ChangeNotifier {
   Future pickFileID() async {
     final result = await FilePicker.platform.pickFiles();
     final file = result!.files.first;
-    if (result != null) {
-      mainIDFile = File(file.path.toString());
-      idFile = file;
-      idFileSize = file.size / 1048576;
-    }
+    mainIDFile = File(file.path.toString());
+    idFile = file;
+    idFileSize = file.size / 1048576;
     checkAcceptedFileId();
     debugPrint("This is the imageIDFile $mainIDFile");
     debugPrint("This is the imageIDFile path ${mainIDFile!.path}");
@@ -196,11 +194,9 @@ class VerificationProvider with ChangeNotifier {
   Future pickFileAddress() async {
     final result = await FilePicker.platform.pickFiles();
     final file = result!.files.first;
-    if (result != null) {
-      mainAddressFile = File(file.path.toString());
-      addressFile = file;
-      addressFileSize = file.size / 1048576;
-    }
+    mainAddressFile = File(file.path.toString());
+    addressFile = file;
+    addressFileSize = file.size / 1048576;
     checkAcceptedFileAddress();
     debugPrint("This is the imageIDFile $mainAddressFile");
     debugPrint("This is the imageIDFile path ${mainAddressFile!.path}");
@@ -270,7 +266,7 @@ class VerificationProvider with ChangeNotifier {
     required String country,
   }) async {
     final dataResponse = await VerificationRepo()
-        .verificationAddressRepository(mainAddressFile!, address1, address2,
+        .verificationAddressRepo(mainAddressFile!, address1, address2,
             city, addressDocumentType, country, otherDocumentType);
     debugPrint(dataResponse.toString());
     getUser();

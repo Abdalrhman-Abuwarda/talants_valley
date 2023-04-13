@@ -1,19 +1,17 @@
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/core/data/network/api/dio_client.dart';
 import 'package:talants_valley/core/model/general_model/user_model.dart';
 
+import '../../../../locator.dart';
 import '../../network/api/end_points.dart';
 
 class UserManagementRepo {
-  Dio dio = Dio();
+  final DioClient  _dioClient =  locator<DioClient>();
+
 
 //--------------------------------getUsers--------------------------------------
   Future<dynamic> getUsersRepository({required int offset}) async {
-    final response = await DioClient(  ).get("${Endpoints.getUsers}$offset");
-    debugPrint("This is response data ${response.data}");
-    debugPrint("This is Lists of users ${response.data["data"]["users"]}");
+    final response = await _dioClient.get("${Endpoints.getUsers}$offset");
     final List usersList = response.data["data"]["users"];
     debugPrint("${usersList.length}");
     List<UserModel> users =
@@ -23,12 +21,9 @@ class UserManagementRepo {
 
 //----------------------------getUserDetailsRepository--------------------------
 
-  Future<dynamic> userDetailsRepository(String userId) async {
+  Future<UserModel> userDetailsRepository(String userId) async {
     final response =
-        await DioClient(  ).get('${Endpoints.getUserDetails}$userId');
-    debugPrint("This is response data ${response.data}");
-    debugPrint(
-        "This is user Details of users in Repository \n ${response.data["data"]["user"]}");
+        await _dioClient.get('${Endpoints.getUserDetails}$userId');
     final UserModel userDetails =
         UserModel.fromJson(response.data["data"]["user"]);
     debugPrint(userDetails.email);
@@ -37,21 +32,13 @@ class UserManagementRepo {
 
 //--------------------------------deleteUser------------------------------------
   Future<dynamic> deleteUserRepository(String id) async {
-    final response = await DioClient(  ).delete('${Endpoints.deleteUser}$id');
-    debugPrint("This is response data ${response.data}");
-    debugPrint(
-        "This is message of user dalete in Repository \n ${response.data["message"]}");
-  }
+     await _dioClient.delete('${Endpoints.deleteUser}$id');
+    }
 
 //--------------------------------blockUser-------------------------------------
 
   Future<dynamic> blockUserRepository(String id) async {
-    final response = await DioClient(  ).put('${Endpoints.blockUser}$id');
-    debugPrint("This is response data \n ${response.data}");
-    debugPrint(
-        "This is message of user Block in Repository \n ${response.data["message"]}");
-    debugPrint(
-        "This is isBlocked value in Repository \n ${response.data["data"]["isBlocked"]}");
+    final response = await _dioClient.put('${Endpoints.blockUser}$id');
     return response.data["data"]["isBlocked"];
   }
 
@@ -67,10 +54,8 @@ class UserManagementRepo {
       required String address2,
       required String city,
       required String country}) async {
-    // print("this is request ${Endpoints.editInformationUser}$id");
 
-    final response =
-        await DioClient(  ).put("${Endpoints.editInformationUser}$id", data:
+        await _dioClient.put("${Endpoints.editInformationUser}$id", data:
         // {
         //   "firstName": "Asseel11111",
         //   "lastName": "Aseel",
@@ -99,17 +84,12 @@ class UserManagementRepo {
       }
     }
     );
-    debugPrint("This is response data in Repository \n ${response.data}");
   }
 
 //--------------------------------changeRoleRepository--------------------------
 
 Future<dynamic> changeRoleRepository(String id) async {
-    final response = await DioClient(  ).put(Endpoints.changeRole);
-    debugPrint(
-        "This is response of change user in Repository \n $response");
-    debugPrint(
-        "This is response of change user in Repository \n ${response.data["data"]["role"]}");
+    final response = await _dioClient.put(Endpoints.changeRole);
     return response.data["data"]["role"];
 }
 

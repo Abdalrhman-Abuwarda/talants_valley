@@ -1,22 +1,23 @@
-import 'package:dio/dio.dart';
 
 import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/core/data/network/api/end_points.dart';
 import 'package:talants_valley/core/data/network/api/dio_client.dart';
 
 
+import '../../../../locator.dart';
 import '../../../model/general_model/user-data_model.dart';
 import '../../../model/general_model/user_model.dart';
 
 class AuthRepo {
-  Dio dio = Dio();
+
+  final DioClient  _dioClient =  locator<DioClient>();
 
 
   //----------------------------------------loginUserRepository-------------------------------
 
-  Future loginUserRepository(
+  Future<UserModel> loginUserRepo(
       {required String email, required String password}) async {
-    final response = await DioClient().post(Endpoints.userLogin, data: {
+    final response = await _dioClient.post(Endpoints.userLogin, data: {
       "email": email,
       "password": password,
     });
@@ -28,14 +29,14 @@ class AuthRepo {
 
 
   //---------------------------------------signupUserRepository-------------------------------
-  Future<DataModel> signupUserRepository(
+  Future<DataModel> signupUserRepo(
       {required String firstName,
       required String lastName,
       required String mobile,
       required String country,
       required String email,
       required String password}) async {
-    final response = await DioClient().post(Endpoints.userSignup, data: {
+    final response = await _dioClient.post(Endpoints.userSignup, data: {
       "firstName": firstName,
       "lastName": lastName,
       "email": email,
@@ -49,18 +50,18 @@ class AuthRepo {
 
   //-----------------------------forgetPasswordRepository-----------------------
 
-Future<dynamic> forgetPasswordRepository({required String email}) async{
-    final response = await DioClient( ).post(Endpoints.userForgetPassword, data: {
+Future<dynamic> forgetPasswordRepo({required String email}) async{
+    final response = await _dioClient.post(Endpoints.userForgetPassword, data: {
       "email": email,
     });
     final userId = response.data["data"]["_id"];
     return userId;
 }
 
-//-------------------------------checkEmailRrpository---------------------------
+//-------------------------------checkEmailRepo---------------------------
 
-Future<dynamic> checkEmailRrpository({required String id, required String verificationCode}) async {
-  final response = await DioClient( ).post(Endpoints.userVerifyPassword, data: {
+Future<dynamic> checkEmailRepo({required String id, required String verificationCode}) async {
+  final response = await _dioClient.post(Endpoints.userVerifyPassword, data: {
     "_id": id,
     "verificationCode": verificationCode,
   });
@@ -70,8 +71,8 @@ Future<dynamic> checkEmailRrpository({required String id, required String verifi
 
 //------------------------------------------------------------------------------
 
-Future<dynamic> createNewPasswordRepository({required String password, required String recoverToken}) async {
-    final response = await DioClient( ).post(Endpoints.crateNewPassword, data: {
+Future<dynamic> createNewPasswordRepo({required String password, required String recoverToken}) async {
+    final response = await _dioClient.post(Endpoints.crateNewPassword, data: {
       "password": password,
       "recoverToken": recoverToken,
     });

@@ -178,7 +178,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
   getBankAccountList() async {
     isLoading = true;
     // notifyListeners();
-    final response = await repo.getBankAccountListRepo();
+    final response = await repo.getBankAccountsRepo();
     bankAccounts = response;
     notifyListeners();
 }
@@ -211,7 +211,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
   getWithdrawList() async {
     isLoading = true;
-    final dataResponse = await repo.getWithdrawalRequestList();
+    final dataResponse = await repo.getWithdrawalsRepo();
     withdrawals = dataResponse;
     debugPrint(" This is the length =>>> ${withdrawals.length.toString()}");
     notifyListeners();
@@ -222,7 +222,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
     getOfficeList() async{
     isLoading = true;
-    final dataResponse = await PayoutFreelancerRepo().getOfficeListRepo();
+    final dataResponse = await PayoutFreelancerRepo().getOfficesRepo();
     officeList  = dataResponse;
     officeSelected = officeList.first;
     notifyListeners();
