@@ -69,7 +69,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 
 //------------------------------resendCodeAddBank-------------------------------
-  resendCodeAddBank() async {
+  Future<dynamic> resendCodeAddBank() async {
     seconds = 60;
     minutes = 1;
     notifyListeners();
@@ -81,7 +81,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //------------------------------------------------------------------------------
 
-  resendCodeAddRecipient() async{
+  Future<dynamic> resendCodeAddRecipient() async{
     seconds = 60;
     minutes = 1;
     notifyListeners();
@@ -138,7 +138,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //----------------------------------sendCodeAddBankAccount----------------------
 
-    sendCodeAddBankAccount({ required String accountName, required String accountNumber, required String bankBranch, required String ledger}) async {
+  Future<dynamic> sendCodeAddBankAccount({ required String accountName, required String accountNumber, required String bankBranch, required String ledger}) async {
     if(branchSelected.isEmpty && ledgerSelected.isEmpty){
       isVisibleLedgerError = true;
       isVisibleBranchError = true;
@@ -165,7 +165,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //-----------------------------verifyAddBnkPage---------------------------------
 
-    verifyAddBnkPage({ required String code}) async{
+  Future<dynamic> verifyAddBnkPage({ required String code}) async{
     isLoading = true;
     await _repo.verifyAddAccountRepo(accountName: SharedPrefController().getBankAccountName(), accountNumber: SharedPrefController().getBankAccountNumber(), bankBranch: SharedPrefController().getBankAccountBranch(), ledger: SharedPrefController().getBankAccountLeger(), code: code, bankName: "Palestine");
     disposeTimer();
@@ -175,7 +175,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //----------------------------getBankAccountList--------------------------------
 
-  getBankAccountList() async {
+  Future<dynamic> getBankAccountList() async {
     isLoading = true;
     // notifyListeners();
     final response = await _repo.getBankAccountsRepo();
@@ -185,7 +185,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //---------------------------deleteBankAccount---------------------------------
 
-    deleteBankAccount({required String bankId}) async {
+  Future<dynamic> deleteBankAccount({required String bankId}) async {
     showDialog(
         context: contextKey,
         builder: (context) =>  BalanceAlertDialog(
@@ -209,7 +209,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //------------------------------------------------------------------------------
 
-  getWithdrawList() async {
+  Future<dynamic> getWithdrawList() async {
     isLoading = true;
     final dataResponse = await _repo.getWithdrawalsRepo();
     withdrawals = dataResponse;
@@ -220,7 +220,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //-----------------------------getOfficeList------------------------------------
 
-    getOfficeList() async{
+  Future<dynamic> getOfficeList() async{
     isLoading = true;
     final dataResponse = await _repo.getOfficesRepo();
     officeList  = dataResponse;
@@ -231,7 +231,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //------------------------------------------------------------------------------
 
-   sendCodeRecipient({required String mobile, required String idNumber, required String name}) async {
+  Future<dynamic> sendCodeRecipient({required String mobile, required String idNumber, required String name}) async {
     isLoading = true;
     notifyListeners();
     await _repo.senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
@@ -245,7 +245,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //------------------------------------------------------------------------------
 
-   verificationAddRecipient({required String code , required String mobile, required String idNumber, required String name}) async{
+  Future<dynamic> verificationAddRecipient({required String code , required String mobile, required String idNumber, required String name}) async{
     isLoading = true;
     notifyListeners();
     await _repo.verificationAddRecipient(code: code, mobile: mobile, idNumber: idNumber, name: name);
@@ -253,7 +253,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
  }
 
 //------------------------------------------------------------------------------
-    getRecipients() async {
+  Future<dynamic> getRecipients() async {
     isLoading = true;
     final dataResponse = await _repo.getRecipientsRepo();
     recipients = dataResponse;
@@ -262,7 +262,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
  //-----------------------------------------------------------------------------
 
-    deleteRecipient({required String? id}) async {
+  Future<dynamic> deleteRecipient({required String? id}) async {
     showDialog(
         context: contextKey,
         builder: (context) =>  BalanceAlertDialog(
@@ -282,7 +282,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //------------------------------------------------------------------------------
 
-  sendCodeUpdateRecipient({ required String id ,required String mobile, required String idNumber, required String name }) async{
+  Future<dynamic> sendCodeUpdateRecipient({ required String id ,required String mobile, required String idNumber, required String name }) async{
     isLoading = true;
     notifyListeners();
   await _repo.senCodeRecipientRepo(mobile: mobile, idNumber: idNumber);
@@ -296,7 +296,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //------------------------updateRecipient---------------------------------------
 
-  updateRecipient({required String code, required String id, required String mobile , required String idNumber, required String name}) async{
+  Future<dynamic> updateRecipient({required String code, required String id, required String mobile , required String idNumber, required String name}) async{
     isLoading = true;
     notifyListeners();
     await _repo.updateRecipientRepo(id: id, code: code, mobile: mobile, idNumber: idNumber, name: name);
@@ -367,7 +367,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
   }
 
   //--------------------------requestBankWithdraw-------------------------------
-    requestBankWithdraw({required String bankId, required int amount}) async {
+    Future<dynamic> requestBankWithdraw({required String bankId, required int amount}) async {
     isLoading = true;
     notifyListeners();
     await _repo.requestBankWithdrawRepo(bankId: bankId, amount: amount);
@@ -379,7 +379,8 @@ class PayoutFreelancerProvider extends ChangeNotifier{
   }
 
   //------------------------requestCashWithdraw---------------------------------
-    requestCashWithdraw({required String amount, required String officeId, required String recipientId}) async{
+
+   Future<dynamic> requestCashWithdraw({required String amount, required String officeId, required String recipientId}) async{
     isLoading = true;
     notifyListeners();
     await _repo.requestWithdrawCashRepo(amount: int.parse(amount), officeId: officeId, recipientId: recipientId);
@@ -399,7 +400,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 //---------------------------getWithdrawDetails---------------------------------
 
-   getWithdrawDetails({required withdrawId}) async {
+   Future<dynamic> getWithdrawDetails({required withdrawId}) async {
     secondLoading = true;
     notifyListeners();
     final dataResponse = await _repo.getWithdrawDetailsRepo(id: withdrawId!);
@@ -415,7 +416,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
  //----------------------------cancelWithdraw-----------------------------------
 
-    cancelWithdraw({required String withdrawId}) async {
+  Future<dynamic> cancelWithdraw({required String withdrawId}) async {
     showDialog(
         context: contextKey,
         builder: (context) =>  BalanceAlertDialog(
@@ -433,7 +434,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
   //--------------------------confirmWithdraw-----------------------------------
 
-    confirmWithdraw({required String id}) async {
+  Future<dynamic> confirmWithdraw({required String id}) async {
     isLoading = true;
     notifyListeners();
     await _repo.confirmWithdrawRepo(id: id);
