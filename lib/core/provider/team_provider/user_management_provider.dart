@@ -2,12 +2,16 @@ import 'package:country_phone_code_picker/constants/country_codes.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/core/model/general_model/user_model.dart';
 
+import '../../../locator.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/helper.dart';
 import '../../data/repository/team_repo/user_mangement_repo.dart';
 
 class UserManagementProvider extends ChangeNotifier {
+
+  final UserManagementRepo  _repo =  locator<UserManagementRepo>();
+
 
   String? postCode;
   final List<String> countriesName =
@@ -28,7 +32,7 @@ class UserManagementProvider extends ChangeNotifier {
   List<UserModel> users = [];
 
   Future<dynamic> getUsers() async {
-    final dataResponse = await UserManagementRepo().getUsersRepository(offset: offsetUsers);
+    final dataResponse = await _repo.getUsersRepository(offset: offsetUsers);
     users = dataResponse;
     offsetUsers += 20;
     notifyListeners();
@@ -37,7 +41,7 @@ class UserManagementProvider extends ChangeNotifier {
 //------------------------------------------------------------------------------
   List<UserModel> otherUsers = [];
 getOtherUsers() async {
-  final dataResponse = await UserManagementRepo().getUsersRepository(offset: offsetUsers);
+  final dataResponse = await _repo.getUsersRepository(offset: offsetUsers);
   otherUsers = dataResponse;
   offsetUsers += 20;
   users.addAll(otherUsers);
@@ -49,7 +53,7 @@ getOtherUsers() async {
 
   Future<dynamic> getUserDetails(String userId) async {
     final dataResponse =
-        await UserManagementRepo().userDetailsRepository(userId);
+        await _repo.userDetailsRepository(userId);
     userDetails = dataResponse;
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.getUserDetails);
@@ -59,7 +63,7 @@ getOtherUsers() async {
 //----------------------------------deleteUser----------------------------------
 
   Future<dynamic> deleteUser(String userId) async {
-    final dataResponse = await UserManagementRepo().deleteUserRepository(userId);
+    await _repo.deleteUserRepository(userId);
     users.removeWhere((element) => element.id == userId);
     Helpers.showSnackBar(message: "Delete User successfully");
     notifyListeners();
@@ -69,7 +73,7 @@ getOtherUsers() async {
 
   Future<dynamic> blockUser(String userId) async {
     final dataResponse =
-        await UserManagementRepo().blockUserRepository(userId);
+        await _repo.blockUserRepository(userId);
     int index = users.indexWhere((item) => item.id == userId);
     users[index].isBlocked = dataResponse;
     Helpers.showSnackBar(message: "Block User successfully");
@@ -101,7 +105,7 @@ getOtherUsers() async {
      required String address2,
      required String city,
      required String country}) async {
-    final dataResponse = await UserManagementRepo()
+    await _repo
         .editUserInformationRepository(userId,
             firstName: fistName,
             lastName: lastName,
@@ -113,14 +117,14 @@ getOtherUsers() async {
             city: city,
             country: country);
 
-    debugPrint("This is response of edit User in provider \n $dataResponse");
     notifyListeners();
   }
 
   //-----------------------------changeRole-------------------------------------
 
 Future<dynamic> changeRole(String userId) async {
-    final dataResponse = await UserManagementRepo().changeRoleRepository(userId);
+    final dataResponse = await _repo
+        .changeRoleRepository(userId);
     int index = users.indexWhere((item) => item.id == userId);
     users[index].role = dataResponse;
     userDetails!.role = dataResponse;

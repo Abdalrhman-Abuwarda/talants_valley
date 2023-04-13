@@ -17,6 +17,7 @@ import 'core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'core/provider/auth_and_verification_provider/verification_provider.dart';
 import 'core/provider/team_provider/main_team_provider.dart';
 import 'core/provider/team_provider/user_management_provider.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,11 @@ Future<void> main() async {
   await ScreenUtil.ensureScreenSize();
   await SharedPrefController().initSharedPreferences();
   runApp(const MyApp());
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  OneSignal.shared.setAppId("");
+  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    debugPrint("Accepted Permission: $accepted");
+  });
 }
 
 class MyApp extends StatelessWidget {

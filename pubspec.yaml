@@ -55,6 +55,7 @@ dependencies:
   get_it: ^7.2.0
   dio_logger: ^4.0.8+8
   jiffy: ^5.0.0
+  onesignal_flutter: ^3.5.1
 
 dev_dependencies:
   flutter_test:
