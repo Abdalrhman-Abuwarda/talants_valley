@@ -79,7 +79,7 @@ Future<dynamic> signupUser(
       required String password}) async{
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().signupUserRepo(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
+  await AuthRepo().signupUserRepo(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
   Helpers.showSnackBar(message: "Signup successfully");
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
