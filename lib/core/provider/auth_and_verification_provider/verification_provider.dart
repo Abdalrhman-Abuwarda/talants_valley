@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/repository/auth_and_verification_repo/verification_repo.dart';
 
+import '../../../locator.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/helper.dart';
@@ -14,6 +15,8 @@ import '../../data/local/shared_controller.dart';
 import 'auth_provider.dart';
 
 class VerificationProvider with ChangeNotifier {
+  final VerificationRepo repo = locator<VerificationRepo>();
+
   String? validateFunction(String? value) => Validate.validateEmail(value);
 
   int seconds = 59;
@@ -80,7 +83,7 @@ class VerificationProvider with ChangeNotifier {
 //------------------------------sendCodeEmail-----------------------------------
 
   Future<dynamic> sendCodeEmail() async {
-    await VerificationRepo().sendCodeEmailRepository();
+    await repo.sendCodeEmailRepository();
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.verificationEmailPage);
     notifyListeners();
@@ -89,7 +92,7 @@ class VerificationProvider with ChangeNotifier {
 //---------------------------resendCodeEmail------------------------------------
 
   Future<dynamic> resendCodeEmail() async {
-    await VerificationRepo().sendCodeEmailRepository();
+    await repo.sendCodeEmailRepository();
     final context = ServiceNavigation.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
     Provider.of<AuthProvider>(context, listen: false).minutes = 1;
@@ -101,8 +104,7 @@ class VerificationProvider with ChangeNotifier {
 //---------------------------verificationEmail----------------------------------
 
   Future<dynamic> verificationEmail({required String code}) async {
-    final dataResponse =
-       await VerificationRepo().verificationEmailRepository(code);
+    final dataResponse = await repo.verificationEmailRepository(code);
     debugPrint(dataResponse.toString());
     Helpers.showSnackBar(message: "The process done successfully");
     ServiceNavigation.serviceNavi
@@ -114,7 +116,7 @@ class VerificationProvider with ChangeNotifier {
 //---------------------------sendMobileCode-------------------------------------
 
   Future<dynamic> sendCodeMobile() async {
-    await VerificationRepo().sendCodeMobileRepository();
+    await repo.sendCodeMobileRepository();
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.verificationMobilePage);
     notifyListeners();
@@ -123,7 +125,7 @@ class VerificationProvider with ChangeNotifier {
 //--------------------------resendMobileCode------------------------------------
 
   Future<dynamic> resendCodeMobile() async {
-    final dateResponse = VerificationRepo().sendCodeMobileRepository();
+    final dateResponse = repo.sendCodeMobileRepository();
     debugPrint(dateResponse.toString());
     final context = ServiceNavigation.serviceNavi.navKey.currentContext;
     Provider.of<AuthProvider>(context!, listen: false).seconds = 60;
@@ -137,8 +139,7 @@ class VerificationProvider with ChangeNotifier {
 //--------------------------verificationMobile----------------------------------
 
   Future<dynamic> verificationMobile({required String code}) async {
-    final dataResponse =
-        VerificationRepo().verificationMobileRepository(code);
+    final dataResponse = repo.verificationMobileRepository(code);
     debugPrint(dataResponse.toString());
     Helpers.showSnackBar(message: "The process done successfully");
     ServiceNavigation.serviceNavi
@@ -150,7 +151,7 @@ class VerificationProvider with ChangeNotifier {
 //------------------------------------------------------------------------------
 
   Future<dynamic> getUser() async {
-    final dataResponse = await VerificationRepo().getUserRepo();
+    final dataResponse = await repo.getUserRepo();
     debugPrint("This is the data of user\n $dataResponse");
     SharedPrefController().saveData(user: dataResponse);
     ServiceNavigation.serviceNavi
@@ -248,8 +249,8 @@ class VerificationProvider with ChangeNotifier {
 
   Future<dynamic> verificationID(
       {required String idNumber, required String idDocumentType}) async {
-    final dataResponse = await VerificationRepo()
-        .verificationIDRepository(mainIDFile!, idNumber, idDocumentType);
+    final dataResponse = await repo.verificationIDRepository(
+        mainIDFile!, idNumber, idDocumentType);
     debugPrint(dataResponse.toString());
     getUser();
     notifyListeners();
@@ -265,9 +266,14 @@ class VerificationProvider with ChangeNotifier {
     required String addressDocumentType,
     required String country,
   }) async {
-    final dataResponse = await VerificationRepo()
-        .verificationAddressRepo(mainAddressFile!, address1, address2,
-            city, addressDocumentType, country, otherDocumentType);
+    final dataResponse = await repo.verificationAddressRepo(
+        mainAddressFile!,
+        address1,
+        address2,
+        city,
+        addressDocumentType,
+        country,
+        otherDocumentType);
     debugPrint(dataResponse.toString());
     getUser();
     notifyListeners();
