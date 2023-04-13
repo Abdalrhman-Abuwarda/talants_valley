@@ -5,13 +5,17 @@ import 'package:provider/provider.dart';
 import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/core/data/repository/auth_and_verification_repo/auth_repo.dart';
 
+import '../../../locator.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
 import '../../../utils/helper.dart';
 import '../freelancer_provider/payout_freelancer_provider.dart';
 
 class AuthProvider with ChangeNotifier{
-bool isPassword = true;
+
+  final AuthRepo  _repo =  locator<AuthRepo>();
+
+  bool isPassword = true;
 String? postCode;
 Duration duration = const Duration();
 bool isLoading = false;
@@ -57,7 +61,7 @@ void suffixPressed(){
 Future<dynamic> loginUser(String email, String password) async{
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().loginUserRepo(email: email, password: password);
+  final dataResponse = await _repo.loginUserRepo(email: email, password: password);
   SharedPrefController().saveData(user: dataResponse);
   notifyListeners();
 
@@ -79,7 +83,7 @@ Future<dynamic> signupUser(
       required String password}) async{
   isLoading = true;
   notifyListeners();
-  await AuthRepo().signupUserRepo(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
+  await _repo.signupUserRepo(firstName: firstName, lastName: lastName, mobile: mobile, country: country, email: email, password: password);
   Helpers.showSnackBar(message: "Signup successfully");
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
@@ -92,7 +96,7 @@ Future<dynamic> signupUser(
 Future<dynamic> forgetPassword({required String email}) async{
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().forgetPasswordRepo(email: email);
+  final dataResponse = await _repo.forgetPasswordRepo(email: email);
   SharedPrefController().saveId(id: dataResponse.toString());
   Helpers.showSnackBar(message: "Send code successfully");
   ServiceNavigation.serviceNavi
@@ -103,7 +107,7 @@ Future<dynamic> forgetPassword({required String email}) async{
 //---------------------------resendCode-----------------------------------------
 
   Future<dynamic> resendCode({required String email}) async{
-    final dataResponse = await AuthRepo().forgetPasswordRepo(email: email);
+    final dataResponse = await _repo.forgetPasswordRepo(email: email);
     SharedPrefController().saveId(id: dataResponse.toString());
     seconds = 60;
     minutes = 1;
@@ -116,7 +120,7 @@ Future<dynamic> forgetPassword({required String email}) async{
 Future<dynamic> checkEmailPassword({ required String verificationCode}) async {
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().checkEmailRepo(id: SharedPrefController().getId(), verificationCode: verificationCode);
+  final dataResponse = await _repo.checkEmailRepo(id: SharedPrefController().getId(), verificationCode: verificationCode);
   SharedPrefController().saveRecoverToken(recoverToken: dataResponse);
   Helpers.showSnackBar(message: "The process done successfully");
   ServiceNavigation.serviceNavi
@@ -129,7 +133,7 @@ Future<dynamic> checkEmailPassword({ required String verificationCode}) async {
 Future<dynamic> createNewPassword({required String password}) async{
   isLoading = true;
   notifyListeners();
-  final dataResponse = await AuthRepo().createNewPasswordRepo(password: password, recoverToken: SharedPrefController().getRecoverToken());
+  final dataResponse = await _repo.createNewPasswordRepo(password: password, recoverToken: SharedPrefController().getRecoverToken());
   Helpers.showSnackBar(message: dataResponse["message"]);
   ServiceNavigation.serviceNavi
       .pushNamedWidget(RouteGenerator.successResetPage);
