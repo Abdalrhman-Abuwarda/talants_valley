@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 
-import '../routing/navigations.dart';
 import 'colors_manager.dart';
 
 class ThemeManager {
@@ -83,7 +82,7 @@ class ThemeManager {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(AppSize.s10.r)),
           borderSide: const BorderSide(
-            color: ColorManager.foucasBorderColor,
+            color: ColorManager.focusBorderColor,
             width: 2,
           ),
         ),

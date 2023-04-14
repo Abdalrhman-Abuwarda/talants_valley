@@ -78,7 +78,7 @@ class _CustomOptPageState extends State<CustomOptPage> {
                 height: AppSize.s40.h,
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: ColorManager.foucasBorderColor, width: 2),
+                      color: ColorManager.focusBorderColor, width: 2),
                   color: ColorManager.whiteColor,
                   borderRadius: BorderRadius.circular(5.r),
                   boxShadow: [
