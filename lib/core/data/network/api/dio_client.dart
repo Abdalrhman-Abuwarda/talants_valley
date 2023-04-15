@@ -2,34 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:talants_valley/core/data/network/api/dio_interceptor.dart';
 
-import '../../../../locator.dart';
 import 'end_points.dart';
 import 'package:dio_logger/dio_logger.dart';
 
 class DioClient {
-// dio instance
-//   final Dio dio;di
-  // DioInterceptor get interceptor =>  locator<DioInterceptor>();
+
 final _dio =Dio()  ..options.baseUrl = Endpoints.baseUrl
   ..options.connectTimeout = 15000
   ..options.receiveTimeout = 30000
   ..options.responseType = ResponseType.json
   ..options.contentType = Headers.formUrlEncodedContentType
+  // ..options.validateStatus = (statusCode) => statusCode! <= 500
   ..interceptors.addAll([DioInterceptor() , dioLoggerInterceptor]);
-// ..options.validateStatus
-//   ..interceptors.add(dioLoggerInterceptor);
-  // DioClient(this.dio) {
-  //   dio
-  //     ..options.baseUrl = Endpoints.baseUrl
-  //     ..options.connectTimeout = 15000
-  //     ..options.receiveTimeout = 30000
-  //     ..options.responseType = ResponseType.json
-  //     ..options.contentType = Headers.formUrlEncodedContentType
-  //     ..interceptors.add(DioInterceptor())
-  //     // ..options.validateStatus
-  //     ..interceptors.add(dioLoggerInterceptor);
-  //
-  // }
+
 
 
   // Get:-----------------------------------------------------------------------
@@ -39,8 +24,7 @@ final _dio =Dio()  ..options.baseUrl = Endpoints.baseUrl
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) async {
-    debugPrint("This is inside Dio Clint in get function ===>>>> ");
-    debugPrint("This is inside Dio Clint in get function ===>>>> ${_dio.interceptors.length}");
+
     final Response response = await _dio.get(
       url,
       queryParameters: queryParameters,
