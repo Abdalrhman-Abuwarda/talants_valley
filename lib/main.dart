@@ -19,6 +19,7 @@ import 'core/provider/team_provider/main_team_provider.dart';
 import 'core/provider/team_provider/user_management_provider.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations;
@@ -31,7 +32,7 @@ Future<void> main() async {
   await SharedPrefController().initSharedPreferences();
   runApp(const MyApp());
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-  OneSignal.shared.setAppId("");
+  OneSignal.shared.setAppId("7f811b94-c90f-480e-9d8e-dcaaabdf1289");
   OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
     debugPrint("Accepted Permission: $accepted");
   });
