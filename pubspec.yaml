@@ -56,6 +56,11 @@ dependencies:
   dio_logger: ^4.0.8+8
   jiffy: ^5.0.0
   onesignal_flutter: ^3.5.1
+  flutter_launcher_icons:
+flutter_icons:
+  image_path: "assets/images/mainimage.png"
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:

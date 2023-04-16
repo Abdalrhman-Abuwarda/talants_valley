@@ -34,6 +34,7 @@ class IconAssets {
   static const String invoiceFreelancerIcon =
       '$iconPath/freelancer_bottom_bar_icons/invoice_icon.svg';
   static const String withdrawIcon = '$iconPath/withdraw_icon.svg';
+  static const String mainIconApp = '$iconPath/main_icon_app.svg';
   static const String bankIcon = '$iconPath/bank_icon.svg';
   static const String cashIcon = '$iconPath/cash_icon.svg';
   static const String doneIcon = '$iconPath/done_icon.svg';
@@ -48,7 +49,6 @@ class IconAssets {
 
 
 }
-
 const String svgPath = 'assets/svg';
 
 class SvgAssets {
