@@ -58,9 +58,11 @@ dependencies:
   onesignal_flutter: ^3.5.1
   flutter_launcher_icons:
 flutter_icons:
-  image_path: "assets/images/mainimage.png"
+  image_path: "assets/images/logo_app.png"
   android: true
   ios: true
+  adaptive_icon_foreground: "assets/images/logo_foreground.png"
+
 
 dev_dependencies:
   flutter_test:
