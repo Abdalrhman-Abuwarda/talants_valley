@@ -16,7 +16,10 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
   final PayoutFreelancerRepo  _repo =  locator<PayoutFreelancerRepo>();
 
-
+  String? fullNameUser;
+  String? genderUser;
+  String? email;
+  String? location;
    bool isVisibleHomeError = false;
    bool isVisibleAmountCashError = false;
    String? mountUserToWithdrawal;
@@ -77,6 +80,10 @@ class PayoutFreelancerProvider extends ChangeNotifier{
     startTimer();
     notifyListeners();
   }
+
+  //----------------------------------------------------------------------------
+
+
 
 
 //------------------------------------------------------------------------------
