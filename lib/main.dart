@@ -9,6 +9,7 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
 import 'package:talants_valley/ui/pages/notification/notification_page.dart';
 import 'package:talants_valley/ui/splash_page.dart';
+import 'package:talants_valley/ui/teamPages/home_team_dashboard/home_dashboard_pages/activites/activity_page.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/shared_controller.dart';
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Talants Valley',
               theme: ThemeManager.lightTheme,
-              home: const SplashPage() ,
+              home: const ActivityPage() ,
               navigatorKey: ServiceNavigation.serviceNavi.navKey,
               onGenerateRoute: RoutsGenerate.generateRoute,
             ),

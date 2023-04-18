@@ -17,4 +17,5 @@ static const Color grayColor = Color(0xFF8C8C8C);
 static const Color unselectedAppBarColor = Color(0xFFBEC2C6);
 static const Color yellowColor = Color(0xFFDAA545);
 static const Color disableIconColor = Color(0xFF707070);
+static const Color enableCardColor = Color(0xFFF2F4F7);
 }
