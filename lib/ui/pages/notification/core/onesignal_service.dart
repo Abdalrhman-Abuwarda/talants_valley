@@ -3,8 +3,6 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../../../routing/navigations.dart';
-import '../../../../utils/helper.dart';
-import '../ui_notification/notification_screen/notification_details_page.dart';
 import 'local_notification_service.dart';
 class OneSignalService {
   static OneSignal? _instance;
@@ -52,7 +50,7 @@ class OneSignalService {
     var deviceState = await _instance!.getDeviceState();
     if (deviceState != null || deviceState?.userId != null) {
       String tokenId = deviceState!.userId!;
-      print("TOKEN ID: "+tokenId);
+      debugPrint("TOKEN ID: $tokenId");
     }
   }
 

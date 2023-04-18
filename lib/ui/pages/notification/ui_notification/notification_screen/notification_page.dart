@@ -7,7 +7,6 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 
 import '../../core/local_notification_service.dart';
-import '../../core/onesignal_service.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
