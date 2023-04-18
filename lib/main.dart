@@ -1,3 +1,5 @@
+
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +9,9 @@ import 'package:talants_valley/locator.dart';
 import 'package:talants_valley/resources/theme_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
-import 'package:talants_valley/ui/pages/notification/notification_page.dart';
+import 'package:talants_valley/ui/pages/notification/core/onesignal_service.dart';
+import 'package:talants_valley/ui/pages/notification/ui_notification/notification_screen/notification_details_page.dart';
+import 'package:talants_valley/ui/pages/notification/ui_notification/notification_screen/notification_page.dart';
 import 'package:talants_valley/ui/splash_page.dart';
 import 'package:talants_valley/ui/teamPages/home_team_dashboard/home_dashboard_pages/activites/activity_page.dart';
 import 'package:talants_valley/utils/helper.dart';
@@ -21,7 +25,6 @@ import 'core/provider/team_provider/main_team_provider.dart';
 import 'core/provider/team_provider/user_management_provider.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations;
@@ -29,15 +32,51 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  // await NotificationService().initNotification();
+  // NotificationService().requestIOSPermissions();
   setup();
   await ScreenUtil.ensureScreenSize();
   await SharedPrefController().initSharedPreferences();
   runApp(const MyApp());
-  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-  OneSignal.shared.setAppId("7f811b94-c90f-480e-9d8e-dcaaabdf1289");
-  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
-    debugPrint("Accepted Permission: $accepted");
-  });
+  OneSignalService().oneSignalSService();
+  AwesomeNotifications().initialize(
+    'resource://drawable/res_notification_app_icon',
+    [
+      NotificationChannel(
+        channelKey: 'basic_channel2',
+        channelName: 'Basic Notifications2',
+        defaultColor: Colors.teal,
+        importance: NotificationImportance.High,
+        channelShowBadge: true,
+        channelDescription: '',
+      ),
+      NotificationChannel(
+        channelKey: 'scheduled_channel',
+        channelName: 'Scheduled Notifications',
+        defaultColor: Colors.teal,
+        locked: true,
+        importance: NotificationImportance.High,
+        // soundSource: 'resource://raw/res_custom_notification',
+        channelDescription: '',
+      ),
+    ],
+  );
+
+  // OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  // OneSignal.shared.setAppId("7f811b94-c90f-480e-9d8e-dcaaabdf1289");
+  // OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+  //   debugPrint("Accepted Permission: $accepted");
+  // });
+  // // OneSignal.shared.s
+  // OneSignal.shared.setNotificationOpenedHandler((openedResult) {
+  //   debugPrint("This is data notification =====>>>>> \n${openedResult.notification.additionalData}");
+  //   Navigator.push(
+  //       Helpers.scaffoldKey.currentState!.context,
+  //       MaterialPageRoute(
+  //           builder: (context) => NotificationDetailsPage(
+  //               data: openedResult.notification.additionalData)));
+  // });
+  // OneSignal.shared.setNotificationWillShowInForegroundHandler((event) {});
 }
 
 class MyApp extends StatelessWidget {
@@ -48,26 +87,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider(), child: const MyApp()),
-        ChangeNotifierProvider(create: (_) => FormProvider(), child: const MyApp()),
-        ChangeNotifierProvider(create: (_) => VerificationProvider(), child: const MyApp()),
-        ChangeNotifierProvider(create: (_) => MainTeamProvider(), child: const MyApp()),
-        ChangeNotifierProvider(create: (_) => UserManagementProvider(), child: const MyApp()),
-        ChangeNotifierProvider(create: (_) => GeneralFreelancerProvider(), child: const MyApp()),
-        ChangeNotifierProvider(create: (_) => PayoutFreelancerProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => AuthProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => FormProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => VerificationProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => MainTeamProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => UserManagementProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => GeneralFreelancerProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => PayoutFreelancerProvider(), child: const MyApp()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),
-        builder: (context, child) =>
-            MaterialApp(
-              scaffoldMessengerKey: Helpers.scaffoldKey,
-              debugShowCheckedModeBanner: false,
-              title: 'Talants Valley',
-              theme: ThemeManager.lightTheme,
-              home: const ActivityPage() ,
-              navigatorKey: ServiceNavigation.serviceNavi.navKey,
-              onGenerateRoute: RoutsGenerate.generateRoute,
-            ),
+        builder: (context, child) => MaterialApp(
+          scaffoldMessengerKey: Helpers.scaffoldKey,
+          debugShowCheckedModeBanner: false,
+          title: 'Talants Valley',
+          theme: ThemeManager.lightTheme,
+          home: const NotificationPage(),
+          navigatorKey: ServiceNavigation.serviceNavi.navKey,
+          onGenerateRoute: RoutsGenerate.generateRoute,
+        ),
       ),
     );
   }

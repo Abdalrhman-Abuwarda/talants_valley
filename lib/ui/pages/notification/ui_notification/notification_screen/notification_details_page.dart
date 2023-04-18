@@ -5,7 +5,9 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 
 class NotificationDetailsPage extends StatelessWidget {
-  const NotificationDetailsPage({Key? key}) : super(key: key);
+  const NotificationDetailsPage({ Key? key})
+      : super(key: key);
+  // final Map<String, dynamic>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class NotificationDetailsPage extends StatelessWidget {
           ),
         ),
         addVerticalSpace(AppSize.s22.h),
-        Text("Welcome, Complete Verification Process",
+        Text("Verify your email.",
             style: textTheme.subtitle1!
                 .copyWith(color: ColorManager.primaryFontColor)),
         addVerticalSpace(AppSize.s50.h),
@@ -34,12 +36,12 @@ class NotificationDetailsPage extends StatelessWidget {
         const Divider(),
         addVerticalSpace(AppSize.s25.h),
         Text(
-          "Hello Hadeel, \nWelcome to Talents Valley! You have successfully created an account",
+          "Hello,\nPlease use the following code to complete verification",
           style: textTheme.headline5,
         ),
         addVerticalSpace(AppSize.s24.h),
         Text(
-          "Complete your verification process and start creating your invoices.",
+          "354 778",
           style: textTheme.headline5,
         ),
         addVerticalSpace(AppSize.s14.h),
@@ -48,7 +50,10 @@ class NotificationDetailsPage extends StatelessWidget {
           style: textTheme.headline5,
         ),
         addVerticalSpace(AppSize.s50.h),
-        Text("From", style: textTheme.headline5!.copyWith(color: ColorManager.grayColor),),
+        Text(
+          "From",
+          style: textTheme.headline5!.copyWith(color: ColorManager.grayColor),
+        ),
         Text(
           "Team Talent's Valley",
           style: textTheme.headline5,

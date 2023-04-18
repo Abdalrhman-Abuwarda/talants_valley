@@ -35,6 +35,7 @@ class RouteGenerator {
   static const String previewCashWithdrawalRecipient = '/previewCashWithdrawalRecipient';
   static const String previewCashWithdrawalStatus = '/previewCashWithdrawalStatus';
   static const String previewBankWithdrawalStatus = '/previewBankWithdrawalStatus';
+  static const String notificationDetailsPage = '/notificationDetailsPage';
 
   RouteGenerator._();
 

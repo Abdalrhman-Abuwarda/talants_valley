@@ -11,6 +11,7 @@ import '../ui/pages/auth/signIn_page.dart';
 import '../ui/pages/auth/sign_up_page.dart';
 import '../ui/pages/auth/success_reset_password.dart';
 import '../ui/pages/main_page_freelancer.dart';
+import '../ui/pages/notification/ui_notification/notification_screen/notification_details_page.dart';
 import '../ui/pages/payout_freelancer/add_balance_bank_page.dart';
 import '../ui/pages/payout_freelancer/add_balane_cash_page.dart';
 import '../ui/pages/payout_freelancer/add_bank_account_page.dart';
@@ -43,7 +44,7 @@ class RoutsGenerate{
     switch(settings.name){
       case RouteGenerator.splashPage:
       case RouteGenerator.signInPage:
-        return MaterialPageRoute(builder: (_) => SignInPage());
+        return MaterialPageRoute(builder: (_) => const SignInPage());
       case RouteGenerator.signUpPage:
         return MaterialPageRoute(builder: (_) => SignUpPage());
       case RouteGenerator.mainFreelancerPage:
@@ -110,6 +111,8 @@ class RoutsGenerate{
         return MaterialPageRoute(builder: (_) => const PreviewBankWithdrawalStatusPage());
       case RouteGenerator.previewCashWithdrawalStatus:
         return MaterialPageRoute(builder: (_) => const PreviewCashWithdrawalStatusPage());
+      case RouteGenerator.notificationDetailsPage:
+        return MaterialPageRoute(builder: (_) =>  const NotificationDetailsPage());
         default:
         throw const FormatException("Route not found");
     }

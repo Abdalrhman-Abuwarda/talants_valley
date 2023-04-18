@@ -57,11 +57,13 @@ dependencies:
   jiffy: ^5.0.0
   onesignal_flutter: ^3.5.1
   flutter_launcher_icons:
+  awesome_notifications: ^0.6.19
+#  flutter_local_notifications: ^8.2.0
 flutter_icons:
-  image_path: "assets/images/logo_app.png"
+  image_path: "assets/images/logo2.png"
   android: true
   ios: true
-  adaptive_icon_foreground: "assets/images/logo_foreground.png"
+  adaptive_icon_foreground: "assets/images/logo2.png"
 
 
 dev_dependencies:

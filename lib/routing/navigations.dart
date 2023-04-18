@@ -6,8 +6,8 @@ class ServiceNavigation{
   static ServiceNavigation serviceNavi = ServiceNavigation._();
   GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
-  pushNamedWidget(String name) {
-    navKey.currentState?.pushNamed(name);
+  pushNamedWidget(String name, {String? string , Object? object}) {
+    navKey.currentState?.pushNamed(name, arguments: [object, string]);
   }
   pushNamedReplacement(String name){
     navKey.currentState?.pushReplacementNamed(name);
