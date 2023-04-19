@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 
-import '../../../../../../resources/values_manager.dart';
-import 'card_activity_modil.dart';
-import 'card_item_activity.dart';
+import '../../../../../../../../resources/values_manager.dart';
+import '../../core_activity/card_activity_model.dart';
+import '../activity_widgets/card_item_activity.dart';
 
 class ActivityPage extends StatefulWidget {
   const ActivityPage({Key? key}) : super(key: key);

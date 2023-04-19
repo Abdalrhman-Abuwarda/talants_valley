@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../resources/colors_manager.dart';
-import '../../../../../../resources/values_manager.dart';
-import 'card_activity_modil.dart';
+import '../../../../../../../../resources/colors_manager.dart';
+import '../../../../../../../../resources/values_manager.dart';
+import '../../core_activity/card_activity_model.dart';
 import 'custam_timeline.dart';
 
 class CardItemActivity extends StatefulWidget {

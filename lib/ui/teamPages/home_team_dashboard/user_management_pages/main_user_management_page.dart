@@ -74,10 +74,10 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
                           shrinkWrap: true,
                           physics: const ScrollPhysics().parent,
                           scrollDirection: Axis.vertical,
-                          itemCount: userManagement.users.length ,
+                          itemCount: userManagement.users.length,
                           itemBuilder: (context, index) {
                             final user = userManagement.users[index];
-                            if (index < userManagement.users.length) {
+                            if (index < userManagement.users.length ) {
                               return ListTileUser(
                                 isBlocked: user.isBlocked,
                                 fullName: "${user.firstName} ${user.lastName}",
