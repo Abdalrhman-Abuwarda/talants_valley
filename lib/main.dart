@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Talants Valley',
           theme: ThemeManager.lightTheme,
-          home: const SplashPage(),
+          home: const NotificationPage(),
           navigatorKey: ServiceNavigation.serviceNavi.navKey,
           onGenerateRoute: RoutsGenerate.generateRoute,
         ),

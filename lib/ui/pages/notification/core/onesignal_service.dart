@@ -16,7 +16,8 @@ class OneSignalService {
     });
     _instance!.setNotificationWillShowInForegroundHandler(
             (OSNotificationReceivedEvent event) {
-              createLocalNotification;
+              debugPrint("This is in Handeller =====>>>>>>>>> \n");
+              createLocalNotification();
 // Will be called whenever a notification is received in foreground
 // Display Notification, pass null param for not displaying the notification
           event.complete(event.notification);
@@ -35,6 +36,7 @@ class OneSignalService {
 
 // Will be called whenever a notification is opened/button pressed.
     });
+
 //     _instance!.setPermissionObserver((OSPermissionStateChanges changes) {
 // // Will be called whenever the permission changes
 // // (ie. user taps Allow on the permission prompt in iOS)
