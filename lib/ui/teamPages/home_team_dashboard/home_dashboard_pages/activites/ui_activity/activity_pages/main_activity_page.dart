@@ -20,6 +20,7 @@ int currantTab = 0;
 class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -46,7 +47,7 @@ class _ActivityPageState extends State<ActivityPage> {
                   padding: EdgeInsets.all(AppSize.s4.h),
                   margin: EdgeInsets.symmetric(
                       horizontal: AppSize.s20.w, vertical: AppSize.s8.h),
-                  height: 40,
+                  height: 40.h,
                   decoration: BoxDecoration(
                       color: ColorManager.mainColor,
                       borderRadius: BorderRadius.circular(AppSize.s20.r)),
@@ -66,7 +67,7 @@ class _ActivityPageState extends State<ActivityPage> {
                             alignment: Alignment.center,
                             child: Text(
                               "Team",
-                              style: Theme.of(context).textTheme.headline3,
+                              style: textTheme.headline3,
                             ),
                           ),
                         ),
@@ -74,7 +75,7 @@ class _ActivityPageState extends State<ActivityPage> {
                           child: Align(
                             alignment: Alignment.center,
                             child: Text("Freelancer",
-                                style: Theme.of(context).textTheme.headline3),
+                                style: textTheme.headline3),
                           ),
                         ),
                       ]),
@@ -86,7 +87,7 @@ class _ActivityPageState extends State<ActivityPage> {
               child: Column(
                 children: [
                   SizedBox(
-                      height: 39,
+                      height: 39.h,
                       child: TextFormField(
                         decoration: InputDecoration(
                             prefixIcon: SizedBox(

@@ -4,15 +4,19 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../../../resources/colors_manager.dart';
 import '../../../../../../../../resources/values_manager.dart';
-import '../../core_activity/card_activity_model.dart';
+import '../../core_activity/activity_model/activity_model.dart';
 import 'custam_timeline.dart';
 
 class CardItemActivity extends StatefulWidget {
   final CardActivityModel cardItem;
   final int currantScreen;
+  final bool isTeam;
 
   const CardItemActivity(
-      {required this.cardItem, required this.currantScreen, Key? key})
+      {
+        required this.isTeam,
+        required this.cardItem,
+        required this.currantScreen, Key? key})
       : super(key: key);
 
   @override
@@ -24,14 +28,14 @@ class _CardItemActivityState extends State<CardItemActivity> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-
         InkWell(
           splashColor: Colors.transparent,
           overlayColor: MaterialStateProperty.all(Colors.transparent),
           onTap: () {
+            if(widget.isTeam ==  false){
             setState(() {
               widget.cardItem.chick = !widget.cardItem.chick;
-            });
+            });}
           },
           child:
           Container(
