@@ -5,8 +5,8 @@ import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 
 import '../../../../../../../../resources/values_manager.dart';
-import '../../core_activity/card_activity_model.dart';
-import '../activity_widgets/card_item_activity.dart';
+import 'activity_for_freelancer_page.dart';
+import 'activity_for_team_page.dart';
 
 class ActivityPage extends StatefulWidget {
   const ActivityPage({Key? key}) : super(key: key);
@@ -110,40 +110,12 @@ class _ActivityPageState extends State<ActivityPage> {
                             ),
                             hintText: "Search"),
                       )),
-                  Expanded(
+                 const Expanded(
                     child: TabBarView(
-                      physics: const NeverScrollableScrollPhysics(),
+                      physics:  NeverScrollableScrollPhysics(),
                       children: [
-                        ListView.builder(
-                          itemCount: 5,
-                          itemBuilder: (context, index) {
-                            return CardItemActivity(
-                              currantScreen: currantTab,
-                              cardItem: CardActivityModel(
-                                  image: IconAssets.cashIcon,
-                                  name:
-                                      "Zain Zaira requested \$400 cash payout",
-                                  date: "17 Aug, 22",
-                                  time: "3:19 pm"),
-                            );
-                          },
-                          shrinkWrap: true,
-                        ),
-                        ListView.builder(
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            return CardItemActivity(
-                              cardItem: CardActivityModel(
-                                  image: IconAssets.cashIcon,
-                                  name:
-                                      "Zain Zaira requested \$400 cash payout",
-                                  date: "17 Aug, 22",
-                                  time: "3:19 pm"),
-                              currantScreen: currantTab,
-                            );
-                          },
-                          shrinkWrap: true,
-                        ),
+                         ActivityForTeamPage(),
+                        ActivityForFreelancerPage(),
                       ],
                     ),
                   )
@@ -152,3 +124,5 @@ class _ActivityPageState extends State<ActivityPage> {
             )));
   }
 }
+
+

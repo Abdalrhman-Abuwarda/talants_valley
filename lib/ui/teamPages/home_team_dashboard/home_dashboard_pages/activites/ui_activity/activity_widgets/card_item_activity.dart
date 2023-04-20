@@ -24,63 +24,7 @@ class _CardItemActivityState extends State<CardItemActivity> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Container(
-        //   margin: const EdgeInsets.only(top: AppPadding.p5),
-        //   decoration: BoxDecoration(
-        //       borderRadius: BorderRadius.circular(AppSize.s6.r),
-        //       border: Border.all(color: ColorManager.mainBorderColor),
-        //       // color: widget.cardItem.chick
-        //       //     ? ColorManager.enableCardColor
-        //       //     : null
-        //   ),
-        //   child: ExpansionTile(
-        //     leading: Container(
-        //       padding: const EdgeInsets.all(AppPadding.p12),
-        //       height: AppSize.s40.h,
-        //       width: AppSize.s40.w,
-        //       decoration: BoxDecoration(
-        //           color: ColorManager.mainColor,
-        //           borderRadius: BorderRadius.circular(50),
-        //           boxShadow: const [
-        //             BoxShadow(
-        //                 color: ColorManager.unselectedAppBarColor,
-        //                 offset: Offset(0, 2),
-        //                 blurRadius: 6)
-        //           ]),
-        //       child: SvgPicture.asset(widget.cardItem.image),
-        //     ),
-        //     title:  Column(
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //       children: [
-        //         Row(
-        //           children: [
-        //             Text(
-        //               widget.cardItem.date,
-        //               style: Theme.of(context).textTheme.bodyText1,
-        //             ),
-        //             addHorizontalSpace(AppSize.s5.w),
-        //             Text(
-        //               widget.cardItem.time,
-        //               style: Theme.of(context).textTheme.bodyText1,
-        //             ),
-        //           ],
-        //         ),
-        //         addVerticalSpace(AppSize.s5.h),
-        //         Text(
-        //           widget.cardItem.name,
-        //           style: Theme.of(context).textTheme.headline5,
-        //         ),
-        //       ],
-        //     ),
-        //     trailing: const SizedBox(height: 5,),
-        //     // childrenPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-        //     children: const [
-        //       CustomTimeLine(),
-        //       CustomTimeLine(),
-        //     ],
-        //     ),
-        // ),
+
         InkWell(
           splashColor: Colors.transparent,
           overlayColor: MaterialStateProperty.all(Colors.transparent),
@@ -168,4 +112,63 @@ class _CardItemActivityState extends State<CardItemActivity> {
     );
   }
 }
+
+
+// Container(
+//   margin: const EdgeInsets.only(top: AppPadding.p5),
+//   decoration: BoxDecoration(
+//       borderRadius: BorderRadius.circular(AppSize.s6.r),
+//       border: Border.all(color: ColorManager.mainBorderColor),
+//       // color: widget.cardItem.chick
+//       //     ? ColorManager.enableCardColor
+//       //     : null
+//   ),
+//   child: ExpansionTile(
+//     leading: Container(
+//       padding: const EdgeInsets.all(AppPadding.p12),
+//       height: AppSize.s40.h,
+//       width: AppSize.s40.w,
+//       decoration: BoxDecoration(
+//           color: ColorManager.mainColor,
+//           borderRadius: BorderRadius.circular(50),
+//           boxShadow: const [
+//             BoxShadow(
+//                 color: ColorManager.unselectedAppBarColor,
+//                 offset: Offset(0, 2),
+//                 blurRadius: 6)
+//           ]),
+//       child: SvgPicture.asset(widget.cardItem.image),
+//     ),
+//     title:  Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       mainAxisAlignment: MainAxisAlignment.spaceAround,
+//       children: [
+//         Row(
+//           children: [
+//             Text(
+//               widget.cardItem.date,
+//               style: Theme.of(context).textTheme.bodyText1,
+//             ),
+//             addHorizontalSpace(AppSize.s5.w),
+//             Text(
+//               widget.cardItem.time,
+//               style: Theme.of(context).textTheme.bodyText1,
+//             ),
+//           ],
+//         ),
+//         addVerticalSpace(AppSize.s5.h),
+//         Text(
+//           widget.cardItem.name,
+//           style: Theme.of(context).textTheme.headline5,
+//         ),
+//       ],
+//     ),
+//     trailing: const SizedBox(height: 5,),
+//     // childrenPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+//     children: const [
+//       CustomTimeLine(),
+//       CustomTimeLine(),
+//     ],
+//     ),
+// ),
 List<CustomTimeLine> a =[const CustomTimeLine(),const CustomTimeLine(),const CustomTimeLine()];

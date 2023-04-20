@@ -62,21 +62,6 @@ Future<void> main() async {
     ],
   );
 
-  // OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-  // OneSignal.shared.setAppId("7f811b94-c90f-480e-9d8e-dcaaabdf1289");
-  // OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
-  //   debugPrint("Accepted Permission: $accepted");
-  // });
-  // // OneSignal.shared.s
-  // OneSignal.shared.setNotificationOpenedHandler((openedResult) {
-  //   debugPrint("This is data notification =====>>>>> \n${openedResult.notification.additionalData}");
-  //   Navigator.push(
-  //       Helpers.scaffoldKey.currentState!.context,
-  //       MaterialPageRoute(
-  //           builder: (context) => NotificationDetailsPage(
-  //               data: openedResult.notification.additionalData)));
-  // });
-  // OneSignal.shared.setNotificationWillShowInForegroundHandler((event) {});
 }
 
 class MyApp extends StatelessWidget {
@@ -107,9 +92,9 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => MaterialApp(
           scaffoldMessengerKey: Helpers.scaffoldKey,
           debugShowCheckedModeBanner: false,
-          title: 'Talants Valley',
+          title: 'Talents Valley',
           theme: ThemeManager.lightTheme,
-          home: const NotificationPage(),
+          home: const ActivityPage(),
           navigatorKey: ServiceNavigation.serviceNavi.navKey,
           onGenerateRoute: RoutsGenerate.generateRoute,
         ),
