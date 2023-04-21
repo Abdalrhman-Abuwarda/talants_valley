@@ -16,14 +16,12 @@ class ActivityForTeamPage extends StatelessWidget {
       itemCount: 5,
       itemBuilder: (context, index) {
         return CardItemActivity(
+          type: "",
           isTeam: true,
           currantScreen: currantTab,
-          cardItem: CardActivityModel(
-              image: IconAssets.cashIcon,
-              name:
-              "Zain Zaira requested \$400 cash payout",
-              date: "17 Aug, 22",
-              time: "3:19 pm"),
+          time: "3:19 pm",
+          date: "17 Aug, 22",
+          title: "Zain Zaira requested \$400 cash payout",
         );
       },
       shrinkWrap: true,

@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:talants_valley/core/data/repository/auth_and_verification_repo/auth_repo.dart';
 import 'package:talants_valley/core/data/repository/auth_and_verification_repo/verification_repo.dart';
 import 'package:talants_valley/core/data/repository/team_repo/user_mangement_repo.dart';
+import 'package:talants_valley/ui/teamPages/activites/core_activity/activiyt_data/activity_repo/activity_repo.dart';
 
 import 'core/data/network/api/dio_client.dart';
 import 'core/data/repository/freelancer_repo/payout_freelancer_repo.dart';
@@ -14,4 +15,5 @@ void setup(){
   locator.registerLazySingleton<AuthRepo>(() => AuthRepo());
   locator.registerLazySingleton<DioClient>(() => DioClient());
   locator.registerLazySingleton<UserManagementRepo>(() => UserManagementRepo());
+  locator.registerLazySingleton<ActivityRepo>(() => ActivityRepo());
 }

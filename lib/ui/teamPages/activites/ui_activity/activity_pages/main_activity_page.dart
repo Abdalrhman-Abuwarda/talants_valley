@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
+import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
 
 import '../../../../../../../../resources/values_manager.dart';
 import 'activity_for_freelancer_page.dart';
@@ -18,6 +20,13 @@ class ActivityPage extends StatefulWidget {
 int currantTab = 0;
 
 class _ActivityPageState extends State<ActivityPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<ActivityProvider>(context, listen: false).getFreelancerActivities();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;

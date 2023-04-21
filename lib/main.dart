@@ -13,7 +13,8 @@ import 'package:talants_valley/ui/pages/notification/core/onesignal_service.dart
 import 'package:talants_valley/ui/pages/notification/ui_notification/notification_screen/notification_details_page.dart';
 import 'package:talants_valley/ui/pages/notification/ui_notification/notification_screen/notification_page.dart';
 import 'package:talants_valley/ui/splash_page.dart';
-import 'package:talants_valley/ui/teamPages/home_team_dashboard/home_dashboard_pages/activites/ui_activity/activity_pages/main_activity_page.dart';
+import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
+import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_pages/main_activity_page.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/shared_controller.dart';
@@ -86,6 +87,8 @@ class MyApp extends StatelessWidget {
             create: (_) => GeneralFreelancerProvider(), child: const MyApp()),
         ChangeNotifierProvider(
             create: (_) => PayoutFreelancerProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => ActivityProvider(), child: const MyApp()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),
