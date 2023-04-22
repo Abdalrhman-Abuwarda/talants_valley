@@ -9,13 +9,14 @@ class ActivityProvider extends ChangeNotifier{
 
   bool isLoading = false;
  List<ActivityModel> freelancerActivities = [];
+ List<ActivityModel> teamActivities = [];
 
 
  //--------------------------getFreelancerActivities---------------------------
 
  Future<dynamic> getFreelancerActivities() async {
    isLoading = true;
-   freelancerActivities = await _activityRepo.getActivitiesRepo(role: "user" , limit: "10");
+   freelancerActivities = await _activityRepo.getActivitiesRepo(role: "user" , limit: "20");
    notifyListeners();
  }
 
@@ -24,4 +25,14 @@ class ActivityProvider extends ChangeNotifier{
    isLoading = false;
   notifyListeners();
  }
+
+ //------------------------------getTeamActivities------------------------------
+
+  Future<dynamic> getTeamActivities() async {
+    isLoading = true;
+    teamActivities = await _activityRepo.getActivitiesRepo(role: "team" , limit: "20");
+    notifyListeners();
+  }
+
+
 }

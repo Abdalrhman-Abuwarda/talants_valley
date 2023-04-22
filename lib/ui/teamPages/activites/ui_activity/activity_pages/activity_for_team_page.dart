@@ -1,30 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:talants_valley/utils/time_extension.dart';
 
-import '../../../../../../../resources/assets_manager.dart';
-import '../../core_activity/activity_model/activity_model.dart';
+import '../../core_activity/activity_provider/activity_provider.dart';
 import '../activity_widgets/card_item_activity.dart';
 import 'main_activity_page.dart';
 
-class ActivityForTeamPage extends StatelessWidget {
+class ActivityForTeamPage extends StatefulWidget {
   const ActivityForTeamPage({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<ActivityForTeamPage> createState() => _ActivityForTeamPageState();
+}
+
+class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return CardItemActivity(
-          type: "",
-          isTeam: true,
-          currantScreen: currantTab,
-          time: "3:19 pm",
-          date: "17 Aug, 22",
-          title: "Zain Zaira requested \$400 cash payout",
-        );
-      },
-      shrinkWrap: true,
+    return Consumer<ActivityProvider>(
+      builder: (context , activity , child) =>
+      activity.isLoading ? const Center(child: CircularProgressIndicator(),) :
+      ListView.builder(
+        itemCount: activity.teamActivities.length,
+        itemBuilder: (context, index) {
+          final active = activity.teamActivities[index];
+          return CardItemActivity(
+            type: active.activityLogs.type,
+            isTeam: true,
+            currantScreen: currantTab,
+            title: active.activityLogs.message,
+            date: active.activityLogs.createdAt.convertToDate()!,
+            time: active.activityLogs.createdAt.convertToTime()!,
+          );
+        },
+        shrinkWrap: true,
+      ),
     );
   }
 }

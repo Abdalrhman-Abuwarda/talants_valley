@@ -25,6 +25,7 @@ class _ActivityPageState extends State<ActivityPage> {
   void initState() {
     // TODO: implement initState
     Provider.of<ActivityProvider>(context, listen: false).getFreelancerActivities();
+    Provider.of<ActivityProvider>(context, listen: false).getTeamActivities();
     super.initState();
   }
   @override
