@@ -26,12 +26,14 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
         itemBuilder: (context, index) {
           final active = activity.teamActivities[index];
           return CardItemActivity(
+            onTap: null,
             type: active.activityLogs.type,
             isTeam: true,
             currantScreen: currantTab,
             title: active.activityLogs.message,
             date: active.activityLogs.createdAt.convertToDate()!,
             time: active.activityLogs.createdAt.convertToTime()!,
+            isCheck: false,
           );
         },
         shrinkWrap: true,

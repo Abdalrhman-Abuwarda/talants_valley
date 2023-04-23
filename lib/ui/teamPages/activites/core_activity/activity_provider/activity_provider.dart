@@ -21,6 +21,8 @@ class ActivityProvider extends ChangeNotifier{
  }
 
  //--------------------------disposeLoading-------------------------------------
+
+
  disposeLoading(){
    isLoading = false;
   notifyListeners();
@@ -32,6 +34,26 @@ class ActivityProvider extends ChangeNotifier{
     isLoading = true;
     teamActivities = await _activityRepo.getActivitiesRepo(role: "team" , limit: "20");
     notifyListeners();
+  }
+
+  //------------------------------selectActivity--------------------------------
+
+
+  selectActivity({required String activityId}) {
+    final int index = freelancerActivities.indexWhere((activity) => activity.id.id == activityId );
+
+    if(freelancerActivities[index].isCheck == true){
+      debugPrint("This is inside if");
+      freelancerActivities[index].isCheck = false;
+      debugPrint("This is freelancerActivities[index].isCheck ${freelancerActivities[index].isCheck}");
+      notifyListeners();
+    }
+
+    for (var element in freelancerActivities) {
+      element.isCheck = false;
+    }
+      freelancerActivities[index].isCheck = true;
+      notifyListeners();
   }
 
 

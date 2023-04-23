@@ -5,7 +5,6 @@ import 'package:talants_valley/resources/assets_manager.dart';
 
 import '../../../../../../../../resources/colors_manager.dart';
 import '../../../../../../../../resources/values_manager.dart';
-import '../../core_activity/activity_model/activity_model.dart';
 import 'custam_timeline.dart';
 
 class CardItemActivity extends StatelessWidget {
@@ -16,6 +15,8 @@ class CardItemActivity extends StatelessWidget {
   final String time;
   final String title;
   final String type;
+  final void Function()? onTap;
+  final bool isCheck;
 
   const CardItemActivity(
       {
@@ -24,6 +25,8 @@ class CardItemActivity extends StatelessWidget {
         required this.title,
         required this.time,
         required this.isTeam,
+        required this.onTap,
+        required this.isCheck,
         required this.currantScreen, Key? key})
       : super(key: key);
 
@@ -34,12 +37,7 @@ class CardItemActivity extends StatelessWidget {
         InkWell(
           splashColor: Colors.transparent,
           overlayColor: MaterialStateProperty.all(Colors.transparent),
-          onTap: () {
-            // if(widget.isTeam ==  false){
-            // setState(() {
-            //   widget.cardItem.chick = !widget.cardItem.chick;
-            // });
-            },
+          onTap: onTap,
           child:
           Container(
             margin: const EdgeInsets.only(top: AppPadding.p5),
@@ -49,9 +47,9 @@ class CardItemActivity extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSize.s6.r),
                 border: Border.all(color: ColorManager.mainBorderColor),
-                // color: widget.cardItem.chick
-                //     ? ColorManager.enableCardColor
-                //     : null
+                color: isCheck
+                    ? ColorManager.enableCardColor
+                    : null
             ),
             child: Row(
               children: [
@@ -102,23 +100,23 @@ class CardItemActivity extends StatelessWidget {
             ),
           ),
         ),
-        // if(widget.currantScreen == 1)
-        //     ...[ Visibility(
-        //         visible: widget.cardItem.chick ? true : false,
-        //         child: ListView.builder(
-        //           shrinkWrap: true,
-        //           itemCount: a.length,
-        //           itemBuilder: (context, index) {
-        //             return a[index];
-        //           },
-        //
-        //
-        //         )
-        //     ),
-        //       SizedBox(
-        //         height: widget.cardItem.chick ? AppSize.s15.h : null,
-        //       )
-        //     ] ,
+        if(isTeam == false)
+            ...[ Visibility(
+                visible: isCheck ? true : false,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: a.length,
+                  itemBuilder: (context, index) {
+                    return a[index];
+                  },
+
+
+                )
+            ),
+              SizedBox(
+                height: isCheck ? AppSize.s15.h : null,
+              )
+            ] ,
 
       ],
     );

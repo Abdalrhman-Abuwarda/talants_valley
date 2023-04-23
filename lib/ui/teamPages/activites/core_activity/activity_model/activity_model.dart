@@ -2,8 +2,9 @@
 class ActivityModel {
   final IdActivityModel id;
   final ActivityLogs activityLogs;
+  bool isCheck ;
 
-  ActivityModel({required this.id, required this.activityLogs});
+  ActivityModel({required this.id, required this.activityLogs, this.isCheck = false});
 
   factory ActivityModel.fromJson(Map<String, dynamic> json) => ActivityModel(
       id: IdActivityModel.fromJson(json['_id']),
