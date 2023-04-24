@@ -1,10 +1,10 @@
-
 class ActivityModel {
   final IdActivityModel id;
   final ActivityLogs activityLogs;
-  bool isCheck ;
+  bool isCheck;
 
-  ActivityModel({required this.id, required this.activityLogs, this.isCheck = false});
+  ActivityModel(
+      {required this.id, required this.activityLogs, this.isCheck = false});
 
   factory ActivityModel.fromJson(Map<String, dynamic> json) => ActivityModel(
       id: IdActivityModel.fromJson(json['_id']),
@@ -22,6 +22,7 @@ class IdActivityModel {
 }
 
 class ActivityLogs {
+  late final String? id;
   late final String type;
   late final String action;
   late final String? status;
@@ -33,7 +34,9 @@ class ActivityLogs {
   late final WithdrawActivityModel? withdraw;
 
   ActivityLogs(
-      {required this.type,
+      {
+        required this.id,
+      required this.type,
       required this.action,
       this.status,
       required this.message,
@@ -44,13 +47,16 @@ class ActivityLogs {
       required this.withdraw});
 
   ActivityLogs.fromJson(Map<String, dynamic> json) {
+    id = json["_id"];
     type = json['type'];
     action = json['action'];
     status = json['status'];
     message = json['message'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    withdraw = json['withdraw'] != null ? WithdrawActivityModel.formJson(json['withdraw']) : null;
+    withdraw = json['withdraw'] != null
+        ? WithdrawActivityModel.formJson(json['withdraw'])
+        : null;
     service =
         json['service'] != null ? Service.fromJson(json['service']) : null;
     createdBy = json['createdBy'] != null
@@ -117,11 +123,26 @@ class ActivityCreatedByModel {
           lastName: json['lastName']);
 }
 
-class WithdrawActivityModel{
-  WithdrawActivityModel({required this.id, required this.amount, required this.typeWithdraw});
+class WithdrawActivityModel {
+  WithdrawActivityModel(
+      {required this.id, required this.amount, required this.typeWithdraw});
+
   final String id;
   final String amount;
   final String typeWithdraw;
 
-  factory WithdrawActivityModel.formJson(Map<String, dynamic> json) => WithdrawActivityModel(id: json["_id"], amount: json["amount"].toString(), typeWithdraw: json["typeWithdraw"]);
+  factory WithdrawActivityModel.formJson(Map<String, dynamic> json) =>
+      WithdrawActivityModel(
+          id: json["_id"],
+          amount: json["amount"].toString(),
+          typeWithdraw: json["typeWithdraw"]);
+}
+
+class TimeLineActivityModel{
+  TimeLineActivityModel({required this.id , required this.activityLogs});
+  final String id;
+  final ActivityLogs activityLogs;
+  
+  
+  // factory TimeLineActivityModel.fromJson(Map<String , dynamic> json) => TimeLineActivityModel(id: json["_id"], activityLogs: activityLogs);
 }

@@ -19,4 +19,11 @@ Future<List<ActivityModel>> getActivitiesRepo({required String role , required S
   return activities;
 }
 
+  Future<List<ActivityLogs>> getActivityTimeLine({required String id}) async {
+    final Response response = await _dioClient.get("${Endpoints.getActivityTimeLine}$id");
+    final List dataList = response.data["data"]["timeline"];
+    final List<ActivityLogs> activityLogs = dataList.map((logs) => ActivityLogs.fromJson(logs)).toList();
+    return activityLogs;
+  }
+
 }

@@ -38,5 +38,6 @@ class Endpoints {
   static const String cancelWithdraw = 'withdraw/cancel/';
   static const String confirmWithdraw = 'withdraw/confirm-payout/';
   static const String getActivityList = 'team/activity/listing';
+  static const String getActivityTimeLine = '/team/activity/timeline/';
 
 }
