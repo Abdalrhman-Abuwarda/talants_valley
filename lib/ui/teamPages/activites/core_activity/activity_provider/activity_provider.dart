@@ -10,13 +10,18 @@ class ActivityProvider extends ChangeNotifier{
   bool isLoading = false;
  List<ActivityModel> freelancerActivities = [];
  List<ActivityModel> teamActivities = [];
+ List<ActivityModel> otherTeamActivities = [];
+ List<ActivityModel> otherFreelancerActivities = [];
+ int offsetTeamActivities = 19;
+ int offsetFreelancerActivities = 19;
+
 
 
  //--------------------------getFreelancerActivities---------------------------
 
  Future<dynamic> getFreelancerActivities() async {
    isLoading = true;
-   freelancerActivities = await _activityRepo.getActivitiesRepo(role: "user" , limit: "20");
+   freelancerActivities = await _activityRepo.getActivitiesRepo(role: "user" , limit: "20" , offset: "0");
    notifyListeners();
  }
 
@@ -32,8 +37,22 @@ class ActivityProvider extends ChangeNotifier{
 
   Future<dynamic> getTeamActivities() async {
     isLoading = true;
-    teamActivities = await _activityRepo.getActivitiesRepo(role: "team" , limit: "20");
+    teamActivities = await _activityRepo.getActivitiesRepo(role: "team" , limit: "20", offset: "0");
     notifyListeners();
+  }
+
+  //-----------------------------getOtherActivities-----------------------------
+
+  Future<dynamic> getOtherActivitiesTeam() async {
+   otherTeamActivities = await _activityRepo.getActivitiesRepo(role: "team" , limit: "20" , offset: "$offsetTeamActivities");
+   offsetTeamActivities += 19;
+   teamActivities.addAll(otherTeamActivities);
+  }
+
+  Future<dynamic> getOtherActivitiesFreelancer() async {
+   otherFreelancerActivities = await _activityRepo.getActivitiesRepo(role: "user" , limit: "20" , offset: "$offsetTeamActivities");
+   offsetFreelancerActivities += 19;
+   freelancerActivities.addAll(otherFreelancerActivities);
   }
 
   //------------------------------selectActivity--------------------------------
@@ -43,7 +62,7 @@ class ActivityProvider extends ChangeNotifier{
     final int index = freelancerActivities.indexWhere((activity) => activity.id.id == activityId );
 
     if(freelancerActivities[index].isCheck == true){
-      debugPrint("This is inside if");
+      debugPrint("This is inside if ${freelancerActivities[index].isCheck}");
       freelancerActivities[index].isCheck = false;
       debugPrint("This is freelancerActivities[index].isCheck ${freelancerActivities[index].isCheck}");
       notifyListeners();

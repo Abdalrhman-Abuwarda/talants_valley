@@ -16,12 +16,40 @@ class ActivityForTeamPage extends StatefulWidget {
 }
 
 class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
+  final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    handleNext();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    scrollController.dispose();
+    super.dispose();
+  }
+
+
+  void handleNext() {
+    scrollController.addListener(() async {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        Provider.of<ActivityProvider>(context, listen: false).getOtherActivitiesTeam();
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ActivityProvider>(
       builder: (context , activity , child) =>
       activity.isLoading ? const Center(child: CircularProgressIndicator(),) :
       ListView.builder(
+        controller: scrollController,
         itemCount: activity.teamActivities.length,
         itemBuilder: (context, index) {
           final active = activity.teamActivities[index];

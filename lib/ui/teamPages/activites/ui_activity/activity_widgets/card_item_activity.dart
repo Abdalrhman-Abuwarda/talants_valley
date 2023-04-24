@@ -49,18 +49,18 @@ class CardItemActivity extends StatelessWidget {
                 border: Border.all(color: ColorManager.mainBorderColor),
                 color: isCheck
                     ? ColorManager.enableCardColor
-                    : null
+                    : Colors.transparent
             ),
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(AppPadding.p10),
+                  padding: const EdgeInsets.all(AppPadding.p8),
                   height: AppSize.s40.h,
                   width: AppSize.s40.w,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: ColorManager.mainColor,
-                      borderRadius: BorderRadius.circular(50),
-                      boxShadow: const [
+                      shape: BoxShape.circle,
+                      boxShadow: [
                         BoxShadow(
                             color: ColorManager.unselectedAppBarColor,
                             offset: Offset(0, 2),
