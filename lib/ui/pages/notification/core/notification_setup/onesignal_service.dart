@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:talants_valley/routing/router.dart';
 
-import '../../../../routing/navigations.dart';
+import '../../../../../routing/navigations.dart';
 import 'local_notification_service.dart';
 class OneSignalService {
   static OneSignal? _instance;

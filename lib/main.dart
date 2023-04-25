@@ -9,7 +9,7 @@ import 'package:talants_valley/locator.dart';
 import 'package:talants_valley/resources/theme_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
-import 'package:talants_valley/ui/pages/notification/core/onesignal_service.dart';
+import 'package:talants_valley/ui/pages/notification/core/notification_setup/onesignal_service.dart';
 import 'package:talants_valley/ui/pages/notification/ui_notification/notification_screen/notification_details_page.dart';
 import 'package:talants_valley/ui/pages/notification/ui_notification/notification_screen/notification_page.dart';
 import 'package:talants_valley/ui/splash_page.dart';

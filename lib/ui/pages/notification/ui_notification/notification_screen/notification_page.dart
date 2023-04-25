@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 
-import '../../core/local_notification_service.dart';
+import '../../core/notification_setup/local_notification_service.dart';
 import '../notification_widget/card_notificaion_widget.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -59,7 +59,6 @@ class _NotificationPageState extends State<NotificationPage> {
   }
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Notifications"),
