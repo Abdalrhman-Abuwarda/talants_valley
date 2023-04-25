@@ -8,7 +8,14 @@ import '../../../../../../../../resources/values_manager.dart';
 
 
 class CustomTimeLine extends StatelessWidget {
-  const CustomTimeLine({Key? key}) : super(key: key);
+  const CustomTimeLine({
+    required this.title,
+    required this.time,
+    Key? key
+  }) : super(key: key);
+
+  final String time;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,7 @@ class CustomTimeLine extends StatelessWidget {
               color: ColorManager.mainBorderColor,
             ),
             addHorizontalSpace(AppSize.s30.w),
-            Text("15 Aug, 22 3:19 pm" ,style: Theme.of(context).textTheme.bodyText1,)
+            Text(time ,style: Theme.of(context).textTheme.bodyText1,)
           ],
         ),
         Row(
@@ -33,22 +40,24 @@ class CustomTimeLine extends StatelessWidget {
               padding: const EdgeInsets.all(AppPadding.p5),
               height: AppSize.s25.h,
               width: AppSize.s25.w,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSize.s50.r),
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
                   color: ColorManager.grayColor),
               child: Container(
                 padding:  const EdgeInsets.all(AppPadding.p5),
                 height: AppSize.s16.h,
                 width: AppSize.s16.w,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppSize.s50.r),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
                     color: ColorManager.unselectedAppBarColor),
                 child: SvgPicture.asset(IconAssets.checkIcon),
               ),
             ),
             addHorizontalSpace(AppSize.s18.w),
-            Text("Dalia sent \$400 bank withdrawal" ,style: Theme.of(context).textTheme.headline5
-              ,)
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.6,
+              child: Text(title ,style: Theme.of(context).textTheme.headline5, overflow: TextOverflow.ellipsis,),
+            )
           ],
         ),
 

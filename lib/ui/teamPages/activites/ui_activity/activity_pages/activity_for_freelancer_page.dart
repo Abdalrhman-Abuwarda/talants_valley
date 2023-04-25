@@ -60,6 +60,8 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
             date: active.activityLogs.createdAt.convertToDate()!,
             time: active.activityLogs.createdAt.convertToTime()!,
             isCheck: active.isCheck,
+            isLoading: activity.secondIsLoading,
+            timeLine: activity.tileLine,
           );
         },
         shrinkWrap: true,

@@ -62,6 +62,7 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
             date: active.activityLogs.createdAt.convertToDate()!,
             time: active.activityLogs.createdAt.convertToTime()!,
             isCheck: false,
+            isLoading: false,
           );
         },
         shrinkWrap: true,

@@ -64,7 +64,7 @@ class ActivityProvider extends ChangeNotifier {
 
   //------------------------------selectActivity--------------------------------
 
-  selectActivity({required String activityId}) {
+  Future<dynamic> selectActivity({required String activityId}) async{
     final int index = freelancerActivities
         .indexWhere((activity) => activity.id.id == activityId);
 
@@ -79,15 +79,15 @@ class ActivityProvider extends ChangeNotifier {
     for (var element in freelancerActivities) {
       element.isCheck = false;
     }
+    secondIsLoading = true;
+    freelancerActivities[index].isCheck = true;
+    notifyListeners();
+    tileLine = await _activityRepo.getActivityTimeLineRepo(id: activityId);
     freelancerActivities[index].isCheck = true;
     notifyListeners();
   }
 
   //------------------------------getTimeLine-----------------------------------
 
-  Future<dynamic> getTimeLineActivity({required String id}) async {
-    secondIsLoading = true;
-    tileLine = await _activityRepo.getActivityTimeLineRepo(id: id);
-    notifyListeners();
-  }
+
 }

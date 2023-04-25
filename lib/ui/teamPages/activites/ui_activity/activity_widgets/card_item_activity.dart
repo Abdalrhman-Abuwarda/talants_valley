@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:talants_valley/resources/assets_manager.dart';
+import 'package:talants_valley/utils/time_extension.dart';
 
 import '../../../../../../../../resources/colors_manager.dart';
 import '../../../../../../../../resources/values_manager.dart';
+import '../../core_activity/activity_model/activity_model.dart';
 import 'custam_timeline.dart';
 
 class CardItemActivity extends StatelessWidget {
-
   final int currantScreen;
   final bool isTeam;
   final String date;
@@ -17,29 +18,33 @@ class CardItemActivity extends StatelessWidget {
   final String type;
   final void Function()? onTap;
   final bool isCheck;
+  final bool isLoading;
+  List<ActivityLogs>? timeLine = [];
 
-  const CardItemActivity(
-      {
-        required this.type,
-        required this.date,
-        required this.title,
-        required this.time,
-        required this.isTeam,
-        required this.onTap,
-        required this.isCheck,
-        required this.currantScreen, Key? key})
+  CardItemActivity(
+      {required this.type,
+      required this.date,
+      required this.title,
+      required this.time,
+      required this.isTeam,
+      required this.onTap,
+      required this.isCheck,
+      required this.isLoading,
+      required this.currantScreen,
+      this.timeLine,
+      Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return Column(
       children: [
         InkWell(
           splashColor: Colors.transparent,
           overlayColor: MaterialStateProperty.all(Colors.transparent),
           onTap: onTap,
-          child:
-          Container(
+          child: Container(
             margin: const EdgeInsets.only(top: AppPadding.p5),
             height: AppSize.s60.h,
             padding: const EdgeInsets.all(AppPadding.p10),
@@ -49,8 +54,7 @@ class CardItemActivity extends StatelessWidget {
                 border: Border.all(color: ColorManager.mainBorderColor),
                 color: isCheck
                     ? ColorManager.enableCardColor
-                    : Colors.transparent
-            ),
+                    : Colors.transparent),
             child: Row(
               children: [
                 Container(
@@ -77,12 +81,12 @@ class CardItemActivity extends StatelessWidget {
                       children: [
                         Text(
                           date,
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: textTheme.bodyText1,
                         ),
                         addHorizontalSpace(AppSize.s5.w),
                         Text(
                           time,
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: textTheme.bodyText1,
                         ),
                       ],
                     ),
@@ -90,7 +94,7 @@ class CardItemActivity extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: Text(
                         title,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: textTheme.headline5,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -100,24 +104,37 @@ class CardItemActivity extends StatelessWidget {
             ),
           ),
         ),
-        if(isTeam == false)
-            ...[ Visibility(
-                visible: isCheck ? true : false,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: a.length,
-                  itemBuilder: (context, index) {
-                    return a[index];
-                  },
-
-
-                )
-            ),
-              SizedBox(
-                height: isCheck ? AppSize.s15.h : null,
-              )
-            ] ,
-
+        if (isTeam == false) ...[
+          Visibility(
+              visible: isCheck ? true : false,
+              child: isLoading
+                  ?  Center(
+                      child: Column(
+                        children: [
+                          addVerticalSpace(AppSize.s10.h),
+                          SizedBox(
+                            height: 30.h,
+                              width: 30.w,
+                              child: const CircularProgressIndicator(strokeWidth: 3,)),
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: timeLine!.length,
+                      itemBuilder: (context, index) {
+                        final time = timeLine![index];
+                        return CustomTimeLine(
+                          title: time.message,
+                          time:
+                              "${time.createdAt.convertToDate()} ${time.createdAt.convertToTime()!}",
+                        );
+                      },
+                    )),
+          SizedBox(
+            height: isCheck ? AppSize.s15.h : null,
+          )
+        ],
       ],
     );
   }
@@ -180,4 +197,4 @@ class CardItemActivity extends StatelessWidget {
 //     ],
 //     ),
 // ),
-List<CustomTimeLine> a =[const CustomTimeLine(),const CustomTimeLine(),const CustomTimeLine()];
+// List<CustomTimeLine> a =[const CustomTimeLine(),const CustomTimeLine(),const CustomTimeLine()];
