@@ -9,12 +9,11 @@ import 'package:talants_valley/locator.dart';
 import 'package:talants_valley/resources/theme_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
-import 'package:talants_valley/ui/pages/notification/core/notification_setup/onesignal_service.dart';
-import 'package:talants_valley/ui/pages/notification/ui_notification/notification_screen/notification_details_page.dart';
-import 'package:talants_valley/ui/pages/notification/ui_notification/notification_screen/notification_page.dart';
 import 'package:talants_valley/ui/splash_page.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
 import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_pages/main_activity_page.dart';
+import 'package:talants_valley/ui/teamPages/notification_team/notification_team_core/notification_setup/onesignal_service.dart';
+import 'package:talants_valley/ui/teamPages/notification_team/ui_notification_team/notification_screen/notification_team_page.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/shared_controller.dart';

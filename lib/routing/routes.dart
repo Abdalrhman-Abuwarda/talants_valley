@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:talants_valley/routing/router.dart';
 import 'package:talants_valley/ui/pages/verification/success_verified_email.dart';
@@ -11,7 +10,6 @@ import '../ui/pages/auth/signIn_page.dart';
 import '../ui/pages/auth/sign_up_page.dart';
 import '../ui/pages/auth/success_reset_password.dart';
 import '../ui/pages/main_page_freelancer.dart';
-import '../ui/pages/notification/ui_notification/notification_screen/notification_details_page.dart';
 import '../ui/pages/payout_freelancer/add_balance_bank_page.dart';
 import '../ui/pages/payout_freelancer/add_balane_cash_page.dart';
 import '../ui/pages/payout_freelancer/add_bank_account_page.dart';
@@ -37,6 +35,7 @@ import '../ui/teamPages/home_team_dashboard/main_team_page.dart';
 import '../ui/teamPages/home_team_dashboard/user_management_pages/edit_user_information_page.dart';
 import '../ui/teamPages/home_team_dashboard/user_management_pages/main_user_management_page.dart';
 import '../ui/teamPages/home_team_dashboard/user_management_pages/user_details_page.dart';
+import '../ui/teamPages/notification_team/ui_notification_team/notification_screen/notification_details_page.dart';
 
 
 class RoutsGenerate{
@@ -60,31 +59,31 @@ class RoutsGenerate{
       case RouteGenerator.checkEmailPage:
         return MaterialPageRoute(builder: (_) =>  const CheckEmailPage());
       case RouteGenerator.verificationEmailPage:
-        return MaterialPageRoute(builder: (_) =>  VerificationEmailPage());
+        return MaterialPageRoute(builder: (_) =>  const VerificationEmailPage());
       case RouteGenerator.successVerificationEmail:
         return MaterialPageRoute(builder: (_) =>  const SuccessVerifiedEmailPage());
       case RouteGenerator.successVerificationMobile:
         return MaterialPageRoute(builder: (_) =>  const SuccessVerifiedMobilePage());
       case RouteGenerator.verificationMobilePage:
-        return MaterialPageRoute(builder: (_) => VerificationMobilePage());
+        return MaterialPageRoute(builder: (_) => const VerificationMobilePage());
       case RouteGenerator.verificationIDPage:
         return MaterialPageRoute(builder: (_) => const VerificationIDPage());
       case RouteGenerator.verificationAddressPage:
-        return MaterialPageRoute(builder: (_) => VerificationAddressPage());
+        return MaterialPageRoute(builder: (_) => const VerificationAddressPage());
       case RouteGenerator.getUserDetails:
-        return MaterialPageRoute(builder: (_) => UserDetailsPage());
+        return MaterialPageRoute(builder: (_) => const UserDetailsPage());
       case RouteGenerator.mainTeamPage:
         return MaterialPageRoute(builder: (_) => const MainTeamPage());
       case RouteGenerator.mainUserManagementPage:
         return MaterialPageRoute(builder: (_) => const MainUserManagementPage());
       case RouteGenerator.editUserInformationPage:
-        return MaterialPageRoute(builder: (_) => EditUserInformation());
+        return MaterialPageRoute(builder: (_) => const EditUserInformation());
       case RouteGenerator.addBankAccountPage:
         return MaterialPageRoute(builder: (_) => const AddBankAccountPage());
       case RouteGenerator.chooseBankAccountPage:
         return MaterialPageRoute(builder: (_) => const ChooseBankAccountPage());
       case RouteGenerator.verificationAddBnkPage:
-        return MaterialPageRoute(builder: (_) => VerificationAddBnkPage());
+        return MaterialPageRoute(builder: (_) => const VerificationAddBnkPage());
       case RouteGenerator.addBalanceBankWithdrawPage:
         return MaterialPageRoute(builder: (_) => const AddBalanceBankPage());
       case RouteGenerator.addBalanceCashWithdrawPage:
@@ -102,7 +101,7 @@ class RoutsGenerate{
       case RouteGenerator.editRecipientPage:
         return MaterialPageRoute(builder: (_) =>   EditRecipientPage());
       case RouteGenerator.verificationAddRecipientPage:
-        return MaterialPageRoute(builder: (_) => VerificationAddRecipientPage());
+        return MaterialPageRoute(builder: (_) => const VerificationAddRecipientPage());
       case RouteGenerator.verificationEditRecipient:
         return MaterialPageRoute(builder: (_) => const VerificationEditRecipientPage());
       case RouteGenerator.previewCashWithdrawalRecipient:

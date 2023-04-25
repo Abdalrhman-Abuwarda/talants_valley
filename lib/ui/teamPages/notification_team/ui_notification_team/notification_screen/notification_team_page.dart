@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 
-import '../../core/notification_setup/local_notification_service.dart';
+import '../../notification_team_core/notification_setup/local_notification_service.dart';
 import '../notification_widget/card_notificaion_widget.dart';
 
 class NotificationPage extends StatefulWidget {
