@@ -98,11 +98,11 @@ class ServiceModel {
 //----------------------------withdrawModel------------------------------------
 
 class WithdrawNotification {
-  final String id;
-  final String amount;
-  final String typeWithdraw;
+  final String? id;
+  final String? amount;
+  final String? typeWithdraw;
   final OfficeNotification? office;
-  final String status;
+  final String? status;
 
   WithdrawNotification(
       {required this.id,
@@ -114,7 +114,7 @@ class WithdrawNotification {
   factory WithdrawNotification.fromJson(Map<String, dynamic> json) =>
       WithdrawNotification(
           id: json["_id"],
-          amount: json["amount"],
+          amount: json["amount"].toString(),
           typeWithdraw: json["typeWithdraw"],
           office: json["office"] != null ? OfficeNotification.fromJson(json["office"]) : null,
           status: json["status"]);

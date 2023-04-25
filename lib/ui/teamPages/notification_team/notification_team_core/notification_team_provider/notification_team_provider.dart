@@ -15,4 +15,10 @@ class NotificationTeamProvider extends ChangeNotifier{
     notifications = await _activityRepo.getNotificationsRepo();
     notifyListeners();
   }
+
+
+  disposeLoading(){
+    isLoading = false;
+    notifyListeners();
+  }
 }

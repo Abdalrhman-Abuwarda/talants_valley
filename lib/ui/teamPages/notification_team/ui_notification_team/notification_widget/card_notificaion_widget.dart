@@ -7,8 +7,13 @@ import '../../../../../resources/colors_manager.dart';
 import '../../../../../resources/values_manager.dart';
 class CardNotificationWidget extends StatelessWidget {
   const CardNotificationWidget({
+    required this.title,
+    required this.subTitle,
     Key? key,
   }) : super(key: key);
+
+  final String title;
+  final String subTitle;
 
 
 
@@ -42,10 +47,12 @@ class CardNotificationWidget extends StatelessWidget {
           ),
         ],
       ),
-      title: Text("Invoice Approved & Sent to Hassan Ahmed." , overflow: TextOverflow.ellipsis, style: textTheme.headline3!.copyWith(fontWeight: FontWeight.normal),),
+      title: Text(title , overflow: TextOverflow.ellipsis, style: textTheme.headline3!.copyWith(fontWeight: FontWeight.normal),),
       subtitle: Row(
         children: [
-          Text("Graphic Design \$400", style: textTheme.bodyText2!.copyWith(color: ColorManager.labelFontColor),),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.5,
+              child: Text(subTitle, style: textTheme.bodyText2!.copyWith(color: ColorManager.labelFontColor), overflow: TextOverflow.ellipsis,)),
           const Spacer(),
           Text("2 hours ago" , style: textTheme.bodyText1!.copyWith(color: ColorManager.grayColor))
         ],
