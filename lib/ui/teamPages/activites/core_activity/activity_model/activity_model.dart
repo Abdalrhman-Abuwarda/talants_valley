@@ -138,6 +138,8 @@ class WithdrawActivityModel {
           typeWithdraw: json["typeWithdraw"]);
 }
 
+
+
 class TimeLineActivityModel{
   TimeLineActivityModel({required this.id , required this.activityLogs});
   final String id;

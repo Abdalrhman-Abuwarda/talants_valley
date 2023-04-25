@@ -4,76 +4,90 @@ import 'package:talants_valley/ui/teamPages/activites/core_activity/activiyt_dat
 
 import '../../../../../locator.dart';
 
-class ActivityProvider extends ChangeNotifier{
-  final ActivityRepo  _activityRepo =  locator<ActivityRepo>();
+class ActivityProvider extends ChangeNotifier {
+  final ActivityRepo _activityRepo = locator<ActivityRepo>();
 
   bool isLoading = false;
- List<ActivityModel> freelancerActivities = [];
- List<ActivityModel> teamActivities = [];
- List<ActivityModel> otherTeamActivities = [];
- List<ActivityModel> otherFreelancerActivities = [];
- int offsetTeamActivities = 19;
- int offsetFreelancerActivities = 19;
+  bool secondIsLoading = false;
+  List<ActivityModel> freelancerActivities = [];
+  List<ActivityModel> teamActivities = [];
+  List<ActivityModel> otherTeamActivities = [];
+  List<ActivityModel> otherFreelancerActivities = [];
+  int offsetTeamActivities = 19;
+  int offsetFreelancerActivities = 19;
 
+  List<ActivityLogs> tileLine = [];
 
+  //--------------------------getFreelancerActivities---------------------------
 
- //--------------------------getFreelancerActivities---------------------------
-
- Future<dynamic> getFreelancerActivities() async {
-   isLoading = true;
-   freelancerActivities = await _activityRepo.getActivitiesRepo(role: "user" , limit: "20" , offset: "0");
-   notifyListeners();
- }
-
- //--------------------------disposeLoading-------------------------------------
-
-
- disposeLoading(){
-   isLoading = false;
-  notifyListeners();
- }
-
- //------------------------------getTeamActivities------------------------------
-
-  Future<dynamic> getTeamActivities() async {
+  Future<dynamic> getFreelancerActivities() async {
     isLoading = true;
-    teamActivities = await _activityRepo.getActivitiesRepo(role: "team" , limit: "20", offset: "0");
+    freelancerActivities = await _activityRepo.getActivitiesRepo(
+        role: "user", limit: "20", offset: "0");
     notifyListeners();
   }
 
-  //-----------------------------getOtherActivities-----------------------------
+  //--------------------------disposeLoading-------------------------------------
 
-  Future<dynamic> getOtherActivitiesTeam() async {
-   otherTeamActivities = await _activityRepo.getActivitiesRepo(role: "team" , limit: "20" , offset: "$offsetTeamActivities");
-   offsetTeamActivities += 19;
-   teamActivities.addAll(otherTeamActivities);
+  disposeLoading() {
+    isLoading = false;
+    secondIsLoading = false;
+    notifyListeners();
   }
 
+  //------------------------------getTeamActivities------------------------------
+
+  Future<dynamic> getTeamActivities() async {
+    isLoading = true;
+    teamActivities = await _activityRepo.getActivitiesRepo(
+        role: "team", limit: "20", offset: "0");
+    notifyListeners();
+  }
+
+  //-----------------------------getOtherActivitiesTeam-------------------------
+
+  Future<dynamic> getOtherActivitiesTeam() async {
+    otherTeamActivities = await _activityRepo.getActivitiesRepo(
+        role: "team", limit: "20", offset: "$offsetTeamActivities");
+    offsetTeamActivities += 19;
+    teamActivities.addAll(otherTeamActivities);
+  }
+
+  //-----------------------------getOtherActivitiesFreelancer-------------------
+
   Future<dynamic> getOtherActivitiesFreelancer() async {
-   otherFreelancerActivities = await _activityRepo.getActivitiesRepo(role: "user" , limit: "20" , offset: "$offsetTeamActivities");
-   offsetFreelancerActivities += 19;
-   freelancerActivities.addAll(otherFreelancerActivities);
+    otherFreelancerActivities = await _activityRepo.getActivitiesRepo(
+        role: "user", limit: "20", offset: "$offsetTeamActivities");
+    offsetFreelancerActivities += 19;
+    freelancerActivities.addAll(otherFreelancerActivities);
   }
 
   //------------------------------selectActivity--------------------------------
 
-
   selectActivity({required String activityId}) {
-    final int index = freelancerActivities.indexWhere((activity) => activity.id.id == activityId );
+    final int index = freelancerActivities
+        .indexWhere((activity) => activity.id.id == activityId);
 
-    if(freelancerActivities[index].isCheck == true){
+    if (freelancerActivities[index].isCheck == true) {
       debugPrint("This is inside if ${freelancerActivities[index].isCheck}");
       freelancerActivities[index].isCheck = false;
-      debugPrint("This is freelancerActivities[index].isCheck ${freelancerActivities[index].isCheck}");
+      debugPrint(
+          "This is freelancerActivities[index].isCheck ${freelancerActivities[index].isCheck}");
       notifyListeners();
     }
 
     for (var element in freelancerActivities) {
       element.isCheck = false;
     }
-      freelancerActivities[index].isCheck = true;
-      notifyListeners();
+    freelancerActivities[index].isCheck = true;
+    notifyListeners();
   }
 
+  //------------------------------getTimeLine-----------------------------------
 
+  Future<dynamic> getTimeLineActivity({required String id}) async {
+    secondIsLoading = true;
+    tileLine = await _activityRepo.getActivityTimeLineRepo(id: id);
+    notifyListeners();
+  }
 }
