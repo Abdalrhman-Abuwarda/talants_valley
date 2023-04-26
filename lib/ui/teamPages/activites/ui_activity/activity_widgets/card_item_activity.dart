@@ -9,7 +9,7 @@ import '../../../../../../../../resources/values_manager.dart';
 import '../../core_activity/activity_model/activity_model.dart';
 import 'custam_timeline.dart';
 
-class CardItemActivity extends StatelessWidget {
+class CardItemActivity extends StatefulWidget {
   final int currantScreen;
   final bool isTeam;
   final String date;
@@ -36,6 +36,11 @@ class CardItemActivity extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<CardItemActivity> createState() => _CardItemActivityState();
+}
+
+class _CardItemActivityState extends State<CardItemActivity> {
+  @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Column(
@@ -43,7 +48,11 @@ class CardItemActivity extends StatelessWidget {
         InkWell(
           splashColor: Colors.transparent,
           overlayColor: MaterialStateProperty.all(Colors.transparent),
-          onTap: onTap,
+          onTap: (){
+            setState(() {
+              widget.onTap!();
+            });
+          },
           child: Container(
             margin: const EdgeInsets.only(top: AppPadding.p5),
             height: AppSize.s60.h,
@@ -52,7 +61,7 @@ class CardItemActivity extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSize.s6.r),
                 border: Border.all(color: ColorManager.mainBorderColor),
-                color: isCheck
+                color: widget.isCheck
                     ? ColorManager.enableCardColor
                     : Colors.transparent),
             child: Row(
@@ -80,12 +89,12 @@ class CardItemActivity extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          date,
+                          widget.date,
                           style: textTheme.bodyText1,
                         ),
                         addHorizontalSpace(AppSize.s5.w),
                         Text(
-                          time,
+                          widget.time,
                           style: textTheme.bodyText1,
                         ),
                       ],
@@ -93,7 +102,7 @@ class CardItemActivity extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: Text(
-                        title,
+                        widget.title,
                         style: textTheme.headline5,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -104,10 +113,10 @@ class CardItemActivity extends StatelessWidget {
             ),
           ),
         ),
-        if (isTeam == false) ...[
+        if (widget.isTeam == false) ...[
           Visibility(
-              visible: isCheck ? true : false,
-              child: isLoading
+              visible: widget.isCheck ,
+              child: widget.isLoading
                   ?  Center(
                       child: Column(
                         children: [
@@ -121,9 +130,9 @@ class CardItemActivity extends StatelessWidget {
                     )
                   : ListView.builder(
                       shrinkWrap: true,
-                      itemCount: timeLine!.length,
+                      itemCount: widget.timeLine!.length,
                       itemBuilder: (context, index) {
-                        final time = timeLine![index];
+                        final time = widget.timeLine![index];
                         return CustomTimeLine(
                           title: time.message,
                           time:
@@ -131,8 +140,11 @@ class CardItemActivity extends StatelessWidget {
                         );
                       },
                     )),
-          SizedBox(
-            height: isCheck ? AppSize.s15.h : null,
+          Visibility(
+            visible: widget.isCheck,
+            child: SizedBox(
+              height: widget.isCheck ? AppSize.s15.h : null,
+            ),
           )
         ],
       ],

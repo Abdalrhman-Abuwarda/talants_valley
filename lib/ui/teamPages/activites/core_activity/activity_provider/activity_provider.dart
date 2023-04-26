@@ -64,27 +64,39 @@ class ActivityProvider extends ChangeNotifier {
 
   //------------------------------selectActivity--------------------------------
 
+ bool isChecked = false ;
+
   Future<dynamic> selectActivity({required String activityId}) async{
     final int index = freelancerActivities
         .indexWhere((activity) => activity.id.id == activityId);
+    debugPrint("This is index ===>>> $index");
 
-    if (freelancerActivities[index].isCheck == true) {
+    if (freelancerActivities[index].isCheck ) {
+      // for (var element in freelancerActivities) {
+      //   element.isCheck = false;
+      // }
       debugPrint("This is inside if ${freelancerActivities[index].isCheck}");
       freelancerActivities[index].isCheck = false;
+      isChecked = freelancerActivities[index].isCheck;
+      debugPrint(
+          "isChecked ==>>> $isChecked");
       debugPrint(
           "This is freelancerActivities[index].isCheck ${freelancerActivities[index].isCheck}");
       notifyListeners();
     }
 
-    for (var element in freelancerActivities) {
-      element.isCheck = false;
+    else {
+      for (var element in freelancerActivities) {
+        element.isCheck = false;
+      }
+      secondIsLoading = true;
+      freelancerActivities[index].isCheck = true;
+      notifyListeners();
+      tileLine = await _activityRepo.getActivityTimeLineRepo(id: activityId);
+      freelancerActivities[index].isCheck = true;
+      notifyListeners();
     }
-    secondIsLoading = true;
-    freelancerActivities[index].isCheck = true;
-    notifyListeners();
-    tileLine = await _activityRepo.getActivityTimeLineRepo(id: activityId);
-    freelancerActivities[index].isCheck = true;
-    notifyListeners();
+
   }
 
   //------------------------------getTimeLine-----------------------------------
