@@ -57,8 +57,12 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
             controller: scrollController,
         itemCount: activity.freelancerActivities.length,
         itemBuilder: (context, index) {
+          var lastValue =
+              activity.freelancerActivities.length - 1;
           final active = activity.freelancerActivities[index];
-          return Column(
+          if (index != lastValue ){
+          return
+            Column(
             children: [
               InkWell(
                 splashColor: Colors.transparent,
@@ -165,6 +169,18 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
               ],
             ],
           );
+          } else if(activity.isLast) {
+            return const Center(
+              child: Text("End"),
+            );
+          }
+          else {
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: AppSize.s30.h),
+              child: const Center(child: CircularProgressIndicator()),
+            );
+          }
 
           //   CardItemActivity(
           //   onTap: () => activity.selectActivity(activityId: active.id.id),

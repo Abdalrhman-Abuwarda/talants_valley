@@ -14,7 +14,8 @@ class ActivityProvider extends ChangeNotifier {
   List<ActivityModel> otherTeamActivities = [];
   List<ActivityModel> otherFreelancerActivities = [];
   int offsetTeamActivities = 19;
-  int offsetFreelancerActivities = 19;
+  int offsetFreelancerActivities = 100;
+  bool isLast = false;
 
   List<ActivityLogs> tileLine = [];
 
@@ -57,9 +58,13 @@ class ActivityProvider extends ChangeNotifier {
 
   Future<dynamic> getOtherActivitiesFreelancer() async {
     otherFreelancerActivities = await _activityRepo.getActivitiesRepo(
-        role: "user", limit: "20", offset: "$offsetTeamActivities");
-    offsetFreelancerActivities += 19;
+        role: "user", limit: "100", offset: "$offsetFreelancerActivities");
+    offsetFreelancerActivities += 100;
+    if(otherFreelancerActivities.isEmpty) {
+      isLast = true;
+    }
     freelancerActivities.addAll(otherFreelancerActivities);
+    otherFreelancerActivities = [];
   }
 
   //------------------------------selectActivity--------------------------------
