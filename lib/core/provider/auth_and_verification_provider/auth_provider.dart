@@ -8,6 +8,7 @@ import 'package:talants_valley/core/data/repository/auth_and_verification_repo/a
 import '../../../locator.dart';
 import '../../../routing/navigations.dart';
 import '../../../routing/router.dart';
+import '../../../ui/teamPages/notification_team/notification_team_core/notification_setup/onesignal_service.dart';
 import '../../../utils/helper.dart';
 import '../freelancer_provider/payout_freelancer_provider.dart';
 
@@ -64,12 +65,13 @@ Future<dynamic> loginUser(String email, String password) async{
   final dataResponse = await _repo.loginUserRepo(email: email, password: password);
   SharedPrefController().saveData(user: dataResponse);
   notifyListeners();
-
   Future.delayed(const Duration(milliseconds: 200) , (){
+    OneSignalService().oneSignalSService();
     Helpers.showSnackBar(message: "login successfully");
     ServiceNavigation.serviceNavi
         .pushNamedAndRemoveUtils(RouteGenerator.mainVerificationPage);
   });
+
 }
 
 
@@ -145,6 +147,7 @@ Future<dynamic> createNewPassword({required String password}) async{
 Future<dynamic> logout() async {
   Provider.of<PayoutFreelancerProvider>(Helpers.scaffoldKey.currentState!.context , listen: false).logoutBalance();
   SharedPrefController().logout();
+  OneSignalService().disposeOnesignal();
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
 }

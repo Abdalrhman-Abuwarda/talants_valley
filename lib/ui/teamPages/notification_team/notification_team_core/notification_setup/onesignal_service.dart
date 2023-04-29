@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:talants_valley/core/data/local/shared_controller.dart';
 import 'package:talants_valley/routing/router.dart';
 
 import '../../../../../routing/navigations.dart';
 import 'local_notification_service.dart';
 class OneSignalService {
   static OneSignal? _instance;
+  final String userId = SharedPrefController().getUser().id ;
+
+
+
   oneSignalSService() {
+    final String userId = SharedPrefController().getUser().id ;
     getInstance();
     _instance!.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
     _instance!.setAppId("7f811b94-c90f-480e-9d8e-dcaaabdf1289");
+    _instance!.setExternalUserId(userId);
+    debugPrint("This is userId ======>>>>>> $userId \n \n \n \n" );
+    debugPrint("This is createUniqueId ======>>>>>> ${createUniqueId().toString()} \n \n \n \n" );
+
+
 // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
     _instance!.promptUserForPushNotificationPermission().then((accepted) {
       debugPrint("Accepted permission: $accepted");
     });
+
     _instance!.setNotificationWillShowInForegroundHandler(
             (OSNotificationReceivedEvent event) {
               debugPrint("This is in Handeller =====>>>>>>>>> \n");
@@ -43,6 +55,13 @@ class OneSignalService {
 //     });
 
   }
+
+  disposeOnesignal(){
+    getInstance();
+    _instance!.removeExternalUserId();
+  }
+
+
   static OneSignal? getInstance() {
     _instance ??= OneSignal.shared;
     return _instance;
