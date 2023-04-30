@@ -27,6 +27,25 @@ class ActivityRepo {
   }
 
 
+  //-----------------------------searchActivity---------------------------------
+
+
+  Future<List<ActivityModel>> searchActivityRepo({required String searchText, required String limit, required String offset,
+  required String role}) async {
+    final Response response = await _dioClient.get(Endpoints.getActivityList, queryParameters: {
+      "role": role,
+      "limit": limit,
+      "offset": offset,
+      "search" : searchText
+    });
+
+    final List dataList = response.data["data"]["activityLogs"];
+    final List<ActivityModel> activities = dataList.map((activity) =>
+        ActivityModel.fromJson(activity)).toList();
+    return activities;
+  }
+
+
 //------------------------------------------------------------------------------
 
 

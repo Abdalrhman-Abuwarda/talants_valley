@@ -16,13 +16,14 @@ class ActivityProvider extends ChangeNotifier {
   int offsetTeamActivities = 19;
   int offsetFreelancerActivities = 19;
   bool isLast = false;
+  bool freelancerLoading = false;
 
   List<ActivityLogs> tileLine = [];
 
   //--------------------------getFreelancerActivities---------------------------
 
   Future<dynamic> getFreelancerActivities() async {
-    isLoading = true;
+    freelancerLoading = true;
     freelancerActivities = await _activityRepo.getActivitiesRepo(
         role: "user", limit: "20", offset: "0", type: "");
     notifyListeners();
@@ -33,6 +34,7 @@ class ActivityProvider extends ChangeNotifier {
   disposeLoading() {
     isLoading = false;
     secondIsLoading = false;
+    freelancerLoading = false;
     notifyListeners();
   }
 
@@ -67,7 +69,7 @@ class ActivityProvider extends ChangeNotifier {
     otherFreelancerActivities = [];
   }
 
-  //------------------------------selectActivity--------------------------------
+  //------------------------selectActivityAndGetTimeLine------------------------
 
  bool isChecked = false ;
 
@@ -96,7 +98,23 @@ class ActivityProvider extends ChangeNotifier {
 
   }
 
-  //------------------------------getTimeLine-----------------------------------
+  //------------------------------searchActivity-----------------------------------
 
+Future<dynamic> searchActivity({required String searchText, required String role}) async {
+  // isLoading = true;
+  // notifyListeners();
+  Future.delayed(const Duration(seconds: 2) , () async {
+    if(role == "team"){
+    teamActivities = await _activityRepo.searchActivityRepo(
+        role: role, limit: "20", offset: "0" , searchText: searchText);
+    notifyListeners();
+    } else {
+      freelancerActivities = await _activityRepo.searchActivityRepo(
+          role: role, limit: "20", offset: "0" , searchText: searchText);
+      notifyListeners();
+    }
+  });
+
+}
 
 }

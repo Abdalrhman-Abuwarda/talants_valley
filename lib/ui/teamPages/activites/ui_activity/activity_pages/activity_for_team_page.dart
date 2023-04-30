@@ -21,6 +21,7 @@ class ActivityForTeamPage extends StatefulWidget {
 
 class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
   final scrollController = ScrollController();
+  final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -33,56 +34,83 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
   void dispose() {
     // TODO: implement dispose
     scrollController.dispose();
+    searchController.dispose();
     super.dispose();
   }
-
 
   void handleNext() {
     scrollController.addListener(() async {
       if (scrollController.position.maxScrollExtent ==
           scrollController.position.pixels) {
-        Provider.of<ActivityProvider>(context, listen: false).getOtherActivitiesTeam();
+        Provider.of<ActivityProvider>(context, listen: false)
+            .getOtherActivitiesTeam();
       }
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ActivityProvider>(
-      builder: (context , activity , child) =>
-      activity.isLoading ? const Center(child: CircularProgressIndicator(),) :
-      SingleChildScrollView(
-        controller: scrollController,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
-          child: Column(
-            children: [
-               SearchBar(sheetPage: (context) => const FilterActivityButtonSheet(),),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                // controller: scrollController,
-                itemCount: activity.teamActivities.length,
-                itemBuilder: (context, index) {
-                  final active = activity.teamActivities[index];
-                  return CardItemActivity(
-                    onTap: null,
-                    type: active.activityLogs.type,
-                    isTeam: true,
-                    currantScreen: currantTab,
-                    title: active.activityLogs.message,
-                    date: active.activityLogs.createdAt.convertToDate()!,
-                    time: active.activityLogs.createdAt.convertToTime()!,
-                    isCheck: false,
-                    isLoading: false,
-                  );
-                },
-                shrinkWrap: true,
+      builder: (context, activity, child) => activity.isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : RefreshIndicator(
+              onRefresh: () => activity.getTeamActivities(),
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+                  child: Column(
+                    children: [
+                      SearchBar(
+                          sheetPage: (context) =>
+                              const FilterActivityButtonSheet(),
+                          searchController: searchController,
+                          onChange: (value) {
+                                    activity.searchActivity(searchText: value, role : "team");
+                          }),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        // controller: scrollController,
+                        itemCount: activity.teamActivities.length,
+                        itemBuilder: (context, index) {
+                          final active = activity.teamActivities[index];
+                          var lastValue = activity.teamActivities.length - 1;
+                          if ((index != lastValue)) {
+                            return CardItemActivity(
+                              onTap: null,
+                              type: active.activityLogs.type,
+                              isTeam: true,
+                              currantScreen: currantTab,
+                              title: active.activityLogs.message,
+                              date: active.activityLogs.createdAt
+                                  .convertToDate()!,
+                              time: active.activityLogs.createdAt
+                                  .convertToTime()!,
+                              isCheck: false,
+                              isLoading: false,
+                            );
+                          } else if (activity.isLast) {
+                            return const Center(
+                              child: Text("No more data"),
+                            );
+                          } else {
+                            return Padding(
+                              padding:
+                                  EdgeInsets.symmetric(vertical: AppSize.s30.h),
+                              child: const Center(
+                                  child: CircularProgressIndicator()),
+                            );
+                          }
+                        },
+                        shrinkWrap: true,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

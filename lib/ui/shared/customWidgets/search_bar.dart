@@ -7,13 +7,16 @@ import '../../../resources/colors_manager.dart';
 import '../../../resources/values_manager.dart';
 
 class SearchBar extends StatelessWidget {
-  const SearchBar({
+   SearchBar({
     required this.sheetPage,
+    required this.searchController,
+    required this.onChange,
     Key? key,
   }) : super(key: key);
 
   final Widget Function(BuildContext) sheetPage;
-
+  final TextEditingController searchController;
+  void Function(String)? onChange;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,6 +24,8 @@ class SearchBar extends StatelessWidget {
       child: Stack(
         children: [
           TextFormField(
+            controller: searchController,
+            onChanged: onChange,
             decoration: InputDecoration(
               hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: ColorManager.unselectedAppBarColor ),
               hintText: "Search",

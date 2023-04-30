@@ -22,6 +22,7 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
   final dataUser = SharedPrefController().getUser();
   List<UserModel> userList = [];
   final scrollController = ScrollController();
+  final TextEditingController searchController = TextEditingController();
 
 
   @override
@@ -36,6 +37,7 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
   void dispose() {
     // TODO: implement dispose
     scrollController.dispose();
+    searchController.dispose();
     super.dispose();
   }
 
@@ -61,7 +63,7 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SearchBar(sheetPage: (context) => const FilterActivityButtonSheet(),),
+              SearchBar(sheetPage: (context) => const FilterActivityButtonSheet(), searchController: searchController, onChange: (value){},),
               addVerticalSpace(AppSize.s10.h),
               Expanded(
                 // height: 300.h,
