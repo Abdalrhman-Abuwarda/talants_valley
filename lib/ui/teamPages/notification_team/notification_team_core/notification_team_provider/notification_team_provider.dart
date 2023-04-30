@@ -16,6 +16,10 @@ class NotificationTeamProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  Future markNotificationAsSeen() async {
+    await _activityRepo.markNotificationAsSeenRpo();
+  }
+
 
   disposeLoading(){
     isLoading = false;

@@ -14,7 +14,12 @@ class NotificationTeamRepo{
     final List dataList = response.data["data"];
     final List<NotificationModel> notifications = dataList.map((notification) => NotificationModel.fromJson(notification)).toList();
     return notifications;
+  }
 
+  Future markNotificationAsSeenRpo() async {
+    await _dioClient.put(Endpoints.markNotificationsTeamAsSeen , data: {
+      "actionType" : "seen"
+    });
   }
 
 }

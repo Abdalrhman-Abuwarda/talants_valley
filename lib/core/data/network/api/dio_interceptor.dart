@@ -64,7 +64,7 @@ class DioInterceptor extends Interceptor {
         }
         break;
       case DioErrorType.response:
-
+        debugPrint("This is response ====>>> \n\n\n${err.response!.statusCode.toString()}");
           if(err.response!.statusCode == 400){
             Helpers.showSnackBar(message: err.response!.data["message"]);
             debugPrint("after Pro this is 400");

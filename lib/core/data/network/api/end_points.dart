@@ -40,6 +40,7 @@ class Endpoints {
   static const String getActivityList = 'team/activity/listing';
   static const String getActivityTimeLine = '/team/activity/timeline/';
   static const String getNotificationsTeam = '/team/notifications/list';
+  static const String markNotificationsTeamAsSeen = '/team/notifications/seen-or-open';
 
 
 }

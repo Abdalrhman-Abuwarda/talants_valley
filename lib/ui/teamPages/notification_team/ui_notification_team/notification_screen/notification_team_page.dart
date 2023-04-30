@@ -3,25 +3,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 import 'package:talants_valley/ui/teamPages/notification_team/notification_team_core/notification_team_provider/notification_team_provider.dart';
+import 'package:talants_valley/utils/time_extension.dart';
 
 import '../../notification_team_core/notification_setup/local_notification_service.dart';
 import '../notification_widget/card_notificaion_widget.dart';
 
-class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+class NotificationTeamPage extends StatefulWidget {
+  const NotificationTeamPage({Key? key}) : super(key: key);
 
   @override
-  State<NotificationPage> createState() => _NotificationPageState();
+  State<NotificationTeamPage> createState() => _NotificationTeamPageState();
 }
 
-class _NotificationPageState extends State<NotificationPage> {
+class _NotificationTeamPageState extends State<NotificationTeamPage> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     Provider.of<NotificationTeamProvider>(context, listen: false)
         .getNotifications();
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        Provider.of<NotificationTeamProvider>(context, listen: false).markNotificationAsSeen()
+    );
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +53,15 @@ class _NotificationPageState extends State<NotificationPage> {
                       itemBuilder: (context, index) {
                         final notification = logic.notifications[index];
                         return CardNotificationWidget(
-                          title: "${notification.notifications!.first.title} and ${notification.notifications!.length} other",
+                          title:
+                              "${notification.notifications!.first.title} and ${notification.notifications!.length} other",
                           subTitle: notification.notifications!.first.content,
+                          time: notification.notifications!.first.createdAt
+                                      .differenceDay()! !=
+                                  "Today"
+                              ? "${notification.notifications!.first.createdAt.differenceDay()!} at ${notification.notifications!.first.createdAt.convertToTime()}"
+                              : notification.notifications!.first.createdAt
+                                  .differenceHour()!,
                         );
                       },
                     ),

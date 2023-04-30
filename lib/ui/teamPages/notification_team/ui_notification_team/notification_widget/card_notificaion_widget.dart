@@ -7,6 +7,7 @@ import '../../../../../resources/colors_manager.dart';
 import '../../../../../resources/values_manager.dart';
 class CardNotificationWidget extends StatelessWidget {
   const CardNotificationWidget({
+    required this.time,
     required this.title,
     required this.subTitle,
     Key? key,
@@ -14,6 +15,7 @@ class CardNotificationWidget extends StatelessWidget {
 
   final String title;
   final String subTitle;
+  final String time;
 
 
 
@@ -51,10 +53,10 @@ class CardNotificationWidget extends StatelessWidget {
       subtitle: Row(
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.5,
+            width: MediaQuery.of(context).size.width * 0.4,
               child: Text(subTitle, style: textTheme.bodyText2!.copyWith(color: ColorManager.labelFontColor), overflow: TextOverflow.ellipsis,)),
           const Spacer(),
-          Text("2 hours ago" , style: textTheme.bodyText1!.copyWith(color: ColorManager.grayColor))
+          Text(time , style: textTheme.bodyText1!.copyWith(color: ColorManager.grayColor))
         ],
       ),
       trailing:  CircleAvatar(

@@ -28,4 +28,10 @@ extension TimeExtension  on String{
     }
     return "$date Days ago";
   }
+
+  String? differenceHour() {
+    DateTime dateFormat = DateTime.parse(this);
+    final hours = Jiffy(DateTime.now()).diff(dateFormat, Units.HOUR).toString();
+    return "$hours Hours ago";
+  }
 }
