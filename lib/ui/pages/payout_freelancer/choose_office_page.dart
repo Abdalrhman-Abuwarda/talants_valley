@@ -40,6 +40,7 @@ class _ChooseOfficePageState extends State<ChooseOfficePage> {
             onPressed: () {ServiceNavigation.serviceNavi.pushNamedReplacement(RouteGenerator.addBalanceCashWithdrawPage);},
             icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
+
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p32.w),
         child: Consumer<PayoutFreelancerProvider>(

@@ -14,7 +14,7 @@ class ActivityProvider extends ChangeNotifier {
   List<ActivityModel> otherTeamActivities = [];
   List<ActivityModel> otherFreelancerActivities = [];
   int offsetTeamActivities = 19;
-  int offsetFreelancerActivities = 100;
+  int offsetFreelancerActivities = 19;
   bool isLast = false;
 
   List<ActivityLogs> tileLine = [];
@@ -24,7 +24,7 @@ class ActivityProvider extends ChangeNotifier {
   Future<dynamic> getFreelancerActivities() async {
     isLoading = true;
     freelancerActivities = await _activityRepo.getActivitiesRepo(
-        role: "user", limit: "20", offset: "0");
+        role: "user", limit: "20", offset: "0", type: "");
     notifyListeners();
   }
 
@@ -41,7 +41,7 @@ class ActivityProvider extends ChangeNotifier {
   Future<dynamic> getTeamActivities() async {
     isLoading = true;
     teamActivities = await _activityRepo.getActivitiesRepo(
-        role: "team", limit: "20", offset: "0");
+        role: "team", limit: "20", offset: "0" , type: "");
     notifyListeners();
   }
 
@@ -49,7 +49,7 @@ class ActivityProvider extends ChangeNotifier {
 
   Future<dynamic> getOtherActivitiesTeam() async {
     otherTeamActivities = await _activityRepo.getActivitiesRepo(
-        role: "team", limit: "20", offset: "$offsetTeamActivities");
+        role: "team", limit: "20", offset: "$offsetTeamActivities", type: "");
     offsetTeamActivities += 19;
     teamActivities.addAll(otherTeamActivities);
   }
@@ -58,8 +58,8 @@ class ActivityProvider extends ChangeNotifier {
 
   Future<dynamic> getOtherActivitiesFreelancer() async {
     otherFreelancerActivities = await _activityRepo.getActivitiesRepo(
-        role: "user", limit: "100", offset: "$offsetFreelancerActivities");
-    offsetFreelancerActivities += 100;
+        role: "user", limit: "100", offset: "$offsetFreelancerActivities",type: "");
+    offsetFreelancerActivities += 19;
     if(otherFreelancerActivities.isEmpty) {
       isLast = true;
     }

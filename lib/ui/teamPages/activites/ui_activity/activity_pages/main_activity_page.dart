@@ -7,6 +7,7 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
 
 import '../../../../../../../../resources/values_manager.dart';
+import '../../../../shared/customWidgets/search_bar.dart';
 import 'activity_for_freelancer_page.dart';
 import 'activity_for_team_page.dart';
 
@@ -92,46 +93,20 @@ class _ActivityPageState extends State<ActivityPage> {
                 ),
               ),
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
-              child: Column(
-                children: [
-                  SizedBox(
-                      height: 39.h,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            prefixIcon: SizedBox(
-                              width: AppSize.s10.w,
-                              child: Row(
-                                children: [
-                                  addHorizontalSpace(AppSize.s10.w),
-                                  SvgPicture.asset(
-                                    IconAssets.searchIcon,
-                                    color: ColorManager.unselectedAppBarColor,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            suffix: Column(
-                              children: [
-                                addVerticalSpace(AppSize.s20.h),
-                                SvgPicture.asset(IconAssets.filterIcon,
-                                    color: ColorManager.unselectedAppBarColor),
-                              ],
-                            ),
-                            hintText: "Search"),
-                      )),
-                 const Expanded(
-                    child: TabBarView(
-                      physics:  NeverScrollableScrollPhysics(),
-                      children: [
-                         ActivityForTeamPage(),
-                        ActivityForFreelancerPage(),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+
+
+            body: Column(
+              children: const [
+               Expanded(
+                  child: TabBarView(
+                    physics:  NeverScrollableScrollPhysics(),
+                    children: [
+                       ActivityForTeamPage(),
+                      ActivityForFreelancerPage(),
+                    ],
+                  ),
+                )
+              ],
             )));
   }
 }

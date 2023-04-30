@@ -14,7 +14,8 @@ class ChooseOfficeButtonSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle bodyTextStyle = Theme.of(context).textTheme.bodyText1!.copyWith(color: ColorManager.thirdFontColor);
     return Consumer<PayoutFreelancerProvider>(
-      builder: (context , balance , child) => Container(
+      builder: (context , balance , child) =>
+          Container(
         padding:  EdgeInsetsDirectional.only(
           top: AppPadding.p16.h,
           start: AppPadding.p22.w,

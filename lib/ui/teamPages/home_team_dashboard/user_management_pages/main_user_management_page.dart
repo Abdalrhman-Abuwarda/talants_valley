@@ -9,6 +9,7 @@ import '../../../../resources/values_manager.dart';
 import '../../../shared/customWidgets/Team_user_mangement/userListTile.dart';
 import '../../../shared/customWidgets/Team_user_mangement/userOptionBottomSheet.dart';
 import '../../../shared/customWidgets/search_bar.dart';
+import '../../activites/ui_activity/activity_widgets/filter_activity_button_sheet.dart';
 
 class MainUserManagementPage extends StatefulWidget {
   const MainUserManagementPage({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class _MainUserManagementPageState extends State<MainUserManagementPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SearchBar(),
+              SearchBar(sheetPage: (context) => const FilterActivityButtonSheet(),),
               addVerticalSpace(AppSize.s10.h),
               Expanded(
                 // height: 300.h,
