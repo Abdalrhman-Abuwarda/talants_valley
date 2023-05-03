@@ -15,7 +15,7 @@ class TeamDashboardPage extends StatelessWidget {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
-            // toolbarHeight: 50,
+            toolbarHeight: AppSize.s50.h,
             title: const Text("Team Dashboard"),
             backgroundColor: Colors.transparent,
             actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.settings))],
