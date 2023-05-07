@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
 import 'package:talants_valley/utils/time_extension.dart';
-import '../../../../../resources/assets_manager.dart';
-import '../../../../../resources/colors_manager.dart';
 import '../../../../../resources/values_manager.dart';
 import '../../../../shared/customWidgets/search_bar.dart';
 import '../activity_widgets/card_item_activity.dart';
-import '../activity_widgets/custam_timeline.dart';
 import '../activity_widgets/filter_activity_button_sheet.dart';
 import 'main_activity_page.dart';
 
@@ -54,7 +50,6 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
     return Consumer<ActivityProvider>(
       builder: (context, activity, child) => RefreshIndicator(
         onRefresh: () => activity.getFreelancerActivities(),
