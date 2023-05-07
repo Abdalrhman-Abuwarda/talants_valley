@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_model/activity_model.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activiyt_data/activity_repo/activity_repo.dart';
@@ -116,5 +118,30 @@ Future<dynamic> searchActivity({required String searchText, required String role
   });
 
 }
+
+//-----------------------------search------------------------------------------
+
+Timer? debounce;
+  String searchText = "";
+
+  onSearchChange({required String indexText , required String role}) async {
+    searchText = indexText;
+    notifyListeners();
+    if(debounce?.isActive ?? false) debounce?.cancel();
+    debounce = Timer(const Duration(seconds: 2), () async {
+      if(searchText != indexText){
+        if(role == "team"){
+          teamActivities = await _activityRepo.searchActivityRepo(
+              role: role, limit: "20", offset: "0" , searchText: searchText);
+          notifyListeners();
+        } else {
+          freelancerActivities = await _activityRepo.searchActivityRepo(
+              role: role, limit: "20", offset: "0" , searchText: searchText);
+          notifyListeners();
+        }
+      }
+    });
+  }
+
 
 }
