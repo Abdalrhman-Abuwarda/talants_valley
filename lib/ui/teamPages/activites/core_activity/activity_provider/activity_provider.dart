@@ -125,21 +125,37 @@ Timer? debounce;
   String searchText = "";
 
   onSearchChange({required String indexText , required String role}) async {
-    searchText = indexText;
-    notifyListeners();
+    debugPrint("This is inside onSearch ==> \n\n");
     if(debounce?.isActive ?? false) debounce?.cancel();
     debounce = Timer(const Duration(seconds: 2), () async {
-      if(searchText != indexText){
+      if(searchText != indexText && indexText.isNotEmpty){
+
         if(role == "team"){
+          isLoading = true;
+          notifyListeners();
+          debugPrint("This is first time request ==> \n\n");
           teamActivities = await _activityRepo.searchActivityRepo(
               role: role, limit: "20", offset: "0" , searchText: searchText);
           notifyListeners();
         } else {
+          freelancerLoading = true;
+          notifyListeners();
+          debugPrint("This is first time request ==> \n\n");
           freelancerActivities = await _activityRepo.searchActivityRepo(
               role: role, limit: "20", offset: "0" , searchText: searchText);
           notifyListeners();
         }
       }
+      else {
+        if(role == "team") {
+          getTeamActivities();
+        }
+        else {
+          getFreelancerActivities();
+        }
+      }
+      searchText = indexText;
+      notifyListeners();
     });
   }
 

@@ -51,11 +51,7 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ActivityProvider>(
-      builder: (context, activity, child) => activity.isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : RefreshIndicator(
+      builder: (context, activity, child) =>  RefreshIndicator(
               onRefresh: () => activity.getTeamActivities(),
               child: SingleChildScrollView(
                 controller: scrollController,
@@ -68,8 +64,13 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
                               const FilterActivityButtonSheet(),
                           searchController: searchController,
                           onChange: (value) {
-                                    activity.searchActivity(searchText: value, role : "team");
+                                    activity.onSearchChange(indexText: value, role : "team");
                           }),
+                      activity.isLoading
+                          ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                          :
                       ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         // controller: scrollController,

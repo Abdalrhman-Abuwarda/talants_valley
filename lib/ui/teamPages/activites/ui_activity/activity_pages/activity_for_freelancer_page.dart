@@ -56,26 +56,26 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Consumer<ActivityProvider>(
-      builder: (context, activity, child) => activity.freelancerLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : RefreshIndicator(
-              onRefresh: () => activity.getFreelancerActivities(),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
-                  child: Column(
-                    children: [
-                      SearchBar(
-                          sheetPage: (context) =>
-                              const FilterActivityButtonSheet(),
-                          searchController: searchController,
-                          onChange: (value) {
-                            activity.searchActivity(searchText: value, role: "user");
-                          }),
-                      ListView.builder(
+      builder: (context, activity, child) => RefreshIndicator(
+        onRefresh: () => activity.getFreelancerActivities(),
+        child: SingleChildScrollView(
+          controller: scrollController,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+            child: Column(
+              children: [
+                SearchBar(
+                    sheetPage: (context) => const FilterActivityButtonSheet(),
+                    searchController: searchController,
+                    onChange: (value) {
+                      debugPrint("This is inside onChange");
+                      activity.onSearchChange(indexText: value, role: "user");
+                    }),
+                activity.freelancerLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         // controller: scrollController,
                         itemCount: activity.freelancerActivities.length,
@@ -114,11 +114,11 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
                         },
                         shrinkWrap: true,
                       ),
-                    ],
-                  ),
-                ),
-              ),
+              ],
             ),
+          ),
+        ),
+      ),
     );
   }
 }
