@@ -79,7 +79,7 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
                           var lastValue = activity.teamActivities.length - 1;
                           if ((index != lastValue)) {
                             return CardItemActivity(
-                              onTap: null,
+                              onTap: (){},
                               type: active.activityLogs.type,
                               isTeam: true,
                               currantScreen: currantTab,

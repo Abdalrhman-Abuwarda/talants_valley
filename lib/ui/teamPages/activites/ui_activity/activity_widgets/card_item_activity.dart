@@ -49,9 +49,7 @@ class _CardItemActivityState extends State<CardItemActivity> {
           splashColor: Colors.transparent,
           overlayColor: MaterialStateProperty.all(Colors.transparent),
           onTap: (){
-            setState(() {
               widget.onTap!();
-            });
           },
           child: Container(
             margin: const EdgeInsets.only(top: AppPadding.p5),

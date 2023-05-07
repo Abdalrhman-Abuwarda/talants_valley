@@ -54,7 +54,7 @@ class FilterActivityButtonSheet extends StatelessWidget {
               children: [
                 Text("Invoice", style: textStyle,),
                 addVerticalSpace(AppSize.s20.h),
-                Text("Withdraw", style: textStyle,),
+                Text("Payout", style: textStyle,),
                 addVerticalSpace(AppSize.s20.h),
                 Text("User", style: textStyle,),
 

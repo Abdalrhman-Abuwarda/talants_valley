@@ -26,6 +26,19 @@ class _NotificationTeamPageState extends State<NotificationTeamPage> {
         Provider.of<NotificationTeamProvider>(context, listen: false).markNotificationAsSeen()
     );
   }
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    debugPrint("This is inside ===>> didChangeDependencies\n\n\n");
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant NotificationTeamPage oldWidget) {
+    // TODO: implement didUpdateWidget.
+    debugPrint("This is inside ===>> didUpdateWidget\n\n\n");
+    super.didUpdateWidget(oldWidget);
+  }
 
 
 

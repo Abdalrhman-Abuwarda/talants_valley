@@ -51,15 +51,6 @@ Future<void> main() async {
         channelShowBadge: true,
         channelDescription: '',
       ),
-      // NotificationChannel(
-      //   channelKey: 'scheduled_channel',
-      //   channelName: 'Scheduled Notifications',
-      //   defaultColor: Colors.teal,
-      //   locked: true,
-      //   importance: NotificationImportance.High,
-      //   // soundSource: 'resource://raw/res_custom_notification',
-      //   channelDescription: '',
-      // ),
     ],
   );
 
