@@ -8,7 +8,7 @@ import 'package:talants_valley/ui/teamPages/home_team_dashboard/user_management_
 
 import '../../../core/provider/team_provider/main_team_provider.dart';
 import 'analytics_pages/main_analytics_page.dart';
-import 'home_dashboard_pages/home_team_dshboard_page.dart';
+import '../home/team_home_ui/team_home_pages/home_team_dshboard_page.dart';
 import 'invoices_pages/main_invoice_page.dart';
 class MainTeamPage extends StatefulWidget {
    const MainTeamPage({Key? key}) : super(key: key);

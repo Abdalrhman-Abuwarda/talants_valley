@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/values_manager.dart';
-import 'package:talants_valley/ui/teamPages/home_team_dashboard/home_dashboard_pages/taps_home_dashboard/all_tap_page.dart';
-import 'package:talants_valley/ui/teamPages/home_team_dashboard/home_dashboard_pages/taps_home_dashboard/invoice_tap_page.dart';
-import 'package:talants_valley/ui/teamPages/home_team_dashboard/home_dashboard_pages/taps_home_dashboard/payout_tap_page.dart';
-import 'package:talants_valley/ui/teamPages/home_team_dashboard/home_dashboard_pages/taps_home_dashboard/users_tap_page.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_pages/taps_home_dashboard/all_tap_page.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_pages/taps_home_dashboard/invoice_tap_page.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_pages/taps_home_dashboard/payout_tap_page.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_pages/taps_home_dashboard/users_tap_page.dart';
 class TeamDashboardPage extends StatelessWidget {
   const TeamDashboardPage({Key? key}) : super(key: key);
 
@@ -35,7 +35,7 @@ class TeamDashboardPage extends StatelessWidget {
               ],
             ),
           ),
-          body:    const TabBarView(
+          body:  const   TabBarView(
             children: [
               AllTapPage(),
               InvoicesTapPage(),

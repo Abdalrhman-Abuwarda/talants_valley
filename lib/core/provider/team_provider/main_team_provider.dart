@@ -7,4 +7,5 @@ class MainTeamProvider extends ChangeNotifier{
       selectedIndex = index;
       notifyListeners();
   }
+
 }
