@@ -26,6 +26,7 @@ class OneSignalService {
       debugPrint("Accepted permission: $accepted");
     });
 
+    // _instance!.set
     _instance!.setNotificationWillShowInForegroundHandler(
             (OSNotificationReceivedEvent event) {
               debugPrint("This is in Handeller =====>>>>>>>>> \n");
@@ -34,6 +35,8 @@ class OneSignalService {
 // Display Notification, pass null param for not displaying the notification
           event.complete(event.notification);
         });
+
+    
     _instance!
         .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
       // createLocalNotification;
