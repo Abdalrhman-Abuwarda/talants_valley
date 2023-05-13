@@ -11,10 +11,9 @@ import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
 import 'package:talants_valley/ui/splash_page.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
-import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_pages/main_activity_page.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_core/home_team_dashboard_provider/home_team_dashboard_provider.dart';
 import 'package:talants_valley/ui/teamPages/notification_team/notification_team_core/notification_setup/onesignal_service.dart';
 import 'package:talants_valley/ui/teamPages/notification_team/notification_team_core/notification_team_provider/notification_team_provider.dart';
-import 'package:talants_valley/ui/teamPages/notification_team/ui_notification_team/notification_screen/notification_team_page.dart';
 import 'package:talants_valley/utils/helper.dart';
 
 import 'core/data/local/shared_controller.dart';
@@ -24,7 +23,6 @@ import 'core/provider/freelancer_provider/payout_freelancer_provider.dart';
 import 'core/provider/auth_and_verification_provider/verification_provider.dart';
 import 'core/provider/team_provider/main_team_provider.dart';
 import 'core/provider/team_provider/user_management_provider.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,6 +80,8 @@ class MyApp extends StatelessWidget {
             create: (_) => ActivityProvider(), child: const MyApp()),
         ChangeNotifierProvider(
             create: (_) => NotificationTeamProvider(), child: const MyApp()),
+        ChangeNotifierProvider(
+            create: (_) => HomeTeamDashboardProvider(), child: const MyApp()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),

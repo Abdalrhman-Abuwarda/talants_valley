@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/auth_and_verification_provider/auth_provider.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_core/home_team_dashboard_provider/home_team_dashboard_provider.dart';
 import 'package:talants_valley/ui/teamPages/notification_team/notification_team_core/notification_team_provider/notification_team_provider.dart';
 
 import '../../../../utils/helper.dart';
@@ -25,6 +26,7 @@ class DioInterceptor extends Interceptor {
     Provider.of<PayoutFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
     Provider.of<ActivityProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeLoading();
     Provider.of<NotificationTeamProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeLoading();
+    Provider.of<HomeTeamDashboardProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
     // TODO: implement onResponse
     super.onResponse(response, handler);
   }
@@ -35,6 +37,7 @@ class DioInterceptor extends Interceptor {
     Provider.of<PayoutFreelancerProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
     Provider.of<ActivityProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeLoading();
     Provider.of<NotificationTeamProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeLoading();
+    Provider.of<HomeTeamDashboardProvider>(Helpers.scaffoldKey.currentState!.context, listen: false).disposeIsLoading();
 
 
     switch(err.type){

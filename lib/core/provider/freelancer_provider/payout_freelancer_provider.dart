@@ -72,6 +72,7 @@ class PayoutFreelancerProvider extends ChangeNotifier{
 
 
 //------------------------------resendCodeAddBank-------------------------------
+
   Future<dynamic> resendCodeAddBank() async {
     seconds = 60;
     minutes = 1;

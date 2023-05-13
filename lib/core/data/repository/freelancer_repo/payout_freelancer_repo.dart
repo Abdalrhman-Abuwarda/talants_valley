@@ -58,9 +58,12 @@ class PayoutFreelancerRepo {
     return response;
   }
 
-  Future<List<WithdrawModel>> getWithdrawalsRepo() async {
+  Future<List<WithdrawModel>> getWithdrawalsRepo({int limit = 20}) async {
     final response =
-        await _dioClient.get(Endpoints.getWithdrawalRequestList);
+        await _dioClient.get(Endpoints.getWithdrawalRequestList ,queryParameters: {
+          "offset" : 0,
+          "limit" : limit
+        });
     debugPrint("This inside Repo Layer after response ===>>> $response");
     final List dataList = response.data["data"]["withdraws"];
     final List<WithdrawModel> withdrawsList =
