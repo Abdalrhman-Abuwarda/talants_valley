@@ -5,9 +5,9 @@ import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_pro
 import 'package:talants_valley/utils/time_extension.dart';
 import '../../../../../resources/values_manager.dart';
 import '../../../../shared/customWidgets/search_bar.dart';
+import '../activity_widgets/activity_skeleton.dart';
 import '../activity_widgets/card_item_activity.dart';
 import '../activity_widgets/filter_activity_button_sheet.dart';
-import 'main_activity_page.dart';
 
 class ActivityForFreelancerPage extends StatefulWidget {
   const ActivityForFreelancerPage({
@@ -67,9 +67,13 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
                       activity.onSearchChange(indexText: value, role: "user");
                     }),
                 activity.freelancerLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
+                    ? ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 10,
+                    itemBuilder: (context, index) =>
+                    const ActivitySkeleton())
+
                     : ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         // controller: scrollController,

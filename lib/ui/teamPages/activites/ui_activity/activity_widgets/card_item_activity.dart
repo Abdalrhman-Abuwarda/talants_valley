@@ -123,6 +123,7 @@ class _CardItemActivityState extends State<CardItemActivity> {
                       ),
                     )
                   : ListView.builder(
+                physics: const ScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: widget.timeLine!.length,
                       itemBuilder: (context, index) {

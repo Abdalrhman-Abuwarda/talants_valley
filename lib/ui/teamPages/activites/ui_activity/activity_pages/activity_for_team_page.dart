@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/values_manager.dart';
-import 'package:talants_valley/ui/shared/customWidgets/balance_freelancer_wigdgets/withdraw_skeleton_widget.dart';
 import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_widgets/activity_skeleton.dart';
 import 'package:talants_valley/utils/time_extension.dart';
 
@@ -10,7 +9,6 @@ import '../../../../shared/customWidgets/search_bar.dart';
 import '../../core_activity/activity_provider/activity_provider.dart';
 import '../activity_widgets/card_item_activity.dart';
 import '../activity_widgets/filter_activity_button_sheet.dart';
-import 'main_activity_page.dart';
 
 class ActivityForTeamPage extends StatefulWidget {
   const ActivityForTeamPage({
@@ -75,7 +73,7 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
                         ? ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: 10,
                         itemBuilder: (context, index) =>
                         const ActivitySkeleton())
                         : ListView.builder(
