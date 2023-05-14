@@ -142,7 +142,7 @@ Future<dynamic> createNewPassword({required String password}) async{
   notifyListeners();
 }
 
-//------------------------------------------------------------------------------
+//----------------------------logout--------------------------------------------
 
 Future<dynamic> logout() async {
   Provider.of<PayoutFreelancerProvider>(Helpers.scaffoldKey.currentState!.context , listen: false).logoutBalance();
@@ -151,6 +151,8 @@ Future<dynamic> logout() async {
   ServiceNavigation.serviceNavi
       .pushNamedAndRemoveUtils(RouteGenerator.signInPage);
 }
+
+
 
 disposeIsLoading() {
   isLoading = false;

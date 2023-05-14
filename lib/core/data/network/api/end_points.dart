@@ -41,6 +41,7 @@ class Endpoints {
   static const String getActivityTimeLine = '/team/activity/timeline/';
   static const String getNotificationsTeam = '/team/notifications/list';
   static const String markNotificationsTeamAsSeen = '/team/notifications/seen-or-open';
+  static const String refreshToken = '/user/verify/refresh-token';
 
 
 }

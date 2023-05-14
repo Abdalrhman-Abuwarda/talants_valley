@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:talants_valley/core/data/network/api/dio_client.dart';
+import 'package:talants_valley/core/data/repository/auth_and_verification_repo/auth_repo.dart';
 import 'package:talants_valley/core/provider/auth_and_verification_provider/auth_provider.dart';
+import 'package:talants_valley/locator.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
 import 'package:talants_valley/ui/teamPages/home/team_home_core/home_team_dashboard_provider/home_team_dashboard_provider.dart';
 import 'package:talants_valley/ui/teamPages/notification_team/notification_team_core/notification_team_provider/notification_team_provider.dart';
@@ -77,6 +80,7 @@ class DioInterceptor extends Interceptor {
           }
           else if(err.response!.statusCode == 401){
             Helpers.showSnackBar(message: err.response!.data["message"]);
+            locator<AuthRepo>().refreshTokenRepo(token: SharedPrefController().accessToken);
           }
           else if(err.response!.statusCode == 422) {
             debugPrint("This is error message \n ${err.response!.data["message"].toString()}");

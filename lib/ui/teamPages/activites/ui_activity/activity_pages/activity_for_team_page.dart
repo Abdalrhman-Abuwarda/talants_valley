@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/balance_freelancer_wigdgets/withdraw_skeleton_widget.dart';
+import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_widgets/activity_skeleton.dart';
 import 'package:talants_valley/utils/time_extension.dart';
 
 import '../../../../shared/customWidgets/search_bar.dart';
@@ -76,7 +77,7 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: 5,
                         itemBuilder: (context, index) =>
-                        const WithdrawSkeleton())
+                        const ActivitySkeleton())
                         : ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       // controller: scrollController,

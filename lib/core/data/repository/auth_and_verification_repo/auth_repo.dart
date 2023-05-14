@@ -78,4 +78,13 @@ Future<dynamic> createNewPasswordRepo({required String password, required String
     });
     return response.data;
 }
+
+Future<dynamic> refreshTokenRepo({required String token}) async {
+    final response = await _dioClient.post(Endpoints.refreshToken, data: {
+      "refreshToken" : token
+    });
+    SharedPrefController().saveAccessToken(token: response.data["data"]["accessToken"]);
+    SharedPrefController().saveRefreshToken(token: response.data["data"]["refreshToken"]);
+}
+
 }

@@ -68,6 +68,8 @@ class SharedPrefController {
 
   String get accessToken => _sharedPreferences.getString("accessToken") ?? '';
 
+  String get refreshToken => _sharedPreferences.getString("refToken") ?? '';
+
 
   Future<bool> saveForgetEmail({required String email}) async {
     return await _sharedPreferences.setString("forgetEmail", email);
