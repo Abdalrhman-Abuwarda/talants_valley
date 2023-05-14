@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:talants_valley/resources/colors_manager.dart';
+import 'package:talants_valley/resources/values_manager.dart';
+import 'package:talants_valley/ui/shared/customWidgets/skeleton_widget.dart';
 
-import '../../../../resources/values_manager.dart';
-import '../skeleton_widget.dart';
-
-class WithdrawSkeleton extends StatelessWidget {
-  const WithdrawSkeleton({
+class ActivitySkeleton extends StatelessWidget {
+  const ActivitySkeleton({
     Key? key,
   }) : super(key: key);
 

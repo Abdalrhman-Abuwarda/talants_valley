@@ -18,7 +18,7 @@ class AllTapPage extends StatelessWidget {
           addVerticalSpace(AppSize.s12.h),
           const InvoiceDashboardCard(),
           const UserDashboardCard(),
-           PayoutDashboardCard(officeName: '', freeLancerName: "",)
+           const PayoutDashboardCard(officeName: '', freeLancerName: "",)
         ],
       ),
     ));

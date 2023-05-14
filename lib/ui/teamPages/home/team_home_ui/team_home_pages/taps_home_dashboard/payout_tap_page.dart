@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 import 'package:talants_valley/ui/shared/customWidgets/balance_freelancer_wigdgets/withdraw_skeleton_widget.dart';
+import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_widgets/card_item_activity.dart';
 import 'package:talants_valley/ui/teamPages/home/team_home_core/home_team_dashboard_provider/home_team_dashboard_provider.dart';
 import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_widget/payout_dashboard_card.dart';
 
@@ -25,32 +26,51 @@ class _PayoutsTapPageState extends State<PayoutsTapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<HomeTeamDashboardProvider>(
-        builder: (context, controller, child) => Padding(
+      body:  Padding(
             padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.w),
-            child:  Column(
+            child: Consumer<HomeTeamDashboardProvider>(
+                builder: (context, controller, child) => Column(
               children: [
                 addVerticalSpace(AppSize.s12.h),
                 controller.isLoading
                     ? ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 5,
-                    itemBuilder: (context, index) =>
-                    const WithdrawSkeleton())
-                    :
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.4,
-                  child: ListView.builder(
-                      itemCount: controller.withdrawals.length,
-                      itemBuilder: (context, index) {
-                        final payout = controller.withdrawals[index];
-                        return PayoutDashboardCard(officeName: payout.office!.name, freeLancerName: payout.recipient!.name,);
-                      }),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 5,
+                        itemBuilder: (context, index) =>
+                            const WithdrawSkeleton())
+                    : SizedBox(
+                        height: MediaQuery.of(context).size.width * 0.4,
+                        child: ListView.builder(
+                            itemCount: controller.withdrawals.length,
+                            itemBuilder: (context, index) {
+                              final payout = controller.withdrawals[index];
+                              return PayoutDashboardCard(
+                                officeName: payout.office!.name,
+                                freeLancerName: payout.recipient!.name,
+                              );
+                            }),
+                      ),
+                addVerticalSpace(AppSize.s33.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Activity"),
+                    TextButton(onPressed: () {}, child: const Text("View"))
+                  ],
+                ),
+                CardItemActivity(
+                  timeLine: [],
+                  type: 'user',
+                  date: '15 Aug, 22',
+                  time: '3:19 pm',
+                  title: 'Dalia edit cash payout',
+                  onTap: () {},
+                  isCheck: false,
+                  isLoading: false,
                 )
               ],
-            )
-        ),
+            )),
       ),
     );
   }

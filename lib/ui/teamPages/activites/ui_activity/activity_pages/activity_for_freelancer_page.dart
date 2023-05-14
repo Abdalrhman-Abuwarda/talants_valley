@@ -80,11 +80,9 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
                           final active = activity.freelancerActivities[index];
                           if (index != lastValue) {
                             return CardItemActivity(
-                              onTap: () => activity.selectActivity(
+                              onTap: () => activity.selectFreelancerActivity(
                                   activityId: active.id.id),
                               type: active.activityLogs.type,
-                              isTeam: false,
-                              currantScreen: currantTab,
                               title: active.activityLogs.message,
                               date: active.activityLogs.createdAt
                                   .convertToDate()!,
@@ -92,7 +90,7 @@ class _ActivityForFreelancerPageState extends State<ActivityForFreelancerPage> {
                                   .convertToTime()!,
                               isCheck: active.isCheck,
                               isLoading: activity.secondIsLoading,
-                              timeLine: activity.tileLine,
+                              timeLine: activity.freelancerTimeLine,
                             );
                           } else if (activity.isLast) {
                             return const Center(

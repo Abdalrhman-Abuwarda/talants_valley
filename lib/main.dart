@@ -6,11 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/core/provider/freelancer_provider/general_freelancer_provider.dart';
 import 'package:talants_valley/locator.dart';
+import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/theme_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
 import 'package:talants_valley/ui/splash_page.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
+import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_pages/main_activity_page.dart';
 import 'package:talants_valley/ui/teamPages/home/team_home_core/home_team_dashboard_provider/home_team_dashboard_provider.dart';
 import 'package:talants_valley/ui/teamPages/notification_team/notification_team_core/notification_setup/onesignal_service.dart';
 import 'package:talants_valley/ui/teamPages/notification_team/notification_team_core/notification_team_provider/notification_team_provider.dart';
@@ -27,6 +29,10 @@ import 'core/provider/team_provider/user_management_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations;
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: ColorManager.blackColor,
+    systemNavigationBarDividerColor: ColorManager.whiteColor
+  ));
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -57,7 +63,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -90,7 +95,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Talents Valley',
           theme: ThemeManager.lightTheme,
-          home: const SplashPage(),
+          home: const ActivityPage(),
           navigatorKey: ServiceNavigation.serviceNavi.navKey,
           onGenerateRoute: RoutsGenerate.generateRoute,
         ),

@@ -10,8 +10,6 @@ import '../../core_activity/activity_model/activity_model.dart';
 import 'custam_timeline.dart';
 
 class CardItemActivity extends StatefulWidget {
-  final int currantScreen;
-  final bool isTeam;
   final String date;
   final String time;
   final String title;
@@ -26,11 +24,9 @@ class CardItemActivity extends StatefulWidget {
       required this.date,
       required this.title,
       required this.time,
-      required this.isTeam,
       required this.onTap,
       required this.isCheck,
       required this.isLoading,
-      required this.currantScreen,
       this.timeLine,
       Key? key})
       : super(key: key);
@@ -111,7 +107,7 @@ class _CardItemActivityState extends State<CardItemActivity> {
             ),
           ),
         ),
-        if (widget.isTeam == false) ...[
+       ...[
           Visibility(
               visible: widget.isCheck ,
               child: widget.isLoading

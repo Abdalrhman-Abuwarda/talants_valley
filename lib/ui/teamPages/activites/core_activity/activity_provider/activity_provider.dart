@@ -20,7 +20,7 @@ class ActivityProvider extends ChangeNotifier {
   bool isLast = false;
   bool freelancerLoading = false;
 
-  List<ActivityLogs> tileLine = [];
+
 
   //--------------------------getFreelancerActivities---------------------------
 
@@ -71,17 +71,18 @@ class ActivityProvider extends ChangeNotifier {
     otherFreelancerActivities = [];
   }
 
-  //------------------------selectActivityAndGetTimeLine------------------------
+  //------------------------selectFreelancerActivityAndGetTimeLine------------------------
 
- bool isChecked = false ;
+ bool isCheckedFreelancer = false ;
+  List<ActivityLogs> freelancerTimeLine = [];
 
-  Future<dynamic> selectActivity({required String activityId}) async{
+  Future<dynamic> selectFreelancerActivity({required String activityId}) async{
     final int index = freelancerActivities
         .indexWhere((activity) => activity.id.id == activityId);
     if (freelancerActivities[index].isCheck ) {
 
       freelancerActivities[index].isCheck = false;
-      isChecked = freelancerActivities[index].isCheck;
+      isCheckedFreelancer = freelancerActivities[index].isCheck;
      
       notifyListeners();
     }
@@ -93,8 +94,38 @@ class ActivityProvider extends ChangeNotifier {
       secondIsLoading = true;
       freelancerActivities[index].isCheck = true;
       notifyListeners();
-      tileLine = await _activityRepo.getActivityTimeLineRepo(id: activityId);
+      freelancerTimeLine = await _activityRepo.getActivityTimeLineRepo(id: activityId);
       freelancerActivities[index].isCheck = true;
+      notifyListeners();
+    }
+
+  }
+
+  //-----------------------------selectTeamActivity-----------------------------
+
+  bool isCheckedTeam = false ;
+  List<ActivityLogs> teamTimeLine = [];
+
+  Future<dynamic> selectTeamActivity({required String activityId}) async{
+    final int index = teamActivities
+        .indexWhere((activity) => activity.id.id == activityId);
+    if (teamActivities[index].isCheck ) {
+
+      teamActivities[index].isCheck = false;
+      isCheckedTeam = teamActivities[index].isCheck;
+
+      notifyListeners();
+    }
+
+    else {
+      for (var element in teamActivities) {
+        element.isCheck = false;
+      }
+      secondIsLoading = true;
+      teamActivities[index].isCheck = true;
+      notifyListeners();
+      teamTimeLine = await _activityRepo.getActivityTimeLineRepo(id: activityId);
+      teamActivities[index].isCheck = true;
       notifyListeners();
     }
 

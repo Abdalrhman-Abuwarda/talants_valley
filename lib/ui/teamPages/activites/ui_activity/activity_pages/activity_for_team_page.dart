@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/values_manager.dart';
+import 'package:talants_valley/ui/shared/customWidgets/balance_freelancer_wigdgets/withdraw_skeleton_widget.dart';
 import 'package:talants_valley/utils/time_extension.dart';
 
 import '../../../../shared/customWidgets/search_bar.dart';
@@ -51,67 +52,72 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ActivityProvider>(
-      builder: (context, activity, child) =>  RefreshIndicator(
-              onRefresh: () => activity.getTeamActivities(),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
-                  child: Column(
-                    children: [
-                      SearchBar(
-                          sheetPage: (context) =>
-                              const FilterActivityButtonSheet(),
-                          searchController: searchController,
-                          onChange: (value) {
-                                    activity.onSearchChange(indexText: value, role : "team");
-                          }),
-                      activity.isLoading
-                          ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                          :
-                      ListView.builder(
+      builder: (context, activity, child) =>
+          RefreshIndicator(
+            onRefresh: () => activity.getTeamActivities(),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+                child: Column(
+                  children: [
+                    SearchBar(
+                        sheetPage: (
+                            context) => const FilterActivityButtonSheet(),
+                        searchController: searchController,
+                        onChange: (value) {
+                          activity.onSearchChange(
+                              indexText: value, role: "team");
+                        }),
+                    addVerticalSpace(AppSize.s15.h),
+                    activity.isLoading
+                        ? ListView.builder(
+                        shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        // controller: scrollController,
-                        itemCount: activity.teamActivities.length,
-                        itemBuilder: (context, index) {
-                          final active = activity.teamActivities[index];
-                          var lastValue = activity.teamActivities.length - 1;
-                          if ((index != lastValue)) {
-                            return CardItemActivity(
-                              onTap: (){},
+                        itemCount: 5,
+                        itemBuilder: (context, index) =>
+                        const WithdrawSkeleton())
+                        : ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      // controller: scrollController,
+                      itemCount: activity.teamActivities.length,
+                      itemBuilder: (context, index) {
+                        final active = activity.teamActivities[index];
+                        var lastValue = activity.teamActivities.length - 1;
+                        if ((index != lastValue)) {
+                          return CardItemActivity(
+                              onTap: () =>
+                                  activity.selectTeamActivity(
+                                      activityId: active.id.id),
                               type: active.activityLogs.type,
-                              isTeam: true,
-                              currantScreen: currantTab,
                               title: active.activityLogs.message,
                               date: active.activityLogs.createdAt
                                   .convertToDate()!,
                               time: active.activityLogs.createdAt
                                   .convertToTime()!,
-                              isCheck: false,
-                              isLoading: false,
-                            );
-                          } else if (activity.isLast) {
-                            return const Center(
-                              child: Text("No more data"),
-                            );
-                          } else {
-                            return Padding(
-                              padding:
-                                  EdgeInsets.symmetric(vertical: AppSize.s30.h),
-                              child: const Center(
-                                  child: CircularProgressIndicator()),
-                            );
-                          }
-                        },
-                        shrinkWrap: true,
-                      ),
-                    ],
-                  ),
+                              isLoading: activity.secondIsLoading,
+                              timeLine: activity.teamTimeLine,
+                              isCheck: active.isCheck,);
+                        } else if (activity.isLast) {
+                          return const Center(
+                            child: Text("No more data"),
+                          );
+                        } else {
+                          return Padding(
+                            padding:
+                            EdgeInsets.symmetric(vertical: AppSize.s30.h),
+                            child: const Center(
+                                child: CircularProgressIndicator()),
+                          );
+                        }
+                      },
+                      shrinkWrap: true,
+                    ),
+                  ],
                 ),
               ),
             ),
+          ),
     );
   }
 }
