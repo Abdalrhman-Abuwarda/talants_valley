@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talants_valley/resources/values_manager.dart';
-import 'package:talants_valley/ui/shared/customWidgets/balance_freelancer_wigdgets/withdraw_skeleton_widget.dart';
 import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_widgets/card_item_activity.dart';
 import 'package:talants_valley/ui/teamPages/home/team_home_core/home_team_dashboard_provider/home_team_dashboard_provider.dart';
-import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_widget/payout_dashboard_card.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_widget/payout_dashboard_widgets/payout_dashboard_card.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_widget/payout_dashboard_widgets/payout_skeleton_dashboard.dart';
 
 class PayoutsTapPage extends StatefulWidget {
   const PayoutsTapPage({Key? key}) : super(key: key);
@@ -36,11 +36,11 @@ class _PayoutsTapPageState extends State<PayoutsTapPage> {
                     ? ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: 3,
                         itemBuilder: (context, index) =>
-                            const WithdrawSkeleton())
+                            const PayoutSkeletonDashboard())
                     : SizedBox(
-                        height: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width * 0.5,
                         child: ListView.builder(
                             itemCount: controller.withdrawals.length,
                             itemBuilder: (context, index) {
@@ -51,7 +51,7 @@ class _PayoutsTapPageState extends State<PayoutsTapPage> {
                               );
                             }),
                       ),
-                addVerticalSpace(AppSize.s33.h),
+                // addVerticalSpace(AppSize.s33.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

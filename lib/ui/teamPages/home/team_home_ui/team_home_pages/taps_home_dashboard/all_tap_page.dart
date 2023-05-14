@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talants_valley/resources/values_manager.dart';
 import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_widget/invoice_dashboard_card.dart';
-import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_widget/payout_dashboard_card.dart';
+import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_widget/payout_dashboard_widgets/payout_dashboard_card.dart';
 import 'package:talants_valley/ui/teamPages/home/team_home_ui/team_home_widget/user_dashboard_card.dart';
 
 class AllTapPage extends StatelessWidget {
