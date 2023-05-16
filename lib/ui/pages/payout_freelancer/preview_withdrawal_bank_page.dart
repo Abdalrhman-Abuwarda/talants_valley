@@ -83,7 +83,7 @@ class PreviewWithdrawalBankPage extends StatelessWidget {
                       textColor: ColorManager.whiteColor,
                       onPressed: () => balance.requestBankWithdraw(
                         amount: int.parse(amountToWithdraw),
-                        bankId: balance.bankAccountSelected!.id,
+                        bankId: balance.bankAccountSelected!.id!,
                       ),
                       isLoading: balance.isLoading,
                       text: 'Confirm',

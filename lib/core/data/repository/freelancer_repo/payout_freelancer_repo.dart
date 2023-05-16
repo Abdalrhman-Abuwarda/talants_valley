@@ -66,8 +66,7 @@ class PayoutFreelancerRepo {
         });
     debugPrint("This inside Repo Layer after response ===>>> $response");
     final List dataList = response.data["data"]["withdraws"];
-    final List<WithdrawModel> withdrawsList =
-        dataList.map((element) => WithdrawModel.formJson(element)).toList();
+    final List<WithdrawModel> withdrawsList = dataList.map((element) => WithdrawModel.formJson(element)).toList();
     return withdrawsList;
   }
 

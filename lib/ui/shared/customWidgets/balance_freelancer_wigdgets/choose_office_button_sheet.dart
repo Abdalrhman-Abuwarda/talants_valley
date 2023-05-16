@@ -93,7 +93,7 @@ class ChooseOfficeButtonSheet extends StatelessWidget {
                         ),
                         onTap: () =>
                             balance.selectOffice(
-                                officeId: balance.officeList[index].id),
+                                officeId: balance.officeList[index].id!),
                       )
                   ;
                 })

@@ -43,7 +43,7 @@ class WithdrawModel {
 //------------------------------------------------------------------------------
 
 class BankModel {
-  final String id;
+  final String? id;
   final String accountName;
   final String accountNumber;
   final String? bankBranch;
@@ -81,7 +81,7 @@ class BankModel {
 
 //------------------------------------------------------------------------------
 class OfficeModel {
-  final String id;
+  final String? id;
   final String name;
   final String address;
   final int? fees;

@@ -107,7 +107,7 @@ class PreviewWithdrawalCashPage extends StatelessWidget {
               addVerticalSpace(AppSize.s45.h),
               Center(
                 child: MainElevatedButton(textColor: ColorManager.whiteColor, text: "Continue",
-                  onPressed: () { balance.requestCashWithdraw(amount: SharedPrefController().getAmountToWithdraw(), officeId: balance.officeSelected!.id, recipientId: balance.recipientSelected!.id ?? ""); },
+                  onPressed: () { balance.requestCashWithdraw(amount: SharedPrefController().getAmountToWithdraw(), officeId: balance.officeSelected!.id!, recipientId: balance.recipientSelected!.id ?? ""); },
                 isLoading: balance.isLoading,
                 isMain: true,),
                 // child: SizedBox(

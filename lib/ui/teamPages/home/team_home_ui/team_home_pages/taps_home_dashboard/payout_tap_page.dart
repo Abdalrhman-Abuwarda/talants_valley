@@ -36,18 +36,19 @@ class _PayoutsTapPageState extends State<PayoutsTapPage> {
                     ? ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 3,
+                        itemCount: 5,
                         itemBuilder: (context, index) =>
                             const PayoutSkeletonDashboard())
                     : SizedBox(
-                        height: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.5,
                         child: ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: controller.withdrawals.length,
                             itemBuilder: (context, index) {
                               final payout = controller.withdrawals[index];
                               return PayoutDashboardCard(
-                                officeName: payout.office!.name,
-                                freeLancerName: payout.recipient!.name,
+                                officeName: payout.office != null ? payout.office!.name : payout.bank!.bankName,
+                                freeLancerName: payout.recipient != null ? payout.recipient!.name : payout.bank!.accountName,
                               );
                             }),
                       ),
@@ -60,7 +61,7 @@ class _PayoutsTapPageState extends State<PayoutsTapPage> {
                   ],
                 ),
                 CardItemActivity(
-                  timeLine: [],
+                  timeLine: const [],
                   type: 'user',
                   date: '15 Aug, 22',
                   time: '3:19 pm',

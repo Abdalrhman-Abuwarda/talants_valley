@@ -100,7 +100,7 @@ class _ChooseBankAccountPageState extends State<ChooseBankAccountPage> {
                             .accountNumber,
                         onPressedIcon: () =>
                             balance.deleteBankAccount(
-                              bankId: bankAccount.id,),
+                              bankId: bankAccount.id!,),
                         onTap: () {
                           balance.selectBankAccount(
                               accountNumber:
