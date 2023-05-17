@@ -30,7 +30,8 @@ class ActivityLogs {
   late final String createdAt;
   late final String updatedAt;
   Service? service;
-  ActivityCreatedByModel? createdBy;
+  String? createdBy;
+  // ActivityCreatedByModel? createdBy;
   late final WithdrawActivityModel? withdraw;
 
   ActivityLogs(
@@ -59,9 +60,10 @@ class ActivityLogs {
         : null;
     service =
         json['service'] != null ? Service.fromJson(json['service']) : null;
-    createdBy = json['createdBy'] != null
-        ? ActivityCreatedByModel.fromJson(json['createdBy'])
-        : null;
+    createdBy = json["createdBy"];
+    // json['createdBy'] != null
+    //     ? ActivityCreatedByModel.fromJson(json['createdBy'])
+    //     : null;
   }
 }
 
