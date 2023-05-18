@@ -50,7 +50,8 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ActivityProvider>(
+    return
+      Consumer<ActivityProvider>(
       builder: (context, activity, child) =>
           RefreshIndicator(
             onRefresh: () => activity.getTeamActivities(),
