@@ -40,8 +40,8 @@ class _ActivityForTeamPageState extends State<ActivityForTeamPage> {
 
   void handleNext() {
     scrollController.addListener(() async {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
+      if (scrollController.position.maxScrollExtent * 0.5 ==
+          scrollController.position.pixels *0.5) {
         Provider.of<ActivityProvider>(context, listen: false)
             .getOtherActivitiesTeam();
       }

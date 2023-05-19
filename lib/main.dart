@@ -10,6 +10,7 @@ import 'package:talants_valley/resources/colors_manager.dart';
 import 'package:talants_valley/resources/theme_manager.dart';
 import 'package:talants_valley/routing/navigations.dart';
 import 'package:talants_valley/routing/routes.dart';
+import 'package:talants_valley/ui/splash_page.dart';
 import 'package:talants_valley/ui/teamPages/activites/core_activity/activity_provider/activity_provider.dart';
 import 'package:talants_valley/ui/teamPages/activites/ui_activity/activity_pages/main_activity_page.dart';
 import 'package:talants_valley/ui/teamPages/home/team_home_core/home_team_dashboard_provider/home_team_dashboard_provider.dart';
