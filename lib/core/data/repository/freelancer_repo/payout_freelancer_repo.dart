@@ -8,6 +8,7 @@ import 'package:talants_valley/core/model/freelancer/payout/recipient_model.dart
 import '../../../../locator.dart';
 
 class PayoutFreelancerRepo {
+
   final DioClient  _dioClient =  locator<DioClient>();
 
   Future<Response> sendCodeAddBankRepo({
@@ -43,6 +44,7 @@ class PayoutFreelancerRepo {
     });
     return response;
   }
+
 
   Future<List<BankModel>> getBankAccountsRepo() async {
     final response = await _dioClient.get(Endpoints.getBankAccountList);

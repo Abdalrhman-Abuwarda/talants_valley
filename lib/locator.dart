@@ -12,10 +12,10 @@ import 'core/data/repository/freelancer_repo/payout_freelancer_repo.dart';
 final locator = GetIt.instance;
 
 void setup(){
+  locator.registerLazySingleton<DioClient>(() => DioClient());
   locator.registerLazySingleton<PayoutFreelancerRepo>(() => PayoutFreelancerRepo());
   locator.registerLazySingleton<VerificationRepo>(() => VerificationRepo());
-  locator.registerLazySingleton<AuthRepo>(() => AuthRepo());
-  locator.registerLazySingleton<DioClient>(() => DioClient());
+  locator.registerLazySingleton<AuthRepo>(() => AuthRepo(locator<DioClient>()));
   locator.registerLazySingleton<UserManagementRepo>(() => UserManagementRepo());
   locator.registerLazySingleton<ActivityRepo>(() => ActivityRepo());
   locator.registerLazySingleton<NotificationTeamRepo>(() => NotificationTeamRepo());

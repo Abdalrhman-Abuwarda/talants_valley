@@ -53,6 +53,7 @@ class _PayoutsTapPageState extends State<PayoutsTapPage> {
                             }),
                       ),
                 // addVerticalSpace(AppSize.s33.h),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

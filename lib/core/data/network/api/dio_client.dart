@@ -15,9 +15,8 @@ final _dio =Dio()  ..options.baseUrl = Endpoints.baseUrl
   // ..options.validateStatus = (statusCode) => statusCode! <= 500
   ..interceptors.addAll([DioInterceptor() , dioLoggerInterceptor]);
 
-
-
   // Get:-----------------------------------------------------------------------
+
   Future<Response> get(
     String url, {
     Map<String, dynamic>? queryParameters,
@@ -35,6 +34,7 @@ final _dio =Dio()  ..options.baseUrl = Endpoints.baseUrl
   }
 
   // Post:----------------------------------------------------------------------
+
   Future<Response> post(
     String url, {
     data,
@@ -55,6 +55,7 @@ final _dio =Dio()  ..options.baseUrl = Endpoints.baseUrl
   }
 
   //--------------------------delete--------------------------------------------
+
   Future<Response> delete(
     String url, {
     data,

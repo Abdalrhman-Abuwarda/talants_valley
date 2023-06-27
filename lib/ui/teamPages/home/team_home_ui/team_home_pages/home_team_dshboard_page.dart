@@ -19,6 +19,7 @@ class TeamDashboardPage extends StatelessWidget {
             title: const Text("Team Dashboard"),
             backgroundColor: Colors.transparent,
             actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.settings))],
+
             bottom: TabBar(
               // indicatorWeight: 0,
               indicatorPadding: EdgeInsets.symmetric(horizontal: AppSize.s12.w, ),

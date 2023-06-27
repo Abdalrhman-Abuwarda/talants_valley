@@ -95,7 +95,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Talents Valley',
           theme: ThemeManager.lightTheme,
-          home: const ActivityPage(),
+          home: const SplashPage(),
           navigatorKey: ServiceNavigation.serviceNavi.navKey,
           onGenerateRoute: RoutsGenerate.generateRoute,
         ),

@@ -10,7 +10,9 @@ import '../../../model/general_model/user_model.dart';
 
 class AuthRepo {
 
-  final DioClient  _dioClient =  locator<DioClient>();
+  final DioClient  _dioClient;
+
+  AuthRepo(this._dioClient);
 
 
   //----------------------------------------loginUserRepository-------------------------------
@@ -29,6 +31,7 @@ class AuthRepo {
 
 
   //---------------------------------------signupUserRepository-------------------------------
+
   Future<DataModel> signupUserRepo(
       {required String firstName,
       required String lastName,
@@ -50,7 +53,7 @@ class AuthRepo {
 
   //-----------------------------forgetPasswordRepository-----------------------
 
-Future<dynamic> forgetPasswordRepo({required String email}) async{
+  Future<dynamic> forgetPasswordRepo({required String email}) async{
     final response = await _dioClient.post(Endpoints.userForgetPassword, data: {
       "email": email,
     });

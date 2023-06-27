@@ -22,7 +22,7 @@ class WithdrawModel {
       required this.status,
       required this.createdAt,
       required this.updatedAt,
-        required this.recipient,
+      required this.recipient,
       this.confirmDocument,
       required this.history});
 
@@ -30,13 +30,20 @@ class WithdrawModel {
       id: json['_id'],
       amount: json["amount"].toString(),
       bank: json['bank'] == null ? null : BankModel.formJson(json["bank"]),
-      office: json['office'] == null ? null : OfficeModel.fromJson(json["office"]),
+      office:
+          json['office'] == null ? null : OfficeModel.fromJson(json["office"]),
       typeWithdraw: json['typeWithdraw'],
-      recipient: json["recipient"] == null ? null : RecipientModel.fromJson(json["recipient"]),
+      recipient: json["recipient"] == null
+          ? null
+          : RecipientModel.fromJson(json["recipient"]),
       status: json['status'],
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
-      history: json['history'] == null ? null : List<HistoryModel>.from(json['history'].map((element) => HistoryModel.formJson(element)).toList()),
+      history: json['history'] == null
+          ? null
+          : List<HistoryModel>.from(json['history']
+              .map((element) => HistoryModel.formJson(element))
+              .toList()),
       confirmDocument: json['confirmDocument']);
 }
 
@@ -100,7 +107,12 @@ class OfficeModel {
   });
 
   factory OfficeModel.fromJson(Map<String, dynamic> json) => OfficeModel._(
-      address: json["address"], name: json["name"], id: json["_id"], fees: json["fees"] , startingHour: json["startingHour"] , endingHour: json["endingHour"]);
+      address: json["address"],
+      name: json["name"],
+      id: json["_id"],
+      fees: json["fees"],
+      startingHour: json["startingHour"],
+      endingHour: json["endingHour"]);
 }
 
 //------------------------------------------------------------------------------
